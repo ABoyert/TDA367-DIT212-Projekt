@@ -6,7 +6,7 @@ AirBnB for bikes!
 1. Clone this project to your computer.
 2. Download ```google-services.json ``` from [project settings in Firebase console](https://console.firebase.google.com/project/paybike-f5a13/settings/general/android:tda367.paybike) and place it in the ```/app``` folder. (Have to be a member of the PayBike-project on Firebase.)
 3. Start an Android emulator or connect an Android phone in [USB-debugging mode](https://developer.android.com/studio/run/device).
-4. Open Terminal/CMD in the root directory of the project and execute the command ```./gradlew installDebug``` and PayBike will hopefully be installed.
+4. Open Terminal/CMD in the root directory of the project and execute the command ```./gradlew installDebug``` on MacOS or ```.\gradlew installDebug``` on Windows. (might need to add ANDROID_HOME environment variable on Windows)
 5. You should now be able to find PayBike among your apps and launch it.
 
 #### Open project in Android Studio:
