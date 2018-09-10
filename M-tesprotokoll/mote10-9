@@ -1,0 +1,96 @@
+# Meeting Agenda
+
+Group: Brädgård
+Date: 10/9
+Chair: 
+Participants: Anton, Pontus, Julia, Oscar
+
+
+## Objectives (5 min) 
+
+Firebase - Fixa connection tidigt
+Vem gör vad? Roller
+Bygga UML
+Hello World
+Bestämma User Stories
+Utifrån krav skriva tester
+
+- Resolve any issues preventing the team to continue.
+- Short clear descriptions.
+
+
+## Reports (15 min) from previous meeting
+
+
+
+Firebase verkar vara mycket möjlig att använda som databas, Pontus testade att kommunicera med databasen i Android Studio.
+
+
+- Each group member reports outcome of assigned issues, see also 'outcomes and
+  assignments'.
+
+
+## Discussion items (35 min)
+
+Roller:
+Backend - Pontus
+GUI - Julia/Oscar
+Logik - Boyert
+Mötesordförande - Oscar
+
+Firebase/Hello World:
+Pontus test används som skelett.
+
+Val av User Stories:
+
+Prioritering av User Stories behövs.
+
+ha en startbar “Hello World”-applikation för att visa att underliggande infrastruktur är på plats och fungerar
+
+se en cykel (cykelobjektet läses från databas och visas korrekt i applikationen)
+hyra en cykel (en hyresförfrågan skapas i databasen och visas korrekt hos uthyraren) 
+skapa annons för att fylla i med information
+
+Välja ut 10 User Stories och ta fram krav man baserar tester på
+Skriva testerna i JUnit
+Utveckla programmet för att klara testerna.
+
+Alla användare kan hyra ut/hyra
+
+- Discuss the identified issues, and possibly new or more general issues (very
+  short notes and/or keywords).
+
+
+## Outcomes and assignments (5 min)
+
+Focus på 1a User Storien dvs:
+Jobba med domänmodellen (UML)
+JUnit
+
+Pontus: Få upp databasen
+Julia: Grundläggande GUI
+Oscar och Boyert: UML
+
+Alla: Läsa och kolla på tester tills onsdagens övningspass
+(Googla och kolla videos på “Test Driven Development”
+
+Diskutera hur vi ligger till på onsdag snabbt.
+
+
+- Outcomes from discussion items. Write down what's decided and why it was 
+  decided. Sync with other documentation (add terms to wordbook).
+- (re)Assign to each group member which issues to solve.
+
+
+## Wrap up
+
+Småmöte onsdag under övningen (10:00)
+Fredag ordinarie möte (12:00)
+Handledarmöte (15:15)
+
+Uppföljning på individuella arbeten och problem.
+
+
+- Write down any unresolved issues for next meeting. 
+- Decide a time and location for next meeting.
+
