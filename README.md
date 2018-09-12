@@ -4,16 +4,14 @@ AirBnB for bikes!
 
 #### Installing PayBike to Emulator/Phone:
 1. Clone this project to your computer.
-2. Download ```google-services.json ``` from [project settings in Firebase console](https://console.firebase.google.com/project/paybike-f5a13/settings/general/android:tda367.paybike) and place it in the ```/app``` folder. (Have to be a member of the PayBike-project on Firebase.)
-3. Start an Android emulator or connect an Android phone in [USB-debugging mode](https://developer.android.com/studio/run/device).
-4. Open Terminal/CMD in the root directory of the project and execute the command ```./gradlew installDebug``` on MacOS or ```.\gradlew installDebug``` on Windows. (might need to add ANDROID_HOME environment variable on Windows)
-5. You should now be able to find PayBike among your apps and launch it.
+2. Start an Android emulator or connect an Android phone in [USB-debugging mode](https://developer.android.com/studio/run/device).
+3. Open Terminal/CMD in the root directory of the project and execute the command ```./gradlew installDebug``` on MacOS or ```.\gradlew installDebug``` on Windows. (might need to add ANDROID_HOME environment variable on Windows)
+4. You should now be able to find PayBike among your apps and launch it.
 
 #### Open project in Android Studio:
 1. Clone this project to your computer.
-2. Download ```google-services.json ``` from [project settings in Firebase console](https://console.firebase.google.com/project/paybike-f5a13/settings/general/android:tda367.paybike) and place it in the ```/app``` folder. (Have to be a member of the PayBike-project on Firebase.)
-3. Open project in Android Studio and click on ```File``` &rarr; ```Sync Project with Gradle Files```. (Press OK/Accept/Next on all pop-ups, default settings should work.)
-4. You should now be able to run/debug and edit the project.
+2. Open project in Android Studio and click on ```File``` &rarr; ```Sync Project with Gradle Files```. (Press OK/Accept/Next on all pop-ups, default settings should work.)
+3. You should now be able to run/debug and edit the project.
 ## Links
 * [**Trello**](https://trello.com/b/hgos5Guu/eda367-payride)
 * [**Google Drive**](https://drive.google.com/drive/folders/1UGm1TVGUnyhd5HZt6wGgRpqhehPjBxv0)
@@ -36,7 +34,7 @@ AirBnB for bikes!
         git rebase master
         git checkout master
         git merge myTask
-        git push    ((= git push origin master) Push to remote repo)
+        git push                (= git push origin master) Push to remote repo
         git branch -d myTask    (Delete branch)
 10. Now everybody should be able to see your contribution (i.e. git pull).
 11. Continue with next task, go to 2.

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1061761983128",
+    "firebase_url": "https://paybike-f5a13.firebaseio.com",
+    "project_id": "paybike-f5a13",
+    "storage_bucket": "paybike-f5a13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061761983128:android:3400fc282661bfa2",
+        "android_client_info": {
+          "package_name": "tda367.paybike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061761983128-clk18sr224d5n1jhr9af2lat7rmq7f0v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tda367.paybike",
+            "certificate_hash": "305e133841644558adb71a44c2f6411c920cff00"
+          }
+        },
+        {
+          "client_id": "1061761983128-vmb6carf0ihh4kjp8gc5pitnhm3hh4ae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6O4xUtc1Tn2l1pflX6kMuh-_fhmCjKXQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061761983128-vmb6carf0ihh4kjp8gc5pitnhm3hh4ae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
