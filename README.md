@@ -14,6 +14,7 @@ AirBnB for bikes!
 3. You should now be able to run/debug and edit the project.
 ## Links
 * [**Trello**](https://trello.com/b/hgos5Guu/eda367-payride)
+* [**Travis**](https://travis-ci.org/ABoyert/TDA367-DIT212-Projekt)
 * [**Google Drive**](https://drive.google.com/drive/folders/1UGm1TVGUnyhd5HZt6wGgRpqhehPjBxv0)
 * [**Firebase Console**](https://console.firebase.google.com/project/paybike-f5a13/overview)
 * [**Course page (TDA367)**](http://www.cse.chalmers.se/edu/course/tda367/)
