@@ -1,4 +1,4 @@
-package tda367.paybike.Activities;
+package tda367.paybike.activities;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
