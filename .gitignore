@@ -4,6 +4,8 @@ target/
 .idea/
 # ignore IntelliJ .iml file in root
 /*.iml
+# Ignore Mac specific dsstore
+*.DS_Store
 
 #
 # Everything below copied from https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore

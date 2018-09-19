@@ -119,6 +119,7 @@ public class DatabaseController {
     }
 
     // Create singleton if it does not exist, otherwise creates it
+    // Returns the DatabaseController instance
     public static DatabaseController getInstance() {
         if (instance == null) {
             instance = new DatabaseController();
