@@ -1,10 +1,9 @@
-package tda367.paybike;
+package tda367.paybike.Activities;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,6 +18,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import tda367.paybike.R;
 
 public class MainActivity extends AppCompatActivity {
     // Set TAG to class name for use in debugging
