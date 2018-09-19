@@ -1,28 +1,129 @@
 package tda367.paybike.database;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
 import java.util.Map;
+
+//  Class that is supposed to act as a
+//  middleman between the application and
+//  our google firestore database in order
+//  to simplify use of the database
+//
+//  EXAMPLE DOCUMENT MAP:
+//  Map<String, Object> example = new HashMap<>();
+//  example.put("text", "abc");
+//  example.put("name", "erik");
+//  example.put("price", 22);
+//
+//  EXAMPLE USING addToDatabase:
+//  addToDatabase("bikes", "bike1234", example); (This will add the example document map created above to the document 'bike1234' in collection 'bikes')
 
 public class DatabaseController {
 
-    public void addToDatabase(String collection, String id, Map documentMap) {
+    // variable to hold the class instance (singleton)
+    private static DatabaseController instance = null;
+    // get firebase firestore db instance
+    private static FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    // TAG is used when logging, helpful for debugging
+    private static final String TAG = DatabaseController.class.getSimpleName();
 
+    // Add a new document with a given ID
+    public void addToDatabase(String collection, String id, Map<String, Object> documentMap) {
+        firestore.collection(collection).document(id)
+                .set(documentMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
     }
 
-    public void addToDatabase(String collection, Map documentMap) {
-
+    // Add a new document with a generated ID
+    public void addToDatabase(String collection, Map<String, Object> documentMap) {
+        firestore.collection(collection)
+                .add(documentMap)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
     }
 
-    public String readFromDatabase(String collection, String documentID, String field) {
+    // Read given field in given document and return as string
+    public String readFromDatabase(final String collection, String documentID, String field) {
+        DocumentReference docRef = firestore.collection(collection).document(documentID);
 
-        return "";
+        Task<DocumentSnapshot> getDoc = docRef.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {
+                            Log.w(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+
+        while (!getDoc.isComplete()); // Bad code, need rework
+
+        return getDoc.getResult().get(field).toString();
     }
 
-    public void deleteFromDatabase(String collection, String documentID) {
-
+    // Delete given document from db
+    public void deleteFromDatabase(String collection, final String documentID) {
+        firestore.collection(collection).document(documentID)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "ID-" + documentID + " deleted!");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "ID-" + documentID + " could not be deleted!");
+                    }
+                });
     }
 
-    // placeholder
+    // Create singleton if it does not exist, otherwise creates it
     public static DatabaseController getInstance() {
-        return new DatabaseController();
+        if (instance == null) {
+            instance = new DatabaseController();
+        }
+
+        return instance;
     }
 }
