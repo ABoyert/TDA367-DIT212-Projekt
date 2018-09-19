@@ -2,10 +2,6 @@ package tda367.paybike.database;
 
 import java.util.Map;
 
-/**
- * Created by Oscar Orava Kilberg on 2018-09-19.
- */
-
 public class DatabaseController {
 
     public void addToDatabase(String collection, String id, Map documentMap) {
@@ -13,6 +9,15 @@ public class DatabaseController {
     }
 
     public void addToDatabase(String collection, Map documentMap) {
+
+    }
+
+    public String readFromDatabase(String collection, String documentID, String field) {
+
+        return "";
+    }
+
+    public void deleteFromDatabase(String collection, String documentID) {
 
     }
 

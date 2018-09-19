@@ -7,6 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -17,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -90,20 +92,66 @@ public class DatabaseControllerTest {
         assertEquals(testText, testDoc.get("text"));
     }
 
+    @Before
+    public void beforeTests() {
+        // Clear tests collection
+        deleteCollection("tests");
+        deleteCollection("tests2");
+    }
+
     @Test
     public void testDeleteFromDatabase() {
+        String collectionName = "tests2";
+        String documentID = "testdelete";
+        // Create a test document in tests2 collection
+        createTestDocument(documentID);
+        int expectedSize = 0;
 
+        db.deleteFromDatabase(collectionName, documentID);
+
+        // Read collection tests2 into local collectionSnapshot
+        Task<QuerySnapshot> collectionSnapshot = firestore.collection(collectionName).get();
+        while (!collectionSnapshot.isComplete()); // REWORK
+
+        // Check if the document added in testAddtoDatabase now is gone
+        assertEquals(expectedSize, collectionSnapshot.getResult().getDocuments().size());
     }
 
     @Test
     public void testReadFromDatabase() {
+        String collectionName = "tests2";
+        String documentID = "testread";
+        String fieldName = "text";
+        String expectedText = "abc";
+        // Create a test document in tests2 collection
+        createTestDocument(documentID);
 
+        String dbAnswer = db.readFromDatabase(collectionName, documentID, fieldName);
+
+        // Check if the text field in document from db is equal to expectedText
+        assertEquals(expectedText, dbAnswer);
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
+        // Clear tests collection
+        deleteCollection("tests");
+        deleteCollection("tests2");
+    }
+
+    private static void createTestDocument(String docID) {
+        Map<String, Object> test = new HashMap<>();
+        test.put("text", "abc");
+        test.put("timestamp", FieldValue.serverTimestamp());
+
+        Task addTestDoc = firestore.collection("tests2").document(docID).set(test);
+
+        while (!addTestDoc.isSuccessful()); // !!!!!
+    }
+
+    private static void deleteCollection(String collectionName) {
         // Delete tests collection from firestore
-        Task<QuerySnapshot> testsCollection = firestore.collection("tests")
+        Task<QuerySnapshot> testsCollection = firestore.collection(collectionName)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -119,7 +167,7 @@ public class DatabaseControllerTest {
         while (!testsCollection.isComplete()); // Nice nice, rework
 
         for (DocumentSnapshot doc : testsCollection.getResult()) {
-            Task docDel = firestore.collection("tests").document(doc.getId())
+            Task docDel = firestore.collection(collectionName).document(doc.getId())
                     .delete()
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
