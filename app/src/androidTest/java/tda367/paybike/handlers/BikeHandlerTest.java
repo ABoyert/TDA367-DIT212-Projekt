@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tda367.paybike.model.Bike;
+import tda367.paybike.model.Rentable;
+import tda367.paybike.model.RentableFactory;
 
 import static org.junit.Assert.*;
 
@@ -30,24 +32,31 @@ public class BikeHandlerTest {
     }
 
    @Test
-    public void readFromListTest(){
+    public void createNewWithFactoryTest(){
        BikeHandler bh = new BikeHandler();
-       Bike testBike1 = new Bike();
-       Bike testBike2 = new Bike();
-       Bike testBike3 = new Bike();
-
-
+       RentableFactory rf = new RentableFactory();
        String[] testPos = {"Testgatan 2"};
-       Bike testBike = new Bike("bike1", 25, testPos);
-       List<Bike> bikes =  new ArrayList<Bike>();
+       Rentable testBike1 = rf.createRentable("Bike", "123", 100.0, testPos);
+
+       List<Rentable> rentables =  new ArrayList<Rentable>();
+       rentables.add(testBike1);
+       assert testBike1.getId() == "123" && testBike1.getPosition() == testPos
+               && testBike1.getPrice() == 100.0 && testBike1.isAvailable();
    }
+    /*
+    @Test
+    public void readBikePropertiesFromListTest(){
+        String[] testPos = {"Testgatan 2"};
+        Bike testBike = new Bike("bike1", 25, testPos);
+        List<Bike> bikes =  new ArrayList<Bike>();
+    }
 
    @Test
-    public void readAllBikes(){
+    public void readBikeFromDatabaseTest(){
         BikeHandler bh = new BikeHandler();
         //bh.bikes
         //List<Bike> bikes = bh.getAllBikes;
 
-   }
+   }*/
 
 }

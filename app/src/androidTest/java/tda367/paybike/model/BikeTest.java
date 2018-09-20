@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 
             assertEquals("tda367.paybike", appContext.getPackageName());
         }
-
+/*
         @Test
         public void createTestBike(){
             Bike testBike = new Bike();
@@ -37,6 +37,6 @@ import static org.junit.Assert.*;
 
             assert testBike.getId() == testID && testBike.getPosition() == position
                     && testBike.getPrice() == testPrice && testBike.isAvailable();
-        }
+        }*/
 
 }
