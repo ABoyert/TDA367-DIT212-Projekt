@@ -31,7 +31,10 @@ public class BikeHandlerTest {
 
    @Test
     public void readFromListTest(){
-       Bike testBike = new Bike();
+
+
+       String[] testPos = {"Testgatan 2"};
+       Bike testBike = new Bike("bike1", 25, testPos);
        List<Bike> bikes =  new ArrayList<Bike>();
    }
 
