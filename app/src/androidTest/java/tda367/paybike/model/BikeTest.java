@@ -25,18 +25,18 @@ import static org.junit.Assert.*;
         }
 
         @Test
-        public void createBike(){
+        public void createTestBike(){
             Bike testBike = new Bike();
             String testID = "1";
             String position[] = new String[]{"Testgatan 1"};
-            Double testprice = 25.00;
+            Double testPrice = 25.00;
             testBike.setId(testID);
             testBike.setPosition(position);
-            testBike.setPrice(testprice);
+            testBike.setPrice(testPrice);
             testBike.setAvailable(true);
 
             assert testBike.getId() == testID && testBike.getPosition() == position
-                    && testBike.getPrice() == testprice && testBike.isAvailable();
+                    && testBike.getPrice() == testPrice && testBike.isAvailable();
         }
 
 }
