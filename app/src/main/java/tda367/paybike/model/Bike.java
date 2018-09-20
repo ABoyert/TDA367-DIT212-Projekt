@@ -40,7 +40,6 @@ public class Bike implements Rentable {
 
     }
 
-
     @Override
     public double getPrice() {
         return price;
