@@ -30,8 +30,8 @@ import java.util.Map;
 //  example.put("name", "erik");
 //  example.put("price", 22);
 //
-//  EXAMPLE USING addToDatabase:
-//  addToDatabase("bikes", "bike1234", example); (This will add the example document map created above to the document 'bike1234' in collection 'bikes')
+//  EXAMPLE USING add:
+//  add("bikes", "bike1234", example); (This will add the example document map created above to the document 'bike1234' in collection 'bikes')
 
 public class DatabaseController {
 
@@ -57,7 +57,7 @@ public class DatabaseController {
     }
 
     // Add a new document with a given ID
-    public void addToDatabase(String collection, String id, Map<String, Object> documentMap) {
+    public void add(String collection, String id, Map<String, Object> documentMap) {
         firestore.collection(collection).document(id)
                 .set(documentMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -75,7 +75,7 @@ public class DatabaseController {
     }
 
     // Add a new document with a generated ID
-    public void addToDatabase(String collection, Map<String, Object> documentMap) {
+    public void add(String collection, Map<String, Object> documentMap) {
         firestore.collection(collection)
                 .add(documentMap)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -93,7 +93,7 @@ public class DatabaseController {
     }
 
     // Read given field in given document and return as string
-    public String readFromDatabase(final String collection, String documentID, String field) {
+    public String read(final String collection, String documentID, String field) {
         DocumentReference docRef = firestore.collection(collection).document(documentID);
 
         Task<DocumentSnapshot> getDoc = docRef.get()
@@ -119,7 +119,7 @@ public class DatabaseController {
     }
 
     // Read given document and returns a DocumentSnapshot
-    public DocumentSnapshot readFromDatabase(String collection, String documentID) {
+    public DocumentSnapshot read(String collection, String documentID) {
         DocumentReference docRef = firestore.collection(collection).document(documentID);
 
         Task<DocumentSnapshot> getDoc = docRef.get()
@@ -145,7 +145,7 @@ public class DatabaseController {
     }
 
     // Read given collection and return a list of document snapshots
-    public List<DocumentSnapshot> readFromDatabase(final String collection) {
+    public List<DocumentSnapshot> read(final String collection) {
         Task<QuerySnapshot> getCollection = firestore.collection(collection)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -165,7 +165,7 @@ public class DatabaseController {
     }
 
     // Delete given document from db
-    public void deleteFromDatabase(String collection, final String documentID) {
+    public void delete(String collection, final String documentID) {
         firestore.collection(collection).document(documentID)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

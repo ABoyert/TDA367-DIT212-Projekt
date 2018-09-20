@@ -4,14 +4,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
-import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,7 +19,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +67,7 @@ public class DatabaseControllerTest {
         test.put("timestamp", timestamp);
 
         // Add test to Firestore db using DatabaseController
-        db.addToDatabase(collectionName, documentID, test);
+        db.add(collectionName, documentID, test);
 
         // Read collection tests into local collectionSnapshot
         Task<QuerySnapshot> collectionSnapshot = firestore.collection(collectionName)
@@ -108,7 +104,7 @@ public class DatabaseControllerTest {
         createTestDocument(documentID);
         int expectedSize = 0;
 
-        db.deleteFromDatabase(collectionName, documentID);
+        db.delete(collectionName, documentID);
 
         // Read collection tests2 into local collectionSnapshot
         Task<QuerySnapshot> collectionSnapshot = firestore.collection(collectionName).get();
@@ -127,7 +123,7 @@ public class DatabaseControllerTest {
         // Create a test document in tests2 collection
         createTestDocument(documentID);
 
-        String dbAnswer = db.readFromDatabase(collectionName, documentID, fieldName);
+        String dbAnswer = db.read(collectionName, documentID, fieldName);
 
         // Check if the text field in document from db is equal to expectedText
         assertEquals(expectedText, dbAnswer);
@@ -141,7 +137,7 @@ public class DatabaseControllerTest {
         // Create a test document in tests2 collection
         createTestDocument(documentID);
 
-        DocumentSnapshot dbAnswer = db.readFromDatabase(collectionName, documentID);
+        DocumentSnapshot dbAnswer = db.read(collectionName, documentID);
 
         // Check that we get the correct document (same id)
         assertEquals(documentID, dbAnswer.getId());
@@ -156,7 +152,7 @@ public class DatabaseControllerTest {
         createTestDocument("test2");
         createTestDocument("test3");
 
-        List<DocumentSnapshot> dbAnswer = db.readFromDatabase(collectionName);
+        List<DocumentSnapshot> dbAnswer = db.read(collectionName);
 
         // Check if the size of the collection is as expected
         assertEquals(expectedSize, dbAnswer.size());
