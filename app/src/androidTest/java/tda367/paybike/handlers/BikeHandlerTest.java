@@ -36,10 +36,6 @@ public class BikeHandlerTest {
        Bike testBike2 = new Bike();
        Bike testBike3 = new Bike();
 
-
-       String[] testPos = {"Testgatan 2"};
-       Bike testBike = new Bike("bike1", 25, testPos);
-       List<Bike> bikes =  new ArrayList<Bike>();
    }
 
    @Test
