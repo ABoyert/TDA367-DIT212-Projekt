@@ -9,13 +9,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+//  Use class by getting the class instance
+//  through the function getInstance()
+//
 //  Class that is supposed to act as a
 //  middleman between the application and
 //  our google firestore database in order
@@ -99,6 +101,52 @@ public class DatabaseController {
         while (!getDoc.isComplete()); // Bad code, need rework
 
         return getDoc.getResult().get(field).toString();
+    }
+
+    // Read given document and returns a DocumentSnapshot
+    public DocumentSnapshot readFromDatabase(String collection, String documentID) {
+        DocumentReference docRef = firestore.collection(collection).document(documentID);
+
+        Task<DocumentSnapshot> getDoc = docRef.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {
+                            Log.w(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+
+        while (!getDoc.isComplete()); // Bad code, need rework
+
+        return getDoc.getResult();
+    }
+
+    // Read given collection and return a list of document snapshots
+    public List<DocumentSnapshot> readFromDatabase(final String collection) {
+        Task<QuerySnapshot> getCollection = firestore.collection(collection)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Successfully read " + collection + "!");
+                        } else {
+                            Log.w(TAG, "Could not read " + collection + "! " + task.getException());
+                        }
+                    }
+                });
+
+        while (!getCollection.isComplete()); // Need rework badly
+
+        return getCollection.getResult().getDocuments();
     }
 
     // Delete given document from db

@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -48,6 +49,13 @@ public class DatabaseControllerTest {
 
         // Get instance of firestore database
         firestore = FirebaseFirestore.getInstance();
+    }
+
+    @Before
+    public void beforeTests() {
+        // Clear tests collection
+        deleteCollection("tests");
+        deleteCollection("tests2");
     }
 
     @Test
@@ -92,13 +100,6 @@ public class DatabaseControllerTest {
         assertEquals(testText, testDoc.get("text"));
     }
 
-    @Before
-    public void beforeTests() {
-        // Clear tests collection
-        deleteCollection("tests");
-        deleteCollection("tests2");
-    }
-
     @Test
     public void testDeleteFromDatabase() {
         String collectionName = "tests2";
@@ -118,7 +119,7 @@ public class DatabaseControllerTest {
     }
 
     @Test
-    public void testReadFromDatabase() {
+    public void testReadFieldFromDatabase() {
         String collectionName = "tests2";
         String documentID = "testread";
         String fieldName = "text";
@@ -130,6 +131,35 @@ public class DatabaseControllerTest {
 
         // Check if the text field in document from db is equal to expectedText
         assertEquals(expectedText, dbAnswer);
+    }
+
+    @Test
+    public void testReadDocumentFromDatabase() {
+        String collectionName = "tests2";
+        String documentID = "testreaddoc";
+        String fieldName = "text";
+        // Create a test document in tests2 collection
+        createTestDocument(documentID);
+
+        DocumentSnapshot dbAnswer = db.readFromDatabase(collectionName, documentID);
+
+        // Check that we get the correct document (same id)
+        assertEquals(documentID, dbAnswer.getId());
+    }
+
+    @Test
+    public void testReadCollectionFromDatabase() {
+        String collectionName = "tests2";
+        int expectedSize = 3;
+        // Create a test document in tests2 collection
+        createTestDocument("test1");
+        createTestDocument("test2");
+        createTestDocument("test3");
+
+        List<DocumentSnapshot> dbAnswer = db.readFromDatabase(collectionName);
+
+        // Check if the size of the collection is as expected
+        assertEquals(expectedSize, dbAnswer.size());
     }
 
     @AfterClass
