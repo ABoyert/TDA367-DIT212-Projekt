@@ -6,6 +6,8 @@ import java.util.Date;
  * Created by Oscar Orava Kilberg on 2018-09-19.
  */
 
+// TODO: Add constructor
+
 public class Bike implements Rentable {
 
     private Date[] rentDate;
