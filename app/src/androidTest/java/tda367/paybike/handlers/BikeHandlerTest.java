@@ -31,11 +31,23 @@ public class BikeHandlerTest {
 
    @Test
     public void readFromListTest(){
+       BikeHandler bh = new BikeHandler();
+       Bike testBike1 = new Bike();
+       Bike testBike2 = new Bike();
+       Bike testBike3 = new Bike();
 
 
        String[] testPos = {"Testgatan 2"};
        Bike testBike = new Bike("bike1", 25, testPos);
        List<Bike> bikes =  new ArrayList<Bike>();
+   }
+
+   @Test
+    public void readAllBikes(){
+        BikeHandler bh = new BikeHandler();
+        //bh.bikes
+        //List<Bike> bikes = bh.getAllBikes;
+
    }
 
 }
