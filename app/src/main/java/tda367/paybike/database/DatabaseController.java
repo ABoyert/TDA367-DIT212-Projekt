@@ -15,6 +15,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.List;
 import java.util.Map;
 
+//          -SINGLETON CLASS-
 //  Use class by getting the class instance
 //  through the function getInstance()
 //
@@ -40,6 +41,20 @@ public class DatabaseController {
     private static FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     // TAG is used when logging, helpful for debugging
     private static final String TAG = DatabaseController.class.getSimpleName();
+
+    protected DatabaseController() {
+        // To make instantiation impossible outside of package and subclasses
+    }
+
+    // Create singleton if it does not exist, otherwise creates it.
+    // Returns the DatabaseController instance.
+    public static DatabaseController getInstance() {
+        if (instance == null) {
+            instance = new DatabaseController();
+        }
+
+        return instance;
+    }
 
     // Add a new document with a given ID
     public void addToDatabase(String collection, String id, Map<String, Object> documentMap) {
@@ -166,13 +181,5 @@ public class DatabaseController {
                 });
     }
 
-    // Create singleton if it does not exist, otherwise creates it
-    // Returns the DatabaseController instance
-    public static DatabaseController getInstance() {
-        if (instance == null) {
-            instance = new DatabaseController();
-        }
 
-        return instance;
-    }
 }
