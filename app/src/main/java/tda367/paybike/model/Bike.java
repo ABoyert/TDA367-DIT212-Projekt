@@ -8,11 +8,17 @@ import java.util.Date;
 
 public class Bike implements Rentable {
 
+    int i;
+
     private Date[] rentDate;
     private String id;
     private double price;
     private String[] position;
     private boolean available;
+
+    public Bike(String id, double price, String[] position){
+        this.setAvailable(false);
+    }
 
     @Override
     public boolean isAvailable() {
