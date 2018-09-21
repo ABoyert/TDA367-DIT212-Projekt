@@ -23,9 +23,10 @@ public class BikeHandler {
     // Can finish function when the Bike class is done
     public List<Bike> getAllBikes() {
         List<Bike> bikeList = new ArrayList<>();
+        String[] pos = {"Testgatan 1"};
 
         for (DocumentSnapshot doc : db.read("bikes")) {
-            bikeList.add(new Bike(/* TODO: Create a bike with the properties from doc, example: doc.get("model"), doc.get("description") */));
+            bikeList.add(new Bike("bike1", 25.00, pos));
         }
 
         return bikeList;
