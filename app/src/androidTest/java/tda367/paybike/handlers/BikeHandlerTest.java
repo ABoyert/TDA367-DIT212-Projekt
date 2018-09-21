@@ -43,14 +43,17 @@ public class BikeHandlerTest {
        assert testBike1.getId() == "123" && testBike1.getPosition() == testPos
                && testBike1.getPrice() == 100.0 && testBike1.isAvailable();
    }
-    /*
+
     @Test
     public void readBikePropertiesFromListTest(){
         String[] testPos = {"Testgatan 2"};
         Bike testBike = new Bike("bike1", 25, testPos);
-        List<Bike> bikes =  new ArrayList<Bike>();
-    }
+        ArrayList<Bike> bikes =  new ArrayList<>();
+        bikes.add(testBike);
 
+        assert bikes.get(1).getId() == "123";
+    }
+    /*
    @Test
     public void readBikeFromDatabaseTest(){
         BikeHandler bh = new BikeHandler();
