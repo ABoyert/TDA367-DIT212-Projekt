@@ -13,21 +13,25 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:contentDescription="@string/bike_image"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@mipmap/skeppshult" />
 
     <TextView
         android:id="@+id/city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="true" />
+        android:fontFamily="@font/deja_vu_sans_mono"
+        android:textAllCaps="true"
+        android:textColor="@color/colorBrown" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/deja_vu_sans_mono" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/deja_vu_sans_mono" />
 </LinearLayout>

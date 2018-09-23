@@ -18,8 +18,18 @@
             android:elevation="0dp"
             android:minHeight="153dp"
             android:theme="@style/ToolbarTheme"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="PAY•BIKE" />
+            app:titleTextColor="@color/colorAccentGreen">
+
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:letterSpacing="0.5em"
+                android:text="@string/display_app_name">
+
+            </TextView>
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
