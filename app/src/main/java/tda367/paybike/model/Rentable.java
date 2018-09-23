@@ -20,6 +20,8 @@ public interface Rentable {
     public Date getEndDate();
     public void setAvailable(boolean available);
     public boolean isAvailable();
+    public void setOwner(String ownerID);
+    public String getOwner();
 
 
 

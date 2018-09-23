@@ -10,6 +10,7 @@ public class Bike implements Rentable {
     private double price;
     private String position;
     private boolean available;
+    private String owner;
 
     public Bike(String id, double price, String position){
         this.id = id;
@@ -28,6 +29,16 @@ public class Bike implements Rentable {
     @Override
     public boolean isAvailable() {
         return available;
+    }
+
+    @Override
+    public void setOwner(String ownerID) {
+        this.owner = ownerID;
+    }
+
+    @Override
+    public String getOwner() {
+        return owner;
     }
 
     @Override
