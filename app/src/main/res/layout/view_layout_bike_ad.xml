@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:contentDescription="@string/bike_image"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
         android:id="@+id/city"
@@ -22,7 +22,7 @@
         android:textAllCaps="true" />
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

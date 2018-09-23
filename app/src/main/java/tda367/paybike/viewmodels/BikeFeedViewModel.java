@@ -6,6 +6,9 @@ package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import tda367.paybike.handlers.BikeHandler;
@@ -17,13 +20,12 @@ public class BikeFeedViewModel extends ViewModel {
 
     public BikeFeedViewModel() {
         bikeHandler = new BikeHandler();
-
     }
 
     // Fetches and returns all available Bike Objects from the Database
-    public Stream<Bike> getAvailableBikes() {
-        return bikeHandler.getAllBikes().stream()
-                .filter(bike -> bike.isAvailable()); // Filters out and returns only available bikes
+    public ArrayList<Bike> getAvailableBikes() {
+        // TODO Filter out non-available bikes
+        return bikeHandler.getAllBikes();
     }
 
 }
