@@ -21,14 +21,9 @@ public class BikeHandler {
     }*/
 
     // Can finish function when the Bike class is done
-<<<<<<< refs/remotes/origin/master
-    public List<Bike> getAllBikes() {
-        List<Bike> bikeList = new ArrayList<>();
-        String[] pos = {"Testgatan 1"};
-=======
     public ArrayList<Bike> getAllBikes() {
         ArrayList<Bike> bikeList = new ArrayList<>();
->>>>>>> Add CustomBikeAdapter and adjust bike feed layout
+        String[] pos = {"Testgatan 1"};
 
         for (DocumentSnapshot doc : db.read("bikes")) {
             bikeList.add(new Bike("bike1", 25.00, pos));
