@@ -14,8 +14,10 @@ public interface Rentable {
     public double getPrice();
     public void setPosition(String pos);
     public String getPosition();
-    public void setDate(Date start, Date end);
-    public Date[] getRentingDate();
+    public void setStartDate(Date startDate);
+    public Date getStartDate();
+    public void setEndDate(Date startDate);
+    public Date getEndDate();
     public void setAvailable(boolean available);
     public boolean isAvailable();
 

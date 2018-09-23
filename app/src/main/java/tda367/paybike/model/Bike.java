@@ -2,15 +2,10 @@ package tda367.paybike.model;
 
 import java.util.Date;
 
-/**
- * Created by Oscar Orava Kilberg on 2018-09-19.
- */
 
 public class Bike implements Rentable {
-
-    int i;
-
-    private Date[] rentDate;
+    private Date startDate;
+    private Date endDate;
     private String id;
     private double price;
     private String position;
@@ -72,13 +67,22 @@ public class Bike implements Rentable {
     }
 
     @Override
-    public void setDate(Date start, Date end) {
-        this.rentDate = new Date[]{start, end};
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     @Override
-    public Date[] getRentingDate() {
-        return rentDate;
+    public Date getStartDate() {
+        return startDate;
     }
 
+    @Override
+    public void setEndDate(Date startDate) {
+        this.endDate = endDate;
+    }
+
+    @Override
+    public Date getEndDate() {
+        return endDate;
+    }
 }

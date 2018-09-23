@@ -24,17 +24,18 @@ public class BikeHandler {
     public List<Bike> getAllBikes() {
         List<Bike> bikeList = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            bikeList.add(new Bike("bike" + i, 5*i, "Testgatan " + i, true));
+        for (DocumentSnapshot doc : db.read("bikes")) {
+            bikeList.add(new Bike(
+                    doc.getId(),
+                    (Double) doc.get("price"),
+                    doc.get("position").toString()));
         }
 
-       /* for (DocumentSnapshot doc : db.read("bikes")) {
-            System.out.println("ADD BIKE...");
-            bikeList.add(new Bike("bike1", 25.00, pos));
-        } */
+        /*
+        for (int i = 0; i < 10; i++) {
+            bikeList.add(new Bike("bike" + i, 5*i, "Testgatan " + i, true));
+        }*/
 
         return bikeList;
     }
-
-
 }
