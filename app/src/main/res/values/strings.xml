@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PayBike</string>
     <string name="title_activity_bike_feed">BikeFeedActivity</string>
+    <string name="bike_image">BikeImage</string>
 </resources>

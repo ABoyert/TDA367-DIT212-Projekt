@@ -21,7 +21,6 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="PAY•BIKE" />
 
-
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_bike_feed" />
