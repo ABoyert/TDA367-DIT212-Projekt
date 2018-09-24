@@ -6,8 +6,6 @@ import java.util.Date;
  * Created by Oscar Orava Kilberg on 2018-09-19.
  */
 
-// TODO: Add constructor
-
 public class Bike implements Rentable {
 
     int i;
@@ -15,11 +13,21 @@ public class Bike implements Rentable {
     private Date[] rentDate;
     private String id;
     private double price;
-    private String[] position;
+    private String position;
     private boolean available;
 
-    public Bike(String id, double price, String[] position){
+    public Bike(String id, double price, String position){
+        this.id = id;
+        this.price = price;
+        this.position = position;
         this.setAvailable(false);
+    }
+
+    public Bike(String id, double price, String position, boolean available){
+        this.id = id;
+        this.price = price;
+        this.position = position;
+        this.available = available;
     }
 
     @Override
@@ -45,7 +53,6 @@ public class Bike implements Rentable {
     @Override
     public void setPrice(Double price) {
         this.price = price;
-
     }
 
     @Override
@@ -55,12 +62,12 @@ public class Bike implements Rentable {
 
 
     @Override
-    public void setPosition(String pos[]) {
+    public void setPosition(String pos) {
         this.position = pos;
     }
 
     @Override
-    public String[] getPosition() {
+    public String getPosition() {
         return position;
     }
 
@@ -73,6 +80,5 @@ public class Bike implements Rentable {
     public Date[] getRentingDate() {
         return rentDate;
     }
-
 
 }
