@@ -24,8 +24,10 @@ public class BikeFeedViewModel extends ViewModel {
 
     // Fetches and returns all available Bike Objects from the Database
     public ArrayList<Bike> getAvailableBikes() {
-        // TODO Filter out non-available bikes
-        return bikeHandler.getAllBikes();
+
+        return bikeHandler.getAllBikes().stream()
+                .filter(bike -> bike.isAvailable())
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
 }

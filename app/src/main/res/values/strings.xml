@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">PayBike</string>
-    <string name="display_app_name">P A Y • B I K E</string>
+    <string name="display_app_name">PAY•BIKE</string>
     <string name="title_activity_bike_feed">BikeFeedActivity</string>
     <string name="bike_image">BikeImage</string>
+    <string name="bike_placeholder_name">Skeppshult bike</string>
+    <string name="bike_placeholder_city">Gothenburg</string>
+    <string name="bike_placeholder_price">$9/h</string>
+    <string name="search_hint">Seach for bikes...</string>
+
 </resources>

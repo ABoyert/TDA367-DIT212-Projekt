@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bikeButton = (Button) findViewById(R.id.bikeButton);
 
         bikeButton.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, BikeFeedActivity.class));
+            startActivity(new Intent(this, BikeFeedActivity.class));
         });
     }
 

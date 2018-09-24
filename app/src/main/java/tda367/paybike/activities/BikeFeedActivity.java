@@ -7,8 +7,11 @@ import android.text.TextUtils;
 import android.widget.GridView;
 import android.widget.SearchView;
 
+import java.util.ArrayList;
+
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomBikeAdAdapter;
+import tda367.paybike.model.Bike;
 import tda367.paybike.viewmodels.BikeFeedViewModel;
 
 /*
@@ -29,6 +32,7 @@ public class BikeFeedActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
 
         viewModel = new BikeFeedViewModel();
         bikeView = (GridView) findViewById(R.id.bikeGrid);

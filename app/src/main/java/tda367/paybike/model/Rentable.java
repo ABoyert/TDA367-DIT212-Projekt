@@ -12,8 +12,8 @@ public interface Rentable {
     public String getId();
     public void setPrice(Double price);
     public double getPrice();
-    public void setPosition(String pos[]);
-    public String[] getPosition();
+    public void setPosition(String pos);
+    public String getPosition();
     public void setDate(Date start, Date end);
     public Date[] getRentingDate();
     public void setAvailable(boolean available);
