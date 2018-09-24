@@ -1,9 +1,5 @@
 package tda367.paybike.viewmodels;
 
-/*
-* This class controls the BikeFeedActivity
-*/
-
 import android.arch.lifecycle.ViewModel;
 
 import java.util.ArrayList;
@@ -13,6 +9,13 @@ import java.util.stream.Stream;
 
 import tda367.paybike.handlers.BikeHandler;
 import tda367.paybike.model.Bike;
+
+/*
+ * Created by Julia Gustafsson on 2018-09-23.
+ *
+ * This class provides the BikeFeedActivity with data
+ */
+
 
 public class BikeFeedViewModel extends ViewModel {
 

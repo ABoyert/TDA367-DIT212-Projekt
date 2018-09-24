@@ -14,9 +14,13 @@ import tda367.paybike.adapters.CustomBikeAdAdapter;
 import tda367.paybike.model.Bike;
 import tda367.paybike.viewmodels.BikeFeedViewModel;
 
-/*
-* This class is only responsible for the visible aspects of the BikeFeed
-*/
+/**
+ * Created by Julia Gustafsson on 2018-09-23.
+ *
+ * This class is only responsible for the visible aspects of the BikeFeed
+ *
+ */
+
 
 public class BikeFeedActivity extends AppCompatActivity {
 

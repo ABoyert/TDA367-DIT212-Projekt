@@ -19,6 +19,13 @@ import tda367.paybike.model.Bike;
 
 import static java.util.stream.Collectors.*;
 
+/*
+ * Created by Julia Gustafsson on 2018-09-23.
+ *
+ * This class works as an adapter for Bike objects to be displayed in advertisement views
+ */
+
+
 public class CustomBikeAdAdapter extends ArrayAdapter<Bike> {
 
     private int layout;
