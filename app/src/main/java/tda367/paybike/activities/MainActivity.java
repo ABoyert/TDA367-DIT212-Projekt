@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import tda367.paybike.R;
+import tda367.paybike.database.DatabaseController;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     // Set TAG to class name for use in debugging
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bikeButton = (Button) findViewById(R.id.bikeButton);
+
+        DatabaseController db = DatabaseController.getInstance();
 
         bikeButton.setOnClickListener(v -> {
             startActivity(new Intent(this, BikeFeedActivity.class));

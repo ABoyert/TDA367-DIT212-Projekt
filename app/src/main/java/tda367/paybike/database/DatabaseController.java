@@ -12,8 +12,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import tda367.paybike.model.Bike;
+import tda367.paybike.model.Request;
+import tda367.paybike.model.User;
 
 //          -SINGLETON CLASS-
 //  Use class by getting the class instance
@@ -42,8 +48,21 @@ public class DatabaseController {
     // TAG is used when logging, helpful for debugging
     private static final String TAG = DatabaseController.class.getSimpleName();
 
+    // Temp solution
+    Map<String, List<DocumentSnapshot>> localDB = new HashMap<>();
+
+    // TODO: isReading
+    /*private boolean doneReading = false;
+
+    public boolean isDoneReading() {
+        return doneReading;
+    }*/
+
     protected DatabaseController() {
         // To make instantiation impossible outside of package and subclasses
+        read("bikes");
+        read("users");
+        read("requests");
     }
 
     // Create singleton if it does not exist, otherwise creates it.
@@ -91,6 +110,8 @@ public class DatabaseController {
                     }
                 });
     }
+
+    /*
 
     // Read given field in given document and return as string
     public String read(final String collection, String documentID, String field) {
@@ -144,8 +165,10 @@ public class DatabaseController {
         return getDoc.getResult();
     }
 
+    */
+
     // Read given collection and return a list of document snapshots
-    public List<DocumentSnapshot> read(final String collection) {
+    private void read(final String collection) {
         Task<QuerySnapshot> getCollection = firestore.collection(collection)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -153,15 +176,23 @@ public class DatabaseController {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "Successfully read " + collection + "!");
+                            localDB.put(collection, task.getResult().getDocuments());
                         } else {
                             Log.w(TAG, "Could not read " + collection + "! " + task.getException());
                         }
                     }
                 });
+    }
 
-        while (!getCollection.isComplete()); // Need rework badly
+    public List<DocumentSnapshot> getCollection(String collection) {
+        read(collection);
 
-        return getCollection.getResult().getDocuments();
+        //while (!doneReading);
+
+        if (localDB.get(collection) != null)
+            return localDB.get(collection);
+        else
+            return null;
     }
 
     // Delete given document from db

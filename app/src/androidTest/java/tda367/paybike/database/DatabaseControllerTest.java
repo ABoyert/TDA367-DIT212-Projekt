@@ -114,7 +114,7 @@ public class DatabaseControllerTest {
         assertEquals(expectedSize, collectionSnapshot.getResult().getDocuments().size());
     }
 
-    @Test
+    /*@Test
     public void testReadFieldFromDatabase() {
         String collectionName = "tests2";
         String documentID = "testread";
@@ -141,7 +141,7 @@ public class DatabaseControllerTest {
 
         // Check that we get the correct document (same id)
         assertEquals(documentID, dbAnswer.getId());
-    }
+    }*/
 
     @Test
     public void testReadCollectionFromDatabase() {
@@ -152,7 +152,7 @@ public class DatabaseControllerTest {
         createTestDocument("test2");
         createTestDocument("test3");
 
-        List<DocumentSnapshot> dbAnswer = db.read(collectionName);
+        List<DocumentSnapshot> dbAnswer = db.getCollection(collectionName);
 
         // Check if the size of the collection is as expected
         assertEquals(expectedSize, dbAnswer.size());

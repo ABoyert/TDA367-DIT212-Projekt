@@ -22,17 +22,18 @@ public class BikeHandler {
 
     // Can finish function when the Bike class is done
     public List<Bike> getAllBikes() {
-        List<Bike> bikeList = new ArrayList<>();
+        ArrayList<Bike> bikeList = new ArrayList<>();
 
-        for (DocumentSnapshot doc : db.read("bikes")) {
+        for (DocumentSnapshot doc : db.getCollection("bikes")) {
             bikeList.add(new Bike(
                     doc.getId(),
-                    (Double) doc.get("price"),
-                    doc.get("position").toString()));
+                    Double.parseDouble(doc.get("price").toString()),
+                    doc.get("position").toString(),
+                    true));
         }
 
-        /*
-        for (int i = 0; i < 10; i++) {
+
+        /*for (int i = 0; i < 10; i++) {
             bikeList.add(new Bike("bike" + i, 5*i, "Testgatan " + i, true));
         }*/
 
