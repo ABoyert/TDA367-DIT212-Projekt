@@ -7,12 +7,16 @@ import android.text.TextUtils;
 import android.widget.GridView;
 import android.widget.SearchView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomBikeAdAdapter;
 import tda367.paybike.model.Bike;
 import tda367.paybike.viewmodels.BikeFeedViewModel;
+
+import static java.util.stream.Collectors.*;
 
 /**
  * Created by Julia Gustafsson on 2018-09-23.
@@ -55,13 +59,11 @@ public class BikeFeedActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
-                    bikeView.clearTextFilter();
-                } else {
-                    bikeAdapter.getFilter().filter(newText);
-                }
-                return true;
+                ArrayList<Bike> results = viewModel.getSearchResult(newText);
+                ((CustomBikeAdAdapter)bikeView.getAdapter()).update(results);
+                return false;
             }
+
         });
     }
 }

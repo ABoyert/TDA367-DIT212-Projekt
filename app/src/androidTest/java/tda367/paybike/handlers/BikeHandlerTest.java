@@ -35,7 +35,7 @@ public class BikeHandlerTest {
     public void createNewWithFactoryTest(){
        BikeHandler bh = new BikeHandler();
        RentableFactory rf = new RentableFactory();
-       String[] testPos = {"Testgatan 2"};
+       String testPos = "Testgatan 2";
        Rentable testBike1 = rf.createRentable("Bike", "123", 100.0, testPos);
 
        List<Rentable> rentables =  new ArrayList<Rentable>();
@@ -46,7 +46,7 @@ public class BikeHandlerTest {
 
     @Test
     public void readBikePropertiesFromListTest(){
-        String[] testPos = {"Testgatan 2"};
+        String testPos = "Testgatan 2";
         Bike testBike = new Bike("bike1", 25, testPos);
         ArrayList<Bike> bikes =  new ArrayList<>();
         bikes.add(testBike);

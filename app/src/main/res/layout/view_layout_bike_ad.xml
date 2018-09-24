@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/bikeImage"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginBottom="4dp"
         android:contentDescription="@string/bike_image"
         app:srcCompat="@mipmap/skeppshult_bike" />
 
@@ -19,22 +19,23 @@
         android:id="@+id/city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/deja_vu_sans_mono"
         android:text="@string/bike_placeholder_city"
         android:textAllCaps="true"
-        android:textColor="@color/colorBrown" />
+        android:textColor="@color/colorBrown"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/deja_vu_sans_mono"
-        android:text="@string/bike_placeholder_name" />
+        android:fontFamily="@font/opensans_semibold"
+        android:text="@string/bike_placeholder_name"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/deja_vu_sans_mono"
-        android:text="@string/bike_placeholder_price" />
+        android:text="@string/bike_placeholder_price"
+        android:textSize="16sp" />
 </LinearLayout>
