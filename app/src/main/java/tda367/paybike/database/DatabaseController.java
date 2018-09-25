@@ -168,7 +168,7 @@ public class DatabaseController {
     */
 
     // Read given collection and return a list of document snapshots
-    private void read(final String collection) {
+    private Task<QuerySnapshot> read(final String collection) {
         Task<QuerySnapshot> getCollection = firestore.collection(collection)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -182,14 +182,24 @@ public class DatabaseController {
                         }
                     }
                 });
+
+        return getCollection;
     }
 
     public List<DocumentSnapshot> getCollection(String collection) {
-        read(collection);
+        Task<QuerySnapshot> readTask = read(collection);
 
-        //while (!doneReading);
+        while (!readTask.isComplete()) {
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
-        if (localDB.get(collection) != null)
+        if (readTask.isComplete())
+            return readTask.getResult().getDocuments();
+        else if (localDB.get(collection) != null)
             return localDB.get(collection);
         else
             return null;
