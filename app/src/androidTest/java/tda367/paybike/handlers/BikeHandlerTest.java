@@ -57,7 +57,8 @@ public class BikeHandlerTest {
    @Test
     public void readBikeFromDatabaseTest(){     //Testar om fuktionen "getAllBikes" får någon data
         BikeHandler bh = new BikeHandler();
-        ArrayList<Bike> bikes = bh.getAllBikes();
+
+        List<Bike> bikes = bh.getAllBikes();
 
        assert bikes.isEmpty() == false;
    }
