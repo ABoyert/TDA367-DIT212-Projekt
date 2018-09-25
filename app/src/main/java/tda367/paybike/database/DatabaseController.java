@@ -189,7 +189,7 @@ public class DatabaseController {
         // Wait for read to finish
         while (!readTask.isComplete()) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

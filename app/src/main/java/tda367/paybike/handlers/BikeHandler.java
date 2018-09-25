@@ -3,7 +3,9 @@ package tda367.paybike.handlers;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.model.Bike;
@@ -16,27 +18,37 @@ public class BikeHandler {
     // Get databaseController instance so we can use the database
     private static DatabaseController db = DatabaseController.getInstance();
 
+    // Name of collection that holds all bikes, and fields in db
+    private static final String BIKESCOLLECTION = "bikes";
+    private static final String POSITION = "position";
+    private static final String PRICE = "price";
+
     /*public BikeHandler() {
         Should class be a singleton or not?
     }*/
 
-    // Can finish function when the Bike class is done
+    // Returns all the objects in the bikes collection in FireStore
     public List<Bike> getAllBikes() {
         ArrayList<Bike> bikeList = new ArrayList<>();
 
-        for (DocumentSnapshot doc : db.getCollection("bikes")) {
+        for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
             bikeList.add(new Bike(
                     doc.getId(),
-                    Double.parseDouble(doc.get("price").toString()),
-                    doc.get("position").toString(),
+                    Double.parseDouble(doc.get(PRICE).toString()),
+                    doc.get(POSITION).toString(),
                     true));
         }
 
-
-        /*for (int i = 0; i < 10; i++) {
-            bikeList.add(new Bike("bike" + i, 5*i, "Testgatan " + i, true));
-        }*/
-
         return bikeList;
+    }
+
+    // Take a bike object and put it into the database
+    public void addBike(Bike bike) {
+        // Put bike's properties into a Map that will be passed to the database
+        Map<String, Object> bikeMap = new HashMap<>();
+        bikeMap.put(POSITION, bike.getPosition());
+        bikeMap.put(PRICE, bike.getPrice());
+
+        db.add(BIKESCOLLECTION, bikeMap);
     }
 }

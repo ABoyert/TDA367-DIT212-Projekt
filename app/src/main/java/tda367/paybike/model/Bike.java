@@ -4,8 +4,8 @@ import java.util.Date;
 
 
 public class Bike implements Rentable {
-    private Date startDate;
-    private Date endDate;
+    //private Date startDate;
+    //private Date endDate;
     private String id;
     private double price;
     private String position;
@@ -77,7 +77,7 @@ public class Bike implements Rentable {
         return position;
     }
 
-    @Override
+    /*@Override
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
@@ -95,5 +95,5 @@ public class Bike implements Rentable {
     @Override
     public Date getEndDate() {
         return endDate;
-    }
+    }*/
 }
