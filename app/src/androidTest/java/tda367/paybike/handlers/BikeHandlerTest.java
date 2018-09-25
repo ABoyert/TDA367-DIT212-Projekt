@@ -32,7 +32,7 @@ public class BikeHandlerTest {
     }
 
    @Test
-    public void createNewWithFactoryTest(){
+    public void createNewWithFactoryTest(){     //Testar så att "bikeHandler" kan använda "RentableFactory"
        BikeHandler bh = new BikeHandler();
        RentableFactory rf = new RentableFactory();
        String testPos = "Testgatan 2";
@@ -53,13 +53,23 @@ public class BikeHandlerTest {
 
         assert bikes.get(1).getId() == "123";
     }
-    /*
-   @Test
-    public void readBikeFromDatabaseTest(){
-        BikeHandler bh = new BikeHandler();
-        //bh.bikes
-        //List<Bike> bikes = bh.getAllBikes;
 
-   }*/
+   @Test
+    public void readBikeFromDatabaseTest(){     //Testar om fuktionen "getAllBikes" får någon data
+        BikeHandler bh = new BikeHandler();
+        ArrayList<Bike> bikes = bh.getAllBikes();
+
+       assert bikes.isEmpty() == false;
+   }
+
+   public void adBikeToDatabaseTest(){          //Testar att lägga till en cyckel till databasen
+
+   }
+
+   public void deleteBikeFromDatabaseTest(){        //Testar att ta bort en cyckel från data basen
+
+   }
+
+
 
 }
