@@ -48,18 +48,13 @@ public class DatabaseController {
     // TAG is used when logging, helpful for debugging
     private static final String TAG = DatabaseController.class.getSimpleName();
 
-    // Temp solution
+    // Offline DB
     Map<String, List<DocumentSnapshot>> localDB = new HashMap<>();
-
-    // TODO: isReading
-    /*private boolean doneReading = false;
-
-    public boolean isDoneReading() {
-        return doneReading;
-    }*/
 
     protected DatabaseController() {
         // To make instantiation impossible outside of package and subclasses
+
+        //Make local copy of required collections on launch
         read("bikes");
         read("users");
         read("requests");
@@ -167,7 +162,7 @@ public class DatabaseController {
 
     */
 
-    // Read given collection and return a list of document snapshots
+    // Return task for reading the given collection
     private Task<QuerySnapshot> read(final String collection) {
         Task<QuerySnapshot> getCollection = firestore.collection(collection)
                 .get()
@@ -186,19 +181,24 @@ public class DatabaseController {
         return getCollection;
     }
 
+    // Returns a list of DocumentSnapshots
     public List<DocumentSnapshot> getCollection(String collection) {
+        // Get task for reading given collection
         Task<QuerySnapshot> readTask = read(collection);
 
+        // Wait for read to finish
         while (!readTask.isComplete()) {
             try {
-                Thread.sleep(20);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        if (readTask.isComplete())
+        // If complete and successful return result
+        if (readTask.isComplete() && readTask.isSuccessful())
             return readTask.getResult().getDocuments();
+        // Return old result if the read fails
         else if (localDB.get(collection) != null)
             return localDB.get(collection);
         else
