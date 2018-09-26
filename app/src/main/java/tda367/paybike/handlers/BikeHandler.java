@@ -51,4 +51,9 @@ public class BikeHandler {
 
         db.add(BIKESCOLLECTION, bikeMap);
     }
+
+    // Take a bike object and remove it from the database
+    public void deleteBike(Bike bike) {
+        db.delete(BIKESCOLLECTION, bike.getId());
+    }
 }
