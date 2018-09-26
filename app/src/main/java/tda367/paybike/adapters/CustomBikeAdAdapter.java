@@ -67,7 +67,7 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Bike> {
         return bikeView;
     }
 
-    public void update(ArrayList<Bike> newList) {
+    public void updateBikeView(ArrayList<Bike> newList) {
         bikes = new ArrayList<>();
         bikes.addAll(newList);
         notifyDataSetChanged();

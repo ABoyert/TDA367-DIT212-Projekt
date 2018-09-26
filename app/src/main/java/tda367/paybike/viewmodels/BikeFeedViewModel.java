@@ -26,13 +26,14 @@ public class BikeFeedViewModel extends ViewModel {
         bikeHandler = new BikeHandler();
     }
 
-    // Fetches and returns all available Bike Objects from the Database
+    // Fetches and returns all Bike Objects from the Database which are marked as "available"
     public ArrayList<Bike> getAvailableBikes() {
         return bikeHandler.getAllBikes().stream()
                 .filter(bike -> bike.isAvailable())
                 .collect(toCollection(ArrayList::new));
     }
 
+    //TODO Update method to filter correct attributes
     public ArrayList<Bike> getSearchResult(String searchText) {
         return bikeHandler.getAllBikes().stream()
                 .filter(bike -> bike.getId().toLowerCase().contains(searchText.toLowerCase()) || bike.getPosition().toLowerCase().contains(searchText.toLowerCase()))

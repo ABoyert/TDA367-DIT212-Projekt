@@ -25,7 +25,6 @@ import static java.util.stream.Collectors.*;
  *
  */
 
-
 public class BikeFeedActivity extends AppCompatActivity {
 
     private static BikeFeedViewModel viewModel;
@@ -60,7 +59,7 @@ public class BikeFeedActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 ArrayList<Bike> results = viewModel.getSearchResult(newText);
-                ((CustomBikeAdAdapter)bikeView.getAdapter()).update(results);
+                ((CustomBikeAdAdapter)bikeView.getAdapter()).updateBikeView(results);
                 return false;
             }
 
