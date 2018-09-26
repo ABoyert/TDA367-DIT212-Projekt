@@ -39,4 +39,12 @@ public class BikeHandler {
 
         return bikeList;
     }
+
+    public void deleteBike(Bike bike){
+
+    }
+
+    public void adBike(Bike bike){
+        
+    }
 }

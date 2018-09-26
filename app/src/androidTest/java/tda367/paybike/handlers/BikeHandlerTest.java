@@ -64,11 +64,21 @@ public class BikeHandlerTest {
    }
 
    public void adBikeToDatabaseTest(){          //Testar att lägga till en cyckel till databasen
+       BikeHandler bh = new BikeHandler();
+       String testPos = "Testgatan 2";
+       Bike testBike = new Bike("bike1", 25, testPos);
+       bh.deleteBike(testBike);
 
+       //assert
    }
 
    public void deleteBikeFromDatabaseTest(){        //Testar att ta bort en cyckel från data basen
+       BikeHandler bh = new BikeHandler();
+       String testPos = "Testgatan 2";
+       Bike testBike = new Bike("bike1", 25, testPos);
+       bh.adBike(testBike);
 
+       //assert
    }
 
 
