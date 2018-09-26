@@ -107,13 +107,15 @@ public class BikeHandlerTest {
         // Delete bike
         bh.deleteBike(testBike);
 
+        Bike dbBike = null;
+
         // Check if bike got removed from db
         for (Bike b : bh.getAllBikes()) {
             if (b.getId().equals(testBike.getId()))
-                assertTrue(false);
+                dbBike = b;
         }
 
-        assertTrue(true);
+        assertTrue(dbBike == null);
     }
 
 }
