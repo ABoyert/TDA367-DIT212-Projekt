@@ -49,7 +49,7 @@ public class BikeHandler {
         bikeMap.put(POSITION, bike.getPosition());
         bikeMap.put(PRICE, bike.getPrice());
 
-        db.add(BIKESCOLLECTION, bikeMap);
+        db.add(BIKESCOLLECTION, bike.getId(), bikeMap);
     }
 
     // Take a bike object and remove it from the database
