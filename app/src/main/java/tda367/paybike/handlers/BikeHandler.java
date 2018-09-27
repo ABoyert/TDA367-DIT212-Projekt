@@ -22,6 +22,8 @@ public class BikeHandler {
     private static final String BIKESCOLLECTION = "bikes";
     private static final String POSITION = "position";
     private static final String PRICE = "price";
+    private static final String IMAGE = "image";
+    private static final String DESCRIPTION = "description";
 
     /*public BikeHandler() {
         Should class be a singleton or not?
@@ -48,6 +50,8 @@ public class BikeHandler {
         Map<String, Object> bikeMap = new HashMap<>();
         bikeMap.put(POSITION, bike.getPosition());
         bikeMap.put(PRICE, bike.getPrice());
+        bikeMap.put(IMAGE, bike.getImageLink());
+        bikeMap.put(DESCRIPTION, bike.getDescription());
 
         db.add(BIKESCOLLECTION, bike.getId(), bikeMap);
     }

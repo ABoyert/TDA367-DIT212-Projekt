@@ -11,6 +11,8 @@ public class Bike implements Rentable {
     private String position;
     private boolean available;
     private String owner;
+    private String imageLink;
+    private String description;
 
     public Bike(String id, double price, String position){
         this.id = id;
@@ -75,6 +77,22 @@ public class Bike implements Rentable {
     @Override
     public String getPosition() {
         return position;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /*@Override
