@@ -14,10 +14,10 @@ public interface Rentable {
     public double getPrice();
     public void setPosition(String pos);
     public String getPosition();
-    public void setStartDate(Date startDate);
+    /*public void setStartDate(Date startDate);
     public Date getStartDate();
     public void setEndDate(Date startDate);
-    public Date getEndDate();
+    public Date getEndDate();*/
     public void setAvailable(boolean available);
     public boolean isAvailable();
     public void setOwner(String ownerID);

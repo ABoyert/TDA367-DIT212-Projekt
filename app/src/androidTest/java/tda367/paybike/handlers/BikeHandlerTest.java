@@ -4,6 +4,10 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -82,5 +86,57 @@ public class BikeHandlerTest {
    }
 
 
+
+    private static BikeHandler bh;
+    private static Bike testBike;
+
+    @BeforeClass
+    public static void beforeClass() {
+        bh = new BikeHandler();
+    }
+
+    @Before
+    public void beforeTests() {
+        testBike = new Bike("testbike200", 10, "Test Street 4");
+    }
+
+    @After
+    public void afterClass() {
+        bh.deleteBike(testBike);
+    }
+
+    @Test
+    public void testAddBike() {
+        bh.addBike(testBike);
+
+        Bike dbBike = null;
+
+        // Check if bike got added to db
+        for (Bike b : bh.getAllBikes()) {
+            if (b.getId().equals(testBike.getId()))
+                dbBike = b;
+
+        }
+
+        assertEquals(testBike.getPosition(), dbBike.getPosition());
+    }
+
+    @Test
+    public void testDeleteBike() {
+        // Add bike to delete
+        bh.addBike(testBike);
+        // Delete bike
+        bh.deleteBike(testBike);
+
+        Bike dbBike = null;
+
+        // Check if bike got removed from db
+        for (Bike b : bh.getAllBikes()) {
+            if (b.getId().equals(testBike.getId()))
+                dbBike = b;
+        }
+
+        assertTrue(dbBike == null);
+    }
 
 }
