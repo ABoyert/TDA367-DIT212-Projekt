@@ -60,12 +60,4 @@ public class BikeHandler {
     public void deleteBike(Bike bike) {
         db.delete(BIKESCOLLECTION, bike.getId());
     }
-
-    public void deleteBike(Bike bike){
-
-    }
-
-    public void adBike(Bike bike){
-        
-    }
 }
