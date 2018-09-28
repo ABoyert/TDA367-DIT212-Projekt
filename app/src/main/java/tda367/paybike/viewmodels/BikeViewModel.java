@@ -1,12 +1,15 @@
 package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import tda367.paybike.activities.BikeDetailsActivity;
+import tda367.paybike.activities.BikeFeedActivity;
 import tda367.paybike.handlers.BikeHandler;
 import tda367.paybike.model.Bike;
 
@@ -18,12 +21,26 @@ import static java.util.stream.Collectors.*;
  * This class provides the BikeFeedActivity with data
  */
 
-public class BikeFeedViewModel extends ViewModel {
+public class BikeViewModel extends ViewModel {
 
     private static BikeHandler bikeHandler;
+    private ArrayList<Bike> availableBikes;
+    private Bike selected;
 
-    public BikeFeedViewModel() {
+    public BikeViewModel() {
         bikeHandler = new BikeHandler();
+    }
+
+    public void setAvaiableBikes(ArrayList<Bike> availableBikes) {
+        this.availableBikes = availableBikes;
+    }
+
+    public void select(Bike selected) {
+        this.selected = selected;
+    }
+
+    public Bike getSelected() {
+        return selected;
     }
 
     // Fetches and returns all Bike Objects from the Database which are marked as "available"

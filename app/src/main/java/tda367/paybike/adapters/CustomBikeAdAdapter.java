@@ -9,16 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import tda367.paybike.R;
 import tda367.paybike.model.Bike;
-
-import static java.util.stream.Collectors.*;
+import tda367.paybike.model.Rentable;
 
 /*
  * Created by Julia Gustafsson on 2018-09-23.
@@ -43,6 +38,11 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Bike> {
     }
 
     @Override
+    public Bike getItem(int position){
+        return bikes.get(position);
+    }
+
+    @Override
     public int getCount() {
         return bikes.size();
     }
@@ -55,7 +55,7 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Bike> {
         // TODO Implement imageView and update method to reflect correct bike attributes
         // ImageView image = (ImageView) ad.findViewById(R.id.bikeImage);
         TextView city = (TextView) bikeView.findViewById(R.id.city);
-        TextView name = (TextView) bikeView.findViewById(R.id.name);
+        TextView name = (TextView) bikeView.findViewById(R.id.bikeName);
         TextView price = (TextView) bikeView.findViewById(R.id.price);
 
         Bike bike = bikes.get(position);
