@@ -2,10 +2,16 @@
     <string name="app_name">PayBike</string>
     <string name="display_app_name">PAY•BIKE</string>
     <string name="title_activity_bike_feed">BikeFeedActivity</string>
+    <string name="title_activity_bike_details">BikeDetailsActivity</string>
     <string name="bike_image">BikeImage</string>
     <string name="bike_placeholder_name">Skeppshult bike</string>
+    <string name="bike_description">Bike for day rental in central Gothenburg. Helmet and lights included in rent. Pick up at the Central Station. </string>
     <string name="bike_placeholder_city">Gothenburg</string>
     <string name="bike_placeholder_price">$9/h</string>
+    <string name="rent_bike_btn">Rent this bike</string>
     <string name="search_hint">Seach for bikes...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

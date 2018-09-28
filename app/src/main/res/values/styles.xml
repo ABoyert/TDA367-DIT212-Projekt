@@ -21,6 +21,13 @@
         <item name="android:textSize">24dp</item>
     </style>
 
+    <style name="ButtonTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@color/colorAccentGreen</item>
+        <item name="android:fontFamily">@font/renogare</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:buttonCornerRadius">10dp</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
