@@ -61,7 +61,7 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Bike> {
         Bike bike = bikes.get(position);
 
         city.setText(bike.getPosition().toString());
-        name.setText(bike.getId());
+        name.setText(bike.getName());
         price.setText(formatPrice(bike.getPrice()));
 
         return bikeView;
