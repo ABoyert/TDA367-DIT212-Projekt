@@ -24,6 +24,9 @@ public class BikeHandler {
     private static final String PRICE = "price";
     private static final String IMAGE = "image";
     private static final String DESCRIPTION = "description";
+    private static final String NAME = "name";
+    private static final String OWNER = "owner";
+    private static final String AVAILABLE = "available";
 
     /*public BikeHandler() {
         Should class be a singleton or not?
@@ -35,10 +38,14 @@ public class BikeHandler {
 
         for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
             bikeList.add(new Bike(
-                    doc.getId(),
+                    (String) doc.get(NAME),
                     Double.parseDouble(doc.get(PRICE).toString()),
-                    doc.get(POSITION).toString(),
-                    true));
+                    (String) doc.get(POSITION),
+                    ((doc.get(AVAILABLE) == null) ? false : (Boolean) doc.get(AVAILABLE)),
+                    (String) doc.get(OWNER),
+                    (String) doc.get(IMAGE),
+                    (String) doc.get(DESCRIPTION),
+                    doc.getId()));
         }
 
         return bikeList;
@@ -52,8 +59,11 @@ public class BikeHandler {
         bikeMap.put(PRICE, bike.getPrice());
         bikeMap.put(IMAGE, bike.getImageLink());
         bikeMap.put(DESCRIPTION, bike.getDescription());
+        bikeMap.put(NAME, bike.getName());
+        bikeMap.put(OWNER, bike.getOwner());
+        bikeMap.put(AVAILABLE, bike.isAvailable());
 
-        db.add(BIKESCOLLECTION, bike.getId(), bikeMap);
+        db.add(BIKESCOLLECTION, bikeMap);
     }
 
     // Take a bike object and remove it from the database

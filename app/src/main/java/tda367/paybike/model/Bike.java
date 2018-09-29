@@ -7,6 +7,7 @@ public class Bike implements Rentable {
     //private Date startDate;
     //private Date endDate;
     private String id;
+    private String name;
     private double price;
     private String position;
     private boolean available;
@@ -14,23 +15,45 @@ public class Bike implements Rentable {
     private String imageLink;
     private String description;
 
-    public Bike(String id, double price, String position){
-        this.id = id;
+    public Bike(String name, double price, String position, boolean available, String owner, String imageLink, String description, String id) {
+        this.name = name;
         this.price = price;
         this.position = position;
-        this.setAvailable(false);
+        this.available = available;
+        this.owner = owner;
+        this.imageLink = imageLink;
+        this.description = description;
+        this.id = id;
     }
 
-    public Bike(String id, double price, String position, boolean available){
-        this.id = id;
+    // Without ID
+    public Bike(String name, double price, String position, boolean available, String owner, String imageLink, String description) {
+        this.name = name;
         this.price = price;
         this.position = position;
+        this.available = available;
+        this.owner = owner;
+        this.imageLink = imageLink;
+        this.description = description;
+        this.id = id;
+    }
+
+    @Override
+    public void setAvailable(boolean available) {
         this.available = available;
     }
 
     @Override
     public boolean isAvailable() {
         return available;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -41,11 +64,6 @@ public class Bike implements Rentable {
     @Override
     public String getOwner() {
         return owner;
-    }
-
-    @Override
-    public void setAvailable(boolean available) {
-        this.available = available;
     }
 
     @Override

@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
+import tda367.paybike.handlers.BikeHandler;
+import tda367.paybike.model.Bike;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     // Set TAG to class name for use in debugging
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         bikeButton = (Button) findViewById(R.id.bikeButton);
 
+        // This line need to be here atm (I think)
         DatabaseController db = DatabaseController.getInstance();
 
         bikeButton.setOnClickListener(v -> {
