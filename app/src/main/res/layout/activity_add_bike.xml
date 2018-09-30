@@ -145,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/price_hint"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -177,6 +177,14 @@
                 android:background="@color/colorWhite"
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/add_photo" />
+
+            <TextView
+                android:id="@+id/inputInvalidText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/postBikeBtn"

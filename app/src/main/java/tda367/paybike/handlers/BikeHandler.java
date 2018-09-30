@@ -47,7 +47,6 @@ public class BikeHandler {
                     (String) doc.get(DESCRIPTION),
                     doc.getId()));
         }
-
         return bikeList;
     }
 
