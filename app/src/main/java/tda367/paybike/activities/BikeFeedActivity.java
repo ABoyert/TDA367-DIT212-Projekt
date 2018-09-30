@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import java.util.ArrayList;
@@ -48,7 +49,11 @@ public class BikeFeedActivity extends AppCompatActivity
     @NonNull
     private static CustomBikeAdAdapter bikeAdapter;
 
+    @NonNull
     private static FrameLayout bikeDetailsContainer;
+
+    @NonNull
+    private ImageButton addBikeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +109,15 @@ public class BikeFeedActivity extends AppCompatActivity
             }
 
         });
+
+        addBikeBtn = (ImageButton) findViewById(R.id.addBikeBtn);
+        addBikeBtn.setOnClickListener(new OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+                                              startActivity(new Intent(getApplicationContext(), AddBikeActivity.class));
+                                          }
+                                      }
+        );
     }
 
     private void viewBikeDetails(Bike bike) {

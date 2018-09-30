@@ -1,15 +1,9 @@
 package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
-import android.content.Intent;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import tda367.paybike.activities.BikeDetailsActivity;
-import tda367.paybike.activities.BikeFeedActivity;
 import tda367.paybike.handlers.BikeHandler;
 import tda367.paybike.model.Bike;
 
@@ -31,7 +25,7 @@ public class BikeViewModel extends ViewModel {
         bikeHandler = new BikeHandler();
     }
 
-    public void setAvaiableBikes(ArrayList<Bike> availableBikes) {
+    public void setAvailableBikes(ArrayList<Bike> availableBikes) {
         this.availableBikes = availableBikes;
     }
 

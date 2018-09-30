@@ -26,8 +26,8 @@
         </activity>
         <activity
             android:name=".activities.BikeDetailsActivity"
-            android:label="@string/title_activity_bike_details">
-        </activity>
+            android:label="@string/title_activity_bike_details"></activity>
+        <activity android:name=".activities.AddBikeActivity"></activity>
     </application>
 
 </manifest>

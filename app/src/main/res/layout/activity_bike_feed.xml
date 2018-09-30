@@ -5,6 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/AppTheme.NoActionBar"
     tools:context=".activities.BikeFeedActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -28,6 +29,14 @@
                 android:layout_gravity="center"
                 android:letterSpacing="0.5"
                 android:text="@string/display_app_name"></TextView>
+
+            <ImageButton
+                android:id="@+id/addBikeBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="16dp"
+                android:background="@mipmap/add" />
 
         </android.support.v7.widget.Toolbar>
 
