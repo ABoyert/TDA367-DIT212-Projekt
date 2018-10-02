@@ -8,8 +8,6 @@ import android.widget.Button;
 
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
-import tda367.paybike.handlers.BikeHandler;
-import tda367.paybike.model.Bike;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     // Set TAG to class name for use in debugging

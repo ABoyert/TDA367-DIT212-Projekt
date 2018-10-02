@@ -2,7 +2,7 @@ package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
 
-import tda367.paybike.handlers.BikeHandler;
+import tda367.paybike.handlers.RentableHandler;
 import tda367.paybike.model.Bike;
 
 public class AddBikeViewModel extends ViewModel {
@@ -24,10 +24,10 @@ public class AddBikeViewModel extends ViewModel {
     private String bikeName, bikeDescription, bikePosition, bikePrice, warningMessage;
     private boolean warning;
 
-    private BikeHandler bikeHandler;
+    private RentableHandler bikeHandler;
 
     public AddBikeViewModel() {
-        bikeHandler = new BikeHandler();
+        bikeHandler = new RentableHandler();
         warning = false;
         bikeName = "";
         bikeDescription = "";
