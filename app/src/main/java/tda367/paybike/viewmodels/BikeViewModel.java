@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import tda367.paybike.handlers.BikeHandler;
+import tda367.paybike.handlers.RentableHandler;
 import tda367.paybike.model.Bike;
 
 import static java.util.stream.Collectors.*;
@@ -17,12 +17,12 @@ import static java.util.stream.Collectors.*;
 
 public class BikeViewModel extends ViewModel {
 
-    private static BikeHandler bikeHandler;
+    private static RentableHandler rentableHandler;
     private ArrayList<Bike> availableBikes;
     private Bike selected;
 
     public BikeViewModel() {
-        bikeHandler = new BikeHandler();
+        rentableHandler = new RentableHandler();
     }
 
     public void setAvailableBikes(ArrayList<Bike> availableBikes) {
@@ -39,14 +39,14 @@ public class BikeViewModel extends ViewModel {
 
     // Fetches and returns all Bike Objects from the Database which are marked as "available"
     public ArrayList<Bike> getAvailableBikes() {
-        return bikeHandler.getAllBikes().stream()
+        return rentableHandler.getAllBikes().stream()
                 .filter(bike -> bike.isAvailable())
                 .collect(toCollection(ArrayList::new));
     }
 
     //TODO Update method to filter correct attributes
     public ArrayList<Bike> getSearchResult(String searchText) {
-        return bikeHandler.getAllBikes().stream()
+        return rentableHandler.getAllBikes().stream()
                 .filter(bike -> bike.getId().toLowerCase().contains(searchText.toLowerCase()) || bike.getPosition().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(toCollection(ArrayList::new));
     }
