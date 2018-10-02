@@ -21,8 +21,8 @@ public class RentableFactoryTest {
 
     public void createBikeWithFactoryTest() {
         RentableFactory rf = new RentableFactory();
-        String testPos = "Testgatan 2";
-        Rentable testBike1 = rf.createRentable("Bike", "123", 100.0, testPos);
+        Position testPos = new Position("123","456","789",000);
+        Rentable testBike1 = rf.createRentable("Bike", "123", 100.0, testPos, true, "Per", "www.chalmers.se", "Bra cykel");
 
         List<Rentable> rentables =  new ArrayList<Rentable>();
         rentables.add(testBike1);

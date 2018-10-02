@@ -8,17 +8,17 @@ public class Bike implements Rentable {
     private Date endDate;
     private String id;
     private double price;
-    private String position;
+    private Position position;
     private boolean available;
     private String owner;
     private String imageLink;
-
     private String name;
     private String description;
 
-    public Bike(String id, double price, String position){
+    public Bike(String id, double price, String position) {
         this.id = id;
-    public Bike(String name, double price, String position, boolean available, String owner, String imageLink, String description, String id) {
+    }
+    public Bike(String name, double price, Position position, boolean available, String owner, String imageLink, String description, String id) {
         this.name = name;
         this.price = price;
         this.position = position;
@@ -30,7 +30,7 @@ public class Bike implements Rentable {
     }
 
     // Without ID
-    public Bike(String name, double price, String position, boolean available, String owner, String imageLink, String description) {
+    public Bike(String name, double price, Position position, boolean available, String owner, String imageLink, String description) {
         this.name = name;
         this.price = price;
         this.position = position;
@@ -75,7 +75,7 @@ public class Bike implements Rentable {
     }
 
     @Override
-    public String getId() {
+    public String getId(){
         return id;
     }
 
@@ -91,12 +91,12 @@ public class Bike implements Rentable {
 
 
     @Override
-    public void setPosition(String pos) {
+    public void setPosition(Position pos) {
         this.position = pos;
     }
 
     @Override
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
@@ -146,5 +146,5 @@ public class Bike implements Rentable {
     public String getDescription() { return description; }
 
     @Override
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) { this.description = description; } */
 }
