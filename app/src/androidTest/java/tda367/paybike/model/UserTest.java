@@ -27,4 +27,22 @@ public class UserTest {
         User user = new User("Julia Gustafsson", "julia@live.se", "passwrd", "12311");
     }
 
+    @Test
+    public void createUserTest(){
+        Position pos = new Position("Horsalevagen", "goteborg", "Swe", 42313);
+        User testUser = new User("boy", "123", "456", pos);
+        testUser.setId("999");
+        testUser.setPassWord("password");
+        testUser.setName("abc");
+
+        assert testUser.getId() == "999" && testUser.getName() == "abc" && testUser.getPassWord() == "password";
+    }
+    @Test
+    public void useAppContext() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        assertEquals("tda367.paybike", appContext.getPackageName());
+    }
+
 }

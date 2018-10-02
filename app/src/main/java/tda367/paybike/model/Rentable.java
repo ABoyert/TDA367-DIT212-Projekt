@@ -28,4 +28,7 @@ public interface Rentable {
     String getName();
     void setName(String name);
 
+
+
+
 }

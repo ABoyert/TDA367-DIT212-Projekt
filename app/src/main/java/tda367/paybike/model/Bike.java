@@ -171,4 +171,9 @@ public class Bike implements Rentable {
         return "Bike Id: " + id + "\nName: " + name + "\nPosition: " + position +
                 "\nOwner Id: " + owner + "\nDescription: " + description;
     }
+
+    @Override
+    public Date getEndDate() {
+        return endDate;
+    }*/
 }
