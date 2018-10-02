@@ -14,6 +14,7 @@ public class Bike implements Rentable {
             owner,
             description;
     private double price;
+    private Position position;
     private boolean available;
     private Uri imagePath;
 
@@ -101,7 +102,7 @@ public class Bike implements Rentable {
     }
 
     @Override
-    public String getId() {
+    public String getId(){
         return id;
     }
 
@@ -116,12 +117,12 @@ public class Bike implements Rentable {
     }
 
     @Override
-    public void setPosition(String pos) {
+    public void setPosition(Position pos) {
         this.position = pos;
     }
 
     @Override
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
@@ -175,5 +176,5 @@ public class Bike implements Rentable {
     @Override
     public Date getEndDate() {
         return endDate;
-    }*/
+    }
 }
