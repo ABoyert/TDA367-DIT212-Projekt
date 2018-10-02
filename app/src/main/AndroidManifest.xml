@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/pay_bike_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,15 +20,14 @@
         <activity
             android:name=".activities.BikeFeedActivity"
             android:label="@string/title_activity_bike_feed"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity
-            android:name=".activities.BikeDetailsActivity"
-            android:label="@string/title_activity_bike_details"></activity>
-        <activity android:name=".activities.AddBikeActivity"></activity>
+        <activity android:name=".activities.AddBikeActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
