@@ -8,7 +8,7 @@ public class RentableFactory {
 
     int i;
 
-    public static Rentable createRentable(String type, String name, double price, String position, boolean available, String owner, String imageLink, String description){
+    public static Rentable createRentable(String type, String name, double price, Position position, boolean available, String owner, String imageLink, String description){
 
 
         if("Bike".equalsIgnoreCase(type))

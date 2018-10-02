@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tda367.paybike.model.Bike;
+import tda367.paybike.model.Position;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;
 
@@ -75,7 +76,8 @@ public class BikeHandlerTest {
     @BeforeClass
     public static void beforeClass() {
         bh = new BikeHandler();
-        testBike = new Bike("testbike200", 10, "Test Street 4", true, "Per", "www.chalmers.se", "Bra cykel");
+        Position testPos = new Position("Horsalevagen", "goteborg", "Swe", 42313);
+        testBike = new Bike("testbike200", 10, testPos, true, "Per", "www.chalmers.se", "Bra cykel");
     }
 
     @Before

@@ -12,8 +12,8 @@ public interface Rentable {
     public String getId();
     public void setPrice(Double price);
     public double getPrice();
-    public void setPosition(String pos);
-    public String getPosition();
+    public void setPosition(Position pos);
+    public Position getPosition();
     /*public void setStartDate(Date startDate);
     public Date getStartDate();
     public void setEndDate(Date startDate);
