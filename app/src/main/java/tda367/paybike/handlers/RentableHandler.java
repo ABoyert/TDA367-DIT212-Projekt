@@ -14,7 +14,7 @@ import tda367.paybike.model.Bike;
  * Created by Oscar Orava Kilberg on 2018-09-19.
  */
 
-public class BikeHandler {
+public class RentableHandler {
     // Get databaseController instance so we can use the database
     private static DatabaseController db = DatabaseController.getInstance();
 
@@ -28,7 +28,7 @@ public class BikeHandler {
     private static final String OWNER = "owner";
     private static final String AVAILABLE = "available";
 
-    /*public BikeHandler() {
+    /*public RentableHandler() {
         Should class be a singleton or not?
     }*/
 
