@@ -12,18 +12,18 @@ import tda367.paybike.database.DatabaseController;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     // Set TAG to class name for use in debugging
     private static final String TAG = MainActivity.class.getSimpleName();
-    private Button bikeButton;
+    private Button findBikeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bikeButton = (Button) findViewById(R.id.bikeButton);
+        findBikeBtn = (Button) findViewById(R.id.findBikeBtn);
 
         // This line need to be here atm (I think)
         DatabaseController db = DatabaseController.getInstance();
 
-        bikeButton.setOnClickListener(v -> {
+        findBikeBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, BikeFeedActivity.class));
         });
     }
