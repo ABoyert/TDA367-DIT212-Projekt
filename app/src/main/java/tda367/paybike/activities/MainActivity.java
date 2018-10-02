@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // This line need to be here atm (I think)
         DatabaseController db = DatabaseController.getInstance();
-
+        /*
         bikeButton.setOnClickListener(v -> {
             startActivity(new Intent(this, BikeFeedActivity.class));
-        });
+        }); */
     }
 
     @Override
