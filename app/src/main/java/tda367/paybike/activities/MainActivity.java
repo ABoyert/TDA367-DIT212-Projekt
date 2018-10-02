@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bikeButton = (Button) findViewById(R.id.bikeButton);
 
         DatabaseController db = DatabaseController.getInstance();
-
+        /*
         bikeButton.setOnClickListener(v -> {
             startActivity(new Intent(this, BikeFeedActivity.class));
-        });
+        }); */
     }
 
     @Override

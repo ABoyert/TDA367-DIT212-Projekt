@@ -12,6 +12,9 @@ public class Bike implements Rentable {
     private boolean available;
     private String owner;
 
+    private String name;
+    private String description;
+
     public Bike(String id, double price, String position){
         this.id = id;
         this.price = price;
@@ -96,4 +99,16 @@ public class Bike implements Rentable {
     public Date getEndDate() {
         return endDate;
     }
+
+    @Override
+    public String getName() { return name; }
+
+    @Override
+    public void setName(String name) { this.name = name; }
+
+    @Override
+    public String getDescription() { return description; }
+
+    @Override
+    public void setDescription(String description) { this.description = description; }
 }

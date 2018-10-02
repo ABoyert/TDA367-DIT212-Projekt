@@ -22,6 +22,10 @@ public interface Rentable {
     public boolean isAvailable();
     public void setOwner(String ownerID);
     public String getOwner();
+    public void setName(String name);
+    public String getName();
+    public void setDescription(String name);
+    public String getDescription();
 
 
 

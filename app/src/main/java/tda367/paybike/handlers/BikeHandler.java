@@ -45,6 +45,6 @@ public class BikeHandler {
     }
 
     public void adBike(Bike bike){
-        
+
     }
 }
