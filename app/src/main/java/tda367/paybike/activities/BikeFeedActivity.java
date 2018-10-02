@@ -112,16 +112,15 @@ public class BikeFeedActivity extends AppCompatActivity
 
         addBikeBtn = (ImageButton) findViewById(R.id.addBikeBtn);
         addBikeBtn.setOnClickListener(new OnClickListener() {
-                                          @Override
-                                          public void onClick(View v) {
-                                              startActivity(new Intent(getApplicationContext(), AddBikeActivity.class));
-                                          }
-                                      }
-        );
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AddBikeActivity.class));
+            }
+        });
     }
 
     private void viewBikeDetails(Bike bike) {
-        BikeDetailsFragment bikeDetails = BikeDetailsFragment.newInstance(bike.getId(), bike.getOwner(), bike.getPosition(), bike.getPrice());
+        BikeDetailsFragment bikeDetails = BikeDetailsFragment.newInstance(bike.getName(), bike.getDescription(), bike.getPosition(), bike.getPrice());
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
