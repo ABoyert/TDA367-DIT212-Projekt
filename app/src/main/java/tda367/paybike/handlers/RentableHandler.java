@@ -9,14 +9,20 @@ import java.util.Map;
 
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.model.Bike;
+import tda367.paybike.model.Rentable;
+import tda367.paybike.model.RentableFactory;
 
 /**
  * Created by Oscar Orava Kilberg on 2018-09-19.
  */
 
+
+
 public class RentableHandler {
     // Get databaseController instance so we can use the database
     private static DatabaseController db = DatabaseController.getInstance();
+
+    int i;
 
     // Name of collection that holds all bikes, and fields in db
     private static final String BIKESCOLLECTION = "bikes";
@@ -33,11 +39,11 @@ public class RentableHandler {
     }*/
 
     // Returns all the objects in the bikes collection in FireStore
-    public List<Bike> getAllBikes() {
-        ArrayList<Bike> bikeList = new ArrayList<>();
+    public List<Rentable> getAllRentables() {
+        ArrayList<Rentable> rentablesList = new ArrayList<>();
 
         for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
-            bikeList.add(new Bike(
+            rentablesList.add(RentableFactory.createRentable("Bike",
                     (String) doc.get(NAME),
                     Double.parseDouble(doc.get(PRICE).toString()),
                     (String) doc.get(POSITION),
@@ -47,26 +53,26 @@ public class RentableHandler {
                     (String) doc.get(DESCRIPTION),
                     doc.getId()));
         }
-        return bikeList;
+        return rentablesList;
     }
 
     // Take a bike object and put it into the database
-    public void addBike(Bike bike) {
+    public void addRentable(Rentable rentable) {
         // Put bike's properties into a Map that will be passed to the database
         Map<String, Object> bikeMap = new HashMap<>();
-        bikeMap.put(POSITION, bike.getPosition());
-        bikeMap.put(PRICE, bike.getPrice());
-        bikeMap.put(IMAGE, bike.getImageLink());
-        bikeMap.put(DESCRIPTION, bike.getDescription());
-        bikeMap.put(NAME, bike.getName());
-        bikeMap.put(OWNER, bike.getOwner());
-        bikeMap.put(AVAILABLE, bike.isAvailable());
+        bikeMap.put(POSITION, rentable.getPosition());
+        bikeMap.put(PRICE, rentable.getPrice());
+        bikeMap.put(IMAGE, rentable.getImageLink());
+        bikeMap.put(DESCRIPTION, rentable.getDescription());
+        bikeMap.put(NAME, rentable.getName());
+        bikeMap.put(OWNER, rentable.getOwner());
+        bikeMap.put(AVAILABLE, rentable.isAvailable());
 
         db.add(BIKESCOLLECTION, bikeMap);
     }
 
     // Take a bike object and remove it from the database
-    public void deleteBike(Bike bike) {
-        db.delete(BIKESCOLLECTION, bike.getId());
+    public void deleteRentable(Rentable rentable) {
+        db.delete(BIKESCOLLECTION, rentable.getId());
     }
 }
