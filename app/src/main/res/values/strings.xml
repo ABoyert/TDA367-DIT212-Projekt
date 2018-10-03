@@ -9,7 +9,7 @@
     <string name="bike_placeholder_city">Gothenburg</string>
     <string name="bike_placeholder_price">$9/h</string>
     <string name="rent_bike_btn">Rent this bike</string>
-    <string name="search_hint">Seach for bikes...</string>
+    <string name="search_hint">Seach for rentables...</string>
 
     // Strings for activity_add_bike.xml
     <string name="add_bike_instruction">Information about your bike </string>

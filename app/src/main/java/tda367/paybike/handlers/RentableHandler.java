@@ -22,7 +22,7 @@ public class RentableHandler {
     // Get databaseController instance so we can use the database
     private static DatabaseController db = DatabaseController.getInstance();
 
-    int i;
+
 
     // Name of collection that holds all bikes, and fields in db
     private static final String BIKESCOLLECTION = "bikes";

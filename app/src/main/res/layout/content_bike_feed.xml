@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@android:color/white"
-            android:queryHint="Search for bikes..." />
+            android:queryHint="Search for rentables..." />
 
         <GridView
             android:id="@+id/bikeGrid"
