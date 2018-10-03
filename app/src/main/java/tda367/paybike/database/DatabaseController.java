@@ -191,20 +191,8 @@ public class DatabaseController {
         // Get task for reading given collection
         Task<QuerySnapshot> readTask = read(collection);
 
-
-        /*final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //Do something after 100ms
-                read(collection);
-            }
-        }, 500);*/
-
-        // Wait for read to finish
-        //while (!readTask.isComplete()) {
-            //SystemClock.sleep(50);
-        //}
+        // Temp solution for db results to be ready
+        SystemClock.sleep(500);
 
         // If complete and successful return result
         if (readTask.isComplete() && readTask.isSuccessful())
