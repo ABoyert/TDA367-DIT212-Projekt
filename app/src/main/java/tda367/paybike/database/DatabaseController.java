@@ -1,5 +1,7 @@
 package tda367.paybike.database;
 
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -7,6 +9,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,16 +47,17 @@ public class DatabaseController {
 
     // variable to hold the class instance (singleton)
     private static DatabaseController instance = null;
-    // get firebase firestore db instance
-    private static FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    // get firebase firestore db and auth instance
+    private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    private FirebaseAuth fAuth = FirebaseAuth.getInstance();
     // TAG is used when logging, helpful for debugging
     private static final String TAG = DatabaseController.class.getSimpleName();
 
     // Offline DB
-    Map<String, List<DocumentSnapshot>> localDB = new HashMap<>();
+    private Map<String, List<DocumentSnapshot>> localDB = new HashMap<>();
 
-    protected DatabaseController() {
-        // To make instantiation impossible outside of package and subclasses
+    private DatabaseController() {
+        // private to make instantiation impossible
 
         //Make local copy of required collections on launch
         read("bikes");
@@ -186,14 +191,20 @@ public class DatabaseController {
         // Get task for reading given collection
         Task<QuerySnapshot> readTask = read(collection);
 
-        // Wait for read to finish
-        while (!readTask.isComplete()) {
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+        /*final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                read(collection);
             }
-        }
+        }, 500);*/
+
+        // Wait for read to finish
+        //while (!readTask.isComplete()) {
+            //SystemClock.sleep(50);
+        //}
 
         // If complete and successful return result
         if (readTask.isComplete() && readTask.isSuccessful())
@@ -222,5 +233,7 @@ public class DatabaseController {
                 });
     }
 
-
+    public FirebaseUser getCurrentUser() {
+        return fAuth.getCurrentUser();
+    }
 }
