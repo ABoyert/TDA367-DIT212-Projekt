@@ -10,6 +10,7 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import tda367.paybike.R;
 import tda367.paybike.model.Bike;
@@ -24,10 +25,10 @@ import tda367.paybike.model.Rentable;
 public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
 
     private int layout;
-    private ArrayList<Rentable> rentables;
+    private List<Rentable> rentables;
     private Filter bikeFilter;
 
-    public CustomBikeAdAdapter(@NonNull Context context, int layout, @NonNull ArrayList<Rentable> rentables) {
+    public CustomBikeAdAdapter(@NonNull Context context, int layout, @NonNull List<Rentable> rentables) {
         super(context, layout, rentables);
         this.rentables = rentables;
         this.layout = layout;
@@ -67,7 +68,7 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
         return bikeView;
     }
 
-    public void updateBikeView(ArrayList<Rentable> newList) {
+    public void updateBikeView(List<Rentable> newList) {
         rentables = new ArrayList<>();
         rentables.addAll(newList);
         notifyDataSetChanged();

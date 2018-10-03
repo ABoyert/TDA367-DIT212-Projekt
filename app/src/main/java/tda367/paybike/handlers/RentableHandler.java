@@ -21,6 +21,7 @@ import tda367.paybike.model.RentableFactory;
 public class RentableHandler {
     // Get databaseController instance so we can use the database
     private static DatabaseController db = DatabaseController.getInstance();
+    private RentableFactory factory = new RentableFactory();
 
 
 
@@ -74,5 +75,17 @@ public class RentableHandler {
     // Take a bike object and remove it from the database
     public void deleteRentable(Rentable rentable) {
         db.delete(BIKESCOLLECTION, rentable.getId());
+
+    }
+
+    public Rentable createRentableWithFactory(boolean withID, String type, String name, double price,
+                                              String pos, boolean available, String owner,
+                                              String imagelink, String description, String id){
+
+        if(withID == true)return factory.createRentable(type, name, price, pos, available, owner, imagelink, description,id);
+
+        if(withID == false)return factory.createRentableNoID(type, name, price, pos, available, owner, imagelink, description);
+
+        return null;
     }
 }
