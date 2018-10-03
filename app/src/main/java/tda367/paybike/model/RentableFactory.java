@@ -7,8 +7,6 @@ package tda367.paybike.model;
 
 public class RentableFactory {
 
-    int j;
-
     public static Rentable createRentable(String type, String name, double price, String position, boolean available, String owner, String imageLink, String description, String id){
 
 
