@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import tda367.paybike.handlers.RentableHandler;
 import tda367.paybike.model.Bike;
+import tda367.paybike.model.Rentable;
 
 import static java.util.stream.Collectors.*;
 
@@ -18,35 +19,35 @@ import static java.util.stream.Collectors.*;
 public class BikeViewModel extends ViewModel {
 
     private static RentableHandler rentableHandler;
-    private ArrayList<Bike> availableBikes;
-    private Bike selected;
+    private ArrayList<Rentable> availableRentables;
+    private Rentable selected;
 
     public BikeViewModel() {
         rentableHandler = new RentableHandler();
     }
 
-    public void setAvailableBikes(ArrayList<Bike> availableBikes) {
-        this.availableBikes = availableBikes;
+    public void setAvailableRentables(ArrayList<Rentable> availableRentables) {
+        this.availableRentables = availableRentables;
     }
 
-    public void select(Bike selected) {
+    public void select(Rentable selected) {
         this.selected = selected;
     }
 
-    public Bike getSelected() {
+    public Rentable getSelected() {
         return selected;
     }
 
     // Fetches and returns all Bike Objects from the Database which are marked as "available"
-    public ArrayList<Bike> getAvailableBikes() {
-        return rentableHandler.getAllBikes().stream()
+    public ArrayList<Rentable> getAvailableRentables() {
+        return rentableHandler.getAllRentables().stream()
                 .filter(bike -> bike.isAvailable())
                 .collect(toCollection(ArrayList::new));
     }
 
     //TODO Update method to filter correct attributes
-    public ArrayList<Bike> getSearchResult(String searchText) {
-        return rentableHandler.getAllBikes().stream()
+    public ArrayList<Rentable> getSearchResult(String searchText) {
+        return rentableHandler.getAllRentables().stream()
                 .filter(bike -> bike.getId().toLowerCase().contains(searchText.toLowerCase()) || bike.getPosition().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(toCollection(ArrayList::new));
     }
