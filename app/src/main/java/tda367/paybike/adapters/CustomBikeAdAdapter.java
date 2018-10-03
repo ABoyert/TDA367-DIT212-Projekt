@@ -21,15 +21,15 @@ import tda367.paybike.model.Rentable;
  * This class works as an adapter for Bike objects to be displayed in advertisement views
  */
 
-public class CustomBikeAdAdapter extends ArrayAdapter<Bike> {
+public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
 
     private int layout;
-    private ArrayList<Bike> bikes;
+    private ArrayList<Rentable> rentables;
     private Filter bikeFilter;
 
-    public CustomBikeAdAdapter(@NonNull Context context, int layout, @NonNull ArrayList<Bike> bikes) {
-        super(context, layout, bikes);
-        this.bikes = bikes;
+    public CustomBikeAdAdapter(@NonNull Context context, int layout, @NonNull ArrayList<Rentable> rentables) {
+        super(context, layout, rentables);
+        this.rentables = rentables;
         this.layout = layout;
     }
 
@@ -38,13 +38,13 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Bike> {
     }
 
     @Override
-    public Bike getItem(int position){
-        return bikes.get(position);
+    public Rentable getItem(int position){
+        return rentables.get(position);
     }
 
     @Override
     public int getCount() {
-        return bikes.size();
+        return rentables.size();
     }
 
     @Override
@@ -58,18 +58,18 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Bike> {
         TextView name = (TextView) bikeView.findViewById(R.id.bikeName);
         TextView price = (TextView) bikeView.findViewById(R.id.price);
 
-        Bike bike = bikes.get(position);
+        Rentable rentable = rentables.get(position);
 
-        city.setText(bike.getPosition().toString());
-        name.setText(bike.getName());
-        price.setText(formatPrice(bike.getPrice()));
+        city.setText(rentable.getPosition().toString());
+        name.setText(rentable.getName());
+        price.setText(formatPrice(rentable.getPrice()));
 
         return bikeView;
     }
 
-    public void updateBikeView(ArrayList<Bike> newList) {
-        bikes = new ArrayList<>();
-        bikes.addAll(newList);
+    public void updateBikeView(ArrayList<Rentable> newList) {
+        rentables = new ArrayList<>();
+        rentables.addAll(newList);
         notifyDataSetChanged();
     }
 
