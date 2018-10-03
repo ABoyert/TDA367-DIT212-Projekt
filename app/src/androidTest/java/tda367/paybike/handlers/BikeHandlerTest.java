@@ -61,13 +61,15 @@ public class BikeHandlerTest {
     }*/
 
    /*@Test
-    public void readBikeFromDatabaseTest(){     //Testar om fuktionen "getAllBikes" får någon data
+    public void readBikeFromDatabaseTest(){     //Testar om fuktionen "getAllRentables" får någon data
         BikeHandler bh = new BikeHandler();
 
-        List<Bike> bikes = bh.getAllBikes();
+        List<Bike> bikes = bh.getAllRentables();
 
        assert bikes.isEmpty() == false;
    }*/
+
+   /*
 
     private static BikeHandler bh;
     private static Bike testBike;
@@ -129,6 +131,6 @@ public class BikeHandlerTest {
         }
 
         assertTrue(dbBike == null);
-    }
+    }*/
 
 }
