@@ -18,6 +18,7 @@ import java.util.List;
 
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
+import tda367.paybike.handlers.UserHandler;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     // Set TAG to class name for use in debugging
@@ -37,7 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DatabaseController db = DatabaseController.getInstance();
 
         // Open sign-in page
-        createSignInIntent();
+        //createSignInIntent();
+
+        // EXAMPLE USE
+        UserHandler uh = new UserHandler();
+        uh.signIn("USERNAME", "PASSWORD");
 
         findBikeBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, BikeFeedActivity.class));
@@ -50,10 +55,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * The two following methods are creating a sign-in intent and handling the result
+     * The two following methods are creating a sign-in intent and handling the result using FirebaseAuthUI-plugin
      */
 
-    public void createSignInIntent() {
+    /*public void createSignInIntent() {
         // [START auth_fui_create_intent]
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
@@ -88,6 +93,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // ...
             }
         }
-    }
-
+    }*/
 }

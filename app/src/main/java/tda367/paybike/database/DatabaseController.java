@@ -47,7 +47,7 @@ public class DatabaseController {
 
     // variable to hold the class instance (singleton)
     private static DatabaseController instance = null;
-    // get firebase firestore db and auth instance
+    // init and get firebase firestore db and auth instance
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private FirebaseAuth fAuth = FirebaseAuth.getInstance();
     // TAG is used when logging, helpful for debugging
@@ -219,9 +219,5 @@ public class DatabaseController {
                         Log.w(TAG, "ID-" + documentID + " could not be deleted!");
                     }
                 });
-    }
-
-    public FirebaseUser getCurrentUser() {
-        return fAuth.getCurrentUser();
     }
 }
