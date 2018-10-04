@@ -1,5 +1,6 @@
 package tda367.paybike.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,18 +10,16 @@ import java.util.List;
 public class Model {
 
     /*
-    Hold data, not communicate
+    Holds data, reflects database.
      */
 
-    private List<Rentable> modelRentables;
-    private List<User> modelUsers;
-    private List<Request> modelRequests;
+    private List<Rentable> modelRentables = new ArrayList<>();
+    private List<User> modelUsers = new ArrayList<>();
+    private List<Request> modelRequests = new ArrayList<>();
     private User currentUser;
 
-    public Model(List<Rentable> modelRentables, List<User> modelUsers, List<Request> modelRequests) {
-        this.modelRentables = modelRentables;
-        this.modelUsers = modelUsers;
-        this.modelRequests = modelRequests;
+    public Model() {
+
     }
 
     public List<Rentable> getModelRentables() {
@@ -29,6 +28,10 @@ public class Model {
 
     public void setModelRentables(List<Rentable> modelRentables) {
         this.modelRentables = modelRentables;
+    }
+
+    public void addRentable(Rentable newRentable){
+        getModelRentables().add(newRentable);
     }
 
     public List<User> getModelUsers() {
@@ -46,4 +49,6 @@ public class Model {
     public void setModelRequests(List<Request> modelRequests) {
         this.modelRequests = modelRequests;
     }
+
+
 }
