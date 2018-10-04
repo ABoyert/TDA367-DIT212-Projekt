@@ -31,5 +31,17 @@ public class RentableFactory {
 
     }
 
+    public static Rentable createTestRentable(String type){
+
+
+        if("Bike".equalsIgnoreCase(type))
+            return new Bike("Test", 25.00, "Testgatan", true, "testOwner", "noImage", "this is a test bike", "123test");
+
+
+        return null;
+
+
+    }
+
 
 }
