@@ -8,6 +8,7 @@ import tda367.paybike.handlers.RequestHandler;
 import tda367.paybike.model.Bike;
 import tda367.paybike.model.Model;
 import tda367.paybike.model.Rentable;
+import tda367.paybike.model.RentableFactory;
 import tda367.paybike.viewmodels.AddBikeViewModel;
 import tda367.paybike.viewmodels.BikeViewModel;
 
@@ -15,46 +16,71 @@ public class Controller {
 
     /*
     *
-    * Communicate data, not hold
+    * Passes data, not hold
     *
     * */
-    private Model model;
+    private Model model = new Model();
     private RequestHandler requestHandler = new RequestHandler();
     private RentableHandler rentableHandler = new RentableHandler();
 
-    //TODO Controller shouldn't be dependent on ViewModels...
-    //private BikeViewModel feedViewModel;
-    //private AddBikeViewModel addViewModel;
+
 
     public Controller() {
-        //this.model = model;
-       // this.feedViewModel = feedViewModel;
-        //this.addViewModel = addViewModel;
+
     }
 
-
-
+    //Retrieves rentables from database
     public List<Rentable> getDatabaseRentables(){
         return rentableHandler.getAllRentables();
     }
 
-    public void placeRentablesInModel(){
+    //Puts rentables from database in model
+    public void updateModelRentables(){
         model.setModelRentables(getDatabaseRentables());
     }
 
+    //Get list of rentables from model
     public List<Rentable> getModelRentables(){
         return model.getModelRentables();
     }
 
-    //TODO Controller shouldn't be dependent on ViewModels...
-    /*
-    public void giveFeedModelList(){
-        feedViewModel.setAvailableRentables(getModelRentables());
+    //Updates the model with rentables from the database and returns the updated list
+    public List<Rentable>updateAndGetRentables(){
+        updateModelRentables();
+        return getModelRentables();
     }
 
-    public void giveAddModelList(){
-        feedViewModel.setAvailableRentables(getModelRentables());
-    }*/
+    public Model getModel(){
+        return model;
+    }
+
+    public void newRentable(boolean withID, String type, String name, double price, String position,
+                                boolean available, String owner, String imageLink,
+                                String description, String id){
+
+        Rentable newRentable = RentableFactory.createRentable(type, name, price,
+                                                                position, available, owner,
+                                                                    imageLink, description, id);
+
+
+        rentableHandler.addRentable(newRentable);
+        updateModelRentables();
+
+    }
+
+    public void newRentableNoID(boolean withID, String type, String name, double price, String position,
+                            boolean available, String owner, String imageLink,
+                            String description){
+
+        Rentable newRentable = RentableFactory.createRentableNoID(type, name, price,
+                position, available, owner,
+                imageLink, description);
+
+        rentableHandler.addRentable(newRentable);
+        updateModelRentables();
+    }
+
+
 
 
 
