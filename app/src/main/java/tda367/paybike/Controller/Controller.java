@@ -16,14 +16,12 @@ public class Controller {
 
     /*
     *
-    * Passes data, not hold
+    * Passes data
     *
     * */
     private Model model = new Model();
     private RequestHandler requestHandler = new RequestHandler();
     private RentableHandler rentableHandler = new RentableHandler();
-
-
 
     public Controller() {
 
@@ -61,7 +59,6 @@ public class Controller {
         Rentable newRentable = RentableFactory.createRentable(type, name, price,
                                                                 position, available, owner,
                                                                     imageLink, description, id);
-
 
         rentableHandler.addRentable(newRentable);
         updateModelRentables();
