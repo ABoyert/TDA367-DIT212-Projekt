@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -16,9 +17,11 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
+
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.handlers.UserHandler;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     // Set TAG to class name for use in debugging
@@ -27,6 +30,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // Firebase Auth
     private static final int RC_SIGN_IN = 123;
+
+    //boy's skit
+
+    private EditText userEmail1, userPassword1;
+
+    userEmail1 = (EditText) findViewById(R.id.userEmail);
+    String userEmailValue = userEmail1.getText().toString();
+
+    userPassword1 = (EditText) findViewById(R.id.userPassword);
+    String userPasswordValue = userPassword1.getText().toString();
+
+    private boolean loginValid(String userEmailValue, String userPasswordValue){
+        UserHandler uh = new UserHandler();
+        boolean loginValidation = uh.signIn(userEmailValue, userPasswordValue);
+        return loginValidation;
+    }
+
+    //boy's skit
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
