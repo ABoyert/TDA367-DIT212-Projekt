@@ -47,7 +47,7 @@ public class BikeViewModel extends ViewModel {
     //TODO Update method to filter correct attributes
     public ArrayList<Bike> getSearchResult(String searchText) {
         return rentableHandler.getAllBikes().stream()
-                .filter(bike -> bike.getId().toLowerCase().contains(searchText.toLowerCase()) || bike.getPosition().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(bike -> bike.getName().toLowerCase().contains(searchText.toLowerCase()) || bike.getPosition().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(toCollection(ArrayList::new));
     }
 
