@@ -1,52 +1,62 @@
 package tda367.paybike.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.SystemClock;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
 import java.util.List;
 
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
+import tda367.paybike.fragments.BikeDetailsFragment;
+import tda367.paybike.fragments.RegisterUserFragment;
 import tda367.paybike.handlers.UserHandler;
+import tda367.paybike.model.Bike;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements
+        View.OnClickListener,
+        RegisterUserFragment.OnFragmentInteractionListener{
+
     // Set TAG to class name for use in debugging
     private static final String TAG = MainActivity.class.getSimpleName();
-    private Button findBikeBtn;
 
     // Firebase Auth
     private static final int RC_SIGN_IN = 123;
+
+    private TextView registerNewUser;
+    private Button findBikeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findBikeBtn = (Button) findViewById(R.id.findBikeBtn);
+        registerNewUser = (TextView) findViewById(R.id.registerUser);
 
-        // This line need to be here atm (I think)
+        // DO NOT DELETE
         DatabaseController db = DatabaseController.getInstance();
-
-        // Open sign-in page
-        //createSignInIntent();
-
-        // EXAMPLE USE
-        UserHandler uh = new UserHandler();
-        uh.signIn("USERNAME", "PASSWORD");
 
         findBikeBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, BikeFeedActivity.class));
         });
+
+        registerNewUser.setOnClickListener(view -> registerNewUser(view));
     }
 
     @Override
@@ -54,44 +64,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    /**
-     * The two following methods are creating a sign-in intent and handling the result using FirebaseAuthUI-plugin
-     */
-
-    /*public void createSignInIntent() {
-        // [START auth_fui_create_intent]
-        // Choose authentication providers
-        List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.EmailBuilder().build());
-
-        // Create and launch sign-in intent
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .build(),
-                RC_SIGN_IN);
-        // [END auth_fui_create_intent]
+    private void registerNewUser(View view) {
+        RegisterUserFragment newUser = RegisterUserFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.fragment_frame, newUser, "NEW_USER_FRAGMENT").commit();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onFragmentInteraction(Uri uri) {
 
-        if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
+    }
 
-            if (resultCode == RESULT_OK) {
-                // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                Log.d(TAG, "Current user: " + user.getDisplayName());
-                // ...
-            } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
-            }
-        }
-    }*/
 }
