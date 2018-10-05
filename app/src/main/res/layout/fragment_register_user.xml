@@ -165,7 +165,7 @@
             android:background="@drawable/btn_round_corners"
             android:paddingBottom="16dp"
             android:paddingTop="12dp"
-            android:text="@string/find_bike_btn_text"
+            android:text="@string/register_btn"
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 

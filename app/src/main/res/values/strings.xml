@@ -34,8 +34,6 @@
     <string name="user_name">First name</string>
     <string name="user_last_name">Last name</string>
     <string name="repeat_password">Repeat Password</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register_btn">Register</string>
 
 </resources>
