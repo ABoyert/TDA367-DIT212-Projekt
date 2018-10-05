@@ -49,10 +49,6 @@ public class MainActivity extends AppCompatActivity implements
         // DO NOT DELETE
         DatabaseController db = DatabaseController.getInstance();
 
-        //Test register
-        UserHandler uh = new UserHandler();
-        uh.createUser("test@gmail.com", "test123", "Test Testsson");
-
         findBikeBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, BikeFeedActivity.class));
         });
