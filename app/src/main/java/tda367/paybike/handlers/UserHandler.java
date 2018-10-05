@@ -9,6 +9,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.model.User;
@@ -36,7 +37,7 @@ public class UserHandler {
     // Tries to sign in the user and returns true on success
     public boolean signIn(String email, String password) {
         // Create sign in-task
-        Task<AuthResult> auth = fAuth.signInWithEmailAndPassword(email, password)
+        Task<AuthResult> login = fAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -54,16 +55,67 @@ public class UserHandler {
         // Give the sign in some time to finish
         SystemClock.sleep(500);
 
-        if (auth.isComplete() && auth.isSuccessful()) {
+        if (login.isComplete() && login.isSuccessful()) {
             return true;
-        } else if (auth.isComplete() && !auth.isSuccessful()) {
+        } else if (login.isComplete() && !login.isSuccessful()) {
             return false;
         }
 
         // Give it some additional time if not done
         SystemClock.sleep(1000);
 
-        if (auth.isComplete() && auth.isSuccessful()) {
+        if (login.isComplete() && login.isSuccessful()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Tries to sign up the user and returns true on success
+    public boolean createUser(String email, String password, String name) {
+        // Create sign in-task
+        Task<AuthResult> signUp = fAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign up success
+                            FirebaseUser user = fAuth.getCurrentUser();
+                            Log.d(TAG, "Sign up with e-mail success! E-mail: " + user.getEmail());
+
+                            // Set profile info
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name)
+                                    .build();
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "Name set! Display name: " + user.getDisplayName());
+                                            }
+                                        }
+                                    });
+                        } else {
+                            // Sign up fails
+                            Log.w(TAG, "Sign up with e-mail FAILED! " + task.getException());
+                        }
+                    }
+                });
+
+        // Give the sign up some time to finish
+        SystemClock.sleep(500);
+
+        if (signUp.isComplete() && signUp.isSuccessful()) {
+            return true;
+        } else if (signUp.isComplete() && !signUp.isSuccessful()) {
+            return false;
+        }
+
+        // Give it some additional time if not done
+        SystemClock.sleep(1000);
+
+        if (signUp.isComplete() && signUp.isSuccessful()) {
             return true;
         } else {
             return false;
