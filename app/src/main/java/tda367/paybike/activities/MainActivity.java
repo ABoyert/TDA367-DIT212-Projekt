@@ -36,9 +36,6 @@ public class MainActivity extends AppCompatActivity implements
     // Set TAG to class name for use in debugging
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    // Firebase Auth
-    private static final int RC_SIGN_IN = 123;
-
     private TextView registerNewUser;
     private Button findBikeBtn;
 

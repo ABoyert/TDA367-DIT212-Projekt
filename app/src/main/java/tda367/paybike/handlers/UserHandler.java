@@ -61,7 +61,7 @@ public class UserHandler {
         }
 
         // Give it some additional time if not done
-        SystemClock.sleep(500);
+        SystemClock.sleep(1000);
 
         if (auth.isComplete() && auth.isSuccessful()) {
             return true;

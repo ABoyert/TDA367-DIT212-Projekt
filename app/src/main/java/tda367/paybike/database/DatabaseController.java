@@ -191,17 +191,25 @@ public class DatabaseController {
         // Get task for reading given collection
         Task<QuerySnapshot> readTask = read(collection);
 
-        // Temp solution for db results to be ready
+        // Give the task some time to finish
         SystemClock.sleep(500);
 
-        // If complete and successful return result
-        if (readTask.isComplete() && readTask.isSuccessful())
+        if (readTask.isComplete() && readTask.isSuccessful()) {
             return readTask.getResult().getDocuments();
-        // Return old result if the read fails
-        else if (localDB.get(collection) != null)
+        } else if (readTask.isComplete() && !readTask.isSuccessful() && !localDB.isEmpty()) {
             return localDB.get(collection);
-        else
-            return null;
+        }
+
+        // Give it some additional time if not done
+        SystemClock.sleep(1000);
+
+        if (readTask.isComplete() && readTask.isSuccessful()) {
+            return readTask.getResult().getDocuments();
+        } else if (!localDB.isEmpty()) {
+            return localDB.get(collection);
+        }
+
+        return null;
     }
 
     // Delete given document from db
