@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentContainer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +22,7 @@ import tda367.paybike.R;
 import tda367.paybike.adapters.CustomBikeAdAdapter;
 import tda367.paybike.fragments.BikeDetailsFragment;
 import tda367.paybike.model.Bike;
+import tda367.paybike.model.Rentable;
 import tda367.paybike.viewmodels.BikeViewModel;
 
 import static android.widget.AdapterView.*;
@@ -76,7 +76,7 @@ public class BikeFeedActivity extends AppCompatActivity
         // Configure the grid of available bikes
         bikeView = (GridView) findViewById(R.id.bikeGrid);
         bikeAdapter = new CustomBikeAdAdapter(this,
-                R.layout.view_layout_bike_ad, viewModel.getAvailableBikes());
+                R.layout.view_layout_bike_ad, viewModel.getAvailableRentables());
         bikeView.setAdapter(bikeAdapter);
 
         // If one of the bikes is clicked
@@ -85,9 +85,9 @@ public class BikeFeedActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object bike = parent.getItemAtPosition(position);
-                if (bike instanceof Bike) {
-                    viewModel.select((Bike) bike);
-                    viewBikeDetails((Bike) bike);
+                if (bike instanceof Rentable) {
+                    viewModel.select((Rentable) bike);
+                    viewBikeDetails((Rentable) bike);
                 }
             }
 
@@ -103,7 +103,7 @@ public class BikeFeedActivity extends AppCompatActivity
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                ArrayList<Bike> results = viewModel.getSearchResult(newText);
+                ArrayList<Rentable> results = viewModel.getSearchResult(newText);
                 ((CustomBikeAdAdapter)bikeView.getAdapter()).updateBikeView(results);
                 return false;
             }
@@ -119,8 +119,8 @@ public class BikeFeedActivity extends AppCompatActivity
         });
     }
 
-    private void viewBikeDetails(Bike bike) {
-        BikeDetailsFragment bikeDetails = BikeDetailsFragment.newInstance(bike.getName(), bike.getDescription(), bike.getPosition(), bike.getPrice());
+    private void viewBikeDetails(Rentable rentable) {
+        BikeDetailsFragment bikeDetails = BikeDetailsFragment.newInstance(rentable.getName(), rentable.getDescription(), rentable.getPosition(), rentable.getPrice());
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);

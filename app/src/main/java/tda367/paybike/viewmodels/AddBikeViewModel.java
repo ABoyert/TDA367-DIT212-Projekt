@@ -2,8 +2,7 @@ package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
 
-import tda367.paybike.handlers.RentableHandler;
-import tda367.paybike.model.Bike;
+import tda367.paybike.Controller.Controller;
 
 public class AddBikeViewModel extends ViewModel {
 
@@ -23,11 +22,10 @@ public class AddBikeViewModel extends ViewModel {
 
     private String bikeName, bikeDescription, bikePosition, bikePrice, warningMessage;
     private boolean warning;
-
-    private RentableHandler bikeHandler;
+    private Controller c;
 
     public AddBikeViewModel() {
-        bikeHandler = new RentableHandler();
+        c = new Controller();
         warning = false;
         bikeName = "";
         bikeDescription = "";
@@ -133,15 +131,11 @@ public class AddBikeViewModel extends ViewModel {
 
     // TODO Complete method once we have the image feature and users
     public void postBike() {
-        Bike newBike = new Bike(bikeName,
-                Double.parseDouble(bikePrice),
-                bikePosition,
-                true,
-                "owner",
-                "imageLink",
-                bikeDescription);
 
-        bikeHandler.addBike(newBike);
+        c.newRentableNoID(false,"Bike", bikeName, Double.parseDouble(bikePrice),
+                bikePosition, true, "owner",
+                "imagelink", bikeDescription);
+
     }
 
 }
