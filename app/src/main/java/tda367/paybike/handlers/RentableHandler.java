@@ -54,6 +54,7 @@ public class RentableHandler {
                     (String) doc.get(DESCRIPTION),
                     doc.getId()));
         }
+
         return rentablesList;
     }
 
