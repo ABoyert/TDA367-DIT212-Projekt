@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements
         findBikeBtn = (Button) findViewById(R.id.findBikeBtn);
         registerNewUser = (TextView) findViewById(R.id.registerUser);
 
+        // DO NOT DELETE
+        DatabaseController db = DatabaseController.getInstance();
+
         findBikeBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, BikeFeedActivity.class));
         });
