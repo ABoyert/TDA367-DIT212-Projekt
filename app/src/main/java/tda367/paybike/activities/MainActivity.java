@@ -31,10 +31,6 @@ public class MainActivity extends AppCompatActivity implements
 
     private TextView registerNewUser;
     private Button findBikeBtn;
-
-    // Firebase Auth
-    private static final int RC_SIGN_IN = 123;
-
     private EditText userEmail1, userPassword1;
 
     @Override
@@ -46,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements
 
         // DO NOT DELETE
         DatabaseController db = DatabaseController.getInstance();
+
+        // TEST
+        UserHandler uh = new UserHandler();
+        Log.d(TAG, "Register success = " + uh.createUser("test@abc.com", "test", "Pontus Backman"));
 
         findBikeBtn.setOnClickListener(v -> {
             UserHandler uh = UserHandler.getInstance();

@@ -23,6 +23,22 @@ public class UserHandler {
     private static final String TAG = UserHandler.class.getSimpleName();
     // Get FirebaseAuth instance
     private FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    // Singleton variable
+    private static UserHandler instance = null;
+
+    // Private constructor
+    private UserHandler() {
+
+    }
+
+    // Get singleton instance
+    public static UserHandler getInstance() {
+        if (instance == null) {
+            instance = new UserHandler();
+        }
+
+        return instance;
+    }
 
     private static UserHandler instance = null;
 
