@@ -16,14 +16,10 @@ import tda367.paybike.model.RentableFactory;
  * Created by Oscar Orava Kilberg on 2018-09-19.
  */
 
-
-
 public class RentableHandler {
     // Get databaseController instance so we can use the database
     private static DatabaseController db = DatabaseController.getInstance();
     private RentableFactory factory = new RentableFactory();
-
-
 
     // Name of collection that holds all bikes, and fields in db
     private static final String BIKESCOLLECTION = "bikes";

@@ -42,6 +42,10 @@ public class Model {
         this.modelUsers = modelUsers;
     }
 
+    public void addModelUser(User newUser) {
+        modelUsers.add(newUser);
+    }
+
     public List<Request> getModelRequests() {
         return modelRequests;
     }

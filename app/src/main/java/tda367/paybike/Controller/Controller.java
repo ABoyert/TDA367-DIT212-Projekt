@@ -5,10 +5,12 @@ import java.util.List;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.handlers.RentableHandler;
 import tda367.paybike.handlers.RequestHandler;
+import tda367.paybike.handlers.UserHandler;
 import tda367.paybike.model.Bike;
 import tda367.paybike.model.Model;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;
+import tda367.paybike.model.User;
 import tda367.paybike.viewmodels.AddBikeViewModel;
 import tda367.paybike.viewmodels.BikeViewModel;
 
@@ -22,6 +24,7 @@ public class Controller {
     private Model model = new Model();
     private RequestHandler requestHandler = new RequestHandler();
     private RentableHandler rentableHandler = new RentableHandler();
+    private UserHandler userHandler = new UserHandler();
 
     public Controller() {
 
@@ -77,8 +80,13 @@ public class Controller {
         updateModelRentables();
     }
 
-
-
-
-
+    public boolean createUser(String email, String password, String name) {
+        if (userHandler.createUser(email, password, name)) {
+            User newUser = new User(email, password, name);
+            model.addModelUser(newUser);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

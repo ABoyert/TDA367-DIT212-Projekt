@@ -24,8 +24,8 @@ public class BikeViewModel extends ViewModel {
 
     public BikeViewModel() {
         c = new Controller();
-
     }
+
     public void setAvailableRentables(List<Rentable> availableRentables) {
         this.availableRentables = availableRentables;
     }
@@ -56,8 +56,6 @@ public class BikeViewModel extends ViewModel {
     }
 
     //TODO Update method to filter correct attributes
-
-
 
     public ArrayList<Rentable> getSearchResult(String searchText) {
         return getAvailableRentables().stream()

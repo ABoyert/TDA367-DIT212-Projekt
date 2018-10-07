@@ -19,12 +19,12 @@ public class UserTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void checkEmail() {
-        User user = new User("Julia", "Gustafsson", "julia[at]live.se", "password");
+        User user = new User("Julia Gustafsson", "julia[at]live.se", "password");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void checkPassword() {
-        User user = new User("Julia", "Gustafsson", "julia@live.se", "passwrd");
+        User user = new User("Julia Gustafsson", "julia@live.se", "passwrd");
     }
-    
+
 }
