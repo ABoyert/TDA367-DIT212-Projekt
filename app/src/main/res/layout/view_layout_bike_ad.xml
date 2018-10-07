@@ -13,7 +13,7 @@
         android:layout_height="100dp"
         android:layout_marginBottom="4dp"
         android:contentDescription="@string/bike_image"
-        app:srcCompat="@mipmap/skeppshult_bike" />
+        app:srcCompat="@mipmap/skeppshult_bike"/>
 
     <TextView
         android:id="@+id/city"
@@ -22,6 +22,8 @@
         android:text="@string/bike_placeholder_city"
         android:textAllCaps="true"
         android:textColor="@color/colorBrown"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textSize="12sp" />
 
     <TextView
@@ -30,6 +32,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/opensans_semibold"
         android:text="@string/bike_placeholder_name"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textSize="16sp" />
 
     <TextView
@@ -37,5 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/bike_placeholder_price"
+        android:maxLines="1"
         android:textSize="16sp" />
 </LinearLayout>

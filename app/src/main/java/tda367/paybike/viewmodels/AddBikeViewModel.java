@@ -84,22 +84,22 @@ public class AddBikeViewModel extends ViewModel {
     }
 
     // Checks if provided name/title is valid
-    public boolean nameIsValid() {
+    private boolean nameIsValid() {
         return bikeName != "" && bikeName.length() < MAX_TITLE_LENGTH ? true : false;
     }
 
-    public boolean positionIsValid() {
+    private boolean positionIsValid() {
         //TODO Write method to check this
         return true;
     }
 
     // Checks if provided price is valid
-    public boolean priceIsValid() {
+    private boolean priceIsValid() {
         return bikePrice != "" && Double.parseDouble(bikePrice) < MAX_PRICE ? true : false;
     }
 
     // Checks if provided description is valid
-    public boolean descriptionIsValid() {
+    private boolean descriptionIsValid() {
         return bikePrice != "" && bikeDescription.length() < MAX_DESCRIPTION_LENGTH ? true : false;
     }
 
@@ -135,8 +135,9 @@ public class AddBikeViewModel extends ViewModel {
         c.newRentableNoID(false,"Bike", bikeName, Double.parseDouble(bikePrice),
                 bikePosition, true, "owner",
                 "imagelink", bikeDescription);
-
     }
+
+
 
 }
 

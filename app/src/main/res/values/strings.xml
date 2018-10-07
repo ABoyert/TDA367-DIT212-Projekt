@@ -31,8 +31,7 @@
 
     // Strings for fragment_register_user.xml
     <string name="register_user_text">Register New User</string>
-    <string name="user_name">First name</string>
-    <string name="user_last_name">Last name</string>
+    <string name="user_name">Name</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="register_btn">Register</string>
 

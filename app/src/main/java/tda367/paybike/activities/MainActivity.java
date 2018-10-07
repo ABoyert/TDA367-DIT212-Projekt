@@ -30,8 +30,7 @@ import tda367.paybike.handlers.UserHandler;
 import tda367.paybike.model.Bike;
 
 public class MainActivity extends AppCompatActivity implements
-        View.OnClickListener,
-        RegisterUserFragment.OnFragmentInteractionListener{
+        RegisterUserFragment.OnFragmentInteractionListener {
 
     // Set TAG to class name for use in debugging
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -51,14 +50,11 @@ public class MainActivity extends AppCompatActivity implements
 
         findBikeBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, BikeFeedActivity.class));
+            // finish(); WHEN THE DATABASE CONTROLLER IS REMOVED FROM THIS CLASS, THIS ROW
+            // SHOULD BE USED TO PREVENT LOGGED IN USERS TO USE BACK ARROW
         });
 
         registerNewUser.setOnClickListener(view -> registerNewUser(view));
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 
     private void registerNewUser(View view) {

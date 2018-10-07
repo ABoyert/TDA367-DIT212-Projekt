@@ -119,6 +119,13 @@ public class BikeFeedActivity extends AppCompatActivity
         });
     }
 
+    // Load all bikes from db when activity is resumed
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bikeAdapter.updateBikeView(viewModel.getAvailableRentables());
+    }
+
     private void viewBikeDetails(Rentable rentable) {
         BikeDetailsFragment bikeDetails = BikeDetailsFragment.newInstance(rentable.getName(), rentable.getDescription(), rentable.getPosition(), rentable.getPrice());
         FragmentManager fragmentManager = getSupportFragmentManager();
