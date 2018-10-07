@@ -22,4 +22,9 @@ public class UserTest {
         User user = new User("Julia", "Gustafsson", "julia[at]live.se", "password");
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void checkPassword() {
+        User user = new User("Julia", "Gustafsson", "julia@live.se", "passwrd");
+    }
+    
 }
