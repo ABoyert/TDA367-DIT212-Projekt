@@ -65,7 +65,7 @@ public class DatabaseController {
         read("requests");
     }
 
-    // Create singleton if it does not exist, otherwise creates it.
+    // Create singleton if it does not exist, otherwise return it.
     // Returns the DatabaseController instance.
     public static DatabaseController getInstance() {
         if (instance == null) {

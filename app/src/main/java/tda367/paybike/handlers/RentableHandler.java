@@ -31,9 +31,20 @@ public class RentableHandler {
     private static final String OWNER = "owner";
     private static final String AVAILABLE = "available";
 
-    /*public RentableHandler() {
-        Should class be a singleton or not?
-    }*/
+    private static RentableHandler instance = null;
+
+    private RentableHandler() {
+        // Singleton
+    }
+
+    // Create singleton if it does not exist, otherwise return it.
+    public static RentableHandler getInstance() {
+        if (instance == null) {
+            instance = new RentableHandler();
+        }
+
+        return instance;
+    }
 
     // Returns all the objects in the bikes collection in FireStore
     public List<Rentable> getAllRentables() {

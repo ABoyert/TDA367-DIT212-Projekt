@@ -22,9 +22,9 @@ public class Controller {
     *
     * */
     private Model model = new Model();
-    private RequestHandler requestHandler = new RequestHandler();
-    private RentableHandler rentableHandler = new RentableHandler();
-    private UserHandler userHandler = new UserHandler();
+    private RequestHandler requestHandler = RequestHandler.getInstance();
+    private RentableHandler rentableHandler = RentableHandler.getInstance();
+    private UserHandler userHandler = UserHandler.getInstance();
 
     public Controller() {
 

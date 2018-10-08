@@ -24,6 +24,21 @@ public class UserHandler {
     // Get FirebaseAuth instance
     private FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
+    private static UserHandler instance = null;
+
+    private UserHandler() {
+        // Singleton
+    }
+
+    // Create singleton if it does not exist, otherwise return it.
+    public static UserHandler getInstance() {
+        if (instance == null) {
+            instance = new UserHandler();
+        }
+
+        return instance;
+    }
+
     // Supposed to return the current user as User-object (Now returning as FirebaseUser)
     public FirebaseUser getCurrentUser() {
         FirebaseUser fUser = fAuth.getCurrentUser();
