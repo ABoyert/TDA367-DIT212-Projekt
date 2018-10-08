@@ -1,5 +1,7 @@
 package tda367.paybike.Controller;
 
+import android.net.Uri;
+
 import java.util.List;
 
 import tda367.paybike.database.DatabaseController;
@@ -56,7 +58,7 @@ public class Controller {
     }
 
     public void newRentable(boolean withID, String type, String name, double price, String position,
-                                boolean available, String owner, String imageLink,
+                                boolean available, String owner, Uri imageLink,
                                 String description, String id){
 
         Rentable newRentable = RentableFactory.createRentable(type, name, price,
@@ -69,7 +71,7 @@ public class Controller {
     }
 
     public void newRentableNoID(boolean withID, String type, String name, double price, String position,
-                            boolean available, String owner, String imageLink,
+                            boolean available, String owner, Uri imageLink,
                             String description){
 
         Rentable newRentable = RentableFactory.createRentableNoID(type, name, price,
@@ -88,5 +90,9 @@ public class Controller {
         } else {
             return false;
         }
+    }
+
+    public void uploadRentableImage(Rentable rentable, Uri filePath) {
+
     }
 }

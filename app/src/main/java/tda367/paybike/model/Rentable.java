@@ -1,5 +1,7 @@
 package tda367.paybike.model;
 
+import android.net.Uri;
+
 import java.util.Date;
 
 /**
@@ -22,8 +24,8 @@ public interface Rentable {
     public boolean isAvailable();
     public void setOwner(String ownerID);
     public String getOwner();
-    public String getImageLink();
-    public void setImageLink(String imageLink);
+    public Uri getImagePath();
+    public void setImagePath(Uri imageLink);
     public String getDescription();
     public void setDescription(String description);
     public String getName();

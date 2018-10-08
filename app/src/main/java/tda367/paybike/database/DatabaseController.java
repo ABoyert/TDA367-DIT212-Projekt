@@ -1,6 +1,6 @@
 package tda367.paybike.database;
 
-import android.os.Handler;
+import android.net.Uri;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -10,20 +10,18 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import tda367.paybike.model.Bike;
-import tda367.paybike.model.Request;
-import tda367.paybike.model.User;
+import java.util.UUID;
 
 //          -SINGLETON CLASS-
 //  Use class by getting the class instance
@@ -47,9 +45,10 @@ public class DatabaseController {
 
     // variable to hold the class instance (singleton)
     private static DatabaseController instance = null;
-    // init and get firebase firestore db and auth instance
+    // init and get firebase firestore db, auth and storage instance
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     // TAG is used when logging, helpful for debugging
     private static final String TAG = DatabaseController.class.getSimpleName();
 
@@ -228,4 +227,60 @@ public class DatabaseController {
                     }
                 });
     }
+
+    // Uploads given file to Firebase Storage and returns the Uri Task
+    public Task<Uri> uploadToStorage(Uri filePath) {
+        // Create a reference to the file
+        //Uri file = Uri.fromFile(new File(filePath);
+        StorageReference fileRef = storageRef.child("images/" + UUID.randomUUID().toString());
+        UploadTask uploadTask = fileRef.putFile(filePath);
+
+        // Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.w(TAG, "Could not upload file to storage!" + exception);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+                Log.d(TAG, "Successfully uploaded file!");
+            }
+        });
+
+        // Let upload task finish
+        while (!uploadTask.isComplete());
+            //SystemClock.sleep(50);
+
+        Task<Uri> getUriTask = fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Log.d(TAG, "Got Download URL: " + uri);
+            }
+        });
+
+        return getUriTask;
+    }
+
+    // Returns reference to file in Firebase storage
+    /*public StorageReference getStorageRef(Uri filePath) {
+        // Get task for reading given collection
+        UploadTask uploadTask = uploadToStorage(filePath);
+
+        // Give the task some time to finish
+        SystemClock.sleep(500);
+
+        if (uploadTask.isComplete() && uploadTask.isSuccessful()) {
+            return uploadTask.getResult().getDocuments();
+
+        // Give it some additional time if not done
+        SystemClock.sleep(1000);
+
+        if (uploadTask.isComplete() && uploadTask.isSuccessful()) {
+            return uploadTask.getResult();
+
+        return null;
+    }*/
 }

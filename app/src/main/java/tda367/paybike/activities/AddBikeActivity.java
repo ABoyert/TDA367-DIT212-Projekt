@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import tda367.paybike.R;
+import tda367.paybike.database.DatabaseController;
 import tda367.paybike.viewmodels.AddBikeViewModel;
 
 public class AddBikeActivity extends AppCompatActivity {
@@ -146,6 +147,7 @@ public class AddBikeActivity extends AppCompatActivity {
         viewModel.setBikeDescription(bikeDescription.getText().toString());
         viewModel.setBikePosition(bikePosition.getText().toString());
         viewModel.setBikePrice(bikePrice.getText().toString());
+        viewModel.setBikeImagePath(filePath);
     }
 
     private void clearAllTextFields() {

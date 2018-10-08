@@ -1,6 +1,7 @@
 package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
+import android.net.Uri;
 
 import tda367.paybike.Controller.Controller;
 
@@ -21,6 +22,7 @@ public class AddBikeViewModel extends ViewModel {
     private static final String NO_PRICE = "You have to set at price. ";
 
     private String bikeName, bikeDescription, bikePosition, bikePrice, warningMessage;
+    private Uri bikeImagePath;
     private boolean warning;
     private Controller c;
 
@@ -32,6 +34,7 @@ public class AddBikeViewModel extends ViewModel {
         bikePosition = "";
         bikePrice = "";
         warningMessage = "";
+        bikeImagePath = null;
     }
 
     // GETTERS AND SETTERS
@@ -73,6 +76,14 @@ public class AddBikeViewModel extends ViewModel {
 
     public void setWarningMessage(String warningMessage) {
         this.warningMessage = warningMessage;
+    }
+
+    public Uri getBikeImagePath() {
+        return bikeImagePath;
+    }
+
+    public void setBikeImagePath(Uri bikeImagePath) {
+        this.bikeImagePath = bikeImagePath;
     }
 
     public boolean warningIsShown() {
@@ -134,7 +145,7 @@ public class AddBikeViewModel extends ViewModel {
 
         c.newRentableNoID(false,"Bike", bikeName, Double.parseDouble(bikePrice),
                 bikePosition, true, "owner",
-                "imagelink", bikeDescription);
+                bikeImagePath, bikeDescription);
     }
 
 

@@ -1,6 +1,6 @@
 package tda367.paybike.model;
 
-import java.util.Date;
+import android.net.Uri;
 
 
 public class Bike implements Rentable {
@@ -12,28 +12,28 @@ public class Bike implements Rentable {
     private String position;
     private boolean available;
     private String owner;
-    private String imageLink;
+    private Uri imagePath;
     private String description;
 
-    public Bike(String name, double price, String position, boolean available, String owner, String imageLink, String description, String id) {
+    public Bike(String name, double price, String position, boolean available, String owner, Uri imagePath, String description, String id) {
         this.name = name;
         this.price = price;
         this.position = position;
         this.available = available;
         this.owner = owner;
-        this.imageLink = imageLink;
+        this.imagePath = imagePath;
         this.description = description;
         this.id = id;
     }
 
     // Without ID
-    public Bike(String name, double price, String position, boolean available, String owner, String imageLink, String description) {
+    public Bike(String name, double price, String position, boolean available, String owner, Uri imagePath, String description) {
         this.name = name;
         this.price = price;
         this.position = position;
         this.available = available;
         this.owner = owner;
-        this.imageLink = imageLink;
+        this.imagePath = imagePath;
         this.description = description;
         this.id = id;
     }
@@ -97,12 +97,12 @@ public class Bike implements Rentable {
         return position;
     }
 
-    public String getImageLink() {
-        return imageLink;
+    public Uri getImagePath() {
+        return imagePath;
     }
 
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
+    public void setImagePath(Uri imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getDescription() {
