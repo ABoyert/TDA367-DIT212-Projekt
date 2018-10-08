@@ -1,21 +1,18 @@
 package tda367.paybike.handlers;
 
-import android.content.Intent;
-import android.os.SystemClock;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-import tda367.paybike.database.DatabaseController;
 import tda367.paybike.model.User;
-
-import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by Oscar Orava Kilberg on 2018-09-19.
@@ -29,26 +26,9 @@ public class UserHandler {
     // Singleton variable
     private static UserHandler instance = null;
 
-    private boolean isDone;
-
     // Private constructor
     private UserHandler() {
 
-    }
-
-    // Get singleton instance
-    public static UserHandler getInstance() {
-        if (instance == null) {
-            instance = new UserHandler();
-        }
-
-        return instance;
-    }
-
-    private static UserHandler instance = null;
-
-    private UserHandler() {
-        // Singleton
     }
 
     // Create singleton if it does not exist, otherwise return it.
@@ -61,17 +41,13 @@ public class UserHandler {
     }
 
     // Supposed to return the current user as User-object (Now returning as FirebaseUser)
+    // Return the current user as FirebaseUser-object
     public FirebaseUser getCurrentUser() {
-        FirebaseUser fUser = fAuth.getCurrentUser();
-
-        if(fAuth.getCurrentUser() != null)
-            return fUser;
-
-        return null;
+        return fAuth.getCurrentUser();
     }
 
-    // Tries to sign up the user and returns true on success
-    public boolean createUser(String email, String password, String name) {
+    // Tries to sign up the user and returns the signUp-task
+    public Task<AuthResult> createUser(String email, String password, String name) {
         // Create sign in-task
         Task<AuthResult> signUp = fAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -102,22 +78,6 @@ public class UserHandler {
                     }
                 });
 
-        // Give the sign up some time to finish
-        SystemClock.sleep(500);
-
-        if (signUp.isComplete() && signUp.isSuccessful()) {
-            return true;
-        } else if (signUp.isComplete() && !signUp.isSuccessful()) {
-            return false;
-        }
-
-        // Give it some additional time if not done
-        SystemClock.sleep(1000);
-
-        if (signUp.isComplete() && signUp.isSuccessful()) {
-            return true;
-        } else {
-            return false;
-        }
+        return signUp;
     }
 }

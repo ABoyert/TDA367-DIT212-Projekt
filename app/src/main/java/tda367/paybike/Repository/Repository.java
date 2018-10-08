@@ -24,6 +24,9 @@ public class Repository {
     private RentableHandler rentableHandler = RentableHandler.getInstance();
     private UserHandler userHandler = UserHandler.getInstance();
 
+    // Set TAG to class name for use in debugging
+    private static final String TAG = Controller.class.getSimpleName();
+
     public Repository() {
 
     }
@@ -79,12 +82,25 @@ public class Repository {
     }
 
     public boolean createUser(String email, String password, String name) {
-        if (userHandler.createUser(email, password, name)) {
-            User newUser = new User(email, password, name);
-            payBike.addModelUser(newUser);
-            return true;
-        } else {
-            return false;
-        }
+        Task<AuthResult> signUp = userHandler.createUser(email, password, name);
+
+        signUp.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                // If sign up is successful
+                User newUser = new User(email, password, name);
+                model.addModelUser(newUser);
+                Log.d(TAG, "Local user (" + name + ") added!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // If sign up fails
+                // Maybe do something that shows an error message on the phone
+            }
+        });
+
+        // TODO: Now always returns true, should return false if sign up fails!
+        return true;
     }
 }

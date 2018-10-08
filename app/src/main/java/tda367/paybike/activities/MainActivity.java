@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
+import java.util.Arrays;
+import java.util.List;
+
+import tda367.paybike.Controller.Controller;
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.fragments.RegisterUserFragment;
@@ -54,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements
         DatabaseController db = DatabaseController.getInstance();
 
         // TEST
-        UserHandler uh = UserHandler.getInstance();
-        Log.d(TAG, "Register success = " + uh.signIn("ponbac@student.chalmers.se", "test123"));
+        //UserHandler uh = UserHandler.getInstance();
+        //Log.d(TAG, "Login success = " + uh.signIn("ponbac@student.chalmers.se", "test123"));
 
         findBikeBtn.setOnClickListener(v -> {
             UserHandler uh = UserHandler.getInstance();
@@ -108,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements
                     public void onFailure(@NonNull Exception e) {
                         // SHOW TOAST OR SOMETHING ABOUT FAILURE
                         // MAYBE SHOW Exception e
+                        Log.w(TAG, "LOGIN FAILED! Error: " + e.getMessage());
+                        Toast.makeText(getApplicationContext(), "Error! " + e.getMessage(),
+                                Toast.LENGTH_LONG).show();
                     }
                 });
     }
