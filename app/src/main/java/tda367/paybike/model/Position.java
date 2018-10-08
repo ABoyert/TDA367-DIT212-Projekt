@@ -2,47 +2,32 @@ package tda367.paybike.model;
 
 public class Position {
 
-    private String street;
-    private String city;
-    private String country;
-    private Integer zipCode;
+    final private String street;
+    final private Integer zipCode;
+    final private String city;
+    final private String country;
 
-    public Position(String street, String city, String country, Integer zipCode) {
+    public Position(String street, Integer zipCode, String city, String country) {
         this.street = street;
+        this.zipCode = zipCode;
         this.city = city;
         this.country = country;
-        this.zipCode = zipCode;
     }
 
     public String getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public Integer getZipCode() {
+        return zipCode;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public Integer getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(Integer zipCode) {
-        this.zipCode = zipCode;
-    }
 }
