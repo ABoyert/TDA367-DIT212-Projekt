@@ -87,9 +87,4 @@ public class Repository {
             return false;
         }
     }
-
-    public void uploadRentableImage(Rentable rentable, Uri filePath) {
-
-    }
-
 }

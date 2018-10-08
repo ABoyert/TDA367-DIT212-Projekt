@@ -1,5 +1,6 @@
 package tda367.paybike.handlers;
 
+import android.content.Intent;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -14,6 +15,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.model.User;
 
+import static android.support.v4.content.ContextCompat.startActivity;
+
 /**
  * Created by Oscar Orava Kilberg on 2018-09-19.
  */
@@ -25,6 +28,8 @@ public class UserHandler {
     private FirebaseAuth fAuth = FirebaseAuth.getInstance();
     // Singleton variable
     private static UserHandler instance = null;
+
+    private boolean isDone;
 
     // Private constructor
     private UserHandler() {
@@ -63,43 +68,6 @@ public class UserHandler {
             return fUser;
 
         return null;
-    }
-
-    // Tries to sign in the user and returns true on success
-    public boolean signIn(String email, String password) {
-        // Create sign in-task
-        Task<AuthResult> login = fAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success
-                            FirebaseUser user = fAuth.getCurrentUser();
-                            Log.d(TAG, "Sign in with e-mail success! User: " + user.getDisplayName());
-                        } else {
-                            // Sign in fails
-                            Log.w(TAG, "Sign in with e-mail FAILED! " + task.getException());
-                        }
-                    }
-                });
-
-        // Give the sign in some time to finish
-        SystemClock.sleep(500);
-
-        if (login.isComplete() && login.isSuccessful()) {
-            return true;
-        } else if (login.isComplete() && !login.isSuccessful()) {
-            return false;
-        }
-
-        // Give it some additional time if not done
-        SystemClock.sleep(1000);
-
-        if (login.isComplete() && login.isSuccessful()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     // Tries to sign up the user and returns true on success
