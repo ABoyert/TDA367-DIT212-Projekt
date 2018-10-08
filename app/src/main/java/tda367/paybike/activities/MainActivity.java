@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -21,6 +22,7 @@ import java.util.List;
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.handlers.UserHandler;
+import tda367.paybike.viewmodels.MainViewModel;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,12 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //boy's skit
 
     private EditText userEmail1, userPassword1;
-
-    userEmail1 = (EditText) findViewById(R.id.userEmail);
-    String userEmailValue = userEmail1.getText().toString();
-
-    userPassword1 = (EditText) findViewById(R.id.userPassword);
-    String userPasswordValue = userPassword1.getText().toString();
 
     private boolean loginValid(String userEmailValue, String userPasswordValue){
         UserHandler uh = new UserHandler();
@@ -55,6 +51,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findBikeBtn = (Button) findViewById(R.id.findBikeBtn);
 
+        userEmail1 = (EditText) findViewById(R.id.userEmail);
+        String userEmailValue = userEmail1.getText().toString();
+
+        userPassword1 = (EditText) findViewById(R.id.userPassword);
+        String userPasswordValue = userPassword1.getText().toString();
+
         // This line need to be here atm (I think)
         DatabaseController db = DatabaseController.getInstance();
 
@@ -64,9 +66,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // EXAMPLE USE
         UserHandler uh = new UserHandler();
         uh.signIn("USERNAME", "PASSWORD");
+        MainViewModel mvm = new MainViewModel();
 
         findBikeBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, BikeFeedActivity.class));
+            if (uh.signIn(userEmailValue, userPasswordValue)){
+                startActivity(new Intent(this, BikeFeedActivity.class));
+            } else {
+                Toast.makeText(MainActivity.this, mvm.getWarning(userEmailValue, userPasswordValue),
+                        Toast.LENGTH_LONG).show();
+            }
+
         });
     }
 
