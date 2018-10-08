@@ -1,22 +1,34 @@
 package tda367.paybike.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 import tda367.paybike.R;
 import tda367.paybike.viewmodels.AddBikeViewModel;
 
 public class AddBikeActivity extends AppCompatActivity {
 
+    private static final int PICK_IMAGE_REQUEST = 71;
+
     private Button addBikeBtn;
     private EditText bikeName, bikeDescription, bikePosition, bikePrice;
     private TextView warning;
+    private ImageButton chooseImageBtn;
 
+    private Uri filePath;
     private AddBikeViewModel viewModel;
 
     @Override
@@ -74,6 +86,14 @@ public class AddBikeActivity extends AppCompatActivity {
             }
         });
 
+        chooseImageBtn = (ImageButton) findViewById(R.id.choseImage);
+        chooseImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage();
+            }
+        });
+        
         warning = (TextView) findViewById(R.id.inputInvalidText);
 
         addBikeBtn.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +103,8 @@ public class AddBikeActivity extends AppCompatActivity {
                 if (viewModel.inputIsValid()) {
                     viewModel.postBike();
                     clearAllTextFields();
+                    //TODO implement
+                    // uploadImage();
                     if (viewModel.warningIsShown()) {
                         hideWarning();
                     }
@@ -92,6 +114,31 @@ public class AddBikeActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null )
+        {
+            filePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                chooseImageBtn.setImageBitmap(bitmap);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void updateModel() {
