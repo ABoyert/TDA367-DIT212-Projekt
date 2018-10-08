@@ -59,7 +59,7 @@ public class BikeViewModel extends ViewModel {
 
     public ArrayList<Rentable> getSearchResult(String searchText) {
         return getAvailableRentables().stream()
-                .filter(bike -> bike.getName().toLowerCase().contains(searchText.toLowerCase()) || bike.getPosition().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(bike -> bike.getName().toLowerCase().contains(searchText.toLowerCase()) || bike.getPosition().getCity().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(toCollection(ArrayList::new));
     }
 

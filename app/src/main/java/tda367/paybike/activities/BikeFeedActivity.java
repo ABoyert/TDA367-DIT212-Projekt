@@ -127,7 +127,7 @@ public class BikeFeedActivity extends AppCompatActivity
     }
 
     private void viewBikeDetails(Rentable rentable) {
-        BikeDetailsFragment bikeDetails = BikeDetailsFragment.newInstance(rentable.getName(), rentable.getDescription(), rentable.getPosition(), rentable.getPrice());
+        BikeDetailsFragment bikeDetails = BikeDetailsFragment.newInstance(rentable.getName(), rentable.getDescription(), rentable.getPosition().getCity(), rentable.getPrice());
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);

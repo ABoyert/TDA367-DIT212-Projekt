@@ -3,6 +3,7 @@ package tda367.paybike.viewmodels;
 import android.arch.lifecycle.ViewModel;
 
 import tda367.paybike.Controller.Controller;
+import tda367.paybike.model.Position;
 
 public class AddBikeViewModel extends ViewModel {
 
@@ -20,7 +21,8 @@ public class AddBikeViewModel extends ViewModel {
     private static final String INVALID_PRICE = "Price cannot exceed $" + MAX_PRICE + ". ";
     private static final String NO_PRICE = "You have to set at price. ";
 
-    private String bikeName, bikeDescription, bikePosition, bikePrice, warningMessage;
+    private String bikeName, bikeDescription, bikePrice, warningMessage;
+    private Position bikePosition;
     private boolean warning;
     private Controller c;
 
@@ -29,7 +31,7 @@ public class AddBikeViewModel extends ViewModel {
         warning = false;
         bikeName = "";
         bikeDescription = "";
-        bikePosition = "";
+        bikePosition = new Position("", 0, "", "");
         bikePrice = "";
         warningMessage = "";
     }
@@ -51,11 +53,11 @@ public class AddBikeViewModel extends ViewModel {
         this.bikeDescription = bikeDescription;
     }
 
-    public String getBikePosition() {
+    public Position getBikePosition() {
         return bikePosition;
     }
 
-    public void setBikePosition(String bikePosition) {
+    public void setBikePosition(Position bikePosition) {
         this.bikePosition = bikePosition;
     }
 
@@ -115,10 +117,10 @@ public class AddBikeViewModel extends ViewModel {
         String warningMessage = "";
             if (!nameIsValid()) {
                 warningMessage += (bikeName != "") ? INVALID_NAME : NO_NAME;
-            }
+            } /*
             if (!positionIsValid()) {
                 warningMessage += (bikePosition != "") ? INVALID_POSITION : NO_POSITION;
-            }
+            } */
             if (!descriptionIsValid()) {
                 warningMessage += (bikeDescription != "") ? INVALID_DESCRIPTION : NO_DESCRIPTION;
             }

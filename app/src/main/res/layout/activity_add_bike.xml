@@ -89,13 +89,12 @@
                 android:textColor="@color/colorBrown"
                 android:textStyle="bold" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/positionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/address_hint"
-                android:inputType="textPostalAddress" />
+                android:completionHint="@string/address_hint"
+                android:text="AutoCompleteTextView" />
 
             <TextView
                 android:id="@+id/textView5"

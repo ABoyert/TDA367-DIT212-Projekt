@@ -9,6 +9,7 @@ import java.util.Map;
 
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.model.Bike;
+import tda367.paybike.model.Position;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;
 
@@ -39,16 +40,28 @@ public class RentableHandler {
     public List<Rentable> getAllRentables() {
         ArrayList<Rentable> rentablesList = new ArrayList<>();
 
-        for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
+        /*for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
             rentablesList.add(RentableFactory.createRentable("Bike",
                     (String) doc.get(NAME),
                     Double.parseDouble(doc.get(PRICE).toString()),
-                    (String) doc.get(POSITION),
+                    (Position) doc.get(POSITION),
                     ((doc.get(AVAILABLE) == null) ? false : (Boolean) doc.get(AVAILABLE)),
                     (String) doc.get(OWNER),
                     (String) doc.get(IMAGE),
                     (String) doc.get(DESCRIPTION),
                     doc.getId()));
+        }
+        */
+        for(int i = 0; i < 10; i++) {
+            rentablesList.add(RentableFactory.createRentable("Bike",
+                    "Test" + i ,
+                    i * 5,
+                    new Position("Testgatan 11", 53431, "Vara", "Sweden"),
+                    true,
+                    "Kalle",
+                    "img",
+                    "Jättefin",
+                    "24141" + i));
         }
 
         return rentablesList;
@@ -76,7 +89,7 @@ public class RentableHandler {
     }
 
     public Rentable createRentableWithFactory(boolean withID, String type, String name, double price,
-                                              String pos, boolean available, String owner,
+                                              Position pos, boolean available, String owner,
                                               String imagelink, String description, String id){
 
         if(withID == true)return factory.createRentable(type, name, price, pos, available, owner, imagelink, description,id);

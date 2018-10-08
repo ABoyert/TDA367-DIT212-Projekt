@@ -8,6 +8,7 @@ import tda367.paybike.handlers.RequestHandler;
 import tda367.paybike.handlers.UserHandler;
 import tda367.paybike.model.Bike;
 import tda367.paybike.model.Model;
+import tda367.paybike.model.Position;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;
 import tda367.paybike.model.User;
@@ -55,7 +56,7 @@ public class Controller {
         return model;
     }
 
-    public void newRentable(boolean withID, String type, String name, double price, String position,
+    public void newRentable(boolean withID, String type, String name, double price, Position position,
                                 boolean available, String owner, String imageLink,
                                 String description, String id){
 
@@ -68,7 +69,7 @@ public class Controller {
 
     }
 
-    public void newRentableNoID(boolean withID, String type, String name, double price, String position,
+    public void newRentableNoID(boolean withID, String type, String name, double price, Position position,
                             boolean available, String owner, String imageLink,
                             String description){
 

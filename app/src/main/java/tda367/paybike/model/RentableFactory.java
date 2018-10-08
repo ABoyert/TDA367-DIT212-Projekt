@@ -7,7 +7,7 @@ package tda367.paybike.model;
 
 public class RentableFactory {
 
-    public static Rentable createRentable(String type, String name, double price, String position, boolean available, String owner, String imageLink, String description, String id){
+    public static Rentable createRentable(String type, String name, double price, Position position, boolean available, String owner, String imageLink, String description, String id){
 
 
         if("Bike".equalsIgnoreCase(type))
@@ -19,7 +19,7 @@ public class RentableFactory {
 
     }
 
-    public static Rentable createRentableNoID(String type, String name, double price, String position, boolean available, String owner, String imageLink, String description){
+    public static Rentable createRentableNoID(String type, String name, double price, Position position, boolean available, String owner, String imageLink, String description){
 
 
         if("Bike".equalsIgnoreCase(type))
@@ -35,7 +35,7 @@ public class RentableFactory {
 
 
         if("Bike".equalsIgnoreCase(type))
-            return new Bike("Test", 25.00, "Testgatan", true, "testOwner", "noImage", "this is a test bike", "123test");
+            return new Bike("Test", 25.00, new Position("Testgatan", 53431, "Vara", "Sweden"), true, "testOwner", "noImage", "this is a test bike", "123test");
 
 
         return null;
