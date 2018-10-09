@@ -1,16 +1,22 @@
 package tda367.paybike.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import tda367.paybike.R;
 import tda367.paybike.model.Bike;
@@ -25,11 +31,16 @@ import tda367.paybike.model.Rentable;
 public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
 
     private int layout;
+    private ImageView rentableImage;
+    private TextView city, name, price;
+
     private List<Rentable> rentables;
     private Filter bikeFilter;
+    private Context context;
 
     public CustomBikeAdAdapter(@NonNull Context context, int layout, @NonNull List<Rentable> rentables) {
         super(context, layout, rentables);
+        this.context = context;
         this.rentables = rentables;
         this.layout = layout;
     }
@@ -53,19 +64,33 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
         LayoutInflater lsuInflator = LayoutInflater.from(getContext());
         View bikeView = lsuInflator.inflate(layout, parent, false);
 
-        // TODO Implement imageView and update method to reflect correct bike attributes
         // ImageView image = (ImageView) ad.findViewById(R.id.bikeImage);
-        TextView city = (TextView) bikeView.findViewById(R.id.city);
-        TextView name = (TextView) bikeView.findViewById(R.id.bikeName);
-        TextView price = (TextView) bikeView.findViewById(R.id.price);
+        city = (TextView) bikeView.findViewById(R.id.city);
+        name = (TextView) bikeView.findViewById(R.id.bikeName);
+        price = (TextView) bikeView.findViewById(R.id.price);
+        rentableImage = (ImageView) bikeView.findViewById(R.id.bikeImage);
 
         Rentable rentable = rentables.get(position);
 
         city.setText(rentable.getPosition().toString());
         name.setText(rentable.getName());
         price.setText(formatPrice(rentable.getPrice()));
+        setImageIfPresent(rentable);
 
         return bikeView;
+    }
+
+    private void setImageIfPresent(Rentable rentable) {
+        Optional<Uri> imagePath = Optional.of(rentable.getImagePath());
+        Bitmap bitmap;
+        if (imagePath.isPresent()) {
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imagePath.get());
+                rentableImage.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void updateBikeView(List<Rentable> newList) {
