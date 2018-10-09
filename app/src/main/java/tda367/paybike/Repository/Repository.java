@@ -4,17 +4,13 @@ import android.net.Uri;
 
 import java.util.List;
 
-import tda367.paybike.database.DatabaseController;
 import tda367.paybike.handlers.RentableHandler;
 import tda367.paybike.handlers.RequestHandler;
 import tda367.paybike.handlers.UserHandler;
-import tda367.paybike.model.Bike;
-import tda367.paybike.model.Model;
+import tda367.paybike.model.PayBike;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;
 import tda367.paybike.model.User;
-import tda367.paybike.viewmodels.AddBikeViewModel;
-import tda367.paybike.viewmodels.BikeViewModel;
 
 public class Repository {
 
@@ -23,7 +19,7 @@ public class Repository {
     * Passes data
     *
     * */
-    private Model model = new Model();
+    private PayBike payBike = new PayBike();
     private RequestHandler requestHandler = RequestHandler.getInstance();
     private RentableHandler rentableHandler = RentableHandler.getInstance();
     private UserHandler userHandler = UserHandler.getInstance();
@@ -37,24 +33,24 @@ public class Repository {
         return rentableHandler.getAllRentables();
     }
 
-    //Puts rentables from database in model
+    //Puts rentables from database in payBike
     public void updateModelRentables(){
-        model.setModelRentables(getDatabaseRentables());
+        payBike.setModelRentables(getDatabaseRentables());
     }
 
-    //Get list of rentables from model
+    //Get list of rentables from payBike
     public List<Rentable> getModelRentables(){
-        return model.getModelRentables();
+        return payBike.getModelRentables();
     }
 
-    //Updates the model with rentables from the database and returns the updated list
+    //Updates the payBike with rentables from the database and returns the updated list
     public List<Rentable>updateAndGetRentables(){
         updateModelRentables();
         return getModelRentables();
     }
 
-    public Model getModel(){
-        return model;
+    public PayBike getPayBike(){
+        return payBike;
     }
 
     public void newRentable(boolean withID, String type, String name, double price, String position,
@@ -85,7 +81,7 @@ public class Repository {
     public boolean createUser(String email, String password, String name) {
         if (userHandler.createUser(email, password, name)) {
             User newUser = new User(email, password, name);
-            model.addModelUser(newUser);
+            payBike.addModelUser(newUser);
             return true;
         } else {
             return false;

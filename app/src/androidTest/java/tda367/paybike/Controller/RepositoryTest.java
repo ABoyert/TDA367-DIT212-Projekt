@@ -34,7 +34,7 @@ public class RepositoryTest {
         List<Rentable> testList = new ArrayList<>();
         testList.add(RentableFactory.createTestRentable("Bike"));
 
-        c.getModel().setModelRentables(testList);
+        c.getPayBike().setModelRentables(testList);
         assert !c.getModelRentables().isEmpty();
     }
 

@@ -43,7 +43,7 @@ public class BikeViewModel extends ViewModel {
         return selected;
     }
 
-    // Fetches and returns all Bike Objects from the Model which are marked as "available"
+    // Fetches and returns all Bike Objects from the PayBike which are marked as "available"
 
     public List<Rentable> getModelRentables() {
         return c.updateAndGetRentables().stream()

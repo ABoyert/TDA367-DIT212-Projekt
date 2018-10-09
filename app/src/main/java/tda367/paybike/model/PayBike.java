@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Oscar Orava Kilberg on 2018-10-02.
  */
 
-public class Model {
+public class PayBike {
 
     /*
     Holds data, reflects database.
@@ -18,7 +18,7 @@ public class Model {
     private List<Request> modelRequests = new ArrayList<>();
     private User currentUser;
 
-    public Model() {
+    public PayBike() {
 
     }
 
@@ -53,6 +53,8 @@ public class Model {
     public void setModelRequests(List<Request> modelRequests) {
         this.modelRequests = modelRequests;
     }
+
+    //TODO Request Adding/Removing/Confirming
 
 
 }

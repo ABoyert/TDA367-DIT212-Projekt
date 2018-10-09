@@ -5,4 +5,7 @@ package tda367.paybike.model;
  */
 
 public class Request {
+
+
+
 }
