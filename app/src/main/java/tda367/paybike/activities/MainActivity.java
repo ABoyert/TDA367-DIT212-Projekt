@@ -41,31 +41,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findBikeBtn = (Button) findViewById(R.id.findBikeBtn);
 
-        userEmail1 = (EditText) findViewById(R.id.userEmail);
-        String userEmailValue = userEmail1.getText().toString();
-
-        userPassword1 = (EditText) findViewById(R.id.userPassword);
-        String userPasswordValue = userPassword1.getText().toString();
-
         // This line need to be here atm (I think)
         DatabaseController db = DatabaseController.getInstance();
 
         // Open sign-in page
         //createSignInIntent();
 
-        // EXAMPLE USE
-        UserHandler uh = new UserHandler();
-        uh.signIn("USERNAME", "PASSWORD");
-        MainViewModel mvm = new MainViewModel();
-
         findBikeBtn.setOnClickListener(v -> {
-            if (uh.signIn(userEmailValue, userPasswordValue)){
+            UserHandler uh = new UserHandler();
+            MainViewModel mvm = new MainViewModel();
+            userEmail1 = (EditText) findViewById(R.id.userEmail);
+            String userEmailValue = userEmail1.getText().toString();
+
+            userPassword1 = (EditText) findViewById(R.id.userPassword);
+            String userPasswordValue = userPassword1.getText().toString();
+
+            if (userEmailValue != null && userPasswordValue != null && uh.signIn(userEmailValue, userPasswordValue)){
                 startActivity(new Intent(this, BikeFeedActivity.class));
             } else {
-                Toast.makeText(MainActivity.this, mvm.getWarning(userEmailValue, userPasswordValue),
+                Toast.makeText(MainActivity.this, mvm.getWarning(userEmailValue, userPasswordValue).toString(),
                         Toast.LENGTH_LONG).show();
             }
-
         });
     }
 
