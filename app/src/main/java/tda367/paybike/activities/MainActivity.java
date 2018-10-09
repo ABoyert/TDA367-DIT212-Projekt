@@ -2,6 +2,7 @@ package tda367.paybike.activities;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -48,9 +49,15 @@ public class MainActivity extends AppCompatActivity implements
         // DO NOT DELETE
         DatabaseController db = DatabaseController.getInstance();
 
-        // TEST
-        //UserHandler uh = UserHandler.getInstance();
-        //Log.d(TAG, "Login success = " + uh.signIn("ponbac@student.chalmers.se", "test123"));
+        // If already logged in, skip login screen!
+        if (fAuth.getCurrentUser() != null) {
+            Log.d(TAG, "Current User: " + fAuth.getCurrentUser().getDisplayName());
+
+            // Let app init
+            SystemClock.sleep(2000);
+
+            showBikeFeed();
+        }
 
         findBikeBtn.setOnClickListener(v -> {
             mvm = new MainViewModel();
@@ -92,8 +99,8 @@ public class MainActivity extends AppCompatActivity implements
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                            startActivity(new Intent(getApplicationContext(), BikeFeedActivity.class));
-                            finish();
+                        Log.d(TAG, "Successfully logged in " + fAuth.getCurrentUser().getDisplayName() + "!");
+                        showBikeFeed();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -105,5 +112,11 @@ public class MainActivity extends AppCompatActivity implements
                                 Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    // Starts the BikeFeed activity
+    private void showBikeFeed() {
+        startActivity(new Intent(getApplicationContext(), BikeFeedActivity.class));
+        finish();
     }
 }
