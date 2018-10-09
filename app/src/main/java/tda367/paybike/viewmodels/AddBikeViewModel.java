@@ -3,7 +3,7 @@ package tda367.paybike.viewmodels;
 import android.arch.lifecycle.ViewModel;
 import android.net.Uri;
 
-import tda367.paybike.Controller.Controller;
+import tda367.paybike.Repository.Repository;
 
 public class AddBikeViewModel extends ViewModel {
 
@@ -24,10 +24,10 @@ public class AddBikeViewModel extends ViewModel {
     private String bikeName, bikeDescription, bikePosition, bikePrice, warningMessage;
     private Uri bikeImagePath;
     private boolean warning;
-    private Controller c;
+    private Repository c;
 
     public AddBikeViewModel() {
-        c = new Controller();
+        c = new Repository();
         warning = false;
         bikeName = "";
         bikeDescription = "";

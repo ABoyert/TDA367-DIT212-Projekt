@@ -1,4 +1,4 @@
-package tda367.paybike.Controller;
+package tda367.paybike.Repository;
 
 import android.net.Uri;
 
@@ -16,7 +16,7 @@ import tda367.paybike.model.User;
 import tda367.paybike.viewmodels.AddBikeViewModel;
 import tda367.paybike.viewmodels.BikeViewModel;
 
-public class Controller {
+public class Repository {
 
     /*
     *
@@ -28,7 +28,7 @@ public class Controller {
     private RentableHandler rentableHandler = RentableHandler.getInstance();
     private UserHandler userHandler = UserHandler.getInstance();
 
-    public Controller() {
+    public Repository() {
 
     }
 

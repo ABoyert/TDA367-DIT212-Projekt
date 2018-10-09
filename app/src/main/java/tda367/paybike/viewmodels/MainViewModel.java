@@ -1,7 +1,7 @@
 package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
-import tda367.paybike.Controller.Controller;
+import tda367.paybike.Repository.Repository;
 
 public class MainViewModel extends ViewModel {
 
@@ -11,10 +11,10 @@ public class MainViewModel extends ViewModel {
 
     private String name, email, password, repeatedPassword;
 
-    Controller c;
+    Repository c;
 
     public MainViewModel() {
-        c = new Controller();
+        c = new Repository();
         name = "";
         email = "";
         password = "";

@@ -20,7 +20,7 @@ public class ControllerTest {
 
     @Test
     public void updateModelRentables() throws Exception {
-        Controller c = new Controller();
+        Repository c = new Repository();
 
 
         assert c.getModelRentables().isEmpty();
@@ -34,7 +34,7 @@ public class ControllerTest {
 
     @Test
     public void getModelRentables() throws Exception {
-        Controller c = new Controller();
+        Repository c = new Repository();
         assert c.getModelRentables().isEmpty();
     }
 
