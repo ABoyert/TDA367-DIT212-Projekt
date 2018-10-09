@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
@@ -22,11 +24,14 @@ import org.w3c.dom.Text;
 import java.util.Arrays;
 import java.util.List;
 
+
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.fragments.BikeDetailsFragment;
 import tda367.paybike.fragments.RegisterUserFragment;
 import tda367.paybike.handlers.UserHandler;
+import tda367.paybike.viewmodels.MainViewModel;
+
 import tda367.paybike.model.Bike;
 
 public class MainActivity extends AppCompatActivity implements
@@ -38,6 +43,11 @@ public class MainActivity extends AppCompatActivity implements
     private TextView registerNewUser;
     private Button findBikeBtn;
 
+    // Firebase Auth
+    private static final int RC_SIGN_IN = 123;
+
+    private EditText userEmail1, userPassword1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +58,29 @@ public class MainActivity extends AppCompatActivity implements
         // DO NOT DELETE
         DatabaseController db = DatabaseController.getInstance();
 
+        // Open sign-in page
+        //createSignInIntent();
+
+        // EXAMPLE USE
+        UserHandler uh = new UserHandler();
+        uh.signIn("USERNAME", "PASSWORD");
+
         findBikeBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, BikeFeedActivity.class));
-            // finish(); WHEN THE DATABASE CONTROLLER IS REMOVED FROM THIS CLASS, THIS ROW
-            // SHOULD BE USED TO PREVENT LOGGED IN USERS TO USE BACK ARROW
+            UserHandler uh = new UserHandler();
+            MainViewModel mvm = new MainViewModel();
+            userEmail1 = (EditText) findViewById(R.id.userEmail);
+            String userEmailValue = userEmail1.getText().toString();
+
+            userPassword1 = (EditText) findViewById(R.id.userPassword);
+            String userPasswordValue = userPassword1.getText().toString();
+            if (userEmailValue.length() != 0 && userPasswordValue.length() != 0){
+                if (uh.signIn(userEmailValue, userPasswordValue)){
+                    startActivity(new Intent(this, BikeFeedActivity.class));
+                }
+            } else {
+                Toast.makeText(MainActivity.this, mvm.getWarning(userEmailValue, userPasswordValue),
+                        Toast.LENGTH_LONG).show();
+            }
         });
 
         registerNewUser.setOnClickListener(view -> registerNewUser(view));
@@ -71,4 +100,24 @@ public class MainActivity extends AppCompatActivity implements
         transaction.add(R.id.fragment_frame, newUser, "NEW_USER_FRAGMENT").commit();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+
+            if (resultCode == RESULT_OK) {
+                // Successfully signed in
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                Log.d(TAG, "Current user: " + user.getDisplayName());
+                // ...
+            } else {
+                // Sign in failed. If response is null the user canceled the
+                // sign-in flow using the back button. Otherwise check
+                // response.getError().getErrorCode() and handle the error.
+                // ...
+            }
+        }
+    }
 }
