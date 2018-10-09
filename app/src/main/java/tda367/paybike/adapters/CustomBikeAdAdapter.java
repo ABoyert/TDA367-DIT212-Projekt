@@ -13,6 +13,8 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,15 +83,12 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
     }
 
     private void setImageIfPresent(Rentable rentable) {
-        Optional<Uri> imagePath = Optional.of(rentable.getImagePath());
-        Bitmap bitmap;
-        if (imagePath.isPresent()) {
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imagePath.get());
-                rentableImage.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        Uri imagePath = rentable.getImagePath();
+        if (imagePath != null) {
+            Glide
+                    .with(getContext())
+                    .load(imagePath)
+                    .into(rentableImage);
         }
     }
 
