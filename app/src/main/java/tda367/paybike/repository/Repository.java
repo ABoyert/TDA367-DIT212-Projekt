@@ -1,6 +1,13 @@
-package tda367.paybike.Repository;
+package tda367.paybike.repository;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 import java.util.List;
 
@@ -19,13 +26,13 @@ public class Repository {
     * Passes data
     *
     * */
-    private PayBike payBike = new PayBike();
+    private PayBike payBike = PayBike.getInstance();
     private RequestHandler requestHandler = RequestHandler.getInstance();
     private RentableHandler rentableHandler = RentableHandler.getInstance();
     private UserHandler userHandler = UserHandler.getInstance();
 
     // Set TAG to class name for use in debugging
-    private static final String TAG = Controller.class.getSimpleName();
+    private static final String TAG = Repository.class.getSimpleName();
 
     public Repository() {
 
@@ -89,7 +96,7 @@ public class Repository {
             public void onSuccess(AuthResult authResult) {
                 // If sign up is successful
                 User newUser = new User(email, password, name);
-                model.addModelUser(newUser);
+                PayBike.addModelUser(newUser);
                 Log.d(TAG, "Local user (" + name + ") added!");
             }
         }).addOnFailureListener(new OnFailureListener() {

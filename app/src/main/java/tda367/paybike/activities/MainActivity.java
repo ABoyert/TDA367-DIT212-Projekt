@@ -2,7 +2,6 @@ package tda367.paybike.activities;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,27 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import org.w3c.dom.Text;
-
-import java.util.Arrays;
-import java.util.List;
-
-import tda367.paybike.Controller.Controller;
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.fragments.RegisterUserFragment;
-import tda367.paybike.handlers.UserHandler;
 import tda367.paybike.viewmodels.MainViewModel;
 
 public class MainActivity extends AppCompatActivity implements
@@ -48,7 +34,9 @@ public class MainActivity extends AppCompatActivity implements
 
     private TextView registerNewUser;
     private Button findBikeBtn;
-    private EditText userEmail1, userPassword1;
+    private EditText userEmail, userPassword;
+
+    MainViewModel mvm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,17 +53,15 @@ public class MainActivity extends AppCompatActivity implements
         //Log.d(TAG, "Login success = " + uh.signIn("ponbac@student.chalmers.se", "test123"));
 
         findBikeBtn.setOnClickListener(v -> {
-            UserHandler uh = UserHandler.getInstance();
-            MainViewModel mvm = new MainViewModel();
-            userEmail1 = (EditText) findViewById(R.id.userEmail);
-            String userEmailValue = userEmail1.getText().toString();
+            mvm = new MainViewModel();
+            userEmail = (EditText) findViewById(R.id.userEmail);
+            userPassword = (EditText) findViewById(R.id.userPassword);
 
-            userPassword1 = (EditText) findViewById(R.id.userPassword);
-            String userPasswordValue = userPassword1.getText().toString();
+            String userEmailValue = userEmail.getText().toString();
+            String userPasswordValue = userPassword.getText().toString();
+
             if (userEmailValue.length() != 0 && userPasswordValue.length() != 0){
-                if (uh.signIn(userEmailValue, userPasswordValue)){
-                    startActivity(new Intent(this, BikeFeedActivity.class));
-                }
+                signIn(userEmailValue, userPasswordValue);
             } else {
                 Toast.makeText(MainActivity.this, mvm.getWarning(userEmailValue, userPasswordValue),
                         Toast.LENGTH_LONG).show();
@@ -107,8 +93,7 @@ public class MainActivity extends AppCompatActivity implements
                     @Override
                     public void onSuccess(AuthResult authResult) {
                             startActivity(new Intent(getApplicationContext(), BikeFeedActivity.class));
-                            finish(); //WHEN THE DATABASE CONTROLLER IS REMOVED FROM THIS CLASS, THIS ROW
-                            // SHOULD BE USED TO PREVENT LOGGED IN USERS TO USE BACK ARROW
+                            finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

@@ -13,13 +13,25 @@ public class PayBike {
     Holds data, reflects database.
      */
 
-    private List<Rentable> modelRentables = new ArrayList<>();
-    private List<User> modelUsers = new ArrayList<>();
-    private List<Request> modelRequests = new ArrayList<>();
-    private User currentUser;
+    private static List<Rentable> modelRentables = new ArrayList<>();
+    private static List<User> modelUsers = new ArrayList<>();
+    private static List<Request> modelRequests = new ArrayList<>();
+    private static User currentUser;
 
-    public PayBike() {
+    // Instance variable
+    private static PayBike instance = null;
 
+    private PayBike() {
+        // Singleton
+    }
+
+    // Create singleton if it does not exist, otherwise return it.
+    public static PayBike getInstance() {
+        if (instance == null) {
+            instance = new PayBike();
+        }
+
+        return instance;
     }
 
     public List<Rentable> getModelRentables() {
@@ -42,7 +54,7 @@ public class PayBike {
         this.modelUsers = modelUsers;
     }
 
-    public void addModelUser(User newUser) {
+    public static void addModelUser(User newUser) {
         modelUsers.add(newUser);
     }
 

@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import tda367.paybike.Repository.Repository;
+import tda367.paybike.repository.Repository;
 import tda367.paybike.model.Rentable;
 
 import static java.util.stream.Collectors.*;
