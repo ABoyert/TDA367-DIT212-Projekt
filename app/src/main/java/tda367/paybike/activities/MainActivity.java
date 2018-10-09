@@ -57,6 +57,11 @@ public class MainActivity extends AppCompatActivity implements
         registerNewUser.setOnClickListener(view -> registerNewUser(view));
     }
 
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+    }
+
     private void registerNewUser(View view) {
         RegisterUserFragment newUser = RegisterUserFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -64,11 +69,6 @@ public class MainActivity extends AppCompatActivity implements
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
         transaction.addToBackStack(null);
         transaction.add(R.id.fragment_frame, newUser, "NEW_USER_FRAGMENT").commit();
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
 }

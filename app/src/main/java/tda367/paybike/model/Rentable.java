@@ -3,6 +3,7 @@ package tda367.paybike.model;
 import android.net.Uri;
 
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * Created by Oscar Orava Kilberg on 2018-09-19.

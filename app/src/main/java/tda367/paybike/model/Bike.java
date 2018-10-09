@@ -4,8 +4,6 @@ import android.net.Uri;
 
 
 public class Bike implements Rentable {
-    //private Date startDate;
-    //private Date endDate;
     private String id;
     private String name;
     private double price;
@@ -86,7 +84,6 @@ public class Bike implements Rentable {
         return price;
     }
 
-
     @Override
     public void setPosition(String pos) {
         this.position = pos;
@@ -112,24 +109,4 @@ public class Bike implements Rentable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    /*@Override
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    @Override
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    @Override
-    public void setEndDate(Date startDate) {
-        this.endDate = endDate;
-    }
-
-    @Override
-    public Date getEndDate() {
-        return endDate;
-    }*/
 }
