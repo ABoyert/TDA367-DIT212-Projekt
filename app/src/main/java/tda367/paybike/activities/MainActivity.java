@@ -2,12 +2,10 @@ package tda367.paybike.activities;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.SystemClock;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +25,6 @@ import java.util.List;
 
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
-import tda367.paybike.fragments.BikeDetailsFragment;
 import tda367.paybike.fragments.RegisterUserFragment;
 import tda367.paybike.handlers.UserHandler;
 import tda367.paybike.viewmodels.MainViewModel;

@@ -20,8 +20,7 @@ import java.util.ArrayList;
 
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomBikeAdAdapter;
-import tda367.paybike.fragments.BikeDetailsFragment;
-import tda367.paybike.model.Bike;
+import tda367.paybike.fragments.RentableDetailsFragment;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.viewmodels.BikeViewModel;
 
@@ -35,7 +34,7 @@ import static android.widget.AdapterView.*;
  */
 
 public class BikeFeedActivity extends AppCompatActivity
-        implements BikeDetailsFragment.OnFragmentInteractionListener {
+        implements RentableDetailsFragment.OnFragmentInteractionListener {
 
     @NonNull
     private static BikeViewModel viewModel;
@@ -90,7 +89,6 @@ public class BikeFeedActivity extends AppCompatActivity
                     viewBikeDetails((Rentable) bike);
                 }
             }
-
         });
 
         // Handle search events
@@ -127,7 +125,7 @@ public class BikeFeedActivity extends AppCompatActivity
     }
 
     private void viewBikeDetails(Rentable rentable) {
-        BikeDetailsFragment bikeDetails = BikeDetailsFragment.newInstance(rentable.getName(), rentable.getDescription(), rentable.getPosition(), rentable.getPrice());
+        RentableDetailsFragment bikeDetails = RentableDetailsFragment.newInstance(rentable);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);

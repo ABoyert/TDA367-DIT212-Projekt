@@ -91,4 +91,5 @@ public class Repository {
     public void uploadRentableImage(Rentable rentable, Uri filePath) {
 
     }
+
 }
