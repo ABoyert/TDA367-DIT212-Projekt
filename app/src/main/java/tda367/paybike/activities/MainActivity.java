@@ -55,11 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             userPassword1 = (EditText) findViewById(R.id.userPassword);
             String userPasswordValue = userPassword1.getText().toString();
-
-            if (userEmailValue != null && userPasswordValue != null && uh.signIn(userEmailValue, userPasswordValue)){
-                startActivity(new Intent(this, BikeFeedActivity.class));
+            if (userEmailValue.length() != 0 && userPasswordValue.length() != 0){
+                if (uh.signIn(userEmailValue, userPasswordValue)){
+                    startActivity(new Intent(this, BikeFeedActivity.class));
+                }
             } else {
-                Toast.makeText(MainActivity.this, mvm.getWarning(userEmailValue, userPasswordValue).toString(),
+                Toast.makeText(MainActivity.this, mvm.getWarning(userEmailValue, userPasswordValue),
                         Toast.LENGTH_LONG).show();
             }
         });
