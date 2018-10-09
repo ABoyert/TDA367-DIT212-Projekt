@@ -29,9 +29,4 @@ public class MainViewModel extends ViewModel{
 
         return warningMessage;
     }
-
-
-    //göra private controller
-
-    //metod som kollar om namet är valid typ
 }

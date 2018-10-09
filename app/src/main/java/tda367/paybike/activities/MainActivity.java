@@ -33,17 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Firebase Auth
     private static final int RC_SIGN_IN = 123;
 
-    //boy's skit
-
     private EditText userEmail1, userPassword1;
-
-    private boolean loginValid(String userEmailValue, String userPasswordValue){
-        UserHandler uh = new UserHandler();
-        boolean loginValidation = uh.signIn(userEmailValue, userPasswordValue);
-        return loginValidation;
-    }
-
-    //boy's skit
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
