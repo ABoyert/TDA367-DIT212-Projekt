@@ -3,11 +3,27 @@ package tda367.paybike.viewmodels;
 import android.arch.lifecycle.ViewModel;
 import tda367.paybike.Repository.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tda367.paybike.handlers.RentableHandler;
+import tda367.paybike.model.Bike;
+import tda367.paybike.model.Rentable;
+import tda367.paybike.model.User;
+
 public class MainViewModel extends ViewModel {
 
     private static final int MIN_PASSWORD_LENGTH = 8;
     private static final int MAX_NAME_LENGTH = 50;
     private static final int MIN_NAME_LENGTH = 0;
+
+    private User currentUser;
+    private static RentableHandler rentableHandler;
+
+    private static final String INVALID_USERNAME = "Username might be incorrect ";
+    private static final String NO_USERNAME = "You have to enter your username ";
+    private static final String INVALID_PASSWORD = "Password might be incorrect ";
+    private static final String NO_PASSWORD = "You have to enter your password ";
 
     private String name, email, password, repeatedPassword;
 
@@ -76,25 +92,6 @@ public class MainViewModel extends ViewModel {
     public boolean createUser() {
         return c.createUser(getEmail(), getPassword(), getName()) ? true : false;
     }
-
-
-import java.util.ArrayList;
-import java.util.List;
-
-import tda367.paybike.handlers.RentableHandler;
-import tda367.paybike.model.Bike;
-import tda367.paybike.model.Rentable;
-import tda367.paybike.model.User;
-
-public class MainViewModel extends ViewModel{
-
-    private User currentUser;
-    private static RentableHandler rentableHandler;
-
-    private static final String INVALID_USERNAME = "Username might be incorrect ";
-    private static final String NO_USERNAME = "You have to enter your username ";
-    private static final String INVALID_PASSWORD = "Password might be incorrect ";
-    private static final String NO_PASSWORD = "You have to enter your password ";
 
     private String userName, passWord;
 

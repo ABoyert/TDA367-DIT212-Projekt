@@ -62,11 +62,11 @@ public class MainActivity extends AppCompatActivity implements
         //createSignInIntent();
 
         // EXAMPLE USE
-        UserHandler uh = new UserHandler();
-        uh.signIn("USERNAME", "PASSWORD");
+        //UserHandler uhtest = UserHandler.getInstance();
+        //uhtest.signIn("USERNAME", "PASSWORD");
 
         findBikeBtn.setOnClickListener(v -> {
-            UserHandler uh = new UserHandler();
+            UserHandler uh = UserHandler.getInstance();
             MainViewModel mvm = new MainViewModel();
             userEmail1 = (EditText) findViewById(R.id.userEmail);
             String userEmailValue = userEmail1.getText().toString();
