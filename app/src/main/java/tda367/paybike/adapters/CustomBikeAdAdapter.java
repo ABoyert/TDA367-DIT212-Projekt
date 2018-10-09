@@ -86,7 +86,7 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
         Uri imagePath = rentable.getImagePath();
         if (imagePath != null) {
             Glide
-                    .with(getContext())
+                    .with(context)
                     .load(imagePath)
                     .into(rentableImage);
         }
