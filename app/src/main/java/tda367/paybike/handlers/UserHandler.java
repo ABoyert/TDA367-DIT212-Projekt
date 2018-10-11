@@ -36,10 +36,10 @@ public class UserHandler {
         if (instance == null) {
             instance = new UserHandler();
         }
-
         return instance;
     }
 
+    //TODO Change return type to User
     // Supposed to return the current user as User-object (Now returning as FirebaseUser)
     // Return the current user as FirebaseUser-object
     public FirebaseUser getCurrentUser() {

@@ -77,7 +77,6 @@ public class RegisterUserFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 viewModel.setName(userName.getText().toString());
-                System.out.println(viewModel.getName());
                 boolean valid = viewModel.nameIsValid() ? true : false;
                 setBackgroundTintListColor(valid, userName);
                 updateRegisterBtn();

@@ -2,11 +2,16 @@ package tda367.paybike.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +27,8 @@ import tda367.paybike.viewmodels.AddBikeViewModel;
 public class AddBikeActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 71;
+    private static final ColorStateList COLOR_CORRECT = ColorStateList.valueOf(Color.parseColor("#30d9af"));
+    private static final ColorStateList COLOR_WRONG = ColorStateList.valueOf(Color.parseColor("#e96e6e"));
 
     private Button addBikeBtn;
     private EditText bikeName, bikeDescription, bikePosition, bikePrice;
@@ -43,46 +50,75 @@ public class AddBikeActivity extends AppCompatActivity {
 
         bikeName = (EditText) findViewById(R.id.nameText);
         bikeName.setText(viewModel.getBikeName());
-        bikeName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        bikeName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus == false) {
-                    viewModel.setBikeName(bikeName.getText().toString());
-                }
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                viewModel.setBikeName(bikeName.getText().toString());
+                boolean valid = viewModel.nameIsValid() ? true : false;
+                setBackgroundTintListColor(valid, bikeName);
+                updatePostBikeBtn();}
         });
 
         bikeDescription = (EditText) findViewById(R.id.descriptionText);
         bikeDescription.setText(viewModel.getBikeDescription());
-        bikeDescription.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        bikeDescription.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus == false) {
-                    viewModel.setBikeDescription(bikeDescription.getText().toString());
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                viewModel.setBikeDescription(bikeDescription.getText().toString());
+                boolean valid = viewModel.descriptionIsValid() ? true : false;
+                setBackgroundTintListColor(valid, bikeDescription);
+                updatePostBikeBtn();}
         });
 
         // TODO Check if this needs to be updated when we have a position object to store addresses
         bikePosition = (EditText) findViewById(R.id.positionText);
         bikePosition.setText(viewModel.getBikeDescription());
-        bikePosition.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        bikePosition.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus == false) {
-                    viewModel.setBikePosition(bikePosition.getText().toString());
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                viewModel.setBikePosition(bikePosition.getText().toString());
+                boolean valid = viewModel.positionIsValid() ? true : false;
+                setBackgroundTintListColor(valid, bikePosition);
+                updatePostBikeBtn();
             }
         });
 
         bikePrice = (EditText) findViewById(R.id.priceText);
         bikePrice.setText(viewModel.getBikePrice());
-        bikePrice.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        bikePrice.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus == false) {
-                    viewModel.setBikePrice(bikePrice.getText().toString());
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                viewModel.setBikePrice(bikePrice.getText().toString());
+                boolean valid = viewModel.priceIsValid() ? true : false;
+                setBackgroundTintListColor(valid, bikePrice);
+                updatePostBikeBtn();
             }
         });
 
@@ -99,16 +135,10 @@ public class AddBikeActivity extends AppCompatActivity {
         addBikeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateModel();
                 if (viewModel.inputIsValid()) {
                     viewModel.postBike();
-                    clearAllTextFields();
-                    if (viewModel.warningIsShown()) {
-                        hideWarning();
-                    }
+                    viewModel.clearAll();
                     finish(); // End Activity
-                } else {
-                    showWarning();
                 }
             }
         });
@@ -131,12 +161,23 @@ public class AddBikeActivity extends AppCompatActivity {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 chooseImageBtn.setImageBitmap(bitmap);
+                viewModel.setBikeImagePath(filePath);
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
+    private void setBackgroundTintListColor(boolean valid, EditText editText) {
+        if (valid) {
+            ViewCompat.setBackgroundTintList(editText, COLOR_CORRECT);
+        } else {
+            ViewCompat.setBackgroundTintList(editText, COLOR_WRONG);
+        }
+    }
+
+    private void updatePostBikeBtn() { addBikeBtn.setEnabled(viewModel.inputIsValid()); }
 
     private void updateModel() {
         viewModel.setBikeName(bikeName.getText().toString());
@@ -146,30 +187,4 @@ public class AddBikeActivity extends AppCompatActivity {
         viewModel.setBikeImagePath(filePath);
     }
 
-    private void clearAllTextFields() {
-        bikeName.getText().clear();
-        viewModel.setBikeName("");
-        bikeDescription.getText().clear();
-        viewModel.setBikeDescription("");
-        bikePosition.getText().clear();
-        viewModel.setBikePosition("");
-        bikePrice.getText().clear();
-        viewModel.setBikePrice("");
-    }
-
-    // Fetches warning message from ViewModel and shows it in the GUI
-    private void showWarning() {
-        warning.setText(viewModel.getWarning());
-        warning.setVisibility(View.VISIBLE);
-        // Notify ViewModel of change
-        viewModel.showWarning(true);
-    }
-
-    // Hides warning message in the GUI
-    private void hideWarning() {
-        warning.setVisibility(View.GONE);
-        warning.setText("");
-        // Notify ViewModel of change
-        viewModel.showWarning(false);
-    }
 }
