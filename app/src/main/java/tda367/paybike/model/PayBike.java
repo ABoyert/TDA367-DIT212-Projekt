@@ -66,6 +66,24 @@ public class PayBike {
         this.modelRequests = modelRequests;
     }
 
+    public void addRequest(User receivingUser, User sendingUser, Rentable targetRentable){
+        modelRequests.add(new Request(receivingUser.getUserID(), sendingUser.getUserID(), targetRentable.getId()));
+    }
+
+    public Request getRequest(){
+
+
+        return null;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        PayBike.currentUser = currentUser;
+    }
+
     //TODO Request Adding/Removing/Confirming
 
 

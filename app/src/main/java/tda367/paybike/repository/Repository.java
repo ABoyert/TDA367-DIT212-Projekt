@@ -17,6 +17,7 @@ import tda367.paybike.handlers.UserHandler;
 import tda367.paybike.model.PayBike;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;
+import tda367.paybike.model.Request;
 import tda367.paybike.model.User;
 
 public class Repository {
@@ -43,6 +44,15 @@ public class Repository {
         return rentableHandler.getAllRentables();
     }
 
+    public List<Request> getDatabaseRequests(){ return requestHandler.getCurrentRequests();}
+
+    public void updateModelRequests(){payBike.setModelRequests(getDatabaseRequests()); }
+
+    public List<Request> updateAndGetRequests(){
+        updateModelRequests();
+        return getModelRequests();
+    }
+
     //Puts rentables from database in payBike
     public void updateModelRentables(){
         payBike.setModelRentables(getDatabaseRentables());
@@ -52,6 +62,8 @@ public class Repository {
     public List<Rentable> getModelRentables(){
         return payBike.getModelRentables();
     }
+
+    public List<Request> getModelRequests(){return payBike.getModelRequests();}
 
     //Updates the payBike with rentables from the database and returns the updated list
     public List<Rentable>updateAndGetRentables(){
@@ -95,7 +107,8 @@ public class Repository {
             @Override
             public void onSuccess(AuthResult authResult) {
                 // If sign up is successful
-                User newUser = new User(email, password, name);
+                String userID = userHandler.getCurrentUser().getUid();
+                User newUser = new User(email, password, name, userID);
                 PayBike.addModelUser(newUser);
                 Log.d(TAG, "Local user (" + name + ") added!");
             }
@@ -110,4 +123,14 @@ public class Repository {
         // TODO: Now always returns true, should return false if sign up fails!
         return true;
     }
+
+    public void setCurrentUser(User currentUser){
+        payBike.setCurrentUser(currentUser);
+    }
+
+    public void getCurrentUser(){
+        payBike.getCurrentUser();
+    }
+
+
 }
