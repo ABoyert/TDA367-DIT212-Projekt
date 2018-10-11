@@ -20,6 +20,8 @@ public class AddBikeViewModel extends ViewModel {
     private static final String NO_DESCRIPTION = "Please tell us something about your bike in the description. ";
     private static final String INVALID_PRICE = "Price cannot exceed $" + MAX_PRICE + ". ";
     private static final String NO_PRICE = "You have to set at price. ";
+    private static final String NO_PICTURE_SELECTED = "Pick an image to show your bike. ";
+
 
     private String bikeName, bikeDescription, bikePosition, bikePrice, warningMessage;
     private Uri bikeImagePath;
@@ -114,11 +116,16 @@ public class AddBikeViewModel extends ViewModel {
         return bikePrice != "" && bikeDescription.length() < MAX_DESCRIPTION_LENGTH ? true : false;
     }
 
+    private boolean imageIsSelected() {
+        return getBikeImagePath() != null ? true : false;
+    }
+
     public boolean inputIsValid() {
         return nameIsValid() &&
                 descriptionIsValid() &&
                 priceIsValid() &&
-                positionIsValid();
+                positionIsValid() &&
+                imageIsSelected();
     }
 
     // Method that generates warning messages when user input is incorrect
@@ -135,6 +142,9 @@ public class AddBikeViewModel extends ViewModel {
             }
             if (!priceIsValid()) {
                 warningMessage += (bikePrice != "") ? INVALID_PRICE : NO_PRICE;
+            }
+            if (!imageIsSelected()) {
+                warningMessage += NO_PICTURE_SELECTED;
             }
 
         return warningMessage;

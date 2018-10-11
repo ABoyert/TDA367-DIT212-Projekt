@@ -103,8 +103,6 @@ public class AddBikeActivity extends AppCompatActivity {
                 if (viewModel.inputIsValid()) {
                     viewModel.postBike();
                     clearAllTextFields();
-                    //TODO implement
-                    // uploadImage();
                     if (viewModel.warningIsShown()) {
                         hideWarning();
                     }
@@ -134,9 +132,7 @@ public class AddBikeActivity extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 chooseImageBtn.setImageBitmap(bitmap);
             }
-
-            catch (IOException e)
-            {
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
