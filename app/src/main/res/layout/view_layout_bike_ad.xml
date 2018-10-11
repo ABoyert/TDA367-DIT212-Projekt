@@ -13,7 +13,8 @@
         android:layout_height="100dp"
         android:layout_marginBottom="4dp"
         android:contentDescription="@string/bike_image"
-        app:srcCompat="@mipmap/skeppshult_bike"/>
+        android:scaleType="centerCrop"
+        app:srcCompat="@mipmap/add_photo" />
 
     <TextView
         android:id="@+id/city"
