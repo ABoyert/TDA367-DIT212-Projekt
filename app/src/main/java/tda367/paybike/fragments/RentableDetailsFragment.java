@@ -93,7 +93,7 @@ public class RentableDetailsFragment extends Fragment {
         rentableDescription.setText(rentable.getDescription());
         rentablePrice = (TextView) rentableDetailsView.findViewById(R.id.bikePrice);
         rentablePrice.setText(formatPrice(rentable.getPrice()));
-        rentableImage = (ImageView) rentableDetailsView.findViewById(R.id.bikeImage); 
+        rentableImage = (ImageView) rentableDetailsView.findViewById(R.id.bikeImage);
         setImageIfPresent(rentable);
 
         return rentableDetailsView;
