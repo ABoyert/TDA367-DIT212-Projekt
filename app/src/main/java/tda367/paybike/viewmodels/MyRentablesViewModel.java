@@ -17,6 +17,7 @@ public class MyRentablesViewModel extends ViewModel {
 
     private Repository r;
     private CustomBikeAdAdapter adapter;
+    private Rentable selected;
 
     public MyRentablesViewModel() {
         r = new Repository();
@@ -26,6 +27,14 @@ public class MyRentablesViewModel extends ViewModel {
     public List<Rentable> getCurrentUserRentables() {
         return r.updateAndGetRentables().stream()
                 .collect(toCollection(ArrayList::new));
+    }
+
+    public void setSelected(Rentable selected) {
+        this.selected = selected;
+    }
+
+    public Rentable getSelected() {
+        return selected;
     }
 
 }

@@ -7,15 +7,20 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomBikeAdAdapter;
+import tda367.paybike.model.Rentable;
 import tda367.paybike.viewmodels.MyRentablesViewModel;
 
 public class MyRentablesActivity extends AppCompatActivity {
@@ -51,12 +56,28 @@ public class MyRentablesActivity extends AppCompatActivity {
         } else {
             LayoutInflater.from(this).inflate(R.layout.no_available_rentables, contentFrame, true);
         }
+        registerForContextMenu(rentablesGrid);
+
+        rentablesGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object bike = parent.getItemAtPosition(position);
+                if (bike instanceof Rentable) {
+                    viewModel.setSelected((Rentable) bike);
+                }
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        updateAdapter();
+    }
 
+    private void updateAdapter() {
+        rentablesAdapter.updateBikeView(viewModel.getCurrentUserRentables());
     }
 
     @Override
@@ -87,6 +108,35 @@ public class MyRentablesActivity extends AppCompatActivity {
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        Rentable selected = rentablesAdapter.getItem(((AdapterView.AdapterContextMenuInfo)menuInfo).position);
+        viewModel.setSelected(selected);
+
+        if (v.getId()==R.id.myRentablesGrid) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.rentable_settings_menu, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()) {
+            case R.id.change_availibility:
+                Toast.makeText(this, viewModel.getSelected().getName() + " is available",
+                        Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.delete:
+                Toast.makeText(this, viewModel.getSelected().getName() + " was deleted",
+                        Toast.LENGTH_LONG).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 
