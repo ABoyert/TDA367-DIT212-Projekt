@@ -73,6 +73,10 @@ public class Repository {
         return getModelRentables();
     }
 
+    public void deleteRentable(Rentable rentable) {
+        rentableHandler.deleteRentable(rentable);
+    }
+
     public PayBike getPayBike(){
         return payBike;
     }

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomBikeAdAdapter;
 import tda367.paybike.model.Rentable;
+import tda367.paybike.repository.Repository;
 import tda367.paybike.viewmodels.MyRentablesViewModel;
 
 public class MyRentablesActivity extends AppCompatActivity {
@@ -29,12 +30,15 @@ public class MyRentablesActivity extends AppCompatActivity {
     private CustomBikeAdAdapter rentablesAdapter;
     private MyRentablesViewModel viewModel;
     private FrameLayout contentFrame;
+    private Repository r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_my_rentables);
+
+        r = new Repository();
 
         // Setup toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -132,8 +136,7 @@ public class MyRentablesActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 return true;
             case R.id.delete:
-                Toast.makeText(this, viewModel.getSelected().getName() + " was deleted",
-                        Toast.LENGTH_LONG).show();
+                r.deleteRentable(viewModel.getSelected());
                 return true;
             default:
                 return super.onContextItemSelected(item);

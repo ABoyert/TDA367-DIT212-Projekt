@@ -113,7 +113,6 @@ public class BikeFeedActivity extends AppCompatActivity
                 ((CustomBikeAdAdapter)bikeView.getAdapter()).updateBikeView(results);
                 return false;
             }
-
         });
     }
 
@@ -167,12 +166,12 @@ public class BikeFeedActivity extends AppCompatActivity
         startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
     }
 
-    //TODO Implement method
+    //TODO Implement method startViewRequestActivity()
     private void startViewRequestActivity() {
 
     }
 
-    //TODO Implement method
+    //TODO Implement method signOut()
     private void signOut() {
         viewModel.getRepository().signOut();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
