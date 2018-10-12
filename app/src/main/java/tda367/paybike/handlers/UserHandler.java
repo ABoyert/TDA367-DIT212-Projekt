@@ -80,4 +80,8 @@ public class UserHandler {
 
         return signUp;
     }
+
+    public void signOut() {
+        fAuth.signOut();
+    }
 }

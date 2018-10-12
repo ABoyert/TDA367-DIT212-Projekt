@@ -127,6 +127,10 @@ public class Repository {
         return true;
     }
 
+    public void signOut() {
+        userHandler.signOut();
+    }
+
 
     public void setCurrentUser(User currentUser){
         payBike.setCurrentUser(currentUser);

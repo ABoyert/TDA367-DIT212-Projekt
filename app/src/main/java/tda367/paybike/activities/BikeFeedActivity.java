@@ -174,7 +174,8 @@ public class BikeFeedActivity extends AppCompatActivity
 
     //TODO Implement method
     private void signOut() {
-
+        viewModel.getRepository().signOut();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
     private void updateAdapter() {

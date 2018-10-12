@@ -65,4 +65,7 @@ public class BikeViewModel extends ViewModel {
                 .collect(toCollection(ArrayList::new));
     }
 
+    public Repository getRepository() {
+        return r;
+    }
 }

@@ -60,7 +60,7 @@ public class RentableHandler {
     public List<Rentable> getAllRentables() {
         ArrayList<Rentable> rentablesList = new ArrayList<>();
 
-        /*for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
+        for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
             rentablesList.add(RentableFactory.createRentable("Bike",
                     (String) doc.get(NAME),
                     Double.parseDouble(doc.get(PRICE).toString()),
@@ -70,8 +70,8 @@ public class RentableHandler {
                     doc.get(IMAGE) == null ? null : Uri.parse(doc.get(IMAGE).toString()),
                     (String) doc.get(DESCRIPTION),
                     doc.getId()));
-        }*/
-        for(int i = 0; i < 10; i++) {
+        }
+        /*for(int i = 0; i < 10; i++) {
             rentablesList.add(RentableFactory.createRentable("Bike",
                     "Test" + i ,
                     i * 5,
@@ -81,7 +81,7 @@ public class RentableHandler {
                     null,
                     "Jättefin",
                     "24141" + i));
-        }
+        }*/
 
         return rentablesList;
     }
@@ -100,7 +100,6 @@ public class RentableHandler {
         bikeMap.put(AVAILABLE, rentable.isAvailable());
 
         db.add(BIKESCOLLECTION, bikeMap);
-
     }
 
     private Uri waitForTask(Task<Uri> task) {
@@ -116,16 +115,17 @@ public class RentableHandler {
     // Take a bike object and remove it from the database
     public void deleteRentable(Rentable rentable) {
         db.delete(BIKESCOLLECTION, rentable.getId());
-
     }
 
     public Rentable createRentableWithFactory(boolean withID, String type, String name, double price,
                                               String pos, boolean available, String owner,
                                               Uri imagelink, String description, String id){
 
-        if(withID == true)return factory.createRentable(type, name, price, pos, available, owner, imagelink, description,id);
+        if(withID)
+            return factory.createRentable(type, name, price, pos, available, owner, imagelink, description,id);
 
-        if(withID == false)return factory.createRentableNoID(type, name, price, pos, available, owner, imagelink, description);
+        if(!withID)
+            return factory.createRentableNoID(type, name, price, pos, available, owner, imagelink, description);
 
         return null;
     }
