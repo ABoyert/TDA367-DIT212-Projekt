@@ -31,4 +31,8 @@ public class RequestHandler {
 
         return currentRequests;
     }
+
+    public void add(Request request){
+
+    }
 }
