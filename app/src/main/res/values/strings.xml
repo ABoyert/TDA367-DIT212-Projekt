@@ -11,13 +11,20 @@
     <string name="rent_bike_btn">Rent this bike</string>
     <string name="search_hint">Seach for rentables...</string>
 
-    // String for activity_main.xml
+    // Strings used in main menu
+    <string name="view_all_bikes">Browse Bikes</string>
+    <string name="view_requests">View Requests</string>
+    <string name="add_new_bike">Add New Bike</string>
+    <string name="view_my_bikes">My Bikes</string>
+    <string name="sign_out">Sign Out</string>
+
+    // Strings used in  activity_main.xml
     <string name="find_bike_btn_text">Find a bike</string>
     <string name="email_text">E-mail address</string>
     <string name="password_text">Password</string>
     <string name="register_user"><u>Register new user</u></string>
 
-    // Strings for activity_add_bike.xml
+    // Strings used in activity_add_bike.xml
     <string name="add_bike_instruction">Information about your bike </string>
     <string name="name_text">Title</string>
     <string name="name_hint">Mountainbike with Green Stripes</string>
@@ -29,7 +36,7 @@
     <string name="price_hint">9</string>
     <string name="post_bike_btn">Post bike</string>
 
-    // Strings for fragment_register_user.xml
+    // Strings used in fragment_register_user.xml
     <string name="register_user_text">Register New User</string>
     <string name="user_name">Name</string>
     <string name="repeat_password">Repeat Password</string>
