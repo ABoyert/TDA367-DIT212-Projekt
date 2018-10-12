@@ -12,7 +12,7 @@ import android.support.annotation.NonNull;
 final public class User {
 
     @NonNull
-    final private String email, password, name;
+    final private String email, password, name, userID;
 
     private void checkEmail(String email) throws IllegalArgumentException {
         if (!email.contains("@")) {
@@ -26,12 +26,13 @@ final public class User {
         }
     }
 
-    public User(String email, String password, String name) {
+    public User(String email, String password, String name, String userID) {
         checkEmail(email);
         checkPassword(password);
         this.name = name;
         this.email = email;
         this.password = password;
+        this.userID = userID;
     }
 
     @NonNull
@@ -49,4 +50,8 @@ final public class User {
         return name;
     }
 
+    @NonNull
+    public String getUserID() {
+        return userID;
+    }
 }
