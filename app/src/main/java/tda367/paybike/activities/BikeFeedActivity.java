@@ -61,6 +61,7 @@ public class BikeFeedActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_bike_feed);
 
         // Setup toolbar
@@ -120,7 +121,7 @@ public class BikeFeedActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        bikeAdapter.updateBikeView(viewModel.getAvailableRentables());
+        updateAdapter();
     }
 
     @Override
@@ -144,6 +145,7 @@ public class BikeFeedActivity extends AppCompatActivity
                 startAddBikeActivity();
                 return true;
             case R.id.view_my_bikes:
+                startMyRentablesActivity();
                 return true;
             case R.id.view_requests:
                 startViewRequestActivity();
@@ -157,17 +159,12 @@ public class BikeFeedActivity extends AppCompatActivity
         }
     }
 
-    private void viewBikeDetails(Rentable rentable) {
-        RentableDetailsFragment bikeDetails = RentableDetailsFragment.newInstance(rentable);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
-        transaction.addToBackStack(null);
-        transaction.add(R.id.fragment_frame, bikeDetails, "BIKE_DETAILS_FRAGMENT").commit();
-    }
-
     private void startAddBikeActivity() {
         startActivity(new Intent(getApplicationContext(), AddBikeActivity.class));
+    }
+
+    private void startMyRentablesActivity() {
+        startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
     }
 
     //TODO Implement method
@@ -179,5 +176,19 @@ public class BikeFeedActivity extends AppCompatActivity
     private void signOut() {
 
     }
+
+    private void updateAdapter() {
+        bikeAdapter.updateBikeView(viewModel.getAvailableRentables());
+    }
+
+    private void viewBikeDetails(Rentable rentable) {
+        RentableDetailsFragment bikeDetails = RentableDetailsFragment.newInstance(rentable);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.fragment_frame, bikeDetails, "BIKE_DETAILS_FRAGMENT").commit();
+    }
+
 
 }

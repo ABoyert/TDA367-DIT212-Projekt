@@ -18,7 +18,7 @@
     <string name="view_my_bikes">My Bikes</string>
     <string name="sign_out">Sign Out</string>
 
-    // Strings used in  activity_main.xml
+    // Strings used in activity_main.xml
     <string name="find_bike_btn_text">Find a bike</string>
     <string name="email_text">E-mail address</string>
     <string name="password_text">Password</string>
@@ -41,5 +41,8 @@
     <string name="user_name">Name</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="register_btn">Register</string>
+
+    // String used in no_available_rentables.xml
+    <string name="no_bikes">You do not have any registered bikes yet. Use the menu to add one!</string>
 
 </resources>

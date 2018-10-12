@@ -37,7 +37,6 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
     private TextView city, name, price;
 
     private List<Rentable> rentables;
-    private Filter bikeFilter;
     private Context context;
 
     public CustomBikeAdAdapter(@NonNull Context context, int layout, @NonNull List<Rentable> rentables) {
@@ -97,5 +96,4 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
         rentables.addAll(newList);
         notifyDataSetChanged();
     }
-
 }
