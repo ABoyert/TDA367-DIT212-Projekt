@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
     android:background="@android:color/white"
     android:orientation="horizontal"
     android:padding="8dp">
@@ -11,8 +12,6 @@
         android:id="@+id/bikeImage"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginRight="8dp"
         android:layout_weight="1"
         android:contentDescription="@string/bike_image"
         android:scaleType="centerCrop"
@@ -21,6 +20,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -33,7 +33,7 @@
             android:text="@string/bike_placeholder_city"
             android:textAllCaps="true"
             android:textColor="@color/colorBrown"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/bikeName"
@@ -43,7 +43,7 @@
             android:fontFamily="@font/opensans_semibold"
             android:maxLines="1"
             android:text="@string/bike_placeholder_name"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/price"

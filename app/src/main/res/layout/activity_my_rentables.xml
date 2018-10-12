@@ -69,7 +69,9 @@
             android:fontFamily="@font/opensans_semibold"
             android:gravity="center_vertical"
             android:text="@string/user_name"
-            android:textSize="24sp" />
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -109,7 +111,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:text="All Listings"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <GridView
@@ -121,8 +123,8 @@
             android:numColumns="1"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:scrollbarStyle="outsideInset"
-            android:verticalSpacing="16dp" />
+            android:paddingTop="16dp"
+            android:scrollbarStyle="outsideInset" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
