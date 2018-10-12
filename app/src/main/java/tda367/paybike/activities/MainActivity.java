@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements
     private Button findBikeBtn;
     private EditText userEmail, userPassword;
 
-    MainViewModel mvm;
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         findBikeBtn.setOnClickListener(v -> {
-            mvm = new MainViewModel();
+            viewModel = new MainViewModel();
             userEmail = (EditText) findViewById(R.id.userEmail);
             userPassword = (EditText) findViewById(R.id.userPassword);
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements
             if (userEmailValue.length() != 0 && userPasswordValue.length() != 0){
                 signIn(userEmailValue, userPasswordValue);
             } else {
-                Toast.makeText(MainActivity.this, mvm.getWarning(userEmailValue, userPasswordValue),
+                Toast.makeText(MainActivity.this, viewModel.getWarning(userEmailValue, userPasswordValue),
                         Toast.LENGTH_LONG).show();
             }
         });

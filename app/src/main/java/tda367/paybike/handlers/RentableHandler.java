@@ -60,7 +60,7 @@ public class RentableHandler {
     public List<Rentable> getAllRentables() {
         ArrayList<Rentable> rentablesList = new ArrayList<>();
 
-        for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
+        /*for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
             rentablesList.add(RentableFactory.createRentable("Bike",
                     (String) doc.get(NAME),
                     Double.parseDouble(doc.get(PRICE).toString()),
@@ -70,18 +70,18 @@ public class RentableHandler {
                     doc.get(IMAGE) == null ? null : Uri.parse(doc.get(IMAGE).toString()),
                     (String) doc.get(DESCRIPTION),
                     doc.getId()));
-        }
-        /*for(int i = 0; i < 10; i++) {
+        }*/
+        for(int i = 0; i < 10; i++) {
             rentablesList.add(RentableFactory.createRentable("Bike",
                     "Test" + i ,
                     i * 5,
                     "Testgatan",
                     true,
                     "Kalle",
-                    "img",
+                    null,
                     "Jättefin",
                     "24141" + i));
-        }*/
+        }
 
         return rentablesList;
     }

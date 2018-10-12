@@ -91,11 +91,12 @@ public class Repository {
     }
 
     public void newRentableNoID(boolean withID, String type, String name, double price, String position,
-                            boolean available, String owner, Uri imageLink,
+                            boolean available, Uri imageLink,
                             String description){
 
+        // TODO change owner argument to respons from userHandler.getCurrentUser().getId()
         Rentable newRentable = RentableFactory.createRentableNoID(type, name, price,
-                position, available, owner,
+                position, available, "owner",
                 imageLink, description);
 
         rentableHandler.addRentable(newRentable);
@@ -125,6 +126,7 @@ public class Repository {
         // TODO: Now always returns true, should return false if sign up fails!
         return true;
     }
+
 
     public void setCurrentUser(User currentUser){
         payBike.setCurrentUser(currentUser);

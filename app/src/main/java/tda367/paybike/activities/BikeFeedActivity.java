@@ -2,13 +2,17 @@ package tda367.paybike.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -57,12 +61,16 @@ public class BikeFeedActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_bike_feed);
 
         // Setup toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+
+        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.sharp_menu_white_18dp);
+        toolbar.setOverflowIcon(drawable);
 
         bikeDetailsContainer = (FrameLayout) findViewById(R.id.fragment_frame);
 
@@ -107,20 +115,69 @@ public class BikeFeedActivity extends AppCompatActivity
             }
 
         });
-
-        addBikeBtn = (ImageButton) findViewById(R.id.addBikeBtn);
-        addBikeBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), AddBikeActivity.class));
-            }
-        });
     }
 
     // Load all bikes from db when activity is resumed
     @Override
     protected void onResume() {
         super.onResume();
+        updateAdapter();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu, this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.view_all_bikes:
+                return true;
+            case R.id.add_bike:
+                startAddBikeActivity();
+                return true;
+            case R.id.view_my_bikes:
+                startMyRentablesActivity();
+                return true;
+            case R.id.view_requests:
+                startViewRequestActivity();
+                return true;
+            case R.id.sign_out:
+                signOut();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void startAddBikeActivity() {
+        startActivity(new Intent(getApplicationContext(), AddBikeActivity.class));
+    }
+
+    private void startMyRentablesActivity() {
+        startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
+    }
+
+    //TODO Implement method
+    private void startViewRequestActivity() {
+
+    }
+
+    //TODO Implement method
+    private void signOut() {
+
+    }
+
+    private void updateAdapter() {
         bikeAdapter.updateBikeView(viewModel.getAvailableRentables());
     }
 
@@ -133,8 +190,5 @@ public class BikeFeedActivity extends AppCompatActivity
         transaction.add(R.id.fragment_frame, bikeDetails, "BIKE_DETAILS_FRAGMENT").commit();
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
 
-    }
 }

@@ -20,20 +20,18 @@ public class AddBikeViewModel extends ViewModel {
     private static final String NO_DESCRIPTION = "Please tell us something about your bike in the description. ";
     private static final String INVALID_PRICE = "Price cannot exceed $" + MAX_PRICE + ". ";
     private static final String NO_PRICE = "You have to set at price. ";
+    private static final String NO_PICTURE_SELECTED = "Pick an image to show your bike. ";
 
-    private String bikeName, bikeDescription, bikePosition, bikePrice, warningMessage;
+    private String bikeName, bikeDescription, bikePosition, bikePrice;
     private Uri bikeImagePath;
-    private boolean warning;
-    private Repository c;
+    private Repository r;
 
     public AddBikeViewModel() {
-        c = new Repository();
-        warning = false;
+        r = new Repository();
         bikeName = "";
         bikeDescription = "";
         bikePosition = "";
         bikePrice = "";
-        warningMessage = "";
         bikeImagePath = null;
     }
 
@@ -70,14 +68,6 @@ public class AddBikeViewModel extends ViewModel {
         this.bikePrice = bikePrice;
     }
 
-    public String getWarningMessage() {
-        return warningMessage;
-    }
-
-    public void setWarningMessage(String warningMessage) {
-        this.warningMessage = warningMessage;
-    }
-
     public Uri getBikeImagePath() {
         return bikeImagePath;
     }
@@ -86,69 +76,52 @@ public class AddBikeViewModel extends ViewModel {
         this.bikeImagePath = bikeImagePath;
     }
 
-    public boolean warningIsShown() {
-        return warning;
-    }
-
-    public void showWarning(boolean status) {
-        this.warning = status;
-    }
-
     // Checks if provided name/title is valid
-    private boolean nameIsValid() {
-        return bikeName != "" && bikeName.length() < MAX_TITLE_LENGTH ? true : false;
+    public boolean nameIsValid() {
+        return bikeName.length() > 0 && bikeName.length() < MAX_TITLE_LENGTH ? true : false;
     }
 
-    private boolean positionIsValid() {
+    public boolean positionIsValid() {
         //TODO Write method to check this
         return true;
     }
 
     // Checks if provided price is valid
-    private boolean priceIsValid() {
-        return bikePrice != "" && Double.parseDouble(bikePrice) < MAX_PRICE ? true : false;
+    public boolean priceIsValid() {
+        return bikePrice.length() > 0 && Double.parseDouble(bikePrice) < MAX_PRICE ? true : false;
     }
 
     // Checks if provided description is valid
-    private boolean descriptionIsValid() {
-        return bikePrice != "" && bikeDescription.length() < MAX_DESCRIPTION_LENGTH ? true : false;
+    public boolean descriptionIsValid() {
+        return bikeDescription.length() > 0 && bikeDescription.length() < MAX_DESCRIPTION_LENGTH ? true : false;
+    }
+
+    public boolean imageIsSelected() {
+        return getBikeImagePath() != null ? true : false;
     }
 
     public boolean inputIsValid() {
         return nameIsValid() &&
                 descriptionIsValid() &&
                 priceIsValid() &&
-                positionIsValid();
-    }
-
-    // Method that generates warning messages when user input is incorrect
-    public String getWarning() {
-        String warningMessage = "";
-            if (!nameIsValid()) {
-                warningMessage += (bikeName != "") ? INVALID_NAME : NO_NAME;
-            }
-            if (!positionIsValid()) {
-                warningMessage += (bikePosition != "") ? INVALID_POSITION : NO_POSITION;
-            }
-            if (!descriptionIsValid()) {
-                warningMessage += (bikeDescription != "") ? INVALID_DESCRIPTION : NO_DESCRIPTION;
-            }
-            if (!priceIsValid()) {
-                warningMessage += (bikePrice != "") ? INVALID_PRICE : NO_PRICE;
-            }
-
-        return warningMessage;
+                positionIsValid() &&
+                imageIsSelected();
     }
 
     // TODO Complete method once we have the image feature and users
     public void postBike() {
 
-        c.newRentableNoID(false,"Bike", bikeName, Double.parseDouble(bikePrice),
-                bikePosition, true, "owner",
-                bikeImagePath, bikeDescription);
+        r.newRentableNoID(false,"Bike", bikeName, Double.parseDouble(bikePrice),
+                bikePosition, true, bikeImagePath, bikeDescription);
     }
 
-
+    public void clearAll() {
+        bikeName = "";
+        bikeDescription = "";
+        bikePosition = "";
+        bikePrice = "";
+        bikeImagePath = null;
+    }
 
 }
 

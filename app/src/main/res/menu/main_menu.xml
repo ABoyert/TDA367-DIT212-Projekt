@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/view_all_bikes"
+        android:icon="@drawable/common_google_signin_btn_icon_dark"
+        android:title="@string/view_all_bikes"/>
+    <item
+        android:id="@+id/view_requests"
+        android:icon="@android:drawable/ic_lock_silent_mode"
+        android:title="@string/view_requests" />
+    <item android:id="@+id/view_my_bikes"
+        android:icon="@drawable/common_google_signin_btn_icon_dark"
+        android:title="@string/view_my_bikes" />
+    <item android:id="@+id/add_bike"
+        android:icon="@drawable/common_google_signin_btn_icon_dark"
+        android:title="@string/add_new_bike" />
+    <item android:id="@+id/sign_out"
+        android:icon="@drawable/common_google_signin_btn_icon_dark"
+        android:title="@string/sign_out" />
+</menu>

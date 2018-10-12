@@ -16,11 +16,13 @@
             android:id="@+id/bikeImage"
             android:layout_width="0dp"
             android:layout_height="260dp"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/bike_image"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/skeppshult_bike" />
+            app:srcCompat="@mipmap/add_photo" />
 
 
         <TextView

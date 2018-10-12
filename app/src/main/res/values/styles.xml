@@ -13,6 +13,13 @@
         <item name="android:fontFamily">@font/opensans_regular</item>
     </style>
 
+    <style name="ThemeOverlay.Menu" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -26,6 +33,7 @@
         <item name="android:textColor">@color/colorAccentGreen</item>
         <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:textSize">24dp</item>
+        <item name="android:popupTheme">@style/ThemeOverlay.Menu</item>
     </style>
 
     <style name="ButtonTheme" parent="ThemeOverlay.AppCompat.Light">

@@ -1,10 +1,13 @@
 package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import tda367.paybike.R;
+import tda367.paybike.adapters.CustomBikeAdAdapter;
 import tda367.paybike.repository.Repository;
 import tda367.paybike.model.Rentable;
 
@@ -20,10 +23,10 @@ public class BikeViewModel extends ViewModel {
 
     private List<Rentable> availableRentables;
     private Rentable selected;
-    private Repository c;
+    private Repository r;
 
     public BikeViewModel() {
-        c = new Repository();
+        r = new Repository();
     }
 
     public void setAvailableRentables(List<Rentable> availableRentables) {
@@ -46,7 +49,7 @@ public class BikeViewModel extends ViewModel {
     // Fetches and returns all Bike Objects from the PayBike which are marked as "available"
 
     public List<Rentable> getModelRentables() {
-        return c.updateAndGetRentables().stream()
+        return r.updateAndGetRentables().stream()
                 .filter(bike -> bike.isAvailable())
                 .collect(toCollection(ArrayList::new));
     }
@@ -55,11 +58,10 @@ public class BikeViewModel extends ViewModel {
         setAvailableRentables(getModelRentables());
     }
 
-    //TODO Update method to filter correct attributes
-
     public ArrayList<Rentable> getSearchResult(String searchText) {
         return getAvailableRentables().stream()
-                .filter(bike -> bike.getName().toLowerCase().contains(searchText.toLowerCase()) || bike.getPosition().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(bike -> bike.getName().toLowerCase().contains(searchText.toLowerCase())
+                        || bike.getPosition().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(toCollection(ArrayList::new));
     }
 
