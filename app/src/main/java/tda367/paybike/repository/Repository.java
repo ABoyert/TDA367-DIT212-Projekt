@@ -20,6 +20,8 @@ import tda367.paybike.model.RentableFactory;
 import tda367.paybike.model.Request;
 import tda367.paybike.model.User;
 
+import static tda367.paybike.model.PayBike.getCurrentUser;
+
 public class Repository {
 
     /*
@@ -128,9 +130,14 @@ public class Repository {
         payBike.setCurrentUser(currentUser);
     }
 
-    public void getCurrentUser(){
-        payBike.getCurrentUser();
-    }
+    /*public void getCurrentUser(){
+        PayBike.getCurrentUser();
+    }*/
 
+    public void createNewRequest(Rentable requested){
+        Request request = new Request(requested.getOwner(), getCurrentUser().getUserID(), requested.getId());
+        requestHandler.add(request);
+        updateModelRequests();
+    }
 
 }
