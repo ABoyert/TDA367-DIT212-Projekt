@@ -62,7 +62,7 @@ public class RequestHandler {
                         doc.get(SENDER).toString(),
                         doc.get(RENTABLEID).toString(),
                         LocalDateTime.parse(doc.get(FROM_DATE_TIME).toString()),
-                        LocalDateTime.parse(doc.get(TO_DATE_TIME).toString()));
+                        LocalDateTime.parse(doc.get(TO_DATE_TIME).toString())));
             }
         }
 
@@ -76,7 +76,7 @@ public class RequestHandler {
         requestMap.put(SENDER, request.getSendingUserId());
         requestMap.put(RENTABLEID, request.getTargetRentableId());
         requestMap.put(ACCEPTED, request.isAccepted());
-        requestMap.put(FROM_DATE_TIME, request.getFromDateTime();
+        requestMap.put(FROM_DATE_TIME, request.getFromDateTime()); 
         requestMap.put(TO_DATE_TIME, request.getToDateTime());
 
         db.add(REQUESTSCOLLECTION, requestMap);
