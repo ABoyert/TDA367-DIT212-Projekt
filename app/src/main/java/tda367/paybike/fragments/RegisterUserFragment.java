@@ -42,9 +42,8 @@ public class RegisterUserFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private MainViewModel viewModel;
 
-    public RegisterUserFragment() {
-        // Required empty public constructor
-    }
+    // Required empty public constructor
+    public RegisterUserFragment() { }
 
     public static RegisterUserFragment newInstance() {
         RegisterUserFragment fragment = new RegisterUserFragment();
@@ -56,9 +55,6 @@ public class RegisterUserFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
-
-        /*if (getArguments() != null) {
-        }*/
     }
 
     @Override
@@ -67,7 +63,7 @@ public class RegisterUserFragment extends Fragment {
 
         View registerUserView = inflater.inflate(R.layout.fragment_register_user, container, false);
 
-        userName = (EditText) registerUserView.findViewById(R.id.userName);
+        userName = registerUserView.findViewById(R.id.userName);
         userName.setText(viewModel.getName());
         userName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,7 +83,7 @@ public class RegisterUserFragment extends Fragment {
             }
         });
 
-        userEmail = (EditText) registerUserView.findViewById(R.id.userEmail);
+        userEmail = registerUserView.findViewById(R.id.userEmail);
         userEmail.setText(viewModel.getEmail());
         userEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -107,7 +103,7 @@ public class RegisterUserFragment extends Fragment {
             }
         });
 
-        userPassword = (EditText) registerUserView.findViewById(R.id.userPassword);
+        userPassword = registerUserView.findViewById(R.id.userPassword);
         userPassword.setText(viewModel.getPassword());
         userPassword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -126,7 +122,7 @@ public class RegisterUserFragment extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
-        userRepeatedPassword = (EditText) registerUserView.findViewById(R.id.userRepeatedPassword);
+        userRepeatedPassword = registerUserView.findViewById(R.id.userRepeatedPassword);
         userRepeatedPassword.setText(viewModel.getRepeatedPassword());
         userRepeatedPassword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -146,45 +142,39 @@ public class RegisterUserFragment extends Fragment {
             }
         });
 
-
-        registerBtn = (Button) registerUserView.findViewById(R.id.registerUserBtn);
+        registerBtn = registerUserView.findViewById(R.id.registerUserBtn);
         registerBtn.setEnabled(false);
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (viewModel.createUser()) {
-                    getFragmentManager().popBackStack();
-                } else {
-                    Toast.makeText(getActivity(),
-                            "Unable to register user at the moment. Please try again later.",
-                            Toast.LENGTH_SHORT)
-                            .show();
-                }
-            }
-        });
+        registerBtn.setOnClickListener(v -> onButtonPressed());
 
         return registerUserView;
     }
-/*
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }*/
 
-    /**
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof RegisterUserFragment.OnFragmentInteractionListener) {
+            mListener = (RegisterUserFragment.OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    public void onButtonPressed() {
+        if (mListener != null) {
+            mListener.onUserRegistration();
+        }
+    }
+
+    /*
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onUserRegistration();
     }
 
     private void setBackgroundTintListColor(boolean valid, EditText editText) {

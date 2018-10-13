@@ -6,11 +6,13 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomBikeAdAdapter;
 import tda367.paybike.fragments.RentableDetailsFragment;
+import tda367.paybike.fragments.SendRequestFragment;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.viewmodels.BikeViewModel;
 
@@ -38,30 +41,23 @@ import static android.widget.AdapterView.*;
  */
 
 public class BikeFeedActivity extends AppCompatActivity
-        implements RentableDetailsFragment.OnFragmentInteractionListener {
+        implements RentableDetailsFragment.OnFragmentInteractionListener,
+                   SendRequestFragment.OnFragmentInteractionListener {
 
-    @NonNull
-    private static BikeViewModel viewModel;
+    private static final int DETAILS_FRAGMENT = 1;
+    private static final int REQUEST_FRAGMENT = 2;
+    private static final String TAG = BikeFeedActivity.class.getSimpleName();
 
-    @NonNull
     private static GridView bikeView;
-
-    @NonNull
     private static SearchView searchBikes;
-
-    @NonNull
-    private static CustomBikeAdAdapter bikeAdapter;
-
-    @NonNull
     private static FrameLayout bikeDetailsContainer;
 
-    @NonNull
-    private ImageButton addBikeBtn;
+    private static BikeViewModel viewModel;
+    private static CustomBikeAdAdapter bikeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_bike_feed);
 
         // Setup toolbar
@@ -69,15 +65,13 @@ public class BikeFeedActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
+        // Setup menu
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.sharp_menu_white_18dp);
         toolbar.setOverflowIcon(drawable);
 
+        // Locate visual components
         bikeDetailsContainer = (FrameLayout) findViewById(R.id.fragment_frame);
-
-        // Load ViewModel
         viewModel = ViewModelProviders.of(this).get(BikeViewModel.class);
-
-        // Locate the search view
         searchBikes = (SearchView) findViewById(R.id.searchBike);
 
         // Configure the grid of available bikes
@@ -94,14 +88,13 @@ public class BikeFeedActivity extends AppCompatActivity
                 Object bike = parent.getItemAtPosition(position);
                 if (bike instanceof Rentable) {
                     viewModel.select((Rentable) bike);
-                    viewBikeDetails((Rentable) bike);
+                    viewFragment((Rentable) bike, DETAILS_FRAGMENT);
                 }
             }
         });
 
         // Handle search events
         searchBikes.setOnQueryTextListener(new OnQueryTextListener() {
-
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -116,6 +109,7 @@ public class BikeFeedActivity extends AppCompatActivity
         });
     }
 
+    // TODO, check if this also updates the model, it should
     // Load all bikes from db when activity is resumed
     @Override
     protected void onResume() {
@@ -123,10 +117,50 @@ public class BikeFeedActivity extends AppCompatActivity
         updateAdapter();
     }
 
+    // Called when user clicks Request in RentableDetailsFragment
+    // Responds by viewing SendRequestFragment
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onMakeRequest(Rentable rentable) {
+        getFragmentManager().popBackStack();
+        viewFragment(rentable, REQUEST_FRAGMENT);
     }
 
+    @Override
+    public void onSendRequest(Rentable rentable) {
+
+    }
+
+    private void updateAdapter() {
+        bikeAdapter.updateBikeView(viewModel.getAvailableRentables());
+    }
+
+    private void viewFragment(Rentable rentable, int f) {
+        if (f == DETAILS_FRAGMENT || f == REQUEST_FRAGMENT) {
+            Fragment fragment;
+            String fragmentString;
+            if (f == DETAILS_FRAGMENT) {
+                fragment = RentableDetailsFragment.newInstance(rentable);
+                fragmentString = "DETAILS_FRAGMENT";
+                Log.d(TAG, "Showing BikeDetailsFragment.");
+
+            } else {
+                fragment = SendRequestFragment.newInstance(rentable);
+                fragmentString = "REQUEST_FRAGMENT";
+                Log.d(TAG, "Showing SendRequestFragment.");
+            }
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                    R.anim.enter_from_right, R.anim.exit_to_right);
+            transaction.addToBackStack(null);
+            transaction.add(R.id.fragment_frame, fragment, fragmentString).commit();
+        }
+        else {
+            Log.e(TAG, "Given fragment doesn't exist. No action taken.");
+        }
+    }
+
+    // Methods that handles the toolbar menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu, this adds items to the action bar if it is present.
@@ -176,19 +210,5 @@ public class BikeFeedActivity extends AppCompatActivity
         viewModel.getRepository().signOut();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
-
-    private void updateAdapter() {
-        bikeAdapter.updateBikeView(viewModel.getAvailableRentables());
-    }
-
-    private void viewBikeDetails(Rentable rentable) {
-        RentableDetailsFragment bikeDetails = RentableDetailsFragment.newInstance(rentable);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
-        transaction.addToBackStack(null);
-        transaction.add(R.id.fragment_frame, bikeDetails, "BIKE_DETAILS_FRAGMENT").commit();
-    }
-
 
 }

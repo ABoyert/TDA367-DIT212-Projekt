@@ -1,5 +1,7 @@
 package tda367.paybike.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,18 +32,6 @@ import tda367.paybike.model.Rentable;
  */
 public class RentableDetailsFragment extends Fragment {
 
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String NAME = "name";
-    private static final String POSITION = "position";
-    private static final String DESCRIPTION = "description";
-    private static final String PRICE = "price";
-
-  /*  private String name,
-            position,
-            description;
-
-    private double price; */
-
     private TextView rentableName,
             rentableDescription,
             rentablePosition,
@@ -48,35 +39,24 @@ public class RentableDetailsFragment extends Fragment {
 
     private ImageView rentableImage;
 
+    private Button rentBikeBtn;
+
     private static Rentable rentable;
 
     private OnFragmentInteractionListener mListener;
 
-    public RentableDetailsFragment() {
-        // Required empty public constructor
-    }
+    // Required empty public constructor
+    public RentableDetailsFragment() { }
 
     public static RentableDetailsFragment newInstance(Rentable r) {
         RentableDetailsFragment fragment = new RentableDetailsFragment();
         rentable = r;
-        /* Bundle args = new Bundle();
-        args.putString(NAME, rentable.getName());
-        args.putString(POSITION, rentable.getPosition());
-        args.putString(DESCRIPTION, rentable.getDescription());
-        args.putDouble(PRICE, rentable.getPrice());
-        args.put
-        fragment.setArguments(args); */
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       /* if (getArguments() != null) {
-            name = getArguments().getString(NAME);
-            position = getArguments().getString(POSITION);
-            description = getArguments().getString(DESCRIPTION);
-            price = getArguments().getDouble(PRICE); */
     }
 
     @Override
@@ -94,30 +74,38 @@ public class RentableDetailsFragment extends Fragment {
         rentablePrice = (TextView) rentableDetailsView.findViewById(R.id.bikePrice);
         rentablePrice.setText(formatPrice(rentable.getPrice()));
         rentableImage = (ImageView) rentableDetailsView.findViewById(R.id.bikeImage);
+        rentBikeBtn = (Button) rentableDetailsView.findViewById(R.id.rentBikeBtn);
+        rentBikeBtn.setOnClickListener(v -> onButtonPressed());
+
         setImageIfPresent(rentable);
 
         return rentableDetailsView;
     }
 
-    /**
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof RentableDetailsFragment.OnFragmentInteractionListener) {
+            mListener = (RentableDetailsFragment.OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    /*
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onMakeRequest(Rentable rentable);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event, this is method for send request
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed() {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onMakeRequest(rentable);
         }
     }
 
