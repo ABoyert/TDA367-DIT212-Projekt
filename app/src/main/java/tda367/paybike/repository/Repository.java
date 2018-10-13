@@ -9,6 +9,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import tda367.paybike.handlers.RentableHandler;
@@ -144,8 +145,8 @@ public class Repository {
         PayBike.getCurrentUser();
     }*/
 
-    public void createNewRequest(Rentable requested){
-        Request request = new Request(requested.getOwner(), getCurrentUser().getUserID(), requested.getId());
+    public void createNewRequest(Rentable requested, LocalDateTime fromDateTime, LocalDateTime toDateTime){
+        Request request = new Request(getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime);
         requestHandler.add(request);
         updateModelRequests();
     }

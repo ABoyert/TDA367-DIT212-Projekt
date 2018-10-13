@@ -12,16 +12,6 @@ public class AddBikeViewModel extends ViewModel {
     private static final int MAX_DESCRIPTION_LENGTH = 1000;
     private static final int MAX_TITLE_LENGTH = 50;
 
-    private static final String INVALID_NAME = "Bike title cannot exceed " + MAX_TITLE_LENGTH + " characters. ";
-    private static final String NO_NAME = "You have to set a title of the bike object. ";
-    private static final String INVALID_POSITION = "Invalid address format. ";
-    private static final String NO_POSITION = "You need to state where the bike is located so other users to find it. ";
-    private static final String INVALID_DESCRIPTION = "Description cannot exceed " + MAX_DESCRIPTION_LENGTH + " characters. ";
-    private static final String NO_DESCRIPTION = "Please tell us something about your bike in the description. ";
-    private static final String INVALID_PRICE = "Price cannot exceed $" + MAX_PRICE + ". ";
-    private static final String NO_PRICE = "You have to set at price. ";
-    private static final String NO_PICTURE_SELECTED = "Pick an image to show your bike. ";
-
     private String bikeName, bikeDescription, bikePosition, bikePrice;
     private Uri bikeImagePath;
     private Repository r;
@@ -78,7 +68,7 @@ public class AddBikeViewModel extends ViewModel {
 
     // Checks if provided name/title is valid
     public boolean nameIsValid() {
-        return bikeName.length() > 0 && bikeName.length() < MAX_TITLE_LENGTH ? true : false;
+        return bikeName.length() > 0 && bikeName.length() < MAX_TITLE_LENGTH;
     }
 
     public boolean positionIsValid() {
@@ -88,16 +78,16 @@ public class AddBikeViewModel extends ViewModel {
 
     // Checks if provided price is valid
     public boolean priceIsValid() {
-        return bikePrice.length() > 0 && Double.parseDouble(bikePrice) < MAX_PRICE ? true : false;
+        return bikePrice.length() > 0 && Double.parseDouble(bikePrice) < MAX_PRICE;
     }
 
     // Checks if provided description is valid
     public boolean descriptionIsValid() {
-        return bikeDescription.length() > 0 && bikeDescription.length() < MAX_DESCRIPTION_LENGTH ? true : false;
+        return bikeDescription.length() > 0 && bikeDescription.length() < MAX_DESCRIPTION_LENGTH;
     }
 
     public boolean imageIsSelected() {
-        return getBikeImagePath() != null ? true : false;
+        return getBikeImagePath() != null;
     }
 
     public boolean inputIsValid() {

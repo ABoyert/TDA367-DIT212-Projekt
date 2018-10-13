@@ -1,6 +1,5 @@
 package tda367.paybike.model;
 
-import android.media.audiofx.AudioEffect;
 import android.net.Uri;
 
 import java.util.Objects;

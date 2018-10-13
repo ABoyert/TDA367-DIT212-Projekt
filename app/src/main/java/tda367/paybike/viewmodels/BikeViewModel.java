@@ -3,6 +3,8 @@ package tda367.paybike.viewmodels;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +27,43 @@ public class BikeViewModel extends ViewModel {
     private Rentable selected;
     private Repository r;
 
+    private LocalDate fromDate, toDate;
+    private LocalTime fromTime, toTime;
+
     public BikeViewModel() {
         r = new Repository();
+    }
+
+    public void setFromDate(LocalDate date) {
+        fromDate = date;
+    }
+
+    public LocalDate getFromDate() {
+        return fromDate;
+    }
+
+    public void setToDate(LocalDate date) {
+        toDate = date;
+    }
+
+    public LocalDate getToDate() {
+        return toDate;
+    }
+
+    public void setFromTime(LocalTime time) {
+        fromTime = time;
+    }
+
+    public LocalTime getFromTime() {
+        return fromTime;
+    }
+
+    public void setToTime(LocalTime time) {
+        toTime = time;
+    }
+
+    public LocalTime getToTime() {
+        return toTime;
     }
 
     public void setAvailableRentables(List<Rentable> availableRentables) {
