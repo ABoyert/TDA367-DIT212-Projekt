@@ -33,15 +33,18 @@ public class RequestTest {
     public void addRequest() {
         Request request = new Request("Julia", "Bike",
                 LocalDateTime.of(2020, 1, 4, 10, 10),
-                LocalDateTime.of(2020, 1, 4, 12, 30));
+                LocalDateTime.of(2020, 1, 5, 12, 30));
         assertNotNull(request);
     }
 
     @Test
     public void equals() {
         Request r1 = new Request("Julia", "Bike",
-                LocalDateTime.of(2018, 6, 5, 22, 30),
-                LocalDateTime.of(2018, 6,5,23,0));
-        assertTrue(r1.equals(r1));
+                LocalDateTime.of(2020, 6, 5, 22, 30),
+                LocalDateTime.of(2020, 6,5,23,0));
+        Request r2 = new Request("Julia", "Bike",
+                LocalDateTime.of(2020, 6, 5, 22, 30),
+                LocalDateTime.of(2020, 6,5,23,0));
+        assertTrue(r1.equals(r2));
     }
 }

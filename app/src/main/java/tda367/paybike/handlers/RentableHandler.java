@@ -73,7 +73,7 @@ public class RentableHandler {
                     doc.get(IMAGE) == null ? null : Uri.parse(doc.get(IMAGE).toString()),
                     (String) doc.get(DESCRIPTION),
                     doc.getId()));
-        }*/
+        } /*
         for(int i = 0; i < 10; i++) {
             rentablesList.add(RentableFactory.createRentable("Bike",
                     "Test" + i ,
@@ -84,7 +84,7 @@ public class RentableHandler {
                     null,
                     "Jättefin",
                     "24141" + i));
-        }
+        }*/
 
         return rentablesList;
     }

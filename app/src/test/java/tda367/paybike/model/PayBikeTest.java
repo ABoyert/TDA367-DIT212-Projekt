@@ -17,7 +17,7 @@ public class PayBikeTest {
         User targetUser = new User("test@t.com", "123", "Testare", "1");
         Uri image = Uri.parse("Image");
         Rentable testRentable = RentableFactory.createRentableNoID("Bike", "Cykeltest", 25.00, "Testland", true, targetUser.getUserID(), image, "En test");
-        payBike.addRequest(currentUser, testRentable, LocalDateTime.now(), LocalDateTime.now());
+        payBike.addRequest(currentUser, testRentable, LocalDateTime.now(), LocalDateTime.of(2020, 12, 24, 12, 0));
         assert !payBike.getModelRequests().isEmpty();
     }
 

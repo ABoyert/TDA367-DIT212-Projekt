@@ -20,7 +20,7 @@ public class Request {
         LocalDateTime now = LocalDateTime.now();
         if (from.isBefore(now)) {
             throw new IllegalArgumentException("Request date cannot be in the past");
-        } else if (!from.isBefore(to)) {
+        } else if (to.isBefore(from)) {
             throw new IllegalArgumentException("Request to-date needs to be after from-date");
         }
     }
