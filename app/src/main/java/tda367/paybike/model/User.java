@@ -2,6 +2,8 @@ package tda367.paybike.model;
 
 import android.support.annotation.NonNull;
 
+import java.util.Objects;
+
 /**
  * Created by Oscar Orava Kilberg on 2018-09-19.
  *
@@ -53,5 +55,27 @@ final public class User {
     @NonNull
     public String getUserID() {
         return userID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(userID, user.userID);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(email, password, name, userID);
+    }
+
+    @Override
+    public String toString() {
+        return "User Id: " + userID + "\nName: " + name + "\nEmail: " + email + "\nPassword: " + password;
     }
 }
