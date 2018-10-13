@@ -1,37 +1,30 @@
 package tda367.paybike.model;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by Oscar Orava Kilberg on 2018-09-19.
  */
 
 public class Request {
 
-    private String receivingUserID;
-    private String sendingUserID;
-    private String targetRentableID;
+    private final String sendingUserID;
+    private final String targetRentableID;
+    private final LocalDateTime fromDateTime;
+    private final LocalDateTime toDateTime;
     private boolean accepted;
 
-    public Request(String receivingUserID, String sendingUserID, String targetRentableID) {
-        this.receivingUserID = receivingUserID;
+    public Request(String sendingUserID, String targetRentableID,
+                   LocalDateTime fromDateTime, LocalDateTime toDateTime) {
         this.sendingUserID = sendingUserID;
         this.accepted = false;
         this.targetRentableID = targetRentableID;
-    }
-
-    public String getReceivingUserID() {
-        return receivingUserID;
-    }
-
-    public void setReceivingUserID(String receivingUserID) {
-        this.receivingUserID = receivingUserID;
+        this.fromDateTime = fromDateTime;
+        this.toDateTime = toDateTime;
     }
 
     public String getSendingUserID() {
         return sendingUserID;
-    }
-
-    public void setSendingUserID(String sendingUserID) {
-        this.sendingUserID = sendingUserID;
     }
 
     public boolean isAccepted() {
@@ -46,7 +39,11 @@ public class Request {
         return targetRentableID;
     }
 
-    public void setTargetRentableID(String targetRentableID) {
-        this.targetRentableID = targetRentableID;
+    public LocalDateTime getFromDateTime() {
+        return fromDateTime;
+    }
+
+    public LocalDateTime getToDateTime() {
+        return toDateTime;
     }
 }
