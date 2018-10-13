@@ -33,7 +33,9 @@ import tda367.paybike.viewmodels.AddBikeViewModel;
 import tda367.paybike.viewmodels.BikeViewModel;
 import tda367.paybike.viewmodels.MainViewModel;
 
-/**
+/*
+ * Created by Julia Gustafsson
+ *
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link SendRequestFragment.OnFragmentInteractionListener} interface
@@ -107,21 +109,17 @@ public class SendRequestFragment extends Fragment {
         fromDate = (EditText) requestFragment.findViewById(R.id.fromDate);
         fromDate.setInputType(InputType.TYPE_NULL);
         fromDate.setOnClickListener(v -> showDialog(FROM_DATE));
-        //fromDate.setOnFocusChangeListener((v,f) -> showDialog(FROM_DATE));
 
         fromTime = (EditText) requestFragment.findViewById(R.id.fromTime);
         fromTime.setInputType(InputType.TYPE_NULL);
         fromTime.setOnClickListener(v -> showDialog(FROM_TIME));
-        //fromTime.setOnFocusChangeListener((v,f) -> showDialog(FROM_TIME));
 
         toDate = (EditText) requestFragment.findViewById(R.id.toDate);
         toDate.setInputType(InputType.TYPE_NULL);
         toDate.setOnClickListener(v -> showDialog(TO_DATE));
-        //toDate.setOnFocusChangeListener((v,f) -> showDialog(TO_DATE));
 
         toTime = (EditText) requestFragment.findViewById(R.id.toTime);
         toTime.setOnClickListener(v -> showDialog(TO_TIME));
-        //toTime.setOnFocusChangeListener((v,f) -> showDialog(TO_TIME));
 
         totalPrice = (TextView) requestFragment.findViewById(R.id.totalPrice);
         totalPrice.setText("$" + rentable.getPrice());

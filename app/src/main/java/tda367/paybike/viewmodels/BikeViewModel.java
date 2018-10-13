@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,18 @@ public class BikeViewModel extends ViewModel {
 
     public LocalTime getToTime() {
         return toTime;
+    }
+
+    public int getTotalPrice() {
+        if (fromDate != null
+                && fromTime != null
+                &&  toDate != null
+                && toTime != null) {
+            LocalDateTime from = LocalDateTime.of(fromDate, fromTime);
+            LocalDateTime to = LocalDateTime.of(toDate, toTime);
+
+        }
+        return 0;
     }
 
     public void setAvailableRentables(List<Rentable> availableRentables) {
