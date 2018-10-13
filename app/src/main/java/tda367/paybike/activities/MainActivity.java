@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.fragments.RegisterUserFragment;
+import tda367.paybike.handlers.RequestHandler;
+import tda367.paybike.model.Request;
 import tda367.paybike.viewmodels.MainViewModel;
 
 public class MainActivity extends AppCompatActivity implements
@@ -52,9 +54,6 @@ public class MainActivity extends AppCompatActivity implements
         // If already logged in, skip login screen!
         if (fAuth.getCurrentUser() != null) {
             Log.d(TAG, "Current User: " + fAuth.getCurrentUser().getDisplayName());
-
-            // Let app init
-            SystemClock.sleep(2000);
 
             showBikeFeed();
         }

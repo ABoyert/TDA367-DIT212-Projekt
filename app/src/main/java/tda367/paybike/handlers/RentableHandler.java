@@ -60,6 +60,9 @@ public class RentableHandler {
     public List<Rentable> getAllRentables() {
         ArrayList<Rentable> rentablesList = new ArrayList<>();
 
+        // Might not be needed
+        while (db.getCollection(BIKESCOLLECTION) == null);
+
         for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
             rentablesList.add(RentableFactory.createRentable("Bike",
                     (String) doc.get(NAME),
