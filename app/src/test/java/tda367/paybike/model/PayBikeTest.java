@@ -4,6 +4,8 @@ import android.net.Uri;
 
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.Assert.*;
 
 public class PayBikeTest {
@@ -15,7 +17,7 @@ public class PayBikeTest {
         User targetUser = new User("test@t.com", "123", "Testare", "1");
         Uri image = Uri.parse("Image");
         Rentable testRentable = RentableFactory.createRentableNoID("Bike", "Cykeltest", 25.00, "Testland", true, targetUser.getUserID(), image, "En test");
-        payBike.addRequest(targetUser, currentUser, testRentable);
+        payBike.addRequest(currentUser, testRentable, LocalDateTime.now(), LocalDateTime.now());
         assert !payBike.getModelRequests().isEmpty();
     }
 
