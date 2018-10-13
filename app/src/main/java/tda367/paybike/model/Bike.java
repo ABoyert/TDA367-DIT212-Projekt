@@ -1,6 +1,9 @@
 package tda367.paybike.model;
 
+import android.media.audiofx.AudioEffect;
 import android.net.Uri;
+
+import java.util.Objects;
 
 
 public class Bike implements Rentable {
@@ -108,5 +111,32 @@ public class Bike implements Rentable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bike bike = (Bike) o;
+        return Double.compare(bike.price, price) == 0 &&
+                available == bike.available &&
+                Objects.equals(id, bike.id) &&
+                Objects.equals(name, bike.name) &&
+                Objects.equals(position, bike.position) &&
+                Objects.equals(owner, bike.owner) &&
+                Objects.equals(imagePath, bike.imagePath) &&
+                Objects.equals(description, bike.description);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, name, price, position, available, owner, imagePath, description);
+    }
+
+    @Override
+    public String toString() {
+        return "Bike Id: " + id + "\nName: " + name + "\nPosition: " + position +
+                "\nOwner Id: " + owner + "\nDescription: " + description;
     }
 }

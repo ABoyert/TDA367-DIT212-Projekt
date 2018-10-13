@@ -1,5 +1,6 @@
 package tda367.paybike.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,8 +67,8 @@ public class PayBike {
         this.modelRequests = modelRequests;
     }
 
-    public void addRequest(User receivingUser, User sendingUser, Rentable targetRentable){
-        modelRequests.add(new Request(receivingUser.getUserID(), sendingUser.getUserID(), targetRentable.getId()));
+    public void addRequest(User sendingUser, Rentable targetRentable, LocalDateTime fromDateTime, LocalDateTime toDateTime){
+        modelRequests.add(new Request(sendingUser.getUserID(), targetRentable.getId(), fromDateTime, toDateTime));
     }
 
     public Request getRequest(){
