@@ -8,7 +8,8 @@ import static org.junit.Assert.*;
 
 public class PayBikeTest {
 
-    @Test public void addRequest(){
+    @Test
+    public void addRequest(){
         PayBike payBike = PayBike.getInstance();
         User currentUser = payBike.getCurrentUser();
         User targetUser = new User("test@t.com", "123", "Testare", "1");
