@@ -22,6 +22,7 @@ public class CustomeRequestAdapter extends ArrayAdapter<Request>{
 
     private List<Request> requests;
     private Context context;
+    private TextView receivingUser, targetRentable;
 
 
     public CustomeRequestAdapter(@NonNull Context context, int layout, @NonNull List<Request> requests) {
@@ -39,19 +40,15 @@ public class CustomeRequestAdapter extends ArrayAdapter<Request>{
         LayoutInflater lsuInflator = LayoutInflater.from(getContext());
         View requestView = lsuInflator.inflate(layout, parent, false);
 
+        receivingUser = (TextView)requestView.findViewById(R.id.receivingUser);
+        targetRentable = (TextView)requestView.findViewById(R.id.targetRentable);
 
-        Movie currentMovie = moviesList.get(position);
+        Request request = requests.get(position);
 
-        ImageView image = (ImageView)listItem.findViewById(R.id.imageView_poster);
-        image.setImageResource(currentMovie.getmImageDrawable());
+        receivingUser.setText(request.getReceivingUserID().toString());
+        targetRentable.setText(request.getTargetRentableID().toString());
 
-        TextView name = (TextView) listItem.findViewById(R.id.textView_name);
-        name.setText(currentMovie.getmName());
-
-        TextView release = (TextView) listItem.findViewById(R.id.textView_release);
-        release.setText(currentMovie.getmRelease());
-
-        return listItem;
+        return requestView;
     }
 
 }

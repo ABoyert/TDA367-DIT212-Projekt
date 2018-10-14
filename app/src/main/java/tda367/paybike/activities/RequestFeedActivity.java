@@ -38,7 +38,10 @@ public class RequestFeedActivity extends AppCompatActivity {
         // Configure the grid of available bikes
         //requestAdapter = new CustomeRequestAdapter()
 
-        rAdapter = new CustomeRequestAdapter(this,getAllRequest);
+
+        rAdapter = new CustomeRequestAdapter(this,
+                R.layout.view_layout_my_request, getAllRequest);
+
         myRequestsGrid.setAdapter(rAdapter);
     }
 
