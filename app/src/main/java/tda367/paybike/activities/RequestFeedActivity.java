@@ -39,8 +39,8 @@ public class RequestFeedActivity extends AppCompatActivity {
         //requestAdapter = new CustomeRequestAdapter()
 
 
-        rAdapter = new CustomeRequestAdapter(this,
-                R.layout.view_layout_my_request, getAllRequest);
+        //rAdapter = new CustomeRequestAdapter(this,
+        //        R.layout.view_layout_my_request, getAllRequest);
 
         myRequestsGrid.setAdapter(rAdapter);
     }
