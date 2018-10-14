@@ -169,7 +169,7 @@ public class BikeFeedActivity extends AppCompatActivity
 
     //TODO Implement method
     private void startViewRequestActivity() {
-
+        startActivity(new Intent(getApplicationContext(), RequestFeedActivity.class));
     }
 
     //TODO Implement method

@@ -30,7 +30,8 @@
         <activity
             android:name=".activities.AddBikeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.MyRentablesActivity"></activity>
+        <activity android:name=".activities.MyRentablesActivity" />
+        <activity android:name=".activities.RequestFeedActivity"></activity>
     </application>
 
 </manifest>
