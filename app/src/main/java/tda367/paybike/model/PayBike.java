@@ -35,6 +35,8 @@ public class PayBike {
         return instance;
     }
 
+    //TODO Filtrering, Checks för lösenord, samma cyklar, likadana id, samma email osv.
+
     public List<Rentable> getModelRentables() {
         return modelRentables;
     }

@@ -132,6 +132,9 @@ public class Repository {
         return true;
     }
 
+    public void updateCurrentUser(){
+
+    }
     public void signOut() {
         userHandler.signOut();
     }
