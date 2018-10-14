@@ -87,5 +87,28 @@ public class PayBike {
 
     //TODO Request Adding/Removing/Confirming
 
+    public void checkLogin(){
+
+    }
+
+    public boolean compareUser(User user){
+        for (User existingUser :getModelUsers()
+             ) {
+
+            if (user.getUserID() == existingUser.getUserID()){
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    public boolean compareEmail(){
+
+
+
+        return false;
+    }
+
 
 }

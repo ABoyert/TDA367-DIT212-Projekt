@@ -84,4 +84,9 @@ public class UserHandler {
     public void signOut() {
         fAuth.signOut();
     }
+
+    /*public void convertfUserObject(){
+        User user = new User(fAuth.getCurrentUser().getPass, fAuth.getCurrentUser().getEmail(),fAuth.getCurrentUser().getDisplayName() );
+
+    }*/
 }
