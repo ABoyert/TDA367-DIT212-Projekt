@@ -14,7 +14,9 @@ import java.util.Objects;
 final public class User {
 
     @NonNull
-    final private String email, password, name, userID;
+    private String email, password, name;
+    final private String userID;
+
 
     private void checkEmail(String email) throws IllegalArgumentException {
         if (!email.contains("@")) {
@@ -35,6 +37,13 @@ final public class User {
         this.email = email;
         this.password = password;
         this.userID = userID;
+    }
+
+    public User(String email, String name, String userID){
+        checkEmail(email);
+        this.name = name;
+        this.userID = userID;
+        this.email = email;
     }
 
     @NonNull

@@ -97,4 +97,27 @@ public class MainViewModel extends ViewModel {
 
         return warningMessage;
     }
+
+    public boolean checkUserExistence(String email){
+        return c.userExists(email);
+    }
+
+    public void login(String email){
+
+    }
+
+    public User getCurrentUser(){
+        return c.getCurrentUser();
+    }
+
+    public void createTestUser(){
+        c.getPayBike().addModelUser(new User("test@test.com", "test1234", "test", "1"));
+    }
+
+    public void startupInit(){
+        c.updateModelUsers();
+
+    }
+
+
 }

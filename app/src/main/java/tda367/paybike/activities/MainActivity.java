@@ -48,11 +48,12 @@ public class MainActivity extends AppCompatActivity implements
         findBikeBtn = (Button) findViewById(R.id.findBikeBtn);
         registerNewUser = (TextView) findViewById(R.id.registerUser);
 
+
         // DO NOT DELETE
         DatabaseController db = DatabaseController.getInstance();
 
         // If already logged in, skip login screen!
-        if (fAuth.getCurrentUser() != null) {
+        if (fAuth.getCurrentUser() != null ) {
             Log.d(TAG, "Current User: " + fAuth.getCurrentUser().getDisplayName());
 
             showBikeFeed();
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements
 
         findBikeBtn.setOnClickListener(v -> {
             viewModel = new MainViewModel();
+            viewModel.startupInit();
             userEmail = (EditText) findViewById(R.id.userEmail);
             userPassword = (EditText) findViewById(R.id.userPassword);
 
@@ -101,11 +103,17 @@ public class MainActivity extends AppCompatActivity implements
     // Tries to sign in user and starts BikeFeedActivity on success
     public void signIn(String email, String password) {
         // Create sign in-task
+
+        MainViewModel viewModel = new MainViewModel();
+
+        if (viewModel.checkUserExistence(email)) {
+
         Task<AuthResult> login = fAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         Log.d(TAG, "Successfully logged in " + fAuth.getCurrentUser().getDisplayName() + "!");
+
                         showBikeFeed();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -118,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements
                                 Toast.LENGTH_LONG).show();
                     }
                 });
+        }
     }
 
     // Starts the BikeFeed activity
@@ -125,4 +134,6 @@ public class MainActivity extends AppCompatActivity implements
         startActivity(new Intent(getApplicationContext(), BikeFeedActivity.class));
         finish();
     }
+
+
 }

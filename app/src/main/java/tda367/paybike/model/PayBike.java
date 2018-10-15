@@ -14,6 +14,8 @@ public class PayBike {
     Holds data, reflects database.
      */
 
+    //TODO ERROR: Just nu kan inte användare från databasen laddas in då Users har lösenord :/ som inte går att hämta från Databasen :(
+
     private static List<Rentable> modelRentables = new ArrayList<>();
     private static List<User> modelUsers = new ArrayList<>();
     private static List<Request> modelRequests = new ArrayList<>();
@@ -87,28 +89,63 @@ public class PayBike {
 
     //TODO Request Adding/Removing/Confirming
 
-    public void checkLogin(){
+    /*public boolean checkLogin(String email, String password){
+        User loginUser = emailExists(email);
+        if(comparePassword(password, loginUser)){
+            setCurrentUser(loginUser);
+            return true;
+        }
+        return false;
 
-    }
+    }*/
 
-    public boolean compareUser(User user){
+    public boolean userExists(User user){
         for (User existingUser :getModelUsers()
              ) {
-
             if (user.getUserID() == existingUser.getUserID()){
                 return true;
             }
-
         }
         return false;
     }
 
-    public boolean compareEmail(){
 
 
+    public boolean emailExists(String email){
+        for (User existingUser: getModelUsers()
+             ) {
+            if(email == existingUser.getEmail()){
+                return true;
+            }
+        }
 
         return false;
     }
+
+    public User findAndReturnUser(String userID){
+        for (User existingUser: getModelUsers()
+             ) {
+            if(userID == existingUser.getUserID()){
+                return existingUser;
+            }
+        }
+        return null;
+    }
+
+    public boolean comparePassword(String password, User user){
+
+        if(password == user.getPassword()){
+            return true;
+        }
+        return false;
+
+    }
+
+    public void updateCurrentUser(String id){
+        setCurrentUser(findAndReturnUser(id));
+    }
+
+
 
 
 }

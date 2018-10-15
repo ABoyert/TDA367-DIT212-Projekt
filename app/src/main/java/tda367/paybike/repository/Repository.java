@@ -56,6 +56,10 @@ public class Repository {
         return getModelRequests();
     }
 
+    public void getDatabaseUsers(){
+
+    }
+
     //Puts rentables from database in payBike
     public void updateModelRentables(){
         payBike.setModelRentables(getDatabaseRentables());
@@ -134,21 +138,28 @@ public class Repository {
 
     public void signOut() {
         userHandler.signOut();
+        payBike.setCurrentUser(null);
     }
 
-
-    public void setCurrentUser(User currentUser){
-        payBike.setCurrentUser(currentUser);
+    public User getCurrentUser(){
+        return PayBike.getCurrentUser();
     }
-
-    /*public void getCurrentUser(){
-        PayBike.getCurrentUser();
-    }*/
 
     public void createNewRequest(Rentable requested, LocalDateTime fromDateTime, LocalDateTime toDateTime){
         Request request = new Request(getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime);
         requestHandler.add(request);
         updateModelRequests();
+    }
+
+    public boolean userExists(String email){
+        //does email exist in model?
+        // if yes, check password in db
+        // if correct, make user currentUser
+        return payBike.emailExists(email);
+    }
+
+    public void updateModelUsers(){
+        payBike.setModelUsers(userHandler.getAllUsers());
     }
 
 }

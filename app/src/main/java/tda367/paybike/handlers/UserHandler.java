@@ -1,6 +1,7 @@
 package tda367.paybike.handlers;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -11,7 +12,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tda367.paybike.database.DatabaseController;
+import tda367.paybike.model.RentableFactory;
 import tda367.paybike.model.User;
 
 /**
@@ -25,6 +32,15 @@ public class UserHandler {
     private FirebaseAuth fAuth = FirebaseAuth.getInstance();
     // Singleton variable
     private static UserHandler instance = null;
+
+    private static DatabaseController db = DatabaseController.getInstance();
+
+    private static final String USERCOLLECTION = "users";
+    private static final String NAME = "name";
+    private static final String EMAIL = "email";
+
+
+    private List<User> userList = new ArrayList<>();
 
     // Private constructor
     private UserHandler() {
@@ -85,8 +101,15 @@ public class UserHandler {
         fAuth.signOut();
     }
 
-    /*public void convertfUserObject(){
-        User user = new User(fAuth.getCurrentUser().getPass, fAuth.getCurrentUser().getEmail(),fAuth.getCurrentUser().getDisplayName() );
+    public List<User> getAllUsers(){
 
-    }*/
+        for (DocumentSnapshot doc : db.getCollection(USERCOLLECTION)) {
+            userList.add(new User((String) doc.get(EMAIL),
+                    (String) doc.get(NAME),
+                    doc.getId()));
+        }
+
+        return userList;
+    }
+
 }
