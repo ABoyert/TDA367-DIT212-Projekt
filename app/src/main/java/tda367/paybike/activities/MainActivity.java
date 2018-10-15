@@ -100,12 +100,14 @@ public class MainActivity extends AppCompatActivity implements
 
     // Tries to sign in user and starts BikeFeedActivity on success
     public void signIn(String email, String password) {
+        MainViewModel viewModel = new MainViewModel();
         // Create sign in-task
         Task<AuthResult> login = fAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         Log.d(TAG, "Successfully logged in " + fAuth.getCurrentUser().getDisplayName() + "!");
+                        viewModel.getC().updateCurrentUser();
                         showBikeFeed();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

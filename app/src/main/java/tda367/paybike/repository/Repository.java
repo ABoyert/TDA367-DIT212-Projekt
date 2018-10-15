@@ -95,13 +95,13 @@ public class Repository {
 
     }
 
-    public void newRentableNoID(boolean withID, String type, String name, double price, String position,
-                            boolean available, Uri imageLink,
+    public void newRentableNoID(String type, String name, double price, String position,
+                            boolean available,Uri imageLink,
                             String description){
 
         // TODO change owner argument to respons from userHandler.getCurrentUser().getId()
         Rentable newRentable = RentableFactory.createRentableNoID(type, name, price,
-                position, available, "owner",
+                position, available, PayBike.getCurrentUser().getUserID(),
                 imageLink, description);
 
         rentableHandler.addRentable(newRentable);
@@ -133,20 +133,12 @@ public class Repository {
     }
 
     public void updateCurrentUser(){
-
+        PayBike.setCurrentUser(userHandler.convertGetCurrentUser());
     }
     public void signOut() {
         userHandler.signOut();
+        updateCurrentUser();
     }
-
-
-    public void setCurrentUser(User currentUser){
-        payBike.setCurrentUser(currentUser);
-    }
-
-    /*public void getCurrentUser(){
-        PayBike.getCurrentUser();
-    }*/
 
     public void createNewRequest(Rentable requested, LocalDateTime fromDateTime, LocalDateTime toDateTime){
         Request request = new Request(getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime);

@@ -84,4 +84,12 @@ public class UserHandler {
     public void signOut() {
         fAuth.signOut();
     }
+
+    public User convertGetCurrentUser(){
+        FirebaseUser user = fAuth.getCurrentUser();
+        if(user == null)return null;
+        return new User(user.getEmail(), user.getDisplayName(), user.getUid());
+
+    }
+
 }

@@ -88,9 +88,11 @@ public class MainViewModel extends ViewModel {
         return c.createUser(getEmail(), getPassword(), getName()) ? true : false;
     }
 
-    private String userName, passWord;
+    public Repository getC() {
+        return c;
+    }
 
-    public String getWarning(String userName,String userPassword) {
+    public String getWarning(String userName, String userPassword) {
         String warningMessage = "";
             warningMessage += (userName.length() != 0) ? INVALID_USERNAME : NO_USERNAME;
             warningMessage += (userPassword.length() != 0) ? INVALID_PASSWORD : NO_PASSWORD;
