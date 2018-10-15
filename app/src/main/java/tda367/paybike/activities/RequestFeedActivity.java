@@ -13,12 +13,14 @@ import java.security.PublicKey;
 
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomeRequestAdapter;
+import tda367.paybike.handlers.RequestHandler;
 //import tda367.paybike.adapters.CustomeRequestAdapter;
 
 public class RequestFeedActivity extends AppCompatActivity {
 
     private GridView myRequestsGrid;
     private CustomeRequestAdapter rAdapter;
+    private RequestHandler requestHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +40,8 @@ public class RequestFeedActivity extends AppCompatActivity {
         // Configure the grid of available bikes
         //requestAdapter = new CustomeRequestAdapter()
 
-
-        //rAdapter = new CustomeRequestAdapter(this,
-        //        R.layout.view_layout_my_request, getAllRequest);
+        rAdapter = new CustomeRequestAdapter(this,
+                R.layout.view_layout_my_request, requestHandler.getCurrentRequests());
 
         myRequestsGrid.setAdapter(rAdapter);
     }
