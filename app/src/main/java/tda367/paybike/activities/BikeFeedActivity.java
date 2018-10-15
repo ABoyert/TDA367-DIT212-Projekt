@@ -73,6 +73,7 @@ public class BikeFeedActivity extends AppCompatActivity
         bikeDetailsContainer = (FrameLayout) findViewById(R.id.fragment_frame);
         viewModel = ViewModelProviders.of(this).get(BikeViewModel.class);
         searchBikes = (SearchView) findViewById(R.id.searchBike);
+        searchBikes.setIconified(false);
 
         // Configure the grid of available bikes
         bikeView = (GridView) findViewById(R.id.bikeGrid);
