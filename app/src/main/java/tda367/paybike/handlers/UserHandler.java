@@ -103,6 +103,7 @@ public class UserHandler {
 
     public List<User> getAllUsers(){
 
+
         for (DocumentSnapshot doc : db.getCollection(USERCOLLECTION)) {
             userList.add(new User((String) doc.get(EMAIL),
                     (String) doc.get(NAME),
