@@ -1,36 +1,30 @@
 package tda367.paybike.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import tda367.paybike.R;
-import tda367.paybike.model.Bike;
 import tda367.paybike.model.Rentable;
 
 /*
  * Created by Julia Gustafsson on 2018-09-23.
  *
- * This class works as an adapter for Bike objects to be displayed in advertisement views
+ * This class works as an adapter for Rentable objects to be displayed in advertisement views
  */
 
-public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
+public class CustomRentableAdapter extends ArrayAdapter<Rentable> {
 
     private int layout;
     private ImageView rentableImage;
@@ -39,7 +33,7 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
     private List<Rentable> rentables;
     private Context context;
 
-    public CustomBikeAdAdapter(@NonNull Context context, int layout, @NonNull List<Rentable> rentables) {
+    public CustomRentableAdapter(@NonNull Context context, int layout, @NonNull List<Rentable> rentables) {
         super(context, layout, rentables);
         this.context = context;
         this.rentables = rentables;
@@ -63,13 +57,13 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater lsuInflator = LayoutInflater.from(getContext());
-        View bikeView = lsuInflator.inflate(layout, parent, false);
+        View rentableView = lsuInflator.inflate(layout, parent, false);
 
         // ImageView image = (ImageView) ad.findViewById(R.id.bikeImage);
-        city = (TextView) bikeView.findViewById(R.id.city);
-        name = (TextView) bikeView.findViewById(R.id.bikeName);
-        price = (TextView) bikeView.findViewById(R.id.price);
-        rentableImage = (ImageView) bikeView.findViewById(R.id.bikeImage);
+        city = (TextView) rentableView.findViewById(R.id.city);
+        name = (TextView) rentableView.findViewById(R.id.name);
+        price = (TextView) rentableView.findViewById(R.id.price);
+        rentableImage = (ImageView) rentableView.findViewById(R.id.rentableImage);
 
         Rentable rentable = rentables.get(position);
 
@@ -78,7 +72,7 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
         price.setText(formatPrice(rentable.getPrice()));
         setImageIfPresent(rentable);
 
-        return bikeView;
+        return rentableView;
     }
 
     private void setImageIfPresent(Rentable rentable) {
@@ -91,7 +85,7 @@ public class CustomBikeAdAdapter extends ArrayAdapter<Rentable> {
         }
     }
 
-    public void updateBikeView(List<Rentable> newList) {
+    public void updateRentableView(List<Rentable> newList) {
         rentables = new ArrayList<>();
         rentables.addAll(newList);
         notifyDataSetChanged();

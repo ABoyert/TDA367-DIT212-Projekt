@@ -14,83 +14,84 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import tda367.paybike.R;
-import tda367.paybike.adapters.CustomBikeAdAdapter;
+import tda367.paybike.adapters.CustomRentableAdapter;
 import tda367.paybike.model.Rentable;
-import tda367.paybike.repository.Repository;
 import tda367.paybike.viewmodels.MyRentablesViewModel;
+
+/*
+ * Created by Julia Gustafsson
+ *
+ * This Activity gives the user the ability to view his/her own bikes.
+ * The user is also provided with the options to delete items or update their availability status.
+ *
+ * General note: All activities work in close relation with their respective ViewModel which
+ * holds the data to be shown, while the activity itself is responsible for displaying it in the correct fashion.
+ */
 
 public class MyRentablesActivity extends AppCompatActivity {
 
-    private GridView rentablesGrid;
-    private CustomBikeAdAdapter rentablesAdapter;
-    private MyRentablesViewModel viewModel;
-    private FrameLayout contentFrame;
-    private Repository r;
+    /* Constants */
+    private static final String TAG = MyRentablesActivity.class.getSimpleName(); // Used for logging
 
+    /* Widgets */
+    private GridView rentablesGrid;
+
+    /* Resources */
+    private CustomRentableAdapter rentablesAdapter;
+    private MyRentablesViewModel viewModel;
+
+    /* Automatically called when Activity is created */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_my_rentables);
 
-        r = new Repository();
+        viewModel = ViewModelProviders.of(this).get(MyRentablesViewModel.class);
 
-        // Setup toolbar
+        /* Configure toolbar */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
+        /* Configure menu */
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.sharp_menu_white_18dp);
         toolbar.setOverflowIcon(drawable);
 
-        contentFrame = (FrameLayout) findViewById(R.id.contentFrame);
-
-        viewModel = ViewModelProviders.of(this).get(MyRentablesViewModel.class);
-
-        rentablesGrid = (GridView) findViewById(R.id.myRentablesGrid);
-        rentablesAdapter = new CustomBikeAdAdapter(this,
+        /* Configure grid of rentables with assistance from the CustomRentableAdapter */
+        rentablesGrid = findViewById(R.id.myRentablesGrid);
+        rentablesAdapter = new CustomRentableAdapter(this,
                 R.layout.view_layout_my_rentable, viewModel.getCurrentUserRentables());
-        if (!viewModel.getCurrentUserRentables().isEmpty()) {
-            rentablesGrid.setAdapter(rentablesAdapter);
-        } else {
-            LayoutInflater.from(this).inflate(R.layout.no_available_rentables, contentFrame, true);
-        }
+        rentablesGrid.setAdapter(rentablesAdapter);
+        /* Allow long clicks on grid items which will display the options change availability and delete. */
         registerForContextMenu(rentablesGrid);
 
-        rentablesGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object bike = parent.getItemAtPosition(position);
-                if (bike instanceof Rentable) {
-                    viewModel.setSelected((Rentable) bike);
-                }
-            }
-        });
+        /* If current user doesn't have any items to display, show message layout instead of list */
+        if (viewModel.getCurrentUserRentables().isEmpty()) {
+            LayoutInflater.from(this).inflate(R.layout.no_available_rentables, findViewById(R.id.contentFrame), true);
+        }
     }
 
+    /* In case Activity is resumed, update adapter to check for changes in Model */
     @Override
     protected void onResume() {
         super.onResume();
-        updateAdapter();
+        rentablesAdapter.updateRentableView(viewModel.getCurrentUserRentables());
+
     }
 
-    private void updateAdapter() {
-        rentablesAdapter.updateBikeView(viewModel.getCurrentUserRentables());
-    }
-
+    /* Automatically called when the menu is configured to inflate the menu with correct menu options */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu, this adds items to the action bar if it is present.
+        /* Inflate the menu, this adds items to the action bar if it is present. */
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
+    /* Automatically called when a menu item i selected */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -109,15 +110,19 @@ public class MyRentablesActivity extends AppCompatActivity {
             case R.id.sign_out:
                 signOut();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    /*
+     * Automatically called when a list item is long-clicked. Displays the options of changing
+     * availability or deleting the rentable.
+     */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
+        // Fetch item and notify ViewModel that item is clicked
         Rentable selected = rentablesAdapter.getItem(((AdapterView.AdapterContextMenuInfo)menuInfo).position);
         viewModel.setSelected(selected);
 
@@ -127,6 +132,7 @@ public class MyRentablesActivity extends AppCompatActivity {
         }
     }
 
+    /* Defines the actions for the context menu. */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -136,28 +142,36 @@ public class MyRentablesActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 return true;
             case R.id.delete:
-                r.deleteRentable(viewModel.getSelected());
+                /* A deleted item will no longer exist in the database or the model */
+                viewModel.deleteSelectedRentable();
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
 
+    /* -- Support methods for menu actions -- /*
+
+    /* Starts the AddBikeActivity */
     private void startAddBikeActivity() {
         startActivity(new Intent(getApplicationContext(), AddBikeActivity.class));
     }
 
+    /* Starts the MyRentablesActivity */
     private void startMyRentablesActivity() {
         startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
     }
 
-    //TODO Implement method
+    /* Starts the ViewRequestActivity */
+    //TODO Implement method startViewRequestActivity()
     private void startViewRequestActivity() {
 
     }
 
-    //TODO Implement method
+    /* Signs out the user and closes the RentableFeedActivity */
     private void signOut() {
-
+        viewModel.signOut();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 }

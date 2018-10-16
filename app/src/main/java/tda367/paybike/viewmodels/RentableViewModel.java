@@ -1,9 +1,7 @@
 package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,9 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import tda367.paybike.R;
-import tda367.paybike.activities.BikeFeedActivity;
-import tda367.paybike.adapters.CustomBikeAdAdapter;
+import tda367.paybike.activities.RentableFeedActivity;
 import tda367.paybike.repository.Repository;
 import tda367.paybike.model.Rentable;
 
@@ -26,9 +22,9 @@ import static java.util.stream.Collectors.*;
  * This class provides the BikeFeedActivity with data
  */
 
-public class BikeViewModel extends ViewModel {
+public class RentableViewModel extends ViewModel {
 
-    private static final String TAG = BikeFeedActivity.class.getSimpleName();
+    private static final String TAG = RentableFeedActivity.class.getSimpleName();
 
     private List<Rentable> availableRentables;
     private Rentable selected;
@@ -36,7 +32,7 @@ public class BikeViewModel extends ViewModel {
 
     private LocalDateTime fromDateTime, toDateTime;
 
-    public BikeViewModel() {
+    public RentableViewModel() {
         r = new Repository();
         fromDateTime = LocalDateTime.now();
         System.out.println("From Date: " + fromDateTime);
@@ -178,8 +174,8 @@ public class BikeViewModel extends ViewModel {
                 .collect(toCollection(ArrayList::new));
     }
 
-    public Repository getRepository() {
-        return r;
+    public void signOut() {
+        r.signOut();
     }
 
 }

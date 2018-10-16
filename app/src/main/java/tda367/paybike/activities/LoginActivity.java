@@ -1,8 +1,7 @@
 package tda367.paybike.activities;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -22,54 +21,75 @@ import com.google.firebase.auth.FirebaseAuth;
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.fragments.RegisterUserFragment;
-import tda367.paybike.handlers.RequestHandler;
-import tda367.paybike.model.Request;
-import tda367.paybike.viewmodels.MainViewModel;
+import tda367.paybike.viewmodels.AddBikeViewModel;
+import tda367.paybike.viewmodels.LoginViewModel;
 
-public class MainActivity extends AppCompatActivity implements
+/*
+ * Created by Julia Gustafsson, Anton Boyert and Pontus Backman
+ *
+ * This Activity enables the user to log in to the application or alternatively,
+ * register a new account. New registrations are handled by RegisterUserFragment.
+ * Launch activity when the app starts for the first time. Will be skipped if a user is already logged in.
+ *
+ * General note: All activities work in close relation with their respective ViewModel which holds the data to be shown,
+ * while the activity itself is responsible for displaying it in the correct fashion.
+ *
+ * This activity shares its ViewModel with the RegisterUserFragment which allows them to share information.
+ */
+
+public class LoginActivity extends AppCompatActivity implements
         RegisterUserFragment.OnFragmentInteractionListener {
 
-    // Set TAG to class name for use in debugging
-    private static final String TAG = MainActivity.class.getSimpleName();
+    /* Constants */
+    private static final String TAG = LoginActivity.class.getSimpleName(); // Used for logging
 
-    // Enables login functionality
-    private FirebaseAuth fAuth = FirebaseAuth.getInstance();
-
+    /* Widgets */
     private TextView registerNewUser;
     private Button findBikeBtn;
     private EditText userEmail, userPassword;
 
-    private MainViewModel viewModel;
+    /* Resources */
+    private FirebaseAuth fAuth = FirebaseAuth.getInstance(); // Used to verify user credentials
+    private LoginViewModel viewModel;
 
+    /* Automatically called when Acitivy is created */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findBikeBtn = (Button) findViewById(R.id.findBikeBtn);
-        registerNewUser = (TextView) findViewById(R.id.registerUser);
 
-        // DO NOT DELETE
-        DatabaseController db = DatabaseController.getInstance();
-
-        // If already logged in, skip login screen!
+        /* If already logged in, skip login screen! */
         if (fAuth.getCurrentUser() != null) {
             Log.d(TAG, "Current User: " + fAuth.getCurrentUser().getDisplayName());
-
             showBikeFeed();
         }
 
-        findBikeBtn.setOnClickListener(v -> {
-            viewModel = new MainViewModel();
-            userEmail = (EditText) findViewById(R.id.userEmail);
-            userPassword = (EditText) findViewById(R.id.userPassword);
+        setContentView(R.layout.activity_main);
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
+        /* Configure widgets */
+        findBikeBtn = findViewById(R.id.findRentableBtn);
+        registerNewUser = findViewById(R.id.registerUser);
+        userEmail = findViewById(R.id.userEmail);
+        userPassword = findViewById(R.id.userPassword);
+
+        /* DO NOT DELETE */
+        DatabaseController db = DatabaseController.getInstance();
+
+        /* If already logged in, skip login screen! */
+        if (fAuth.getCurrentUser() != null) {
+            Log.d(TAG, "Current User: " + fAuth.getCurrentUser().getDisplayName());
+            showBikeFeed();
+        }
+
+        /* Handle click events on login button */
+        findBikeBtn.setOnClickListener(v -> {
             String userEmailValue = userEmail.getText().toString();
             String userPasswordValue = userPassword.getText().toString();
 
             if (userEmailValue.length() != 0 && userPasswordValue.length() != 0){
                 signIn(userEmailValue, userPasswordValue);
             } else {
-                Toast.makeText(MainActivity.this, viewModel.getWarning(userEmailValue, userPasswordValue),
+                Toast.makeText(LoginActivity.this, viewModel.getWarning(userEmailValue, userPasswordValue),
                         Toast.LENGTH_LONG).show();
             }
         });
@@ -100,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements
 
     // Tries to sign in user and starts BikeFeedActivity on success
     public void signIn(String email, String password) {
-        MainViewModel viewModel = new MainViewModel();
+        LoginViewModel viewModel = new LoginViewModel();
         // Create sign in-task
         Task<AuthResult> login = fAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -124,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements
 
     // Starts the BikeFeed activity
     private void showBikeFeed() {
-        startActivity(new Intent(getApplicationContext(), BikeFeedActivity.class));
+        startActivity(new Intent(getApplicationContext(), RentableFeedActivity.class));
         finish();
     }
 }

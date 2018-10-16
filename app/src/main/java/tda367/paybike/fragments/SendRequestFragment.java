@@ -22,12 +22,11 @@ import android.widget.TimePicker;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 
 import tda367.paybike.R;
 import tda367.paybike.model.Rentable;
-import tda367.paybike.viewmodels.BikeViewModel;
+import tda367.paybike.viewmodels.RentableViewModel;
 
 /*
  * Created by Julia Gustafsson
@@ -54,7 +53,7 @@ public class SendRequestFragment extends Fragment {
     private Button sendRequestBtn;
 
     // Resources
-    private BikeViewModel viewModel;
+    private RentableViewModel viewModel;
     private static Rentable rentable;
     private OnFragmentInteractionListener mListener;
     private Calendar calendar;
@@ -78,7 +77,7 @@ public class SendRequestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = ViewModelProviders.of(getActivity()).get(BikeViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(RentableViewModel.class);
     }
 
     @Override

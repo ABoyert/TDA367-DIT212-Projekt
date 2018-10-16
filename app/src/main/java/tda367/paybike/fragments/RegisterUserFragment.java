@@ -1,31 +1,22 @@
 package tda367.paybike.fragments;
 
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import tda367.paybike.R;
-import tda367.paybike.model.Bike;
-import tda367.paybike.viewmodels.AddBikeViewModel;
-import tda367.paybike.viewmodels.MainViewModel;
+import tda367.paybike.viewmodels.LoginViewModel;
 
 public class RegisterUserFragment extends Fragment {
 
@@ -40,7 +31,7 @@ public class RegisterUserFragment extends Fragment {
     private Button registerBtn;
 
     private OnFragmentInteractionListener mListener;
-    private MainViewModel viewModel;
+    private LoginViewModel viewModel;
 
     // Required empty public constructor
     public RegisterUserFragment() { }
@@ -54,7 +45,7 @@ public class RegisterUserFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(LoginViewModel.class);
     }
 
     @Override

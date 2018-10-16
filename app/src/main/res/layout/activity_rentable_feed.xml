@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme.NoActionBar"
-    tools:context=".activities.BikeFeedActivity">
+    tools:context=".activities.RentableFeedActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -36,7 +36,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/content_bike_feed"
+        layout="@layout/content_rentable_feed"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_frame"

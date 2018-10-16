@@ -168,7 +168,7 @@
                 android:textStyle="bold" />
 
             <ImageButton
-                android:id="@+id/choseImage"
+                android:id="@+id/chooseImage"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -178,16 +178,8 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/add_photo" />
 
-            <TextView
-                android:id="@+id/inputInvalidText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="@android:color/holo_red_dark"
-                android:visibility="gone" />
-
             <Button
-                android:id="@+id/postBikeBtn"
+                android:id="@+id/postRentableBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"

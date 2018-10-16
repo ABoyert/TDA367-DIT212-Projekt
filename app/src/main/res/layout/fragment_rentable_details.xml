@@ -13,7 +13,7 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:id="@+id/bikeImage"
+            android:id="@+id/rentableImage"
             android:layout_width="0dp"
             android:layout_height="260dp"
             android:adjustViewBounds="true"
@@ -26,7 +26,7 @@
 
 
         <TextView
-            android:id="@+id/bikeDescription"
+            android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -36,10 +36,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bikeName" />
+            app:layout_constraintTop_toBottomOf="@+id/name" />
 
         <TextView
-            android:id="@+id/bikeName"
+            android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -51,10 +51,10 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bikePosition" />
+            app:layout_constraintTop_toBottomOf="@+id/position" />
 
         <TextView
-            android:id="@+id/bikePosition"
+            android:id="@+id/position"
             android:layout_width="0dp"
             android:layout_height="26dp"
             android:layout_marginEnd="16dp"
@@ -66,10 +66,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bikeImage" />
+            app:layout_constraintTop_toBottomOf="@+id/rentableImage" />
 
         <Button
-            android:id="@+id/rentBikeBtn"
+            android:id="@+id/rentBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -87,13 +87,13 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/bikePrice"
+            android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@string/bike_placeholder_price"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/rentBikeBtn"
+            app:layout_constraintBottom_toTopOf="@+id/rentBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

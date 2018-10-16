@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.BikeFeedActivity"
+            android:name=".activities.RentableFeedActivity"
             android:label="@string/title_activity_bike_feed"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

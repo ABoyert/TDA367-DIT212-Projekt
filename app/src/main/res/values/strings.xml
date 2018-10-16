@@ -25,13 +25,13 @@
     <string name="register_user"><u>Register new user</u></string>
 
     // Strings used in activity_add_bike.xml
-    <string name="add_bike_instruction">Information about your bike </string>
+    <string name="add_bike_instruction">Tell us about your bike... </string>
     <string name="name_text">Title</string>
     <string name="name_hint">Mountainbike with Green Stripes</string>
     <string name="address_text">Bike Location</string>
-    <string name="address_hint">McDonlads, Bora Bora</string>
+    <string name="address_hint">McDonalds, Bora Bora</string>
     <string name="description_text">Description</string>
-    <string name="description_hint">It has two wheels and lock.</string>
+    <string name="description_hint">It has two wheels and a lock.</string>
     <string name="price_text">Hourly rate</string>
     <string name="price_hint">9</string>
     <string name="post_bike_btn">Post bike</string>

@@ -9,7 +9,7 @@
     android:padding="8dp">
 
     <ImageView
-        android:id="@+id/bikeImage"
+        android:id="@+id/rentableImage"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_weight="1"
@@ -36,7 +36,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/bikeName"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"

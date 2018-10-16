@@ -6,7 +6,7 @@ import tda367.paybike.repository.Repository;
 import tda367.paybike.handlers.RentableHandler;
 import tda367.paybike.model.User;
 
-public class MainViewModel extends ViewModel {
+public class LoginViewModel extends ViewModel {
 
     private static final int MIN_PASSWORD_LENGTH = 8;
     private static final int MAX_NAME_LENGTH = 50;
@@ -24,7 +24,7 @@ public class MainViewModel extends ViewModel {
 
     Repository c;
 
-    public MainViewModel() {
+    public LoginViewModel() {
         c = new Repository();
         name = "";
         email = "";
@@ -94,8 +94,8 @@ public class MainViewModel extends ViewModel {
 
     public String getWarning(String userName, String userPassword) {
         String warningMessage = "";
-            warningMessage += (userName.length() != 0) ? INVALID_USERNAME : NO_USERNAME;
-            warningMessage += (userPassword.length() != 0) ? INVALID_PASSWORD : NO_PASSWORD;
+        warningMessage += (userName.length() != 0) ? INVALID_USERNAME : NO_USERNAME;
+        warningMessage += (userPassword.length() != 0) ? INVALID_PASSWORD : NO_PASSWORD;
 
         return warningMessage;
     }

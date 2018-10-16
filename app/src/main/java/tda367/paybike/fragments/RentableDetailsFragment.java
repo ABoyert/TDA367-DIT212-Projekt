@@ -1,11 +1,8 @@
 package tda367.paybike.fragments;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-
-import java.io.IOException;
-import java.util.Optional;
 
 import tda367.paybike.R;
 import tda367.paybike.model.Rentable;
@@ -63,18 +57,18 @@ public class RentableDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rentableDetailsView = inflater.inflate(R.layout.fragment_bike_details, container, false);
+        View rentableDetailsView = inflater.inflate(R.layout.fragment_rentable_details, container, false);
 
-        rentableName = (TextView) rentableDetailsView.findViewById(R.id.bikeName);
+        rentableName = (TextView) rentableDetailsView.findViewById(R.id.name);
         rentableName.setText(rentable.getName());
-        rentablePosition = (TextView) rentableDetailsView.findViewById(R.id.bikePosition);
+        rentablePosition = (TextView) rentableDetailsView.findViewById(R.id.position);
         rentablePosition.setText(rentable.getPosition());
-        rentableDescription = (TextView) rentableDetailsView.findViewById(R.id.bikeDescription);
+        rentableDescription = (TextView) rentableDetailsView.findViewById(R.id.description);
         rentableDescription.setText(rentable.getDescription());
-        rentablePrice = (TextView) rentableDetailsView.findViewById(R.id.bikePrice);
+        rentablePrice = (TextView) rentableDetailsView.findViewById(R.id.price);
         rentablePrice.setText(formatPrice(rentable.getPrice()));
-        rentableImage = (ImageView) rentableDetailsView.findViewById(R.id.bikeImage);
-        rentBikeBtn = (Button) rentableDetailsView.findViewById(R.id.rentBikeBtn);
+        rentableImage = (ImageView) rentableDetailsView.findViewById(R.id.rentableImage);
+        rentBikeBtn = (Button) rentableDetailsView.findViewById(R.id.rentBtn);
         rentBikeBtn.setOnClickListener(v -> onButtonPressed());
 
         setImageIfPresent(rentable);
@@ -100,12 +94,12 @@ public class RentableDetailsFragment extends Fragment {
      * activity.
      */
     public interface OnFragmentInteractionListener {
-        void onMakeRequest(Rentable rentable);
+        void onMakeRequest();
     }
 
     public void onButtonPressed() {
         if (mListener != null) {
-            mListener.onMakeRequest(rentable);
+            mListener.onMakeRequest();
         }
     }
 
