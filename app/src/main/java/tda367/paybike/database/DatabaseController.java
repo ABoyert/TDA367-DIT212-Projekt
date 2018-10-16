@@ -166,7 +166,7 @@ public class DatabaseController {
 
     */
 
-    // Return task for reading the given collection
+    // Return task for reading the given collection and also add a copy of the collection read to localDB map
     private Task<QuerySnapshot> read(final String collection) {
         Task<QuerySnapshot> getCollection = firestore.collection(collection)
                 .get()
