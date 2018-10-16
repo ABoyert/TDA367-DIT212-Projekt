@@ -7,10 +7,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -25,13 +22,12 @@ import android.widget.TimePicker;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 
 import tda367.paybike.R;
 import tda367.paybike.model.Rentable;
-import tda367.paybike.viewmodels.AddBikeViewModel;
 import tda367.paybike.viewmodels.BikeViewModel;
-import tda367.paybike.viewmodels.MainViewModel;
 
 /*
  * Created by Julia Gustafsson
@@ -57,22 +53,12 @@ public class SendRequestFragment extends Fragment {
     private TextView totalPrice;
     private Button sendRequestBtn;
 
-
     // Resources
     private BikeViewModel viewModel;
     private static Rentable rentable;
     private OnFragmentInteractionListener mListener;
     private Calendar calendar;
     private int openDialog;
-
-
-    private LocalDateTime fDateTime, tDateTime;
-    private LocalDate fDate, tDate;
-    private LocalTime fTime, tTime;
-
-    private int fromYear, fromMonth, fromDay, fromHour, fromMin,
-            toYear, toMonth, toDay, toHour, toMin;
-
 
     public SendRequestFragment() {
         // Required empty public constructor
@@ -82,7 +68,6 @@ public class SendRequestFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      */
-    //
     public static SendRequestFragment newInstance(Rentable r) {
         SendRequestFragment fragment = new SendRequestFragment();
         rentable = r;
@@ -94,7 +79,6 @@ public class SendRequestFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         viewModel = ViewModelProviders.of(getActivity()).get(BikeViewModel.class);
-
     }
 
     @Override
@@ -106,33 +90,36 @@ public class SendRequestFragment extends Fragment {
         // No dialog is initially open
         openDialog = 0;
 
-        fromDate = (EditText) requestFragment.findViewById(R.id.fromDate);
+        fromDate = requestFragment.findViewById(R.id.fromDate);
         fromDate.setInputType(InputType.TYPE_NULL);
         fromDate.setOnClickListener(v -> showDialog(FROM_DATE));
 
-        fromTime = (EditText) requestFragment.findViewById(R.id.fromTime);
+        fromTime = requestFragment.findViewById(R.id.fromTime);
         fromTime.setInputType(InputType.TYPE_NULL);
         fromTime.setOnClickListener(v -> showDialog(FROM_TIME));
 
-        toDate = (EditText) requestFragment.findViewById(R.id.toDate);
+        toDate = requestFragment.findViewById(R.id.toDate);
         toDate.setInputType(InputType.TYPE_NULL);
         toDate.setOnClickListener(v -> showDialog(TO_DATE));
 
-        toTime = (EditText) requestFragment.findViewById(R.id.toTime);
+        toTime = requestFragment.findViewById(R.id.toTime);
+        toTime.setInputType(InputType.TYPE_NULL);
         toTime.setOnClickListener(v -> showDialog(TO_TIME));
 
-        totalPrice = (TextView) requestFragment.findViewById(R.id.totalPrice);
-        totalPrice.setText("$" + rentable.getPrice());
-        sendRequestBtn = (Button) requestFragment.findViewById(R.id.sendRequstBtn);
-        sendRequestBtn.setEnabled(false);
+        totalPrice = requestFragment.findViewById(R.id.totalPrice);
+        totalPrice.setText("$" + String.format("%.2f", rentable.getPrice()));
+        sendRequestBtn = requestFragment.findViewById(R.id.sendRequstBtn);
+        sendRequestBtn.setEnabled(true);
         sendRequestBtn.setOnClickListener(v -> sendRequest());
+
+        initHintTimes();
 
         return requestFragment;
     }
 
     public void sendRequest() {
         if (mListener != null) {
-            mListener.onSendRequest(rentable);
+            mListener.onSendRequest();
         }
     }
 
@@ -153,31 +140,44 @@ public class SendRequestFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initHintTimes();
+    }
+
     private void showDialog(int id) {
         Dialog dialog = getDialog(id);
-       if (dialog != null) {
-           dialog.show();
-       }
+        if (dialog instanceof DatePickerDialog) {
+            DatePicker datePicker = ((DatePickerDialog) dialog).getDatePicker();
+            datePicker.setMinDate(System.currentTimeMillis() + 1000);
+            datePicker.setMaxDate((long) (System.currentTimeMillis() + 3.1556926 * Math.pow(10,10)));
+            dialog.show();
+        } else if (dialog instanceof TimePickerDialog) {
+            dialog.show();
+        }
     }
 
     private Dialog getDialog(int id) {
+        LocalDateTime from = viewModel.getFromDateTime();
+        LocalDateTime to = viewModel.getToDateTime();
         switch (id) {
             case FROM_DATE:
                 openDialog = FROM_DATE;
                 return new DatePickerDialog(getActivity(),
-                        myDateListener, fromYear, fromMonth, fromDay);
+                        myDateListener, from.getYear(), from.getMonthValue(), from.getDayOfMonth());
             case FROM_TIME:
                 openDialog = FROM_TIME;
                 return new TimePickerDialog(getActivity(), myTimeListener,
-                        fromHour, fromMin, true);
+                        from.getHour(), from.getMinute(), true);
             case TO_DATE:
                 openDialog = TO_DATE;
                 return new DatePickerDialog(getActivity(),
-                        myDateListener, toYear, toMonth, toDay);
+                        myDateListener, to.getYear(), to.getMonthValue(), to.getDayOfMonth());
             case TO_TIME:
                 openDialog = TO_TIME;
                 return new TimePickerDialog(getActivity(), myTimeListener,
-                        toHour, toMin, true);
+                        to.getHour(), to.getMinute(), true);
             default:
                 return null;
         }
@@ -189,12 +189,13 @@ public class SendRequestFragment extends Fragment {
                 public void onDateSet(DatePicker arg0,
                                       int year, int month, int day) {
                     if (openDialog == FROM_DATE) {
-                        fDate = LocalDate.of(year, month+1, day);
-                        updateFromDate();
+                        updateFromDate(year, month+1, day);
+                        updatePrice();
                     } else if (openDialog == TO_DATE) {
-                        tDate = LocalDate.of(year, month+1,day);
-                        updateToDate();
+                        updateToDate(year, month+1, day);
+                        updatePrice();
                     }
+                    openDialog = 0;
                 }
             };
 
@@ -204,33 +205,63 @@ public class SendRequestFragment extends Fragment {
                 public void onTimeSet(TimePicker arg0,
                                       int hour, int min) {
                     if (openDialog == FROM_TIME) {
-                        fTime = LocalTime.of(hour, min);
-                        updateFromTime();
+                        updateFromTime(hour, min);
+                        updatePrice();
                     } else if (openDialog == TO_TIME) {
-                        tTime = LocalTime.of(hour, min);
-                        updateToTime();
+                        updateToTime(hour, min);
+                        updatePrice();
                     }
+                    openDialog = 0;
                 }
             };
 
-    private void updateFromDate() {
-        viewModel.setFromDate(fDate);
+    private void updateFromDate(int year, int month, int day) {
+        viewModel.setFromDate(LocalDate.of(year, month, day));
         fromDate.setText(viewModel.getFromDate().toString());
+        updateBtn();
     }
 
-    private void updateToDate() {
-        viewModel.setToDate(tDate);
+    private void updateToDate(int year, int month, int day) {
+        viewModel.setToDate(LocalDate.of(year, month, day));
         toDate.setText(viewModel.getToDate().toString());
+        updateBtn();
     }
 
-    private void updateFromTime() {
-        viewModel.setFromTime(fTime);
+    private void updateFromTime(int hour, int min) {
+        viewModel.setFromTime(LocalTime.of(hour, min));
         fromTime.setText(viewModel.getFromTime().toString());
+        updateBtn();
     }
 
-    private void updateToTime() {
-        viewModel.setToTime(tTime);
+    private void updateToTime(int hour, int min) {
+        viewModel.setToTime(LocalTime.of(hour, min));
         toTime.setText(viewModel.getToTime().toString());
+        updateBtn();
+    }
+
+    private void updatePrice() {
+        if (viewModel.timesAreValid()) {
+            String stringPrice = "$" + String.format("%.2f", viewModel.getTotalPrice());
+            totalPrice.setText(stringPrice);
+        } else {
+            totalPrice.setText("-");
+        }
+    }
+
+    private void updateBtn() {
+        if (viewModel.timesAreValid()) {
+            sendRequestBtn.setEnabled(true);
+        } else {
+            sendRequestBtn.setEnabled(false);
+        }
+    }
+
+    public void initHintTimes() {
+        viewModel.initTimes();
+        fromDate.setText(viewModel.getFromDate().toString());
+        fromTime.setText(viewModel.getFromTime().getHour() + ":00");
+        toDate.setText(viewModel.getToDate().toString());
+        toTime.setText(viewModel.getToTime().getHour() + ":00");
     }
 
     /*
@@ -240,6 +271,6 @@ public class SendRequestFragment extends Fragment {
      * activity.
      */
     public interface OnFragmentInteractionListener {
-        void onSendRequest(Rentable rentable);
+        void onSendRequest();
     }
 }

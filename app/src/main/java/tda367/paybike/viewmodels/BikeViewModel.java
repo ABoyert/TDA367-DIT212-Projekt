@@ -2,14 +2,18 @@ package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import tda367.paybike.R;
+import tda367.paybike.activities.BikeFeedActivity;
 import tda367.paybike.adapters.CustomBikeAdAdapter;
 import tda367.paybike.repository.Repository;
 import tda367.paybike.model.Rentable;
@@ -24,59 +28,118 @@ import static java.util.stream.Collectors.*;
 
 public class BikeViewModel extends ViewModel {
 
+    private static final String TAG = BikeFeedActivity.class.getSimpleName();
+
     private List<Rentable> availableRentables;
     private Rentable selected;
     private Repository r;
 
-    private LocalDate fromDate, toDate;
-    private LocalTime fromTime, toTime;
+    private LocalDateTime fromDateTime, toDateTime;
 
     public BikeViewModel() {
         r = new Repository();
+        fromDateTime = LocalDateTime.now();
+        System.out.println("From Date: " + fromDateTime);
+        toDateTime = LocalDateTime.now().plus(1,ChronoUnit.HOURS);
+        System.out.println("To Date: " + toDateTime);
+    }
+
+    public LocalDateTime getFromDateTime() {
+        return fromDateTime;
+    }
+
+    public LocalDateTime getToDateTime() {
+        return toDateTime;
     }
 
     public void setFromDate(LocalDate date) {
-        fromDate = date;
+        LocalTime time = fromDateTime.toLocalTime();
+        fromDateTime = LocalDateTime.of(date, time);
     }
 
     public LocalDate getFromDate() {
-        return fromDate;
+        return fromDateTime.toLocalDate();
     }
 
     public void setToDate(LocalDate date) {
-        toDate = date;
+        LocalTime time = toDateTime.toLocalTime();
+        toDateTime = LocalDateTime.of(date, time);
     }
 
     public LocalDate getToDate() {
-        return toDate;
+        return toDateTime.toLocalDate();
     }
 
     public void setFromTime(LocalTime time) {
-        fromTime = time;
+        LocalDate date = fromDateTime.toLocalDate();
+        fromDateTime = LocalDateTime.of(date, time);
     }
 
     public LocalTime getFromTime() {
-        return fromTime;
+        return fromDateTime.toLocalTime();
     }
 
     public void setToTime(LocalTime time) {
-        toTime = time;
+        LocalDate date = toDateTime.toLocalDate();
+        toDateTime = LocalDateTime.of(date, time);
     }
 
     public LocalTime getToTime() {
-        return toTime;
+        return toDateTime.toLocalTime();
     }
 
-    public int getTotalPrice() {
-        if (fromDate != null
-                && fromTime != null
-                &&  toDate != null
-                && toTime != null) {
-            LocalDateTime from = LocalDateTime.of(fromDate, fromTime);
-            LocalDateTime to = LocalDateTime.of(toDate, toTime);
-
+    public double getTotalPrice() {
+        double price = 0;
+        if (getFromDate() != null
+                && getFromTime() != null
+                && getToDate() != null
+                && getToTime() != null) {
+            long minBetween = ChronoUnit.MINUTES.between(fromDateTime,toDateTime);
+            int hours = (int) minBetween / 60;
+            int minutes = (int) (minBetween % 60);
+            double rate = selected.getPrice();
+            // Lowest price is for one hour, if more than one hour, calculate exact price
+            price = hours < 1 ? selected.getPrice() : (hours * rate) + (minutes * rate/60);
         }
-        return 0;
+        return price;
+    }
+
+    public boolean fromDateIsBeforeToDate() {
+        return fromDateTime.isBefore(toDateTime);
+    }
+
+    public boolean fromDateIsAfterNow() {
+        return LocalDateTime.now().isBefore(fromDateTime);
+    }
+
+    public boolean toDateIsOneHourAfterFromDate() {
+        if (fromDateIsBeforeToDate()) {
+            long min = ChronoUnit.MINUTES.between(fromDateTime,toDateTime);
+            return min >= 60;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean timesAreValid() {
+        return fromDateIsBeforeToDate()
+                && fromDateIsAfterNow()
+                && toDateIsOneHourAfterFromDate();
+    }
+
+    public void initTimes() {
+        fromDateTime = LocalDateTime.now().withMinute(00).plusHours(2);
+        toDateTime = LocalDateTime.now().withMinute(00).plusHours(3);
+    }
+
+    public void createNewRequest() {
+        if (timesAreValid()) {
+            try {
+                r.createNewRequest(selected, fromDateTime, toDateTime, getTotalPrice());
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "Request could not be created, illegal arguments.");
+            }
+        }
     }
 
     public void setAvailableRentables(List<Rentable> availableRentables) {
@@ -118,4 +181,5 @@ public class BikeViewModel extends ViewModel {
     public Repository getRepository() {
         return r;
     }
+
 }

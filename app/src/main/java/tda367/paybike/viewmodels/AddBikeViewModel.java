@@ -98,9 +98,7 @@ public class AddBikeViewModel extends ViewModel {
                 imageIsSelected();
     }
 
-    // TODO Complete method once we have the image feature and users
     public void postBike() {
-
         r.newRentableNoID("Bike", bikeName, Double.parseDouble(bikePrice),
                 bikePosition, true, bikeImagePath, bikeDescription);
     }

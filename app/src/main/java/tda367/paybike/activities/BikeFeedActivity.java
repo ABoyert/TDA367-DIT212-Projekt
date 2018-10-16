@@ -3,9 +3,7 @@ package tda367.paybike.activities;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,7 +17,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import java.util.ArrayList;
@@ -44,6 +41,7 @@ public class BikeFeedActivity extends AppCompatActivity
         implements RentableDetailsFragment.OnFragmentInteractionListener,
                    SendRequestFragment.OnFragmentInteractionListener {
 
+
     private static final int DETAILS_FRAGMENT = 1;
     private static final int REQUEST_FRAGMENT = 2;
     private static final String TAG = BikeFeedActivity.class.getSimpleName();
@@ -61,7 +59,7 @@ public class BikeFeedActivity extends AppCompatActivity
         setContentView(R.layout.activity_bike_feed);
 
         // Setup toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
@@ -70,27 +68,23 @@ public class BikeFeedActivity extends AppCompatActivity
         toolbar.setOverflowIcon(drawable);
 
         // Locate visual components
-        bikeDetailsContainer = (FrameLayout) findViewById(R.id.fragment_frame);
+        bikeDetailsContainer = findViewById(R.id.fragment_frame);
         viewModel = ViewModelProviders.of(this).get(BikeViewModel.class);
-        searchBikes = (SearchView) findViewById(R.id.searchBike);
+        searchBikes = findViewById(R.id.searchBike);
         searchBikes.setIconified(false);
 
         // Configure the grid of available bikes
-        bikeView = (GridView) findViewById(R.id.bikeGrid);
+        bikeView = findViewById(R.id.bikeGrid);
         bikeAdapter = new CustomBikeAdAdapter(this,
                 R.layout.view_layout_bike_ad, viewModel.getAvailableRentables());
         bikeView.setAdapter(bikeAdapter);
 
         // If one of the bikes is clicked
-        bikeView.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object bike = parent.getItemAtPosition(position);
-                if (bike instanceof Rentable) {
-                    viewModel.select((Rentable) bike);
-                    viewFragment((Rentable) bike, DETAILS_FRAGMENT);
-                }
+        bikeView.setOnItemClickListener((parent, view, position, id) -> {
+            Object bike = parent.getItemAtPosition(position);
+            if (bike instanceof Rentable) {
+                viewModel.select((Rentable) bike);
+                viewFragment((Rentable) bike, DETAILS_FRAGMENT);
             }
         });
 
@@ -127,8 +121,9 @@ public class BikeFeedActivity extends AppCompatActivity
     }
 
     @Override
-    public void onSendRequest(Rentable rentable) {
-
+    public void onSendRequest() {
+        viewModel.createNewRequest();
+        getFragmentManager().popBackStack();
     }
 
     private void updateAdapter() {
@@ -187,7 +182,6 @@ public class BikeFeedActivity extends AppCompatActivity
             case R.id.sign_out:
                 signOut();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -206,7 +200,6 @@ public class BikeFeedActivity extends AppCompatActivity
 
     }
 
-    //TODO Implement method signOut()
     private void signOut() {
         viewModel.getRepository().signOut();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
