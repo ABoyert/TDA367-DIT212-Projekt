@@ -27,7 +27,7 @@ public class RequestHandler {
     private static final String ACCEPTED = "accepted";
     private static final String FROM_DATE_TIME = "fromDateTime:";
     private static final String TO_DATE_TIME = "toDateTime:";
-
+    private static final String PRICE = "price:";
 
     private static RequestHandler instance = null;
 
@@ -62,7 +62,8 @@ public class RequestHandler {
                         doc.get(SENDER).toString(),
                         doc.get(RENTABLEID).toString(),
                         LocalDateTime.parse(doc.get(FROM_DATE_TIME).toString()),
-                        LocalDateTime.parse(doc.get(TO_DATE_TIME).toString())));
+                        LocalDateTime.parse(doc.get(TO_DATE_TIME).toString()),
+                        Double.parseDouble(doc.get(PRICE).toString())));
             }
         }
 
@@ -78,6 +79,7 @@ public class RequestHandler {
         requestMap.put(ACCEPTED, request.isAccepted());
         requestMap.put(FROM_DATE_TIME, request.getFromDateTime());
         requestMap.put(TO_DATE_TIME, request.getToDateTime());
+        requestMap.put(PRICE, request.getPrice());
 
         db.add(REQUESTSCOLLECTION, requestMap);
     }

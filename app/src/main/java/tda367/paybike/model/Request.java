@@ -1,6 +1,7 @@
 package tda367.paybike.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 /**
@@ -14,6 +15,7 @@ public class Request {
     private String requestId;
     private final LocalDateTime fromDateTime;
     private final LocalDateTime toDateTime;
+    private double price;
     private boolean accepted;
 
     private void checkDateTime(LocalDateTime from, LocalDateTime to) throws IllegalArgumentException {
@@ -26,13 +28,14 @@ public class Request {
     }
 
     public Request(String sendingUserID, String targetRentableID,
-                   LocalDateTime fromDateTime, LocalDateTime toDateTime) {
+                   LocalDateTime fromDateTime, LocalDateTime toDateTime, double price) {
         checkDateTime(fromDateTime, toDateTime);
         this.sendingUserId = sendingUserID;
         this.accepted = false;
         this.targetRentableId = targetRentableID;
         this.fromDateTime = fromDateTime;
         this.toDateTime = toDateTime;
+        this.price = price;
     }
 
     public String getSendingUserId() {
@@ -57,6 +60,10 @@ public class Request {
 
     public LocalDateTime getToDateTime() {
         return toDateTime;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     @Override

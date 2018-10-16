@@ -140,8 +140,8 @@ public class Repository {
         updateCurrentUser();
     }
 
-    public void createNewRequest(Rentable requested, LocalDateTime fromDateTime, LocalDateTime toDateTime){
-        Request request = new Request(getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime);
+    public void createNewRequest(Rentable requested, LocalDateTime fromDateTime, LocalDateTime toDateTime, double price){
+        Request request = new Request(getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime, price);
         requestHandler.add(request);
         updateModelRequests();
     }
