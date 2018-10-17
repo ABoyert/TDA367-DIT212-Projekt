@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     /* Resources */
     private FirebaseAuth fAuth = FirebaseAuth.getInstance(); // Used to verify user credentials
-    private LoginViewModel viewModel;
+    private LoginViewModel viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
     /* Automatically called when Acitivy is created */
     @Override
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements
         }
 
         setContentView(R.layout.activity_main);
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        //viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
         /* Configure widgets */
         findBikeBtn = findViewById(R.id.findRentableBtn);
