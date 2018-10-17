@@ -77,8 +77,8 @@ public class RequestHandler {
         requestMap.put(SENDER, request.getSendingUserId());
         requestMap.put(RENTABLEID, request.getTargetRentableId());
         requestMap.put(ACCEPTED, request.isAccepted());
-        requestMap.put(FROM_DATE_TIME, request.getFromDateTime());
-        requestMap.put(TO_DATE_TIME, request.getToDateTime());
+        requestMap.put(FROM_DATE_TIME, request.getFromDateTime().toString());
+        requestMap.put(TO_DATE_TIME, request.getToDateTime().toString());
         requestMap.put(PRICE, request.getPrice());
 
         db.add(REQUESTSCOLLECTION, requestMap);

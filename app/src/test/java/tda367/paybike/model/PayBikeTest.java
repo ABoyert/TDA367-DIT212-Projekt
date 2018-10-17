@@ -22,4 +22,6 @@ public class PayBikeTest {
         assertFalse (payBike.getModelRequests().isEmpty());
     }
 
+    //TODO kolla så inte flera av samma request kan göras, kolla så inte en bike med samma ID av redan existerande bike läggs till
+
 }

@@ -137,4 +137,8 @@ public class Repository {
         updateModelRequests();
     }
 
+    public String getCurrentUserID(){
+        return PayBike.getCurrentUser().getUserID();
+    }
+
 }

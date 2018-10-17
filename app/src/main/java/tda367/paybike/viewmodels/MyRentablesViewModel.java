@@ -24,6 +24,7 @@ public class MyRentablesViewModel extends ViewModel {
     // TODO Anropa metod som filtrerar bort cyklar från andra användare
     public List<Rentable> getCurrentUserRentables() {
         return r.updateAndGetRentables().stream()
+                .filter(u->u.getOwner().equals(r.getCurrentUserID()))
                 .collect(toCollection(ArrayList::new));
     }
 
