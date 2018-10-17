@@ -50,12 +50,14 @@ public class LoginActivity extends AppCompatActivity implements
 
     /* Resources */
     private FirebaseAuth fAuth = FirebaseAuth.getInstance(); // Used to verify user credentials
-    private LoginViewModel viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+    private LoginViewModel viewModel;
 
     /* Automatically called when Acitivy is created */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
         /* If already logged in, skip login screen! */
         if (fAuth.getCurrentUser() != null) {
