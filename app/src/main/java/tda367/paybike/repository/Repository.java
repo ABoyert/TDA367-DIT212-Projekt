@@ -78,6 +78,10 @@ public class Repository {
         rentableHandler.deleteRentable(rentable);
     }
 
+    public void updateRentable(Rentable rentable) {
+        rentableHandler.updateRentable(rentable);
+    }
+
     public PayBike getPayBike(){
         return payBike;
     }
