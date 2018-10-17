@@ -138,7 +138,8 @@ public class MyRentablesActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch(item.getItemId()) {
             case R.id.change_availibility:
-                Toast.makeText(this, viewModel.getSelected().getName() + " is available",
+                viewModel.toggleSelectedAvailability();
+                Toast.makeText(this, viewModel.getSelected().getName() + " availability changed!",
                         Toast.LENGTH_LONG).show();
                 return true;
             case R.id.delete:

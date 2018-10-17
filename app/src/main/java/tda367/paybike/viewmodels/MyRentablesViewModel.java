@@ -27,6 +27,11 @@ public class MyRentablesViewModel extends ViewModel {
                 .collect(toCollection(ArrayList::new));
     }
 
+    public void toggleSelectedAvailability() {
+        selected.setAvailable(!selected.isAvailable());
+        r.updateRentable(selected);
+    }
+
     public void setSelected(Rentable selected) {
         this.selected = selected;
     }
