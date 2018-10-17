@@ -26,7 +26,7 @@ public class RequestHandler {
     private static final String RENTABLEID = "rentable";
     private static final String ACCEPTED = "accepted";
     private static final String FROM_DATE_TIME = "fromDateTime:";
-    private static final String TO_DATE_TIME = "toDateTime:";
+    private static final String TO_DATE_TIME = "toDateTime";
     private static final String PRICE = "price:";
 
     private static RequestHandler instance = null;
