@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements
         /* If already logged in, skip login screen! */
         if (fAuth.getCurrentUser() != null) {
             Log.d(TAG, "Current User: " + fAuth.getCurrentUser().getDisplayName());
+            viewModel.getC().updateCurrentUser();
             showBikeFeed();
         }
 
