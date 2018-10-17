@@ -11,7 +11,7 @@ import tda367.paybike.repository.Repository;
 
 import static java.util.stream.Collectors.toCollection;
 
-public class MyRentablesViewModel extends ViewModel {
+public class  MyRentablesViewModel extends ViewModel {
 
     private Repository r;
     private CustomRentableAdapter adapter;
