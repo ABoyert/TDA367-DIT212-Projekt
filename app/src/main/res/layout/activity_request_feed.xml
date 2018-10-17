@@ -56,7 +56,8 @@
             android:paddingRight="16dp"
             android:text="All Requests"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:gravity="top"/>
 
         <GridView
             android:id="@+id/myRequestsGrid"

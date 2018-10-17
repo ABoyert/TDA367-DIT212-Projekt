@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,9 +32,16 @@ public class CustomeRequestAdapter extends ArrayAdapter<Request>{
         this.requests = requests;
         this.layout = layout;
     }
+    @Override
+    public Request getItem(int position){
+        return requests.get(position);
+    }
 
+    @Override
+    public int getCount() {
+        return requests.size();
+    }
 
-    @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
@@ -51,4 +59,9 @@ public class CustomeRequestAdapter extends ArrayAdapter<Request>{
         return requestView;
     }
 
+    public void updateBikeView(List<Request> newList) {
+        requests = new ArrayList<>();
+        requests.addAll(newList);
+        notifyDataSetChanged();
+    }
 }

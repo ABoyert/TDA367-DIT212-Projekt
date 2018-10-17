@@ -40,10 +40,11 @@ public class RequestFeedActivity extends AppCompatActivity {
         // Configure the grid of available bikes
         //requestAdapter = new CustomeRequestAdapter()
 
+        /*
         rAdapter = new CustomeRequestAdapter(this,
                 R.layout.view_layout_my_request, requestHandler.getCurrentRequests());
 
-        myRequestsGrid.setAdapter(rAdapter);
+        myRequestsGrid.setAdapter(rAdapter);*/
     }
 
 
@@ -52,6 +53,7 @@ public class RequestFeedActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.view_all_bikes:
+                startBikeFeedActivity();
                 return true;
             case R.id.add_bike:
                 startAddBikeActivity();
@@ -63,12 +65,26 @@ public class RequestFeedActivity extends AppCompatActivity {
                 startViewRequestActivity();
                 return true;
             case R.id.sign_out:
-                //signOut();
+                signOut();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateAdapter();
+    }
+
+    private void updateAdapter() {
+        rAdapter.updateBikeView(requestHandler.getCurrentRequests());
+    }
+
+    private  void startBikeFeedActivity(){
+        startActivity(new Intent(getApplicationContext(), BikeFeedActivity.class));
     }
 
     private void startAddBikeActivity() {
@@ -79,9 +95,12 @@ public class RequestFeedActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
     }
 
-    //TODO Implement method
     private void startViewRequestActivity() {
         startActivity(new Intent(getApplicationContext(), RequestFeedActivity.class));
     }
 
+    //TODO Implement method
+    private void signOut() {
+
+    }
 }

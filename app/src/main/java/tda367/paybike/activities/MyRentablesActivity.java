@@ -148,9 +148,8 @@ public class MyRentablesActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
     }
 
-    //TODO Implement method
     private void startViewRequestActivity() {
-
+        startActivity(new Intent(getApplicationContext(), RequestFeedActivity.class));
     }
 
     //TODO Implement method
