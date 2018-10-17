@@ -176,13 +176,13 @@ public class AddBikeActivity extends AppCompatActivity {
         bikeDescription.setText(viewModel.getBikeDescription());
         bikePosition.setText(viewModel.getBikePosition());
         bikePrice.setText(viewModel.getBikePrice());
-        if (!viewModel.getBikeImagePath().equals(null))
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), viewModel.getBikeImagePath());
-            chooseImageBtn.setImageBitmap(bitmap);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
+        if (!(viewModel.getBikeImagePath() == null)) {
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), viewModel.getBikeImagePath());
+                chooseImageBtn.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         updatePostBikeBtn();
     }
