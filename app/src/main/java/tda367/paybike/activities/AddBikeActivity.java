@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
@@ -32,11 +33,12 @@ import tda367.paybike.viewmodels.AddBikeViewModel;
 
 public class AddBikeActivity extends AppCompatActivity {
 
+
     /* Constants */
     private static final int PICK_IMAGE_REQUEST = 71; // Request id, used for fetching images from device
     private static final String TAG = AddBikeActivity.class.getSimpleName(); // Used for logging
-    private final ColorStateList COLOR_CORRECT = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorAccentGreen));
-    private final ColorStateList COLOR_WRONG = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorRed));
+    private final ColorStateList COLOR_CORRECT = ColorStateList.valueOf(Color.parseColor("#30d9af"));
+    private final ColorStateList COLOR_WRONG = ColorStateList.valueOf(Color.parseColor("#e96e6e"));
 
     /* Widgets */
     private Button addBikeBtn;
@@ -174,6 +176,7 @@ public class AddBikeActivity extends AppCompatActivity {
         bikeDescription.setText(viewModel.getBikeDescription());
         bikePosition.setText(viewModel.getBikePosition());
         bikePrice.setText(viewModel.getBikePrice());
+        if (!viewModel.getBikeImagePath().equals(null))
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), viewModel.getBikeImagePath());
             chooseImageBtn.setImageBitmap(bitmap);

@@ -57,14 +57,17 @@ public class LoginActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+
         /* If already logged in, skip login screen! */
         if (fAuth.getCurrentUser() != null) {
             Log.d(TAG, "Current User: " + fAuth.getCurrentUser().getDisplayName());
+            viewModel.getC().updateCurrentUser();
             showBikeFeed();
         }
 
         setContentView(R.layout.activity_main);
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        //viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
         /* Configure widgets */
         findBikeBtn = findViewById(R.id.findRentableBtn);

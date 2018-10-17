@@ -82,19 +82,6 @@ public class Repository {
         return payBike;
     }
 
-    public void newRentable(boolean withID, String type, String name, double price, String position,
-                                boolean available, String owner, Uri imageLink,
-                                String description, String id){
-
-        Rentable newRentable = RentableFactory.createRentable(type, name, price,
-                                                                position, available, owner,
-                                                                    imageLink, description, id);
-
-        rentableHandler.addRentable(newRentable);
-        updateModelRentables();
-
-    }
-
     public void newRentableNoID(String type, String name, double price, String position,
                             boolean available,Uri imageLink,
                             String description){
@@ -141,7 +128,7 @@ public class Repository {
     }
 
     public void createNewRequest(Rentable requested, LocalDateTime fromDateTime, LocalDateTime toDateTime, double price){
-        Request request = new Request(getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime, price);
+        Request request = new Request(PayBike.getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime, price);
         requestHandler.add(request);
         updateModelRequests();
     }
