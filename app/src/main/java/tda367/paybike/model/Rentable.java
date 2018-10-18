@@ -11,28 +11,21 @@ import java.util.Optional;
 
 public interface Rentable {
 
-    public void setId(String id);
-    public String getId();
-    public void setPrice(Double price);
-    public double getPrice();
-    public void setPosition(String pos);
-    public String getPosition();
-    /*public void setStartDate(Date startDate);
-    public Date getStartDate();
-    public void setEndDate(Date startDate);
-    public Date getEndDate();*/
-    public void setAvailable(boolean available);
-    public boolean isAvailable();
-    public void setOwner(String ownerID);
-    public String getOwner();
-    public Uri getImagePath();
-    public void setImagePath(Uri imageLink);
-    public String getDescription();
-    public void setDescription(String description);
-    public String getName();
-    public void setName(String name);
-
-
-
+    void setId(String id);
+    String getId();
+    void setPrice(Double price);
+    double getPrice();
+    void setPosition(String pos);
+    String getPosition();
+    void setAvailable(boolean available);
+    boolean isAvailable();
+    void setOwner(String ownerID);
+    String getOwner();
+    Uri getImagePath();
+    void setImagePath(Uri imageLink);
+    String getDescription();
+    void setDescription(String description);
+    String getName();
+    void setName(String name);
 
 }
