@@ -28,8 +28,13 @@
     <string name="add_bike_instruction">Tell us about your bike... </string>
     <string name="name_text">Title</string>
     <string name="name_hint">Mountainbike with Green Stripes</string>
-    <string name="address_text">Bike Location</string>
-    <string name="address_hint">McDonalds, Bora Bora</string>
+    <string name="address_text">Location</string>
+    <string name="street_hint">Bikeroad 10</string>
+    <string name="city">City</string>
+    <string name="zipcode">Zipcode</string>
+    <string name="street">Street</string>
+    <string name="zipcode_hint">42215</string>
+    <string name="city_hint">Stockholm</string>
     <string name="description_text">Description</string>
     <string name="description_hint">It has two wheels and a lock.</string>
     <string name="price_text">Hourly rate</string>

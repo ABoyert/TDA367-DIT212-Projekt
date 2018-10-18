@@ -156,11 +156,13 @@ public class MyRentablesActivity extends AppCompatActivity {
     /* Starts the AddBikeActivity */
     private void startAddBikeActivity() {
         startActivity(new Intent(getApplicationContext(), AddBikeActivity.class));
+        finish();
     }
 
     /* Starts the MyRentablesActivity */
     private void startMyRentablesActivity() {
         startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
+        finish(); 
     }
 
     /* Starts the ViewRequestActivity */

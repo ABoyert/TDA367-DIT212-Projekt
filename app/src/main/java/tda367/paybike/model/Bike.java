@@ -10,7 +10,6 @@ public class Bike implements Rentable {
     /* Instance variables */
     private String id,
             name,
-            position,
             owner,
             description;
     private double price;
@@ -38,7 +37,7 @@ public class Bike implements Rentable {
     }
 
     /* Constructor containing Id */
-    public Bike(String name, double price, String position, boolean available, String owner, Uri imagePath, String description, String id) {
+    public Bike(String name, double price, Position position, boolean available, String owner, Uri imagePath, String description, String id) {
         checkName(name);
         checkDescription(description);
 
@@ -53,7 +52,7 @@ public class Bike implements Rentable {
     }
 
     /* Constructor without an Id */
-    public Bike(String name, double price, String position, boolean available, String owner, Uri imagePath, String description) {
+    public Bike(String name, double price, Position position, boolean available, String owner, Uri imagePath, String description) {
         checkName(name);
         checkDescription(description);
 
@@ -171,10 +170,5 @@ public class Bike implements Rentable {
     public String toString() {
         return "Bike Id: " + id + "\nName: " + name + "\nPosition: " + position +
                 "\nOwner Id: " + owner + "\nDescription: " + description;
-    }
-
-    @Override
-    public Date getEndDate() {
-        return endDate;
     }
 }

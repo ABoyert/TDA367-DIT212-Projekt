@@ -62,7 +62,9 @@ public class RentableDetailsFragment extends Fragment {
         rentableName = (TextView) rentableDetailsView.findViewById(R.id.name);
         rentableName.setText(rentable.getName());
         rentablePosition = (TextView) rentableDetailsView.findViewById(R.id.position);
-        rentablePosition.setText(rentable.getPosition());
+        rentablePosition.setText(rentable.getPosition().getStreet() + ", " +
+                rentable.getPosition().getZipCode() + ", " +
+                rentable.getPosition().getCity());
         rentableDescription = (TextView) rentableDetailsView.findViewById(R.id.description);
         rentableDescription.setText(rentable.getDescription());
         rentablePrice = (TextView) rentableDetailsView.findViewById(R.id.price);

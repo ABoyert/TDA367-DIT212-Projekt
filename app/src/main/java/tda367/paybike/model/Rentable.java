@@ -15,8 +15,8 @@ public interface Rentable {
     String getId();
     void setPrice(Double price);
     double getPrice();
-    void setPosition(String pos);
-    String getPosition();
+    void setPosition(Position pos);
+    Position getPosition();
     void setAvailable(boolean available);
     boolean isAvailable();
     void setOwner(String ownerID);

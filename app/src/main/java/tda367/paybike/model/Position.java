@@ -1,5 +1,8 @@
 package tda367.paybike.model;
 
+import java.util.IllegalFormatException;
+import java.util.Objects;
+
 /*
  * This class models Positions
  *
@@ -7,28 +10,29 @@ package tda367.paybike.model;
  */
 public class Position {
 
-    final private String street;
-    final private Integer zipCode;
-    final private String city;
-    final private String country;
+    private static final String COUNTRY = "Sweden";
+
+    private final String street;
+    private final Integer zipCode;
+    private final  String city;
 
     /* Verifies that the given zipcode has five digits */
     private void checkZipCode(Integer zipCode) throws IllegalArgumentException {
-        if (!(zipCode % 1000 < 9)) {
+        if (!(zipCode / 10000 < 9 && zipCode / 10000 > 1)) {
             throw new IllegalArgumentException("Zipcode is invalid.");
         }
     }
 
     /* Verifies that street is not an empty String */
     private void checkStreet(String street) throws IllegalArgumentException {
-        if (street == "") {
+        if (street == "" || containsInvalidChar(street)) {
             throw new IllegalArgumentException("Street needs to be at least one character long.");
         }
     }
 
     /* Verifies that city is not an empty String */
     private void checkCity(String city) throws IllegalArgumentException {
-        if (city == "") {
+        if (city == "" || containsInvalidChar(city)) {
             throw new IllegalArgumentException("City needs to be at least one character long.");
         }
     }
@@ -43,11 +47,10 @@ public class Position {
     public Position(String street, Integer zipCode, String city) {
         checkStreet(street);
         checkZipCode(zipCode);
-        checkCity(city)
+        checkCity(city);
         this.street = street;
         this.zipCode = zipCode;
         this.city = city;
-        country = "Sweden";
     }
 
     /* Getters since all variables are final */
@@ -65,7 +68,52 @@ public class Position {
     }
 
     public String getCountry() {
-        return country;
+        return COUNTRY;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return Objects.equals(street, position.street) &&
+                Objects.equals(zipCode, position.zipCode) &&
+                Objects.equals(city, position.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(street, zipCode, city);
+    }
+
+    @Override
+    public String toString() {
+        return street + "," + zipCode + "," + city;
+    }
+
+    private boolean containsInvalidChar(String s) {
+        return s.indexOf(',') == -1 ? false : true;
+    }
+
+    /*
+    *  Takes a toString() representation of a Position and parses to a new Position object
+    *  Street, zipcode and city should be separated with a comma
+    *  Example: "Mainstreet 2,45643,Stockholm"
+    */
+    public static Position parseString(String position) throws IllegalArgumentException {
+        String street;
+        Integer zipCode;
+        String city;
+
+        String[] split = position.split(",", -1);
+        if (split.length == 3) {
+            street = split[0];
+            zipCode = Integer.parseInt(split[1]);
+            city = split[2];
+            return new Position(street, zipCode, city);
+        } else {
+            throw new IllegalArgumentException("Position could not be parsed due to Illegal Format");
+        }
     }
 
 }

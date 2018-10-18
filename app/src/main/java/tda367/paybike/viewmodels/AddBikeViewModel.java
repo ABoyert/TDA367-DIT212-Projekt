@@ -3,6 +3,7 @@ package tda367.paybike.viewmodels;
 import android.arch.lifecycle.ViewModel;
 import android.net.Uri;
 
+import tda367.paybike.model.Position;
 import tda367.paybike.repository.Repository;
 
 public class AddBikeViewModel extends ViewModel {
@@ -10,18 +11,22 @@ public class AddBikeViewModel extends ViewModel {
     // Constants
     private static final int MAX_DESCRIPTION_LENGTH = 1000;
     private static final int MAX_TITLE_LENGTH = 50;
+    private static final int MAX_CITY_LENGTH = 30;
+    private static final int MAX_STREET_LENGTH = 50;
+    private static final int ZIPCODE_LENGTH = 5;
 
-    private String bikeName, bikeDescription, bikePosition, bikePrice;
+    private String bikeName,
+            bikeDescription,
+            bikePrice,
+            street,
+            zipcode,
+            city;
     private Uri bikeImagePath;
     private Repository r;
 
     public AddBikeViewModel() {
         r = new Repository();
-        bikeName = "";
-        bikeDescription = "";
-        bikePosition = "";
-        bikePrice = "";
-        bikeImagePath = null;
+        clearAll();
     }
 
     // GETTERS AND SETTERS
@@ -41,12 +46,28 @@ public class AddBikeViewModel extends ViewModel {
         this.bikeDescription = bikeDescription;
     }
 
-    public String getBikePosition() {
-        return bikePosition;
+    public String getStreet() {
+        return street;
     }
 
-    public void setBikePosition(String bikePosition) {
-        this.bikePosition = bikePosition;
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getBikePrice() {
@@ -70,9 +91,15 @@ public class AddBikeViewModel extends ViewModel {
         return bikeName.length() > 0 && bikeName.length() < MAX_TITLE_LENGTH;
     }
 
-    public boolean positionIsValid() {
-        //TODO Write method to check this
-        return true;
+    public boolean streetIsValid() {
+        return street.length() > 0 && street.length() < MAX_STREET_LENGTH && street.indexOf(',') == -1;
+    }
+    public boolean zipcodeIsValid() {
+        return zipcode.length() == ZIPCODE_LENGTH;
+    }
+
+    public boolean cityIsValid() {
+        return city.length() > 0 && city.length() < MAX_CITY_LENGTH && city.indexOf(',') == -1;
     }
 
     // Checks if provided price is valid
@@ -93,22 +120,25 @@ public class AddBikeViewModel extends ViewModel {
         return nameIsValid() &&
                 descriptionIsValid() &&
                 priceIsValid() &&
-                positionIsValid() &&
+                streetIsValid() &&
+                zipcodeIsValid() &&
+                cityIsValid() &&
                 imageIsSelected();
     }
 
     public void postBike() {
         r.newRentableNoID("Bike", bikeName, Double.parseDouble(bikePrice),
-                bikePosition, true, bikeImagePath, bikeDescription);
+                new Position(street, Integer.parseInt(zipcode), city), true, bikeImagePath, bikeDescription);
     }
 
     public void clearAll() {
         bikeName = "";
         bikeDescription = "";
-        bikePosition = "";
         bikePrice = "";
+        street = "";
+        zipcode = "";
+        city = "";
         bikeImagePath = null;
     }
-
 }
 

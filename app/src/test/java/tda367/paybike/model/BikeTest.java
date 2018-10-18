@@ -9,7 +9,7 @@ public class BikeTest {
 
     private final String TEST_ID = "1342j4d78a";
     private final String TEST_NAME = "Skeppshult";
-    private final String TEST_POSITION = "The Moon";
+    private final Position TEST_POSITION = new Position("Testgatan 2", 57574, "Karlstad");
     private final String TEST_OWNER = "Kalle Anka";
     private final String TEST_DESCRIPTION = "Very nice bike with two wheels and a lock.";
     private final double TEST_PRICE = 55;

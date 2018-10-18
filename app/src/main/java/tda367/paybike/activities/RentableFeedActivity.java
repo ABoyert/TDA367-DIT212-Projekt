@@ -101,7 +101,7 @@ public class RentableFeedActivity extends AppCompatActivity
             public boolean onQueryTextChange(String newText) {
                 /*
                 Retrieves search results from the ViewModel and updates the adapter
-                to view selection of rentables
+                to view selection of rentables.
                 */
                 ArrayList<Rentable> results = viewModel.getSearchResult(newText);
                 ((CustomRentableAdapter) rentableView.getAdapter()).updateRentableView(results);

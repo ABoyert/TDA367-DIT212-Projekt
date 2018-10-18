@@ -44,8 +44,10 @@ public class AddBikeActivity extends AppCompatActivity {
     private Button addBikeBtn;
     private EditText bikeName,
             bikeDescription,
-            bikePosition,
-            bikePrice;
+            bikePrice,
+            street,
+            zipcode,
+            city;
     private ImageButton chooseImageBtn;
 
     /* Resources */
@@ -62,7 +64,6 @@ public class AddBikeActivity extends AppCompatActivity {
 
         /* Configure bikeName */
         bikeName = findViewById(R.id.nameText);
-        bikeName.setText(viewModel.getBikeName());
         bikeName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -83,7 +84,6 @@ public class AddBikeActivity extends AppCompatActivity {
 
         /* Configure bikeDescription */
         bikeDescription = findViewById(R.id.descriptionText);
-        bikeDescription.setText(viewModel.getBikeDescription());
         bikeDescription.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -103,13 +103,9 @@ public class AddBikeActivity extends AppCompatActivity {
                 updatePostBikeBtn();}
         });
 
-        /*
-        Configure bikePosition
-        TODO Check if this needs to be updated when we have a position object to store addresses
-        */
-        bikePosition = findViewById(R.id.positionText);
-        bikePosition.setText(viewModel.getBikeDescription());
-        bikePosition.addTextChangedListener(new TextWatcher() {
+
+        street = findViewById(R.id.street);
+        street.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
@@ -120,10 +116,52 @@ public class AddBikeActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 /* Notify ViewModel of changes in text */
-                viewModel.setBikePosition(bikePosition.getText().toString());
+                viewModel.setStreet(street.getText().toString());
                 /* Check if input is valid (see AddBikeViewModel for constraints) */
-                boolean valid = viewModel.positionIsValid() ? true : false;
-                setBackgroundTintListColor(valid, bikePosition);
+                boolean valid = viewModel.streetIsValid() ? true : false;
+                setBackgroundTintListColor(valid, street);
+                /* Evaluate if button should be enabled or disabled */
+                updatePostBikeBtn();
+            }
+        });
+
+        zipcode = findViewById(R.id.zipcode);
+        zipcode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                /* Notify ViewModel of changes in text */
+                viewModel.setZipcode(zipcode.getText().toString());
+                /* Check if input is valid (see AddBikeViewModel for constraints) */
+                boolean valid = viewModel.zipcodeIsValid() ? true : false;
+                setBackgroundTintListColor(valid, zipcode);
+                /* Evaluate if button should be enabled or disabled */
+                updatePostBikeBtn();
+            }
+        });
+
+        city = findViewById(R.id.city);
+        city.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                /* Notify ViewModel of changes in text */
+                viewModel.setCity(city.getText().toString());
+                /* Check if input is valid (see AddBikeViewModel for constraints) */
+                boolean valid = viewModel.cityIsValid() ? true : false;
+                setBackgroundTintListColor(valid, city);
                 /* Evaluate if button should be enabled or disabled */
                 updatePostBikeBtn();
             }
@@ -131,7 +169,6 @@ public class AddBikeActivity extends AppCompatActivity {
 
         /* Configure bikePrice */
         bikePrice = findViewById(R.id.priceText);
-        bikePrice.setText(viewModel.getBikePrice());
         bikePrice.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -174,7 +211,9 @@ public class AddBikeActivity extends AppCompatActivity {
         super.onResume();
         bikeName.setText(viewModel.getBikeName());
         bikeDescription.setText(viewModel.getBikeDescription());
-        bikePosition.setText(viewModel.getBikePosition());
+        street.setText(viewModel.getStreet());
+        zipcode.setText(viewModel.getZipcode());
+        city.setText(viewModel.getCity());
         bikePrice.setText(viewModel.getBikePrice());
         if (!(viewModel.getBikeImagePath() == null)) {
             try {

@@ -16,6 +16,7 @@ import tda367.paybike.handlers.RentableHandler;
 import tda367.paybike.handlers.RequestHandler;
 import tda367.paybike.handlers.UserHandler;
 import tda367.paybike.model.PayBike;
+import tda367.paybike.model.Position;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;
 import tda367.paybike.model.Request;
@@ -86,7 +87,7 @@ public class Repository {
         return payBike;
     }
 
-    public void newRentableNoID(String type, String name, double price, String position,
+    public void newRentableNoID(String type, String name, double price, Position position,
                             boolean available,Uri imageLink,
                             String description){
 
