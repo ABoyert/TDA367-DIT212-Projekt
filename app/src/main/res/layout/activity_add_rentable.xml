@@ -248,6 +248,7 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/btn_round_corners"
                 android:defaultFocusHighlightEnabled="true"
+                android:elevation="0dp"
                 android:paddingBottom="16dp"
                 android:paddingTop="12dp"
                 android:text="@string/post_bike_btn"

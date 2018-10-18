@@ -32,32 +32,27 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_rentable_feed"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_frame"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
         android:orientation="vertical"
         android:paddingTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <TextView
             android:id="@+id/myRentablesText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="top"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:text="All Requests"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:gravity="top"/>
+            android:textStyle="bold" />
 
         <GridView
             android:id="@+id/myRequestsGrid"
@@ -70,8 +65,7 @@
             android:paddingRight="16dp"
             android:paddingTop="16dp"
             android:scrollbarStyle="outsideInset"
-            android:verticalSpacing="16dp" >
-        </GridView>
+            android:verticalSpacing="16dp"></GridView>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -107,7 +107,7 @@ public class SendRequestFragment extends Fragment {
 
         totalPrice = requestFragment.findViewById(R.id.totalPrice);
         totalPrice.setText("$" + String.format("%.2f", rentable.getPrice()));
-        sendRequestBtn = requestFragment.findViewById(R.id.sendRequstBtn);
+        sendRequestBtn = requestFragment.findViewById(R.id.sendRequestBtn);
         sendRequestBtn.setEnabled(true);
         sendRequestBtn.setOnClickListener(v -> sendRequest());
 
