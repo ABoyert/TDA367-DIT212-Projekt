@@ -14,8 +14,15 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 import tda367.paybike.model.User;
 
-/**
- * Created by Oscar Orava Kilberg on 2018-09-19.
+/**        -SINGLETON CLASS-
+ * Use class by getting the class instance
+ * through the function getInstance()
+ *
+ * Everything regarding users and user accounts in
+ * Firebase Auth goes through this
+ * class. Uses Firebase Auth in
+ * order to do things regarding
+ * users in Firebase.
  */
 
 public class UserHandler {

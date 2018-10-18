@@ -20,8 +20,15 @@ import tda367.paybike.model.Position;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;
 
-/**
- * Created by Oscar Orava Kilberg on 2018-09-19.
+/**        -SINGLETON CLASS-
+ * Use class by getting the class instance
+ * through the function getInstance()
+ *
+ * Everything regarding Rentables in
+ * the database goes through this
+ * class. Uses DatabaseController in
+ * order to do things regarding
+ * rentables in the database.
  */
 
 public class RentableHandler {

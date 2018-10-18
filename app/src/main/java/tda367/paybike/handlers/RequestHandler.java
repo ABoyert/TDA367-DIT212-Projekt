@@ -14,8 +14,15 @@ import java.util.Map;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.model.Request;
 
-/**
- * Created by Oscar Orava Kilberg on 2018-09-19.
+/**        -SINGLETON CLASS-
+ * Use class by getting the class instance
+ * through the function getInstance()
+ *
+ * Everything regarding Requests in
+ * the database goes through this
+ * class. Uses DatabaseController in
+ * order to do things regarding
+ * requests in the database.
  */
 
 public class RequestHandler {
