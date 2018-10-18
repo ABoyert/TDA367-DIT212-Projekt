@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/body"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
@@ -20,28 +21,28 @@
         android:id="@+id/city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="@string/bike_placeholder_city"
         android:textAllCaps="true"
         android:textColor="@color/colorBrown"
-        android:ellipsize="end"
-        android:maxLines="1"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/opensans_semibold"
-        android:text="@string/bike_placeholder_name"
         android:ellipsize="end"
+        android:fontFamily="@font/opensans_semibold"
         android:maxLines="1"
+        android:text="@string/bike_placeholder_name"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/bike_placeholder_price"
         android:maxLines="1"
+        android:text="@string/bike_placeholder_price"
         android:textSize="16sp" />
 </LinearLayout>

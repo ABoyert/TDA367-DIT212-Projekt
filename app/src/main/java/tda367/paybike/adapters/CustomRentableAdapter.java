@@ -1,6 +1,7 @@
 package tda367.paybike.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +31,7 @@ public class CustomRentableAdapter extends ArrayAdapter<Rentable> {
     private int layout;
     private ImageView rentableImage;
     private TextView city, name, price;
+    private LinearLayout body;
 
     private List<Rentable> rentables;
     private Context context;
@@ -59,11 +62,11 @@ public class CustomRentableAdapter extends ArrayAdapter<Rentable> {
         LayoutInflater lsuInflator = LayoutInflater.from(getContext());
         View rentableView = lsuInflator.inflate(layout, parent, false);
 
-        // ImageView image = (ImageView) ad.findViewById(R.id.bikeImage);
-        city = (TextView) rentableView.findViewById(R.id.city);
-        name = (TextView) rentableView.findViewById(R.id.name);
-        price = (TextView) rentableView.findViewById(R.id.price);
-        rentableImage = (ImageView) rentableView.findViewById(R.id.rentableImage);
+        city = rentableView.findViewById(R.id.city);
+        name = rentableView.findViewById(R.id.name);
+        price = rentableView.findViewById(R.id.price);
+        rentableImage = rentableView.findViewById(R.id.rentableImage);
+        body = rentableView.findViewById(R.id.body);
 
         Rentable rentable = rentables.get(position);
 
@@ -71,6 +74,11 @@ public class CustomRentableAdapter extends ArrayAdapter<Rentable> {
         name.setText(rentable.getName());
         price.setText(formatPrice(rentable.getPrice()));
         setImageIfPresent(rentable);
+
+        /* Make available bikes have light green background in MyRentablesActivity */
+        if (layout == R.layout.view_layout_my_rentable && rentable.isAvailable()) {
+            body.setBackgroundColor(Color.parseColor("#4d2fd9af"));
+        }
 
         return rentableView;
     }
