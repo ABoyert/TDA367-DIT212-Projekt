@@ -18,6 +18,8 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomRentableAdapter;
 import tda367.paybike.model.Rentable;
@@ -146,14 +148,22 @@ public class MyRentablesActivity extends AppCompatActivity {
                 viewModel.toggleSelectedAvailability();
                 Toast.makeText(this, viewModel.getSelected().getName() + " availability changed!",
                         Toast.LENGTH_LONG).show();
+                refreshRentables();
                 return true;
             case R.id.delete:
                 /* A deleted item will no longer exist in the database or the model */
                 viewModel.deleteSelectedRentable();
+                refreshRentables();
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
+
+    }
+
+    /* Refreshes the shown items after availability toggle or deletion has been performed */
+    public void refreshRentables() {
+        ((CustomRentableAdapter) rentablesGrid.getAdapter()).updateRentableView(viewModel.getCurrentUserRentables());
     }
 
     /* -- Support methods for menu actions -- /*

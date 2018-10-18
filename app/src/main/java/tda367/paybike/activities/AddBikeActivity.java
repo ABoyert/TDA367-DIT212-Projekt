@@ -227,7 +227,7 @@ public class AddBikeActivity extends AppCompatActivity {
     }
 
     /*
-    Automatically called when an image is choosen by the user as a result of a call to chooseImage()
+    Automatically called when an image is chosen by the user as a result of a call to chooseImage()
     Method is responsible for storing the image in the ViewModel as well as displaying it to the user
     */
     @Override
