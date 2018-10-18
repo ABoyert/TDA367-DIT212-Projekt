@@ -138,8 +138,8 @@ public class Repository {
         updateModelRequests();
     }
 
-    public String getCurrentUserID(){
-        return PayBike.getCurrentUser().getUserID();
+    public User getCurrentUser() {
+        return PayBike.getCurrentUser();
     }
 
 }

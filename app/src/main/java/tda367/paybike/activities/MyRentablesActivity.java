@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import tda367.paybike.R;
@@ -39,6 +40,7 @@ public class MyRentablesActivity extends AppCompatActivity {
 
     /* Widgets */
     private GridView rentablesGrid;
+    private TextView userName;
 
     /* Resources */
     private CustomRentableAdapter rentablesAdapter;
@@ -60,6 +62,9 @@ public class MyRentablesActivity extends AppCompatActivity {
         /* Configure menu */
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.sharp_menu_white_18dp);
         toolbar.setOverflowIcon(drawable);
+
+        userName = findViewById(R.id.userName);
+        userName.setText(viewModel.getUserName());
 
         /* Configure grid of rentables with assistance from the CustomRentableAdapter */
         rentablesGrid = findViewById(R.id.myRentablesGrid);

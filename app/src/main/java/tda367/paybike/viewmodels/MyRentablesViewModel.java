@@ -23,13 +23,17 @@ public class  MyRentablesViewModel extends ViewModel {
 
     public List<Rentable> getCurrentUserRentables() {
         return r.updateAndGetRentables().stream()
-                .filter(u->u.getOwner().equals(r.getCurrentUserID()))
+                .filter(u->u.getOwner().equals(r.getCurrentUser().getUserID()))
                 .collect(toCollection(ArrayList::new));
     }
 
     public void toggleSelectedAvailability() {
         selected.setAvailable(!selected.isAvailable());
         r.updateRentable(selected);
+    }
+
+    public String getUserName() {
+        return r.getCurrentUser().getName();
     }
 
     public void setSelected(Rentable selected) {
@@ -47,4 +51,5 @@ public class  MyRentablesViewModel extends ViewModel {
     public void signOut() {
         r.signOut();
     }
+
 }
