@@ -221,12 +221,9 @@ public class RentableFeedActivity extends AppCompatActivity
         startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
     }
 
-    /*
-    Starts the ViewRequestActivity
-    TODO Implement method startViewRequestActivity()
-    */
+    /* Starts the ViewRequestActivity */
     private void startViewRequestActivity() {
-
+        startActivity(new Intent(getApplicationContext(), RequestFeedActivity.class));
     }
 
     /* Signs out the user and closes the RentableFeedActivity */

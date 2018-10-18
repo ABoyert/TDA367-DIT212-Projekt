@@ -10,11 +10,12 @@ import android.view.MenuItem;
 import android.widget.GridView;
 
 import java.security.PublicKey;
+import java.util.List;
 
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomeRequestAdapter;
 import tda367.paybike.handlers.RequestHandler;
-//import tda367.paybike.adapters.CustomeRequestAdapter;
+import tda367.paybike.model.Request;
 
 public class RequestFeedActivity extends AppCompatActivity {
 
@@ -27,6 +28,8 @@ public class RequestFeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_feed);
 
+        requestHandler = RequestHandler.getInstance();
+
         // Setup toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -35,19 +38,20 @@ public class RequestFeedActivity extends AppCompatActivity {
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.sharp_menu_white_18dp);
         toolbar.setOverflowIcon(drawable);
 
-        myRequestsGrid = (GridView) findViewById(R.id.myRequestsGrid);
-
         // Configure the grid of available bikes
-        //requestAdapter = new CustomeRequestAdapter()
-
-        /*
+        myRequestsGrid = (GridView) findViewById(R.id.myRequestsGrid);
         rAdapter = new CustomeRequestAdapter(this,
                 R.layout.view_layout_my_request, requestHandler.getCurrentRequests());
-
-        myRequestsGrid.setAdapter(rAdapter);*/
+        myRequestsGrid.setAdapter(rAdapter);
     }
 
+    public List<Request> getPersonalRequests(List<Request> requests) {
+        //TODO Implement method the get personal requests
 
+        return requests;
+    }
+
+    //'onOptionsItemSelected' method is automatically called when one of the menu items are clicked
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -73,34 +77,41 @@ public class RequestFeedActivity extends AppCompatActivity {
         }
     }
 
+    /*
     @Override
     protected void onResume() {
         super.onResume();
         updateAdapter();
-    }
+    }*/
 
     private void updateAdapter() {
         rAdapter.updateBikeView(requestHandler.getCurrentRequests());
     }
 
+
+
+    //Starts the RentableFeedActivity
     private  void startBikeFeedActivity(){
-        startActivity(new Intent(getApplicationContext(), BikeFeedActivity.class));
+        startActivity(new Intent(getApplicationContext(), RentableFeedActivity.class));
     }
 
+    //Starts the AddBikeActivity
     private void startAddBikeActivity() {
         startActivity(new Intent(getApplicationContext(), AddBikeActivity.class));
     }
 
+    //Starts the MyRentablesActivity
     private void startMyRentablesActivity() {
         startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
     }
 
+    //Starts the ViewRequestsActivity
     private void startViewRequestActivity() {
         startActivity(new Intent(getApplicationContext(), RequestFeedActivity.class));
     }
 
-    //TODO Implement method
+    //Method that Sign out out the user
     private void signOut() {
-
+        //TODO Implement method
     }
 }

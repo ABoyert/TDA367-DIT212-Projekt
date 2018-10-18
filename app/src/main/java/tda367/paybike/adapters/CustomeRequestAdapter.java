@@ -23,7 +23,7 @@ public class CustomeRequestAdapter extends ArrayAdapter<Request>{
 
     private List<Request> requests;
     private Context context;
-    private TextView receivingUser, targetRentable;
+    private TextView receivingUser, targetRentable, startTime, endTime, price;
 
 
     public CustomeRequestAdapter(@NonNull Context context, int layout, @NonNull List<Request> requests) {
@@ -32,6 +32,20 @@ public class CustomeRequestAdapter extends ArrayAdapter<Request>{
         this.requests = requests;
         this.layout = layout;
     }
+
+    //complement the start time to the desired string
+    private String formatStartTime(String startTime) {
+        return "From: " + startTime;
+    }
+
+    //complement the end time to the desired string
+    private String formatEndTime(String endTime) {
+        return "To: " + endTime;
+    }
+
+    //complement the price to the desired string
+    private String formatPrice(double price) { return "$" + price + "/h";}
+
     @Override
     public Request getItem(int position){
         return requests.get(position);
@@ -50,11 +64,17 @@ public class CustomeRequestAdapter extends ArrayAdapter<Request>{
 
         receivingUser = (TextView)requestView.findViewById(R.id.receivingUser);
         targetRentable = (TextView)requestView.findViewById(R.id.targetRentable);
+        startTime = (TextView)requestView.findViewById(R.id.startTime);
+        endTime = (TextView)requestView.findViewById(R.id.endTime);
+        price = (TextView) requestView.findViewById(R.id.price);
 
         Request request = requests.get(position);
 
-        receivingUser.setText(request.getReceivingUserID().toString());
-        targetRentable.setText(request.getTargetRentableID().toString());
+        receivingUser.setText(request.getSendingUserId());
+        targetRentable.setText(request.getTargetRentableId());
+        startTime.setText(formatStartTime(request.getFromDateTime().toString()));
+        endTime.setText(formatEndTime(request.getToDateTime().toString()));
+        price.setText(formatPrice(request.getPrice()));
 
         return requestView;
     }

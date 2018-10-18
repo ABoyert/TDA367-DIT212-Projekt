@@ -5,6 +5,7 @@ import android.net.Uri;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +49,13 @@ public class RequestHandler {
     public List<Request> getCurrentRequests(){
         ArrayList<Request> requests = new ArrayList<>();
 
+
+        String str = "2100-04-08 12:30";
+        //TODO write 'formatter' that reads the correct format
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm:ss.SSS");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+
         // Might not be needed
         while (db.getCollection(REQUESTSCOLLECTION) == null);
 
@@ -60,10 +68,11 @@ public class RequestHandler {
             if (!accepted) {
                 requests.add(new Request(
                         doc.get(SENDER).toString(),
-                        doc.get(RENTABLEID).toString(),
-                        LocalDateTime.parse(doc.get(FROM_DATE_TIME).toString()),
-                        LocalDateTime.parse(doc.get(TO_DATE_TIME).toString()),
-                        Double.parseDouble(doc.get(PRICE).toString())));
+                        doc.get(RENTABLEID).toString(), dateTime, dateTime,20.0));
+                        //TODO enable reading/sending required information in correct format
+                        //LocalDateTime.parse(doc.get(FROM_DATE_TIME).toString(),formatter),
+                        //LocalDateTime.parse(doc.get(TO_DATE_TIME).toString(),formatter),
+                        //Double.parseDouble(doc.get(PRICE).toString())));
             }
         }
 
