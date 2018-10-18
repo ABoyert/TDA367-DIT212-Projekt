@@ -81,15 +81,11 @@ public class RentableDetailsFragment extends Fragment {
 
         /* Can't rent your own bike, disable button if owner = current user */
         if (viewModel.isUserRentableOwner()) {
-            rentBikeBtn.setClickable(false);
-            rentBikeBtn.setText("Can not rent your own bike!");
-            rentBikeBtn.setBackgroundColor(Color.GRAY);
+            rentBikeBtn.setEnabled(false);
+            rentBikeBtn.setText("You own this bike");
         }
 
-
-
         setImageIfPresent(rentable);
-
         return rentableDetailsView;
     }
 

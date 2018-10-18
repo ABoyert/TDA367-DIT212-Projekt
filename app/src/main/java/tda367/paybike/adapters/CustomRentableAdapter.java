@@ -70,7 +70,7 @@ public class CustomRentableAdapter extends ArrayAdapter<Rentable> {
 
         Rentable rentable = rentables.get(position);
 
-        city.setText(rentable.getPosition().toString());
+        city.setText(rentable.getPosition().getCity());
         name.setText(rentable.getName());
         price.setText(formatPrice(rentable.getPrice()));
         setImageIfPresent(rentable);
