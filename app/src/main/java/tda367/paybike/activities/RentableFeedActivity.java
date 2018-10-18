@@ -111,7 +111,6 @@ public class RentableFeedActivity extends AppCompatActivity
     }
 
     /*
-    TODO, check if this also updates the model, it should
     Load all bikes from db when activity is resumed
     */
     @Override

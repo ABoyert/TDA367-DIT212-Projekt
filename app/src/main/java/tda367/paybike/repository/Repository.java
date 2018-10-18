@@ -78,6 +78,10 @@ public class Repository {
         rentableHandler.deleteRentable(rentable);
     }
 
+    public void updateRentable(Rentable rentable) {
+        rentableHandler.updateRentable(rentable);
+    }
+
     public PayBike getPayBike(){
         return payBike;
     }
@@ -131,6 +135,10 @@ public class Repository {
         Request request = new Request(PayBike.getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime, price);
         requestHandler.add(request);
         updateModelRequests();
+    }
+
+    public String getCurrentUserID(){
+        return PayBike.getCurrentUser().getUserID();
     }
 
 }

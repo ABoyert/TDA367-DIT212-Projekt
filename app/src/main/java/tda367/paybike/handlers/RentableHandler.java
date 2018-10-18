@@ -105,6 +105,22 @@ public class RentableHandler {
         db.add(BIKESCOLLECTION, bikeMap);
     }
 
+    // Take a bike object and update the db version of it
+    public void updateRentable(Rentable rentable) {
+        // Put bike's properties into a Map that will be passed to the database
+        Map<String, Object> bikeMap = new HashMap<>();
+        bikeMap.put(POSITION, rentable.getPosition());
+        bikeMap.put(PRICE, rentable.getPrice());
+        bikeMap.put(IMAGE, rentable.getImagePath().toString());
+        //Log.d(TAG, "IMAGE = " + waitForTask(db.uploadToStorage(rentable.getImagePath())));
+        bikeMap.put(DESCRIPTION, rentable.getDescription());
+        bikeMap.put(NAME, rentable.getName());
+        bikeMap.put(OWNER, rentable.getOwner());
+        bikeMap.put(AVAILABLE, rentable.isAvailable());
+
+        db.add(BIKESCOLLECTION, rentable.getId(), bikeMap);
+    }
+
     private Uri waitForTask(Task<Uri> task) {
         while (!task.isSuccessful()) {
             //SystemClock.sleep(50);

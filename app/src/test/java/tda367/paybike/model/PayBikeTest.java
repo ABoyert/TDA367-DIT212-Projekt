@@ -6,7 +6,8 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+
 
 public class PayBikeTest {
 
@@ -19,7 +20,9 @@ public class PayBikeTest {
         Uri image = Uri.parse("Image");
         Rentable testRentable = RentableFactory.createRentableNoID("Bike", "Cykeltest", 25.00, "Testland", true, targetUser.getUserID(), image, "En test");
         payBike.addRequest(currentUser, testRentable, LocalDateTime.of(2020, 12, 24, 11,0), LocalDateTime.of(2020, 12, 24, 12, 0), 10);
-        assertFalse (payBike.getModelRequests().isEmpty());
+        assertFalse(payBike.getModelRequests().isEmpty());
     }
+
+    //TODO kolla så inte flera av samma request kan göras, kolla så inte en bike med samma ID av redan existerande bike läggs till
 
 }

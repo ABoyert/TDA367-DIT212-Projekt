@@ -8,7 +8,6 @@ import tda367.paybike.repository.Repository;
 public class AddBikeViewModel extends ViewModel {
 
     // Constants
-    private static final int MAX_PRICE = 1000;
     private static final int MAX_DESCRIPTION_LENGTH = 1000;
     private static final int MAX_TITLE_LENGTH = 50;
 
@@ -78,7 +77,7 @@ public class AddBikeViewModel extends ViewModel {
 
     // Checks if provided price is valid
     public boolean priceIsValid() {
-        return bikePrice.length() > 0 && Double.parseDouble(bikePrice) < MAX_PRICE;
+        return bikePrice.length() > 0;
     }
 
     // Checks if provided description is valid

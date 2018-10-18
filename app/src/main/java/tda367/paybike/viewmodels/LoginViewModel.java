@@ -6,19 +6,25 @@ import tda367.paybike.repository.Repository;
 import tda367.paybike.handlers.RentableHandler;
 import tda367.paybike.model.User;
 
+/*
+* Created by Julia Gustafsson
+*
+ * This ViewModel is responsible for handling the data which will be presented in the LoginActivity as well
+ * as the RegisterUserFragment.
+ *
+ * Important: This class should never hold a reference to an Activity or Fragment, nor it's context.
+ */
+
 public class LoginViewModel extends ViewModel {
 
+    /* Constants*/
     private static final int MIN_PASSWORD_LENGTH = 8;
     private static final int MAX_NAME_LENGTH = 50;
     private static final int MIN_NAME_LENGTH = 0;
-
-    private User currentUser;
-    private static RentableHandler rentableHandler;
-
     private static final String INVALID_USERNAME = "Username might be incorrect ";
-    private static final String NO_USERNAME = "You have to enter your username ";
+    private static final String NO_USERNAME = "You have to enter your username.";
     private static final String INVALID_PASSWORD = "Password might be incorrect ";
-    private static final String NO_PASSWORD = "You have to enter your password ";
+    private static final String NO_PASSWORD = "You have to enter your password. ";
 
     private String name, email, password, repeatedPassword;
 

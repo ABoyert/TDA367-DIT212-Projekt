@@ -100,10 +100,16 @@ public class LoginActivity extends AppCompatActivity implements
         registerNewUser.setOnClickListener(view -> registerNewUser(view));
     }
 
+    /* Handles clicks on Register button in RegisterUserFragment */
     @Override
     public void onUserRegistration() {
+        /* If it is possible to create a user...*/
         if (viewModel.createUser()) {
-            getFragmentManager().popBackStack();
+            /* Close fragment */ 
+            onBackPressed();
+            /* When new user registers, show new account details on login screen */
+            userEmail.setText(viewModel.getEmail());
+            userPassword.setText(viewModel.getPassword());
         } else {
             Toast.makeText(this,
                     "Unable to register user at the moment. Please try again later.",
@@ -112,6 +118,7 @@ public class LoginActivity extends AppCompatActivity implements
         }
     }
 
+    /* Starts RegisterUserFragment to enable new account registration */
     private void registerNewUser(View view) {
         RegisterUserFragment newUser = RegisterUserFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -121,31 +128,23 @@ public class LoginActivity extends AppCompatActivity implements
         transaction.add(R.id.fragment_frame, newUser, "NEW_USER_FRAGMENT").commit();
     }
 
-    // Tries to sign in user and starts BikeFeedActivity on success
+    /* Tries to sign in user and starts BikeFeedActivity on success */
     public void signIn(String email, String password) {
         LoginViewModel viewModel = new LoginViewModel();
-        // Create sign in-task
+        /* Create sign in-task */
         Task<AuthResult> login = fAuth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Log.d(TAG, "Successfully logged in " + fAuth.getCurrentUser().getDisplayName() + "!");
-                        viewModel.getC().updateCurrentUser();
-                        showBikeFeed();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // SHOW TOAST OR SOMETHING ABOUT FAILURE
-                        // MAYBE SHOW Exception e
-                        Log.w(TAG, "LOGIN FAILED! Error: " + e.getMessage());
-                        Toast.makeText(getApplicationContext(), "Error! " + e.getMessage(),
-                                Toast.LENGTH_LONG).show();
-                    }
+                .addOnSuccessListener(authResult -> {
+                    Log.d(TAG, "Successfully logged in " + fAuth.getCurrentUser().getDisplayName() + "!");
+                    viewModel.getC().updateCurrentUser();
+                    showBikeFeed();
+                }).addOnFailureListener(e -> {
+                    Log.w(TAG, "LOGIN FAILED! Error: " + e.getMessage());
+                    Toast.makeText(getApplicationContext(), "Error! " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
                 });
     }
 
-    // Starts the BikeFeed activity
+    /* Starts the BikeFeed activity when user is successfully logged in, also finishes the LoginActivity */
     private void showBikeFeed() {
         startActivity(new Intent(getApplicationContext(), RentableFeedActivity.class));
         finish();
