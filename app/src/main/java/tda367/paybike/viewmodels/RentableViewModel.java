@@ -138,6 +138,14 @@ public class RentableViewModel extends ViewModel {
         }
     }
 
+    public boolean isUserRentableOwner() {
+        if (r.getCurrentUser().getUserID().equals(selected.getOwner())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void setAvailableRentables(List<Rentable> availableRentables) {
         this.availableRentables = availableRentables;
     }

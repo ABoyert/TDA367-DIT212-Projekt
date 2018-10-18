@@ -1,6 +1,8 @@
 package tda367.paybike.fragments;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import com.bumptech.glide.Glide;
 
 import tda367.paybike.R;
 import tda367.paybike.model.Rentable;
+import tda367.paybike.viewmodels.RentableViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +42,8 @@ public class RentableDetailsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private RentableViewModel viewModel;
+
     // Required empty public constructor
     public RentableDetailsFragment() { }
 
@@ -56,8 +61,9 @@ public class RentableDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View rentableDetailsView = inflater.inflate(R.layout.fragment_rentable_details, container, false);
+
+        viewModel = ViewModelProviders.of(getActivity()).get(RentableViewModel.class);
 
         rentableName = (TextView) rentableDetailsView.findViewById(R.id.name);
         rentableName.setText(rentable.getName());
@@ -72,6 +78,15 @@ public class RentableDetailsFragment extends Fragment {
         rentableImage = (ImageView) rentableDetailsView.findViewById(R.id.rentableImage);
         rentBikeBtn = (Button) rentableDetailsView.findViewById(R.id.rentBtn);
         rentBikeBtn.setOnClickListener(v -> onButtonPressed());
+
+        /* Can't rent your own bike, disable button if owner = current user */
+        if (viewModel.isUserRentableOwner()) {
+            rentBikeBtn.setClickable(false);
+            rentBikeBtn.setText("Can not rent your own bike!");
+            rentBikeBtn.setBackgroundColor(Color.GRAY);
+        }
+
+
 
         setImageIfPresent(rentable);
 
