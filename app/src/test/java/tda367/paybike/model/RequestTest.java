@@ -6,6 +6,11 @@ import java.time.LocalDateTime;
 
 import static junit.framework.TestCase.*;
 
+/* Created by Julia Gustafsson
+ *
+ * Contains JUnit tests for Request
+ */
+
 public class RequestTest {
 
     @Test(expected = IllegalArgumentException.class)

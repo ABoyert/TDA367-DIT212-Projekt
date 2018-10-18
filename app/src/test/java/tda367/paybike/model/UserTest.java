@@ -1,11 +1,11 @@
 package tda367.paybike.model;
 
-import android.net.Uri;
-
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
+/* Created by Julia Gustafsson
+ *
+ * Contains JUnit tests for User
+ */
 public class UserTest {
 
     @Test (expected = IllegalArgumentException.class)
