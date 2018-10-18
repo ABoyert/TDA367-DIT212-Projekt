@@ -77,6 +77,12 @@ public class Repository {
 
     public void deleteRentable(Rentable rentable) {
         rentableHandler.deleteRentable(rentable);
+
+        for (Request r : payBike.getModelRequests()) {
+            if (r.getTargetRentableId().equals(rentable.getId())) {
+                requestHandler.deleteRequest(r);
+            }
+        }
     }
 
     public void updateRentable(Rentable rentable) {

@@ -17,6 +17,7 @@ public class Request {
     private final LocalDateTime toDateTime;
     private double price;
     private boolean accepted;
+    private String id;
 
     private void checkDateTime(LocalDateTime from, LocalDateTime to) throws IllegalArgumentException {
         LocalDateTime now = LocalDateTime.now();
@@ -36,6 +37,19 @@ public class Request {
         this.fromDateTime = fromDateTime;
         this.toDateTime = toDateTime;
         this.price = price;
+    }
+
+    /* Constructor with ID */
+    public Request(String sendingUserID, String targetRentableID,
+                   LocalDateTime fromDateTime, LocalDateTime toDateTime, double price, String id) {
+        checkDateTime(fromDateTime, toDateTime);
+        this.sendingUserId = sendingUserID;
+        this.accepted = false;
+        this.targetRentableId = targetRentableID;
+        this.fromDateTime = fromDateTime;
+        this.toDateTime = toDateTime;
+        this.price = price;
+        this.id = id;
     }
 
     public String getSendingUserId() {
@@ -64,6 +78,14 @@ public class Request {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

@@ -68,7 +68,11 @@ public class RequestHandler {
             if (!accepted) {
                 requests.add(new Request(
                         doc.get(SENDER).toString(),
-                        doc.get(RENTABLEID).toString(), dateTime, dateTime,20.0));
+                        doc.get(RENTABLEID).toString(),
+                        dateTime, // Rework
+                        dateTime, // Rework
+                        20.0, // Rework
+                        doc.getId()));
                         //TODO enable reading/sending required information in correct format
                         //LocalDateTime.parse(doc.get(FROM_DATE_TIME).toString(),formatter),
                         //LocalDateTime.parse(doc.get(TO_DATE_TIME).toString(),formatter),
@@ -91,5 +95,10 @@ public class RequestHandler {
         requestMap.put(PRICE, request.getPrice());
 
         db.add(REQUESTSCOLLECTION, requestMap);
+    }
+
+    // Take a bike object and remove it from the database
+    public void deleteRequest(Request request) {
+        db.delete(REQUESTSCOLLECTION, request.getId());
     }
 }
