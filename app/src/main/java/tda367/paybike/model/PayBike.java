@@ -55,18 +55,6 @@ public class PayBike {
         this.modelRentables = modelRentables;
     }
 
-    public void addRentable(Rentable newRentable){
-        getModelRentables().add(newRentable);
-    }
-
-    public List<User> getModelUsers() {
-        return modelUsers;
-    }
-
-    public void setModelUsers(List<User> modelUsers) {
-        this.modelUsers = modelUsers;
-    }
-
     public static void addModelUser(User newUser) {
         modelUsers.add(newUser);
     }
@@ -81,12 +69,6 @@ public class PayBike {
 
     public void addRequest(User sendingUser, Rentable targetRentable, LocalDateTime fromDateTime, LocalDateTime toDateTime, double price){
         modelRequests.add(new Request(sendingUser.getUserID(), targetRentable.getId(), fromDateTime, toDateTime, price));
-    }
-
-    public Request getRequest(){
-
-
-        return null;
     }
 
     public static User getCurrentUser() {

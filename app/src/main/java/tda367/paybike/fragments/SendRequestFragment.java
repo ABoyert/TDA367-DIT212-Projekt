@@ -40,8 +40,6 @@ import tda367.paybike.viewmodels.RentableViewModel;
  */
 public class SendRequestFragment extends Fragment {
 
-    private static final ColorStateList COLOR_CORRECT = ColorStateList.valueOf(Color.parseColor("#30d9af"));
-    private static final ColorStateList COLOR_WRONG = ColorStateList.valueOf(Color.parseColor("#e96e6e"));
     private static final int FROM_DATE = 999;
     private static final int TO_DATE = 888;
     private static final int FROM_TIME = 777;

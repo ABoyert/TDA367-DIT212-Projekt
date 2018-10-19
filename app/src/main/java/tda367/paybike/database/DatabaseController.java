@@ -50,7 +50,6 @@ public class DatabaseController {
     private static DatabaseController instance = null;
     // init and get firebase firestore db, auth and storage instance
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-    private FirebaseAuth fAuth = FirebaseAuth.getInstance();
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     // TAG is used when logging, helpful for debugging
     private static final String TAG = DatabaseController.class.getSimpleName();

@@ -133,16 +133,4 @@ public class RentableHandler {
         db.delete(BIKESCOLLECTION, rentable.getId());
     }
 
-    public Rentable createRentableWithFactory(boolean withID, String type, String name, double price,
-                                              Position pos, boolean available, String owner,
-                                              Uri imagelink, String description, String id){
-
-        if(withID)
-            return factory.createRentable(type, name, price, pos, available, owner, imagelink, description,id);
-
-        if(!withID)
-            return factory.createRentableNoID(type, name, price, pos, available, owner, imagelink, description);
-
-        return null;
-    }
 }

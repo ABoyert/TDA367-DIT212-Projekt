@@ -35,7 +35,6 @@ public class CustomRentableAdapter extends ArrayAdapter<Rentable> {
     private int layout;
     private ImageView rentableImage;
     private TextView city, name, price;
-    private LinearLayout body;
     private Switch available;
 
     private List<Rentable> rentables;
