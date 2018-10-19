@@ -37,6 +37,16 @@ public class PayBike {
 
     //TODO Filtrering, Checks för lösenord, samma cyklar, likadana id, samma email osv.
 
+    public Rentable getRentableFromId(String id) {
+        for (Rentable r : modelRentables) {
+            if (r.getId().equals(id)) {
+                return r;
+            }
+        }
+
+        return null;
+    }
+
     public List<Rentable> getModelRentables() {
         return modelRentables;
     }
