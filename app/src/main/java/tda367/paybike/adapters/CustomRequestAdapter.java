@@ -135,9 +135,23 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
             }
         }
 
+        acceptBtn.setOnClickListener(v -> acceptRequest(request));
+        declineBtn.setOnClickListener(v -> declineRequest(request));
 
         return requestView;
 
+    }
+
+    private void acceptRequest(Request request) {
+        request.setAnswered(true);
+        request.setAccepted(true);
+        r.updateRequest(request);
+    }
+
+    private void declineRequest(Request request) {
+        request.setAnswered(true);
+        request.setAccepted(false);
+        r.updateRequest(request);
     }
 
     private void showButtons(boolean visible) {

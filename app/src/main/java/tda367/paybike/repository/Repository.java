@@ -10,7 +10,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
 
 import tda367.paybike.handlers.RentableHandler;
 import tda367.paybike.handlers.RequestHandler;
@@ -22,6 +25,7 @@ import tda367.paybike.model.RentableFactory;
 import tda367.paybike.model.Request;
 import tda367.paybike.model.User;
 
+import static java.util.stream.Collectors.toCollection;
 import static tda367.paybike.model.PayBike.getCurrentUser;
 
 public class Repository {
@@ -50,7 +54,15 @@ public class Repository {
 
     public List<Request> getDatabaseRequests(){ return requestHandler.getCurrentRequests();}
 
-    public void updateModelRequests(){payBike.setModelRequests(getDatabaseRequests()); }
+    /* Returns requests that are associated with the current user */
+    public List<Request> getCurrentUserRequests() {
+       return getDatabaseRequests().stream()
+                .filter(request -> getCurrentUser().getUserID().equals(request.getSendingUserId()) ||
+                getCurrentUser().getUserID().equals(payBike.getRentableFromId(request.getTargetRentableId()).getOwner()))
+                .collect(toCollection(ArrayList::new));
+    }
+
+    public void updateModelRequests(){ payBike.setModelRequests(getDatabaseRequests()); }
 
     public List<Request> updateAndGetRequests(){
         updateModelRequests();
@@ -87,6 +99,10 @@ public class Repository {
 
     public void updateRentable(Rentable rentable) {
         rentableHandler.updateRentable(rentable);
+    }
+
+    public void updateRequest(Request request) {
+        requestHandler.updateRequest(request);
     }
 
     public PayBike getPayBike(){

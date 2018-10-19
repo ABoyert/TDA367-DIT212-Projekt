@@ -1,5 +1,7 @@
 package tda367.paybike.activities;
 
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -18,20 +20,27 @@ import tda367.paybike.R;
 import tda367.paybike.adapters.CustomRequestAdapter;
 import tda367.paybike.handlers.RequestHandler;
 import tda367.paybike.model.Request;
+import tda367.paybike.repository.Repository;
+import tda367.paybike.viewmodels.AddBikeViewModel;
+import tda367.paybike.viewmodels.RequestFeedViewModel;
 
 public class RequestFeedActivity extends AppCompatActivity {
 
+    /* Widgets */
     private GridView myRequestsGrid;
-    private CustomRequestAdapter rAdapter;
-    private RequestHandler requestHandler;
     private SwipeRefreshLayout swipeRefresh;
+
+    /* Resources */
+    private CustomRequestAdapter rAdapter;
+    private RequestFeedViewModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_feed);
 
-        requestHandler = RequestHandler.getInstance();
+        viewModel = ViewModelProviders.of(this).get(RequestFeedViewModel.class);
 
         // Setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -44,7 +53,7 @@ public class RequestFeedActivity extends AppCompatActivity {
         // Configure the grid of available bikes
         myRequestsGrid = findViewById(R.id.myRequestsGrid);
         rAdapter = new CustomRequestAdapter(this,
-                R.layout.view_layout_my_request, requestHandler.getCurrentRequests());
+                R.layout.view_layout_my_request, viewModel.getRequests());
         myRequestsGrid.setAdapter(rAdapter);
 
         swipeRefresh = findViewById(R.id.swipeRefresh);
@@ -95,10 +104,9 @@ public class RequestFeedActivity extends AppCompatActivity {
     }
 
     private void updateAdapter() {
-        rAdapter.updateBikeView(requestHandler.getCurrentRequests());
+        viewModel.updateRequests();
+        rAdapter.updateBikeView(viewModel.getRequests());
     }
-
-
 
     //Starts the RentableFeedActivity
     private  void startBikeFeedActivity(){

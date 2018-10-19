@@ -13,6 +13,7 @@ import java.util.Map;
 
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.model.Position;
+import tda367.paybike.model.Rentable;
 import tda367.paybike.model.Request;
 
 /**        -SINGLETON CLASS-
@@ -34,6 +35,7 @@ public class RequestHandler {
     private static final String SENDER = "sender";
     private static final String RENTABLEID = "rentable";
     private static final String ACCEPTED = "accepted";
+    private static final String ANSWERED = "answered";
     private static final String FROM_DATE_TIME = "fromDateTime:";
     private static final String TO_DATE_TIME = "toDateTime";
     private static final String PRICE = "price:";
@@ -62,19 +64,14 @@ public class RequestHandler {
 
         // for every request in the database, create new request-object
         for (DocumentSnapshot doc : db.getCollection(REQUESTSCOLLECTION)) {
-            // Avoiding null pointer exception
-            boolean accepted = doc.get(ACCEPTED) != null ? (Boolean) doc.get(ACCEPTED) : true;
 
-            // Add all not yet accepted requests to the list
-            if (!accepted) {
-                requests.add(new Request(
+            requests.add(new Request(
                         doc.get(SENDER).toString(),
                         doc.get(RENTABLEID).toString(),
                         LocalDateTime.parse(doc.get(FROM_DATE_TIME).toString()),
                         LocalDateTime.parse(doc.get(TO_DATE_TIME).toString()),
                         Double.parseDouble(doc.get(PRICE).toString()),
                         doc.getId()));
-            }
         }
         return requests;
     }
@@ -86,11 +83,27 @@ public class RequestHandler {
         requestMap.put(SENDER, request.getSendingUserId());
         requestMap.put(RENTABLEID, request.getTargetRentableId());
         requestMap.put(ACCEPTED, request.isAccepted());
+        requestMap.put(ANSWERED, request.isAnswered());
         requestMap.put(FROM_DATE_TIME, request.getFromDateTime().toString());
         requestMap.put(TO_DATE_TIME, request.getToDateTime().toString());
         requestMap.put(PRICE, request.getPrice());
 
         db.add(REQUESTSCOLLECTION, requestMap);
+    }
+
+    // Update request in the database
+    public void updateRequest(Request request) {
+        // Put request's properties into a Map that will be passed to the database
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put(SENDER, request.getSendingUserId());
+        requestMap.put(RENTABLEID, request.getTargetRentableId());
+        requestMap.put(ACCEPTED, request.isAccepted());
+        requestMap.put(ANSWERED, request.isAnswered());
+        requestMap.put(FROM_DATE_TIME, request.getFromDateTime().toString());
+        requestMap.put(TO_DATE_TIME, request.getToDateTime().toString());
+        requestMap.put(PRICE, request.getPrice());
+
+        db.add(REQUESTSCOLLECTION, request.getId(), requestMap);
     }
 
     // Take a bike object and remove it from the database

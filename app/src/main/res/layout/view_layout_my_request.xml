@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -80,6 +79,7 @@
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:fontFamily="@font/opensans_semibold"
+        android:gravity="top"
         android:maxLines="1"
         android:text="@string/bike_placeholder_price"
         android:textSize="24sp"
@@ -110,8 +110,7 @@
             android:scaleType="fitXY"
             android:src="@drawable/baseline_access_time_white_48dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/acceptBtn"
@@ -125,8 +124,8 @@
             android:background="@drawable/btn_round_corners"
             android:padding="8dp"
             android:scaleType="fitXY"
-            android:visibility="visible"
-            android:src="@drawable/baseline_done_white_48dp" />
+            android:src="@drawable/baseline_done_white_48dp"
+            android:visibility="visible" />
 
         <ImageButton
             android:id="@+id/declineBtn"
@@ -148,16 +147,15 @@
         android:id="@+id/type"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@drawable/btn_round_corners_gray_enabled"
         android:cropToPadding="false"
-        android:padding="8dp"
+        android:padding="12dp"
         android:scaleType="fitXY"
         android:src="@drawable/baseline_send_white_48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
