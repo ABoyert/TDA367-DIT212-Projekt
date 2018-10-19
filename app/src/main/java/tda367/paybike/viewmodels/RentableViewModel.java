@@ -133,7 +133,7 @@ public class RentableViewModel extends ViewModel {
             try {
                 r.createNewRequest(selected, fromDateTime, toDateTime, getTotalPrice());
             } catch (IllegalArgumentException e) {
-                Log.e(TAG, "Request could not be created, illegal arguments.");
+                Log.e(TAG, "Request could not be created, illegal arguments. " + "From: " + fromDateTime.toString() + " To: " + toDateTime.toString());
             }
         }
     }
