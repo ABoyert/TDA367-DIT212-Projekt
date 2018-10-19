@@ -103,16 +103,15 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
         /* Check if request was sent by this user */
         if (request.getSendingUserId().equals(currentUser.getUserID())) {
             /* If request is not yet answered, display pending */
-            if (request.isAnswered()) {
+            if (!(request.getAnswer() == Request.Answer.UNANSWERED)) {
                 pending.setVisibility(View.GONE);
-                if (request.isAccepted()) {
+                if (request.getAnswer() == Request.Answer.ACCEPTED) {
                     acceptBtn.setVisibility(View.VISIBLE);
                     acceptBtn.setEnabled(false);
-                } else {
+                } else if (request.getAnswer() == Request.Answer.DENIED){
                     declineBtn.setVisibility(View.VISIBLE);
                     declineBtn.setEnabled(false);
                 }
-
             } else {
                 showButtons(false);
                 pending.setVisibility(View.VISIBLE);
@@ -121,11 +120,11 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
         } else {
             /* Set icon to indicate received */
             type.setImageBitmap(receivedRequest);
-            if (request.isAnswered()) {
-                if (request.isAccepted()) {
+            if (!(request.getAnswer() == Request.Answer.UNANSWERED)) {
+                if (request.getAnswer() == Request.Answer.ACCEPTED) {
                     acceptBtn.setVisibility(View.VISIBLE);
                     acceptBtn.setEnabled(false);
-                } else {
+                } else if (request.getAnswer() == Request.Answer.DENIED){
                     declineBtn.setVisibility(View.VISIBLE);
                     declineBtn.setEnabled(false);
                 }
@@ -143,14 +142,12 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
     }
 
     private void acceptRequest(Request request) {
-        request.setAnswered(true);
-        request.setAccepted(true);
+        request.setAnswer(Request.Answer.ACCEPTED);
         r.updateRequest(request);
     }
 
     private void declineRequest(Request request) {
-        request.setAnswered(true);
-        request.setAccepted(false);
+        request.setAnswer(Request.Answer.DENIED);
         r.updateRequest(request);
     }
 
