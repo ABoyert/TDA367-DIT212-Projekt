@@ -38,12 +38,14 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
 
     //complement the start time to the desired string
     private String formatFromTime(LocalDateTime fromTime) {
-        return "From: " + fromTime.toLocalDate().toString() + " " + fromTime.toLocalTime().toString();
+        String from = "From: " + fromTime.toLocalDate().toString() + " " + fromTime.getHour() + ":";
+        return fromTime.getMinute() < 10 ? from + "0" + fromTime.getMinute() : from + fromTime.getMinute();
     }
 
     //complement the end time to the desired string
     private String formatToTime(LocalDateTime toTime) {
-        return "To: " + toTime.toLocalDate().toString() + " " + toTime.toLocalTime().toString();
+        String to = "To: " + toTime.toLocalDate().toString() + " " + toTime.getHour() + ":";
+        return toTime.getMinute() < 10 ? to + "0" + toTime.getMinute() : to + toTime.getMinute();
     }
 
     //complement the price to the desired string

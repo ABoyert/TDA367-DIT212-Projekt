@@ -1,8 +1,11 @@
 package tda367.paybike.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +24,7 @@ public class RequestFeedActivity extends AppCompatActivity {
     private GridView myRequestsGrid;
     private CustomRequestAdapter rAdapter;
     private RequestHandler requestHandler;
+    private SwipeRefreshLayout swipeRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class RequestFeedActivity extends AppCompatActivity {
         requestHandler = RequestHandler.getInstance();
 
         // Setup toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
@@ -38,10 +42,18 @@ public class RequestFeedActivity extends AppCompatActivity {
         toolbar.setOverflowIcon(drawable);
 
         // Configure the grid of available bikes
-        myRequestsGrid = (GridView) findViewById(R.id.myRequestsGrid);
+        myRequestsGrid = findViewById(R.id.myRequestsGrid);
         rAdapter = new CustomRequestAdapter(this,
                 R.layout.view_layout_my_request, requestHandler.getCurrentRequests());
         myRequestsGrid.setAdapter(rAdapter);
+
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+        swipeRefresh.setColorSchemeColors(Color.parseColor("#30d9af"));
+        /* Enables user to swipe down to refresh the list of bikes */
+        swipeRefresh.setOnRefreshListener(() -> {
+            updateAdapter();
+            new Handler().postDelayed(() -> swipeRefresh.setRefreshing(false), 2000);
+        });
     }
 
     public List<Request> getPersonalRequests(List<Request> requests) {
@@ -76,12 +88,11 @@ public class RequestFeedActivity extends AppCompatActivity {
         }
     }
 
-    /*
     @Override
     protected void onResume() {
         super.onResume();
         updateAdapter();
-    }*/
+    }
 
     private void updateAdapter() {
         rAdapter.updateBikeView(requestHandler.getCurrentRequests());

@@ -52,20 +52,27 @@
             android:paddingRight="16dp"
             android:text="All Requests"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
-        <GridView
-            android:id="@+id/myRequestsGrid"
+        <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="0dp"
-            android:layout_marginTop="0dp"
-            android:numColumns="1"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
-            android:scrollbarStyle="outsideInset"
-            android:verticalSpacing="16dp"></GridView>
+            android:layout_height="match_parent">
+
+            <GridView
+                android:id="@+id/myRequestsGrid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_marginTop="0dp"
+                android:numColumns="1"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:scrollbarStyle="outsideInset"
+                android:verticalSpacing="16dp"></GridView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

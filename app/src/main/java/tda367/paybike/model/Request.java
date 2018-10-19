@@ -24,18 +24,8 @@ public class Request {
     private boolean answered;
     private String id;
 
-    private void checkDateTime(LocalDateTime from, LocalDateTime to) throws IllegalArgumentException {
-        LocalDateTime now = LocalDateTime.now();
-        if (from.isBefore(now)) {
-            throw new IllegalArgumentException("Request date cannot be in the past");
-        } else if (to.isBefore(from)) {
-            throw new IllegalArgumentException("Request to-date needs to be after from-date");
-        }
-    }
-
     public Request(String sendingUserID, String targetRentableID,
                    LocalDateTime fromDateTime, LocalDateTime toDateTime, double price) {
-        checkDateTime(fromDateTime, toDateTime);
         this.sendingUserId = sendingUserID;
         this.targetRentableId = targetRentableID;
         this.fromDateTime = fromDateTime;
@@ -48,7 +38,6 @@ public class Request {
     /* Constructor with ID */
     public Request(String sendingUserID, String targetRentableID,
                    LocalDateTime fromDateTime, LocalDateTime toDateTime, double price, String id) {
-        checkDateTime(fromDateTime, toDateTime);
         this.sendingUserId = sendingUserID;
         this.targetRentableId = targetRentableID;
         this.fromDateTime = fromDateTime;
