@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import tda367.paybike.R;
 import tda367.paybike.model.Rentable;
+import tda367.paybike.repository.Repository;
 
 /*
  * Created by Julia Gustafsson on 2018-09-23.
@@ -28,13 +31,16 @@ import tda367.paybike.model.Rentable;
 
 public class CustomRentableAdapter extends ArrayAdapter<Rentable> {
 
+    /* Widgets */
     private int layout;
     private ImageView rentableImage;
     private TextView city, name, price;
     private LinearLayout body;
+    private Switch available;
 
     private List<Rentable> rentables;
     private Context context;
+    private Repository r;
 
     public CustomRentableAdapter(@NonNull Context context, int layout, @NonNull List<Rentable> rentables) {
         super(context, layout, rentables);
@@ -61,12 +67,12 @@ public class CustomRentableAdapter extends ArrayAdapter<Rentable> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater lsuInflator = LayoutInflater.from(getContext());
         View rentableView = lsuInflator.inflate(layout, parent, false);
+        r = new Repository();
 
         city = rentableView.findViewById(R.id.city);
         name = rentableView.findViewById(R.id.name);
         price = rentableView.findViewById(R.id.price);
         rentableImage = rentableView.findViewById(R.id.rentableImage);
-        body = rentableView.findViewById(R.id.body);
 
         Rentable rentable = rentables.get(position);
 
@@ -75,9 +81,21 @@ public class CustomRentableAdapter extends ArrayAdapter<Rentable> {
         price.setText(formatPrice(rentable.getPrice()));
         setImageIfPresent(rentable);
 
-        /* Make available bikes have light green background in MyRentablesActivity */
-        if (layout == R.layout.view_layout_my_rentable && rentable.isAvailable()) {
-            body.setBackgroundColor(Color.parseColor("#4d2fd9af"));
+        /* Use toggle button to change and display availability in MyRentablesActivity */
+        if (layout == R.layout.view_layout_my_rentable) {
+            available = rentableView.findViewById(R.id.available);
+            if (rentable.isAvailable()) {
+                available.setChecked(true);
+            } else {
+                available.setChecked(false);
+            }
+            available.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    rentable.setAvailable(!rentable.isAvailable());
+                    r.updateRentable(rentable);
+                }
+            });
         }
 
         return rentableView;

@@ -126,7 +126,7 @@ public class RentableFeedActivity extends AppCompatActivity
     */
     @Override
     public void onMakeRequest() {
-        getFragmentManager().popBackStack();
+        onBackPressed();
         viewFragment(REQUEST_FRAGMENT);
     }
 
@@ -137,7 +137,7 @@ public class RentableFeedActivity extends AppCompatActivity
     @Override
     public void onSendRequest() {
         viewModel.createNewRequest();
-        getFragmentManager().popBackStack();
+        onBackPressed();
     }
 
     /* Automatically called to inflate the menu in the hamburger icon in toolbar */

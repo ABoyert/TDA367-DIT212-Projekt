@@ -146,8 +146,6 @@ public class MyRentablesActivity extends AppCompatActivity {
         switch(item.getItemId()) {
             case R.id.change_availibility:
                 viewModel.toggleSelectedAvailability();
-                Toast.makeText(this, viewModel.getSelected().getName() + " availability changed!",
-                        Toast.LENGTH_LONG).show();
                 refreshRentables();
                 return true;
             case R.id.delete:
