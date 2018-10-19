@@ -1,11 +1,8 @@
 package tda367.paybike.handlers;
 
-import android.net.Uri;
-
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,10 +13,11 @@ import tda367.paybike.model.Position;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.Request;
 
-/**        -SINGLETON CLASS-
+/**
+ * -SINGLETON CLASS-
  * Use class by getting the class instance
  * through the function getInstance()
- *
+ * <p>
  * Everything regarding Requests in
  * the database goes through this
  * class. Uses DatabaseController in
@@ -34,7 +32,7 @@ public class RequestHandler {
     private static final String REQUESTSCOLLECTION = "requests";
     private static final String SENDER = "sender";
     private static final String RENTABLEID = "rentable";
-    private static final String ANSWERED = "answered";
+    private static final String ANSWER = "answer";
     private static final String FROM_DATE_TIME = "fromDateTime:";
     private static final String TO_DATE_TIME = "toDateTime";
     private static final String PRICE = "price:";
@@ -55,34 +53,38 @@ public class RequestHandler {
     }
 
     // Returns list of all requests in the database that is not accepted
-    public List<Request> getCurrentRequests(){
+    public List<Request> getCurrentRequests() {
         ArrayList<Request> requests = new ArrayList<>();
 
         // Might not be needed
-        while (db.getCollection(REQUESTSCOLLECTION) == null);
+        while (db.getCollection(REQUESTSCOLLECTION) == null) ;
 
         // for every request in the database, create new request-object
         for (DocumentSnapshot doc : db.getCollection(REQUESTSCOLLECTION)) {
+            // Avoiding null pointer exception
+            boolean accepted = doc.get(ANSWER) != null ? (Boolean) doc.get(ANSWER) : true;
 
             requests.add(new Request(
-                        doc.get(SENDER).toString(),
-                        doc.get(RENTABLEID).toString(),
-                        LocalDateTime.parse(doc.get(FROM_DATE_TIME).toString()),
-                        LocalDateTime.parse(doc.get(TO_DATE_TIME).toString()),
-                        Double.parseDouble(doc.get(PRICE).toString()),
-                        doc.getId()));
+                    doc.get(SENDER).toString(),
+                    doc.get(RENTABLEID).toString(),
+                    LocalDateTime.parse(doc.get(FROM_DATE_TIME).toString()),
+                    LocalDateTime.parse(doc.get(TO_DATE_TIME).toString()),
+                    Double.parseDouble(doc.get(PRICE).toString()),
+                    Request.Answer.valueOf(doc.get(ANSWER).toString()),
+                    doc.getId()));
+
         }
+
         return requests;
     }
 
     // Add new request to the database
-    public void add(Request request){
+    public void add(Request request) {
         // Put request's properties into a Map that will be passed to the database
         Map<String, Object> requestMap = new HashMap<>();
         requestMap.put(SENDER, request.getSendingUserId());
         requestMap.put(RENTABLEID, request.getTargetRentableId());
-        requestMap.put(ANSWERED, request.isAnswered());
-        requestMap.put(ANSWER, request.getAnswer());
+        requestMap.put(ANSWER, request.getAnswer().toString());
         requestMap.put(FROM_DATE_TIME, request.getFromDateTime().toString());
         requestMap.put(TO_DATE_TIME, request.getToDateTime().toString());
         requestMap.put(PRICE, request.getPrice());
@@ -96,8 +98,7 @@ public class RequestHandler {
         Map<String, Object> requestMap = new HashMap<>();
         requestMap.put(SENDER, request.getSendingUserId());
         requestMap.put(RENTABLEID, request.getTargetRentableId());
-        requestMap.put(ACCEPTED, request.isAccepted());
-        requestMap.put(ANSWERED, request.isAnswered());
+        requestMap.put(ANSWER, request.getAnswer().toString());
         requestMap.put(FROM_DATE_TIME, request.getFromDateTime().toString());
         requestMap.put(TO_DATE_TIME, request.getToDateTime().toString());
         requestMap.put(PRICE, request.getPrice());

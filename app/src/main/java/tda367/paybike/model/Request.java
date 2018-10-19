@@ -21,7 +21,7 @@ public class Request {
      A request which has accepted = false and answered = false has not been answered and therefore
      accepted = false should not be interpreted as declined. Whereas accepted = false and answered = true
      means the request has been declined by the owner.*/
-    private enum Answer {
+    public enum Answer {
         ACCEPTED,
         UNANSWERED,
         DENIED
@@ -29,25 +29,25 @@ public class Request {
     private Answer answer;
 
     public Request(String sendingUserID, String targetRentableID,
-                   LocalDateTime fromDateTime, LocalDateTime toDateTime, double price) {
+                   LocalDateTime fromDateTime, LocalDateTime toDateTime, double price, Answer answer) {
         this.sendingUserId = sendingUserID;
         this.targetRentableId = targetRentableID;
         this.fromDateTime = fromDateTime;
         this.toDateTime = toDateTime;
         this.price = price;
-        this.answer = Answer.UNANSWERED;
+        this.answer = answer;
     }
 
     /* Constructor with ID */
     public Request(String sendingUserID, String targetRentableID,
-                   LocalDateTime fromDateTime, LocalDateTime toDateTime, double price, String id) {
+                   LocalDateTime fromDateTime, LocalDateTime toDateTime, double price, Answer answer, String id) {
         this.sendingUserId = sendingUserID;
         this.targetRentableId = targetRentableID;
         this.fromDateTime = fromDateTime;
         this.toDateTime = toDateTime;
         this.price = price;
         this.id = id;
-        this.answer = Answer.UNANSWERED;
+        this.answer = answer;
     }
 
     public String getSendingUserId() {

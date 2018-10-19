@@ -155,7 +155,7 @@ public class Repository {
     }
 
     public void createNewRequest(Rentable requested, LocalDateTime fromDateTime, LocalDateTime toDateTime, double price){
-        Request request = new Request(PayBike.getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime, price);
+        Request request = new Request(PayBike.getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime, price, Request.Answer.UNANSWERED);
         requestHandler.add(request);
         updateModelRequests();
     }
