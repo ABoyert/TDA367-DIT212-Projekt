@@ -15,14 +15,18 @@ public class Request {
     private final LocalDateTime fromDateTime;
     private final LocalDateTime toDateTime;
     private double price;
+    private String id;
     /* The reason for having both answered and accepted, is to be able to
      tell apart a request that has not yet been answered with one that has been answered.
      A request which has accepted = false and answered = false has not been answered and therefore
      accepted = false should not be interpreted as declined. Whereas accepted = false and answered = true
      means the request has been declined by the owner.*/
-    private boolean accepted;
-    private boolean answered;
-    private String id;
+    private enum Answer {
+        ACCEPTED,
+        UNANSWERED,
+        DENIED
+    }
+    private Answer answer;
 
     public Request(String sendingUserID, String targetRentableID,
                    LocalDateTime fromDateTime, LocalDateTime toDateTime, double price) {
@@ -31,8 +35,7 @@ public class Request {
         this.fromDateTime = fromDateTime;
         this.toDateTime = toDateTime;
         this.price = price;
-        accepted = false;
-        answered = false;
+        this.answer = Answer.UNANSWERED;
     }
 
     /* Constructor with ID */
@@ -44,28 +47,19 @@ public class Request {
         this.toDateTime = toDateTime;
         this.price = price;
         this.id = id;
-        accepted = false;
-        answered = false;
+        this.answer = Answer.UNANSWERED;
     }
 
     public String getSendingUserId() {
         return sendingUserId;
     }
 
-    public boolean isAccepted() {
-        return accepted;
+    public Answer getAnswer() {
+        return answer;
     }
 
-    public void setAccepted(boolean accepted) {
-            this.accepted = accepted;
-    }
-
-    public boolean isAnswered() {
-        return answered;
-    }
-
-    public void setAnswered(boolean answered) {
-        this.answered = answered;
+    public void setAnswer(Answer answer) {
+            this.answer = answer;
     }
 
     public String getTargetRentableId() {
@@ -97,7 +91,7 @@ public class Request {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Request request = (Request) o;
-        return accepted == request.accepted &&
+        return answer == request.getAnswer() &&
                 Objects.equals(sendingUserId, request.sendingUserId) &&
                 Objects.equals(targetRentableId, request.targetRentableId) &&
                 Objects.equals(fromDateTime, request.fromDateTime) &&
@@ -106,7 +100,7 @@ public class Request {
 
     @Override
     public int hashCode() {
-        return Objects.hash(sendingUserId, targetRentableId, fromDateTime, toDateTime, accepted);
+        return Objects.hash(sendingUserId, targetRentableId, fromDateTime, toDateTime, answer);
     }
 
     @Override

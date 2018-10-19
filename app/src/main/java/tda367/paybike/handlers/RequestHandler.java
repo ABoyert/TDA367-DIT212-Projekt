@@ -34,7 +34,6 @@ public class RequestHandler {
     private static final String REQUESTSCOLLECTION = "requests";
     private static final String SENDER = "sender";
     private static final String RENTABLEID = "rentable";
-    private static final String ACCEPTED = "accepted";
     private static final String ANSWERED = "answered";
     private static final String FROM_DATE_TIME = "fromDateTime:";
     private static final String TO_DATE_TIME = "toDateTime";
@@ -82,8 +81,8 @@ public class RequestHandler {
         Map<String, Object> requestMap = new HashMap<>();
         requestMap.put(SENDER, request.getSendingUserId());
         requestMap.put(RENTABLEID, request.getTargetRentableId());
-        requestMap.put(ACCEPTED, request.isAccepted());
         requestMap.put(ANSWERED, request.isAnswered());
+        requestMap.put(ANSWER, request.getAnswer());
         requestMap.put(FROM_DATE_TIME, request.getFromDateTime().toString());
         requestMap.put(TO_DATE_TIME, request.getToDateTime().toString());
         requestMap.put(PRICE, request.getPrice());
