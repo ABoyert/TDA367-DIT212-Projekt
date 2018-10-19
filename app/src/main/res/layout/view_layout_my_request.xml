@@ -11,15 +11,17 @@
 
     <ImageView
         android:id="@+id/bikeImage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@color/colorWhite"
         android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:srcCompat="@mipmap/add_photo" />
 
     <LinearLayout
@@ -33,7 +35,7 @@
         android:layout_weight="1"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bikeImage">
 
@@ -59,7 +61,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/startTime"
+            android:id="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -68,64 +70,94 @@
             android:text="@string/start_time"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/endTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="@font/opensans_semibold"
-            android:maxLines="1"
-            android:text="@string/end_time"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="@font/opensans_semibold"
-            android:maxLines="1"
-            android:text="@string/bike_placeholder_price"
-            android:textSize="16sp" />
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/opensans_semibold"
+        android:maxLines="1"
+        android:text="@string/bike_placeholder_price"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bikeImage"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/status"
+        <ImageView
+            android:id="@+id/pending"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="right"
-            android:layout_marginEnd="4dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="1"
-            android:adjustViewBounds="false"
-            android:background="@drawable/btn_round_corners_enabled"
-            android:padding="3dp"
-            app:srcCompat="@mipmap/baseline_done_white_48dp" />
+            android:adjustViewBounds="true"
+            android:background="@drawable/btn_round_corners_gray_enabled"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/baseline_access_time_white_48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <ImageButton
-            android:id="@+id/status2"
+            android:id="@+id/acceptBtn"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="right"
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/btn_round_corners"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:visibility="visible"
+            android:src="@drawable/baseline_done_white_48dp" />
+
+        <ImageButton
+            android:id="@+id/declineBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="right"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
             android:background="@drawable/btn_round_corners_red"
-            android:padding="3dp"
-            app:srcCompat="@mipmap/baseline_clear_white_48dp" />
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/baseline_clear_white_48dp" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/type"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/btn_round_corners_gray_enabled"
+        android:cropToPadding="false"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/baseline_send_white_48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
 </android.support.constraint.ConstraintLayout>

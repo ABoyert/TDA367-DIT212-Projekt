@@ -54,7 +54,6 @@ public class SendRequestFragment extends Fragment {
     private RentableViewModel viewModel;
     private static Rentable rentable;
     private OnFragmentInteractionListener mListener;
-    private Calendar calendar;
     private int openDialog;
 
     public SendRequestFragment() {
@@ -83,7 +82,6 @@ public class SendRequestFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View requestFragment = inflater.inflate(R.layout.fragment_send_request, container, false);
-        calendar = Calendar.getInstance();
         // No dialog is initially open
         openDialog = 0;
 
