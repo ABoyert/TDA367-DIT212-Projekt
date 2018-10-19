@@ -61,9 +61,6 @@ public class RequestHandler {
 
         // for every request in the database, create new request-object
         for (DocumentSnapshot doc : db.getCollection(REQUESTSCOLLECTION)) {
-            // Avoiding null pointer exception
-            boolean accepted = doc.get(ANSWER) != null ? (Boolean) doc.get(ANSWER) : true;
-
             requests.add(new Request(
                     doc.get(SENDER).toString(),
                     doc.get(RENTABLEID).toString(),
@@ -72,7 +69,6 @@ public class RequestHandler {
                     Double.parseDouble(doc.get(PRICE).toString()),
                     Request.Answer.valueOf(doc.get(ANSWER).toString()),
                     doc.getId()));
-
         }
 
         return requests;
