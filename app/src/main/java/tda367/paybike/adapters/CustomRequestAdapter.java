@@ -15,6 +15,7 @@ import java.util.List;
 
 
 import tda367.paybike.R;
+import tda367.paybike.model.Rentable;
 import tda367.paybike.model.Request;
 import tda367.paybike.repository.Repository;
 
@@ -66,6 +67,7 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
         r = new Repository();
 
         Request request = requests.get(position);
+        Rentable rentable = r.getPayBike().getRentableFromId(request.getTargetRentableId());
 
         location = requestView.findViewById(R.id.city);
         title = requestView.findViewById(R.id.targetRentable);
@@ -73,8 +75,9 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
         endTime = requestView.findViewById(R.id.endTime);
         price = requestView.findViewById(R.id.price);
 
-        location.setText(request.getTargetRentableId());
-        title.setText(request.getTargetRentableId());
+
+        location.setText(rentable.getPosition().getStreet() + ", " + rentable.getPosition().getCity());
+        title.setText(rentable.getName());
         startTime.setText(formatFromTime(request.getFromDateTime()));
         endTime.setText(formatToTime(request.getToDateTime()));
         price.setText(formatPrice(request.getPrice()));
