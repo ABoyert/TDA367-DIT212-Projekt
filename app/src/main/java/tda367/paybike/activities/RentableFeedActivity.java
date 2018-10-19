@@ -2,12 +2,16 @@ package tda367.paybike.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +21,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.GridView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 import tda367.paybike.R;
@@ -50,6 +56,7 @@ public class RentableFeedActivity extends AppCompatActivity
     /* Widgets */
     private static GridView rentableView;
     private static SearchView searchRentables;
+    private static SwipeRefreshLayout swipeRefresh;
 
     /* Resources */
     private static RentableViewModel viewModel;
@@ -108,6 +115,14 @@ public class RentableFeedActivity extends AppCompatActivity
                 ((CustomRentableAdapter) rentableView.getAdapter()).updateRentableView(results);
                 return false;
             }
+        });
+
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+        swipeRefresh.setColorSchemeColors(Color.parseColor("#30d9af"));
+        /* Enables user to swipe down to refresh the list of bikes */
+        swipeRefresh.setOnRefreshListener(() -> {
+            updateAdapter();
+            new Handler().postDelayed(() -> swipeRefresh.setRefreshing(false), 2000);
         });
     }
 
