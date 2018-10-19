@@ -1,7 +1,6 @@
 package tda367.paybike.model;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 /**
@@ -16,7 +15,13 @@ public class Request {
     private final LocalDateTime fromDateTime;
     private final LocalDateTime toDateTime;
     private double price;
+    /* The reason for having both answered and accepted, is to be able to
+     tell apart a request that has not yet been answered with one that has been answered.
+     A request which has accepted = false and answered = false has not been answered and therefore
+     accepted = false should not be interpreted as declined. Whereas accepted = false and answered = true
+     means the request has been declined by the owner.*/
     private boolean accepted;
+    private boolean answered;
     private String id;
 
     private void checkDateTime(LocalDateTime from, LocalDateTime to) throws IllegalArgumentException {
@@ -32,11 +37,12 @@ public class Request {
                    LocalDateTime fromDateTime, LocalDateTime toDateTime, double price) {
         checkDateTime(fromDateTime, toDateTime);
         this.sendingUserId = sendingUserID;
-        this.accepted = false;
         this.targetRentableId = targetRentableID;
         this.fromDateTime = fromDateTime;
         this.toDateTime = toDateTime;
         this.price = price;
+        accepted = false;
+        answered = false;
     }
 
     /* Constructor with ID */
@@ -44,12 +50,13 @@ public class Request {
                    LocalDateTime fromDateTime, LocalDateTime toDateTime, double price, String id) {
         checkDateTime(fromDateTime, toDateTime);
         this.sendingUserId = sendingUserID;
-        this.accepted = false;
         this.targetRentableId = targetRentableID;
         this.fromDateTime = fromDateTime;
         this.toDateTime = toDateTime;
         this.price = price;
         this.id = id;
+        accepted = false;
+        answered = false;
     }
 
     public String getSendingUserId() {
@@ -61,7 +68,15 @@ public class Request {
     }
 
     public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
+            this.accepted = accepted;
+    }
+
+    public boolean isAnswered() {
+        return answered;
+    }
+
+    public void setAnswered(boolean answered) {
+        this.answered = answered;
     }
 
     public String getTargetRentableId() {

@@ -7,26 +7,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 
 import tda367.paybike.R;
 import tda367.paybike.model.Request;
+import tda367.paybike.repository.Repository;
 
-public class CustomeRequestAdapter extends ArrayAdapter<Request>{
+public class CustomRequestAdapter extends ArrayAdapter<Request>{
 
     private int layout;
 
     private List<Request> requests;
     private Context context;
-    private TextView receivingUser, targetRentable, startTime, endTime, price;
+    private TextView location, title, startTime, endTime, price;
+    private Repository r;
 
 
-    public CustomeRequestAdapter(@NonNull Context context, int layout, @NonNull List<Request> requests) {
+    public CustomRequestAdapter(@NonNull Context context, int layout, @NonNull List<Request> requests) {
         super(context, layout, requests);
         this.context = context;
         this.requests = requests;
@@ -34,17 +36,17 @@ public class CustomeRequestAdapter extends ArrayAdapter<Request>{
     }
 
     //complement the start time to the desired string
-    private String formatStartTime(String startTime) {
-        return "From: " + startTime;
+    private String formatFromTime(LocalDateTime fromTime) {
+        return "From: " + fromTime.toLocalDate().toString() + " " + fromTime.toLocalTime().toString();
     }
 
     //complement the end time to the desired string
-    private String formatEndTime(String endTime) {
-        return "To: " + endTime;
+    private String formatToTime(LocalDateTime toTime) {
+        return "To: " + toTime.toLocalDate().toString() + " " + toTime.toLocalTime().toString();
     }
 
     //complement the price to the desired string
-    private String formatPrice(double price) { return "$" + price + "/h";}
+    private String formatPrice(double price) { return "$" + price;}
 
     @Override
     public Request getItem(int position){
@@ -61,19 +63,20 @@ public class CustomeRequestAdapter extends ArrayAdapter<Request>{
 
         LayoutInflater lsuInflator = LayoutInflater.from(getContext());
         View requestView = lsuInflator.inflate(layout, parent, false);
-
-        receivingUser = (TextView)requestView.findViewById(R.id.receivingUser);
-        targetRentable = (TextView)requestView.findViewById(R.id.targetRentable);
-        startTime = (TextView)requestView.findViewById(R.id.startTime);
-        endTime = (TextView)requestView.findViewById(R.id.endTime);
-        price = (TextView) requestView.findViewById(R.id.price);
+        r = new Repository();
 
         Request request = requests.get(position);
 
-        receivingUser.setText(request.getSendingUserId());
-        targetRentable.setText(request.getTargetRentableId());
-        startTime.setText(formatStartTime(request.getFromDateTime().toString()));
-        endTime.setText(formatEndTime(request.getToDateTime().toString()));
+        location = requestView.findViewById(R.id.city);
+        title = requestView.findViewById(R.id.targetRentable);
+        startTime = requestView.findViewById(R.id.startTime);
+        endTime = requestView.findViewById(R.id.endTime);
+        price = requestView.findViewById(R.id.price);
+
+        location.setText(request.getTargetRentableId());
+        title.setText(request.getTargetRentableId());
+        startTime.setText(formatFromTime(request.getFromDateTime()));
+        endTime.setText(formatToTime(request.getToDateTime()));
         price.setText(formatPrice(request.getPrice()));
 
         return requestView;

@@ -9,18 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.GridView;
 
-import java.security.PublicKey;
 import java.util.List;
 
 import tda367.paybike.R;
-import tda367.paybike.adapters.CustomeRequestAdapter;
+import tda367.paybike.adapters.CustomRequestAdapter;
 import tda367.paybike.handlers.RequestHandler;
 import tda367.paybike.model.Request;
 
 public class RequestFeedActivity extends AppCompatActivity {
 
     private GridView myRequestsGrid;
-    private CustomeRequestAdapter rAdapter;
+    private CustomRequestAdapter rAdapter;
     private RequestHandler requestHandler;
 
     @Override
@@ -40,7 +39,7 @@ public class RequestFeedActivity extends AppCompatActivity {
 
         // Configure the grid of available bikes
         myRequestsGrid = (GridView) findViewById(R.id.myRequestsGrid);
-        rAdapter = new CustomeRequestAdapter(this,
+        rAdapter = new CustomRequestAdapter(this,
                 R.layout.view_layout_my_request, requestHandler.getCurrentRequests());
         myRequestsGrid.setAdapter(rAdapter);
     }
