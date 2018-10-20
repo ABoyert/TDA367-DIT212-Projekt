@@ -24,7 +24,7 @@ import static java.util.stream.Collectors.*;
 
 public class RentableViewModel extends ViewModel {
 
-    private static final String TAG = RentableFeedActivity.class.getSimpleName();
+    private static final String TAG = "RentableFeedActivity";
 
     private List<Rentable> availableRentables;
     private Rentable selected;

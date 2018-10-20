@@ -7,6 +7,10 @@ import java.util.Optional;
 
 /**
  * Created by Oscar Orava Kilberg on 2018-09-19.
+ *
+ *
+ * Rentable is a interface implemented by all current and future object that can be rented in the application.
+ *
  */
 
 public interface Rentable {

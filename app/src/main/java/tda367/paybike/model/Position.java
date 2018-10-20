@@ -7,6 +7,9 @@ import java.util.Objects;
  * This class models Positions
  *
  * It's current limitation is to only model Swedish addresses
+ *
+ *
+ *
  */
 public class Position {
 

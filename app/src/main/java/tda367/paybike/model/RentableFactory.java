@@ -5,6 +5,9 @@ import android.net.Uri;
 /**
  * Created by Oscar Orava Kilberg on 2018-09-20.
  *
+ *
+ * RentableFactory abtracts the creeation of Rentable objects.
+ *
  */
 
 public class RentableFactory {

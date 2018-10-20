@@ -149,6 +149,7 @@ public class Repository {
     public void updateCurrentUser(){
         PayBike.setCurrentUser(userHandler.convertGetCurrentUser());
     }
+
     public void signOut() {
         userHandler.signOut();
         updateCurrentUser();

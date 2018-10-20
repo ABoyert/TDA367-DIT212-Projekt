@@ -4,6 +4,12 @@ import android.net.Uri;
 
 import java.util.Objects;
 
+/*
+
+Bike implements Rentable and is one type of rentable object.
+
+ */
+
 
 public class Bike implements Rentable {
 

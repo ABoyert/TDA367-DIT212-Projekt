@@ -5,6 +5,12 @@ import java.util.Objects;
 
 /**
  * Created by Oscar Orava Kilberg on 2018-09-19.
+ *
+ * Requests contain the information required for someone to ask for permission to rent a bike (or rentable) from a owner.
+ * Is then accepted/declined by owner.
+ *
+ *
+ *
  */
 
 public class Request {
