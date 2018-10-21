@@ -18,7 +18,7 @@ public class RequestTest {
         Request request = new Request("Julia", "Bike",
                 LocalDateTime.of(2019, 1, 4, 10, 10),
                 LocalDateTime.of(2018, 4, 2, 10, 30),
-                10);
+                10, Request.Answer.UNANSWERED);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -26,7 +26,7 @@ public class RequestTest {
         Request request = new Request("Julia", "Bike",
                 LocalDateTime.of(2019, 1, 4, 10, 10),
                 LocalDateTime.of(2019, 1, 4, 8, 30),
-                10);
+                10, Request.Answer.UNANSWERED);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -34,7 +34,7 @@ public class RequestTest {
         Request request = new Request("Julia", "Bike",
                 LocalDateTime.of(2017, 1, 4, 10, 10),
                 LocalDateTime.of(2017, 1, 4, 12, 30),
-                10);
+                10, Request.Answer.UNANSWERED);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class RequestTest {
         Request request = new Request("Julia", "Bike",
                 LocalDateTime.of(2020, 1, 4, 10, 10),
                 LocalDateTime.of(2020, 1, 5, 12, 30),
-                10);
+                10, Request.Answer.UNANSWERED);
         assertNotNull(request);
     }
 
@@ -51,11 +51,11 @@ public class RequestTest {
         Request r1 = new Request("Julia", "Bike",
                 LocalDateTime.of(2020, 6, 5, 22, 30),
                 LocalDateTime.of(2020, 6,5,23,0),
-                10);
+                10, Request.Answer.UNANSWERED);
         Request r2 = new Request("Julia", "Bike",
                 LocalDateTime.of(2020, 6, 5, 22, 30),
                 LocalDateTime.of(2020, 6,5,23,0),
-                10);
+                10, Request.Answer.UNANSWERED);
         assertTrue(r1.equals(r2));
     }
 }
