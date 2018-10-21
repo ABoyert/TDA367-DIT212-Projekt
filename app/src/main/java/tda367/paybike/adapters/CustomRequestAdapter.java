@@ -136,7 +136,7 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
         acceptBtn.setOnClickListener(v -> acceptRequest(request));
         declineBtn.setOnClickListener(v -> {
             if (userIsSender(request, currentUser)) {
-                deleteRequest();
+                deleteRequest(request);
             } else {
                 declineRequest(request);
             }
@@ -146,8 +146,8 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
 
     }
 
-    private void deleteRequest() {
-
+    private void deleteRequest(Request request) {
+        r.deleteRequst(request);
     }
 
     private boolean userIsSender(Request request, User currentUser) {

@@ -95,6 +95,10 @@ public class Repository {
         }
     }
 
+    public void deleteRequst(Request request) {
+        requestHandler.deleteRequest(request);
+    }
+
     public void updateRentable(Rentable rentable) {
         rentableHandler.updateRentable(rentable);
     }

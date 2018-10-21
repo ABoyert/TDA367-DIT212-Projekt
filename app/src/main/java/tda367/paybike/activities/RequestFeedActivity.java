@@ -11,14 +11,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
-import java.util.List;
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomRequestAdapter;
-import tda367.paybike.model.Request;
 import tda367.paybike.viewmodels.RequestFeedViewModel;
 
 public class RequestFeedActivity extends AppCompatActivity {
@@ -63,10 +60,12 @@ public class RequestFeedActivity extends AppCompatActivity {
         });
     }
 
-    public List<Request> getPersonalRequests(List<Request> requests) {
-        //TODO Implement method the get personal requests
-
-        return requests;
+    /* Automatically called to inflate the menu in the hamburger icon in toolbar */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu, this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 
     //'onOptionsItemSelected' method is automatically called when one of the menu items are clicked
