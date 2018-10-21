@@ -88,7 +88,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public boolean createUser() {
-        return c.createUser(getEmail(), getPassword(), getName()) ? true : false;
+        return c.createUser(getEmail(), getPassword(), getName());
     }
 
     public Repository getC() {

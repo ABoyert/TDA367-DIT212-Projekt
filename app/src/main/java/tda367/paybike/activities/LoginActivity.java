@@ -99,6 +99,8 @@ public class LoginActivity extends AppCompatActivity implements
     /* Handles clicks on Register button in RegisterUserFragment */
     @Override
     public void onUserRegistration() {
+        findBikeBtn.setVisibility(View.VISIBLE);
+
         /* If it is possible to create a user...*/
         if (viewModel.createUser()) {
             /* Close fragment */ 
@@ -116,6 +118,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     /* Starts RegisterUserFragment to enable new account registration */
     private void registerNewUser(View view) {
+        findBikeBtn.setVisibility(View.INVISIBLE);
         RegisterUserFragment newUser = RegisterUserFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();

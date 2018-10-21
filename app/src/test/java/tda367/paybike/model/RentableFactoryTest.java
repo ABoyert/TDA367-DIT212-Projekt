@@ -11,7 +11,7 @@ public class RentableFactoryTest {
     @Test
     public void TestCreateRentable(){
         RentableFactory rf = new RentableFactory();
-        Rentable testBike1 = rf.createTestRentable("Bike");
+        Rentable testBike1 = RentableFactory.createTestRentable("Bike");
         assertNotNull(testBike1);
     }
 }

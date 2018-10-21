@@ -75,7 +75,7 @@ public class AddBikeActivity extends AppCompatActivity {
                 /* Notify ViewModel of changes in text */
                 viewModel.setBikeName(bikeName.getText().toString());
                 /* Check if input is valid (see AddBikeViewModel for constraints) */
-                boolean valid = viewModel.nameIsValid() ? true : false;
+                boolean valid = viewModel.nameIsValid();
                 setBackgroundTintListColor(valid, bikeName);
                 /* Evaluate if button should be enabled or disabled */
                 updatePostBikeBtn();}
@@ -96,7 +96,7 @@ public class AddBikeActivity extends AppCompatActivity {
                 // Notify ViewModel of changes in text
                 viewModel.setBikeDescription(bikeDescription.getText().toString());
                 // Check if input is valid (see AddBikeViewModel for constraints)
-                boolean valid = viewModel.descriptionIsValid() ? true : false;
+                boolean valid = viewModel.descriptionIsValid();
                 setBackgroundTintListColor(valid, bikeDescription);
                 // Evaluate if button should be enabled or disabled
                 updatePostBikeBtn();}
@@ -117,7 +117,7 @@ public class AddBikeActivity extends AppCompatActivity {
                 /* Notify ViewModel of changes in text */
                 viewModel.setStreet(street.getText().toString());
                 /* Check if input is valid (see AddBikeViewModel for constraints) */
-                boolean valid = viewModel.streetIsValid() ? true : false;
+                boolean valid = viewModel.streetIsValid();
                 setBackgroundTintListColor(valid, street);
                 /* Evaluate if button should be enabled or disabled */
                 updatePostBikeBtn();
@@ -138,7 +138,7 @@ public class AddBikeActivity extends AppCompatActivity {
                 /* Notify ViewModel of changes in text */
                 viewModel.setZipcode(zipcode.getText().toString());
                 /* Check if input is valid (see AddBikeViewModel for constraints) */
-                boolean valid = viewModel.zipcodeIsValid() ? true : false;
+                boolean valid = viewModel.zipcodeIsValid();
                 setBackgroundTintListColor(valid, zipcode);
                 /* Evaluate if button should be enabled or disabled */
                 updatePostBikeBtn();
@@ -159,7 +159,7 @@ public class AddBikeActivity extends AppCompatActivity {
                 /* Notify ViewModel of changes in text */
                 viewModel.setCity(city.getText().toString());
                 /* Check if input is valid (see AddBikeViewModel for constraints) */
-                boolean valid = viewModel.cityIsValid() ? true : false;
+                boolean valid = viewModel.cityIsValid();
                 setBackgroundTintListColor(valid, city);
                 /* Evaluate if button should be enabled or disabled */
                 updatePostBikeBtn();
@@ -180,7 +180,7 @@ public class AddBikeActivity extends AppCompatActivity {
                 /* Notify ViewModel of changes in text */
                 viewModel.setBikePrice(bikePrice.getText().toString());
                 /* Check if input is valid (see AddBikeViewModel for constraints) */
-                boolean valid = viewModel.priceIsValid() ? true : false;
+                boolean valid = viewModel.priceIsValid();
                 setBackgroundTintListColor(valid, bikePrice);
                 /* Evaluate if button should be enabled or disabled */
                 updatePostBikeBtn();

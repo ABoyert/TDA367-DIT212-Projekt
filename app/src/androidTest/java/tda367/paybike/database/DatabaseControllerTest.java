@@ -35,7 +35,7 @@ public class DatabaseControllerTest {
 
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         // Get instance of databaseController to be used in following tests
         db = DatabaseController.getInstance();
 
@@ -159,7 +159,7 @@ public class DatabaseControllerTest {
     }
 
     @AfterClass
-    public static void tearDown() throws Exception {
+    public static void tearDown() {
         // Clear tests collection
         deleteCollection("tests");
         deleteCollection("tests2");

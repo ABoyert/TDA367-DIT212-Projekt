@@ -22,7 +22,7 @@ public class BikeTest {
     private static Bike testBike;
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         testBike = new Bike (TEST_NAME, TEST_PRICE, TEST_POSITION, TEST_AVAILABLE, TEST_OWNER, TEST_URI, TEST_DESCRIPTION, TEST_ID);
     }
 

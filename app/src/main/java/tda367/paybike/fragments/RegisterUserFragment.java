@@ -64,7 +64,7 @@ public class RegisterUserFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 viewModel.setName(userName.getText().toString());
-                boolean valid = viewModel.nameIsValid() ? true : false;
+                boolean valid = viewModel.nameIsValid();
                 setBackgroundTintListColor(valid, userName);
                 updateRegisterBtn();
             }
@@ -84,7 +84,7 @@ public class RegisterUserFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 viewModel.setEmail(userEmail.getText().toString());
-                boolean valid = viewModel.emailIsValid() ? true : false;
+                boolean valid = viewModel.emailIsValid();
                 setBackgroundTintListColor(valid, userEmail);
                 updateRegisterBtn();
             }
@@ -104,7 +104,7 @@ public class RegisterUserFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 viewModel.setPassword(userPassword.getText().toString());
-                boolean valid = viewModel.passwordIsValid() ? true : false;
+                boolean valid = viewModel.passwordIsValid();
                 setBackgroundTintListColor(valid, userPassword);
                 updateRegisterBtn();
             }
@@ -123,7 +123,7 @@ public class RegisterUserFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 viewModel.setRepeatedPassword(userRepeatedPassword.getText().toString());
-                boolean valid = viewModel.passwordsMatch() ? true : false;
+                boolean valid = viewModel.passwordsMatch();
                 setBackgroundTintListColor(valid, userRepeatedPassword);
                 updateRegisterBtn();
             }

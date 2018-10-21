@@ -52,7 +52,7 @@ public class PayBike {
     }
 
     public void setModelRentables(List<Rentable> modelRentables) {
-        this.modelRentables = modelRentables;
+        PayBike.modelRentables = modelRentables;
     }
 
     public void addModelRentable(Rentable r) {
@@ -82,7 +82,7 @@ public class PayBike {
     }
 
     public void setModelRequests(List<Request> modelRequests) {
-        this.modelRequests = modelRequests;
+        PayBike.modelRequests = modelRequests;
     }
 
     public void addRequest(User sendingUser, Rentable targetRentable, LocalDateTime fromDateTime, LocalDateTime toDateTime, double price){

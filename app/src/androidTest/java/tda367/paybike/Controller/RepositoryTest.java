@@ -21,11 +21,11 @@ public class RepositoryTest {
     //Context appContext = InstrumentationRegistry.getTargetContext();
     //assertEquals("tda367.paybike", appContext.getPackageName());
     @Test
-    public void getDatabaseRentables() throws Exception {
+    public void getDatabaseRentables() {
     }
 
     @Test
-    public void updateModelRentables() throws Exception {
+    public void updateModelRentables() {
         Repository c = new Repository();
 
 
@@ -39,21 +39,21 @@ public class RepositoryTest {
     }
 
     @Test
-    public void getModelRentables() throws Exception {
+    public void getModelRentables() {
         Repository c = new Repository();
         assert c.getModelRentables().isEmpty();
     }
 
     @Test
-    public void updateAndGetRentables() throws Exception {
+    public void updateAndGetRentables() {
     }
 
     @Test
-    public void getModel() throws Exception {
+    public void getModel() {
     }
 
     @Test
-    public void newRentable() throws Exception {
+    public void newRentable() {
     }
 
 }

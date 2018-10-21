@@ -64,18 +64,18 @@ public class RentableDetailsFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(getActivity()).get(RentableViewModel.class);
 
-        rentableName = (TextView) rentableDetailsView.findViewById(R.id.name);
+        rentableName = rentableDetailsView.findViewById(R.id.name);
         rentableName.setText(rentable.getName());
-        rentablePosition = (TextView) rentableDetailsView.findViewById(R.id.position);
+        rentablePosition = rentableDetailsView.findViewById(R.id.position);
         rentablePosition.setText(rentable.getPosition().getStreet() + ", " +
                 rentable.getPosition().getZipCode() + ", " +
                 rentable.getPosition().getCity());
-        rentableDescription = (TextView) rentableDetailsView.findViewById(R.id.description);
+        rentableDescription = rentableDetailsView.findViewById(R.id.description);
         rentableDescription.setText(rentable.getDescription());
-        rentablePrice = (TextView) rentableDetailsView.findViewById(R.id.price);
+        rentablePrice = rentableDetailsView.findViewById(R.id.price);
         rentablePrice.setText(formatPrice(rentable.getPrice()));
-        rentableImage = (ImageView) rentableDetailsView.findViewById(R.id.rentableImage);
-        rentBikeBtn = (Button) rentableDetailsView.findViewById(R.id.rentBtn);
+        rentableImage = rentableDetailsView.findViewById(R.id.rentableImage);
+        rentBikeBtn = rentableDetailsView.findViewById(R.id.rentBtn);
         rentBikeBtn.setOnClickListener(v -> onButtonPressed());
 
         /* Can't rent your own bike, disable button if owner = current user */

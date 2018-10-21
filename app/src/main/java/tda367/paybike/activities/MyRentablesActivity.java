@@ -54,7 +54,7 @@ public class MyRentablesActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(MyRentablesViewModel.class);
 
         /* Configure toolbar */
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 

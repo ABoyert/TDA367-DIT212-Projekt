@@ -94,7 +94,7 @@ public class Position {
     }
 
     private boolean containsInvalidChar(String s) {
-        return s.indexOf(',') == -1 ? false : true;
+        return s.indexOf(',') != -1;
     }
 
     /*

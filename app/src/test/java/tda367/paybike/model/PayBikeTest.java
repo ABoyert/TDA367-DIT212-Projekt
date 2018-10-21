@@ -27,7 +27,7 @@ public class PayBikeTest {
     public static void init() {
         payBike = PayBike.getInstance();
         PayBike.setCurrentUser(new User("test@test.com", "password", "Testare", "0"));
-        currentUser = payBike.getCurrentUser();
+        currentUser = PayBike.getCurrentUser();
         targetUser = new User("test@t.com", "password", "Testare", "1");
         image = Uri.parse("Image");
         testRentable = RentableFactory.createRentable("Bike", "Cykeltest", 25.00, new Position("Testgatan 1", 34351, "Miami"), true, targetUser.getUserID(), image, "En test", "id1234");
@@ -62,9 +62,9 @@ public class PayBikeTest {
         User newUser = new User("test1@test.com", "password", "Testare", "1");
         User newUser2 = new User("test2@test.com", "password", "Testare", "2");
 
-        payBike.addModelUser(newUser);
-        payBike.addModelUser(newUser2);
-        payBike.addModelUser(newUser2);
+        PayBike.addModelUser(newUser);
+        PayBike.addModelUser(newUser2);
+        PayBike.addModelUser(newUser2);
 
         /* Should only be 2 users in model */
         assertEquals(2, payBike.getModelUsers().size());
