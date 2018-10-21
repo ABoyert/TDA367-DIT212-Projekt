@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import java.util.List;
 import tda367.paybike.R;
@@ -50,6 +52,7 @@ public class RequestFeedActivity extends AppCompatActivity {
         rAdapter = new CustomRequestAdapter(this,
                 R.layout.view_layout_my_request, viewModel.getRequests());
         myRequestsGrid.setAdapter(rAdapter);
+        myRequestsGrid.setOnItemClickListener((parent, view, position, id) -> updateAdapter());
 
         swipeRefresh = findViewById(R.id.swipeRefresh);
         swipeRefresh.setColorSchemeColors(Color.parseColor("#30d9af"));

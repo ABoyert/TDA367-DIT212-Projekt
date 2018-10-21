@@ -100,48 +100,58 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
         price.setText(formatPrice(request.getPrice()));
         setImageIfPresent(rentable);
 
-        /* Check if request was sent by this user */
-        if (request.getSendingUserId().equals(currentUser.getUserID())) {
-            pending.setVisibility(View.GONE);
-
-            switch (request.getAnswer()) {
-                case ACCEPTED:
-                    acceptBtn.setVisibility(View.VISIBLE);
-                    acceptBtn.setEnabled(false);
-                    break;
-                case DENIED:
-                    declineBtn.setVisibility(View.VISIBLE);
-                    declineBtn.setEnabled(false);
-                    break;
-                case UNANSWERED:
-                    pending.setVisibility(View.VISIBLE);
-                    showButtons(false);
-                    break;
-            }
-        } else { /* Request received from another user */
-            /* Set icon to indicate received */
+        if (!userIsSender(request, currentUser)) {
             type.setImageBitmap(receivedRequest);
+        }
 
-            switch (request.getAnswer()) {
-                case ACCEPTED:
-                    acceptBtn.setVisibility(View.VISIBLE);
-                    acceptBtn.setEnabled(false);
-                    break;
-                case DENIED:
+        switch (request.getAnswer()) {
+            case ACCEPTED:
+                acceptBtn.setVisibility(View.VISIBLE);
+                acceptBtn.setEnabled(false);
+                declineBtn.setVisibility(View.GONE);
+                pending.setVisibility(View.GONE);
+                break;
+            case DENIED:
+                declineBtn.setVisibility(View.VISIBLE);
+                declineBtn.setEnabled(false);
+                acceptBtn.setVisibility(View.GONE);
+                pending.setVisibility(View.GONE);
+                break;
+            case UNANSWERED:
+                /* Check if request was sent by this user */
+                if (userIsSender(request, currentUser)) {
+                    pending.setVisibility(View.VISIBLE);
+                    acceptBtn.setVisibility(View.GONE);
                     declineBtn.setVisibility(View.VISIBLE);
-                    declineBtn.setEnabled(false);
-                case UNANSWERED:
+                    break;
+                    /* Request received from another user */
+                    /* Set icon to indicate received */
+                } else {
                     pending.setVisibility(View.GONE);
                     showButtons(true);
                     break;
-            }
+                }
         }
 
         acceptBtn.setOnClickListener(v -> acceptRequest(request));
-        declineBtn.setOnClickListener(v -> declineRequest(request));
+        declineBtn.setOnClickListener(v -> {
+            if (userIsSender(request, currentUser)) {
+                deleteRequest();
+            } else {
+                declineRequest(request);
+            }
+        });
 
         return requestView;
 
+    }
+
+    private void deleteRequest() {
+
+    }
+
+    private boolean userIsSender(Request request, User currentUser) {
+        return request.getSendingUserId().equals(currentUser.getUserID());
     }
 
     private void acceptRequest(Request request) {
