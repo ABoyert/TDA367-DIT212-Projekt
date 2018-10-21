@@ -102,35 +102,38 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
 
         /* Check if request was sent by this user */
         if (request.getSendingUserId().equals(currentUser.getUserID())) {
-            /* If request is not yet answered, display pending */
-            if (!(request.getAnswer() == Request.Answer.UNANSWERED)) {
-                pending.setVisibility(View.GONE);
-                if (request.getAnswer() == Request.Answer.ACCEPTED) {
+            pending.setVisibility(View.GONE);
+
+            switch (request.getAnswer()) {
+                case ACCEPTED:
                     acceptBtn.setVisibility(View.VISIBLE);
                     acceptBtn.setEnabled(false);
-                } else if (request.getAnswer() == Request.Answer.DENIED){
+                    break;
+                case DENIED:
                     declineBtn.setVisibility(View.VISIBLE);
                     declineBtn.setEnabled(false);
-                }
-            } else {
-                showButtons(false);
-                pending.setVisibility(View.VISIBLE);
+                    break;
+                case UNANSWERED:
+                    pending.setVisibility(View.VISIBLE);
+                    showButtons(false);
+                    break;
             }
-
-        } else {
+        } else { /* Request received from another user */
             /* Set icon to indicate received */
             type.setImageBitmap(receivedRequest);
-            if (!(request.getAnswer() == Request.Answer.UNANSWERED)) {
-                if (request.getAnswer() == Request.Answer.ACCEPTED) {
+
+            switch (request.getAnswer()) {
+                case ACCEPTED:
                     acceptBtn.setVisibility(View.VISIBLE);
                     acceptBtn.setEnabled(false);
-                } else if (request.getAnswer() == Request.Answer.DENIED){
+                    break;
+                case DENIED:
                     declineBtn.setVisibility(View.VISIBLE);
                     declineBtn.setEnabled(false);
-                }
-            } else {
-                pending.setVisibility(View.GONE);
-                showButtons(true);
+                case UNANSWERED:
+                    pending.setVisibility(View.GONE);
+                    showButtons(true);
+                    break;
             }
         }
 
