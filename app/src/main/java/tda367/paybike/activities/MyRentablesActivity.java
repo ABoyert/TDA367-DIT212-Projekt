@@ -16,9 +16,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomRentableAdapter;

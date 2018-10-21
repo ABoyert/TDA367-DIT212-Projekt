@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import tda367.paybike.adapters.CustomRentableAdapter;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.repository.Repository;
 

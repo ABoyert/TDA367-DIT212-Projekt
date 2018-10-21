@@ -1,10 +1,8 @@
 package tda367.paybike.handlers;
 
 import android.net.Uri;
-import android.os.SystemClock;
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -13,9 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
-import tda367.paybike.model.Bike;
 import tda367.paybike.model.Position;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;

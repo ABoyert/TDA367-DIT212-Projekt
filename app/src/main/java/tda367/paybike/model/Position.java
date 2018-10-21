@@ -1,6 +1,5 @@
 package tda367.paybike.model;
 
-import java.util.IllegalFormatException;
 import java.util.Objects;
 
 /*
