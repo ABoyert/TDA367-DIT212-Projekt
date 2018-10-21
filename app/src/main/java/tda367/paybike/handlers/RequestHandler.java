@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import tda367.paybike.database.DatabaseController;
-import tda367.paybike.model.Position;
-import tda367.paybike.model.Rentable;
 import tda367.paybike.model.Request;
 
 /**

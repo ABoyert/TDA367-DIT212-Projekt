@@ -2,7 +2,6 @@ package tda367.paybike.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -13,15 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.fragments.RegisterUserFragment;
-import tda367.paybike.viewmodels.AddBikeViewModel;
 import tda367.paybike.viewmodels.LoginViewModel;
 
 /*

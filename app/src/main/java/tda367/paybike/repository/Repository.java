@@ -24,7 +24,6 @@ import tda367.paybike.model.Request;
 import tda367.paybike.model.User;
 
 import static java.util.stream.Collectors.toCollection;
-import static tda367.paybike.model.PayBike.getCurrentUser;
 
 public class Repository {
 

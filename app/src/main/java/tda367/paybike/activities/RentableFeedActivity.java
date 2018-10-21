@@ -2,7 +2,6 @@ package tda367.paybike.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,11 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.GridView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
