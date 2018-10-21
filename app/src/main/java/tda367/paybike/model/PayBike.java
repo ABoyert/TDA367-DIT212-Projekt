@@ -35,7 +35,7 @@ public class PayBike {
         return instance;
     }
 
-    //TODO Filtrering, Checks för lösenord, samma cyklar, likadana id, samma email osv.
+    //TODO Filtrering
 
     public Rentable getRentableFromId(String id) {
         for (Rentable r : modelRentables) {
@@ -51,14 +51,30 @@ public class PayBike {
         return modelRentables;
     }
 
-
-
     public void setModelRentables(List<Rentable> modelRentables) {
         this.modelRentables = modelRentables;
     }
 
+    public void addModelRentable(Rentable r) {
+        /* If rentable not already exists in the list, add it */
+        if (!modelRentables.contains(r)) {
+            modelRentables.add(r);
+        }
+    }
+
     public static void addModelUser(User newUser) {
-        modelUsers.add(newUser);
+        boolean userAlreadyExists = false;
+
+        /* Check if email or ID matches existing user */
+        for (User u : modelUsers) {
+            if (u.getEmail().equals(newUser.getEmail()) || u.getUserID().equals(newUser.getUserID())) {
+                userAlreadyExists = true;
+            }
+        }
+
+        if (!userAlreadyExists) {
+            modelUsers.add(newUser);
+        }
     }
 
     public List<Request> getModelRequests() {
@@ -75,6 +91,10 @@ public class PayBike {
 
     public static User getCurrentUser() {
         return currentUser;
+    }
+
+    public List<User> getModelUsers() {
+        return modelUsers;
     }
 
     public static void setCurrentUser(User currentUser) {
