@@ -114,7 +114,7 @@ public class Position {
             city = split[2];
             return new Position(street, zipCode, city);
         } else {
-            throw new IllegalArgumentException("Position could not be parsed due to Illegal Format");
+            throw new IllegalArgumentException("Position could not be parsed due to Illegal Format! Pos: " + position);
         }
     }
 

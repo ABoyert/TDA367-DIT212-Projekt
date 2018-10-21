@@ -101,6 +101,7 @@ public class MyRentablesActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.view_all_bikes:
+                startRentableFeedActivity();
                 return true;
             case R.id.add_bike:
                 startAddBikeActivity();
@@ -173,6 +174,11 @@ public class MyRentablesActivity extends AppCompatActivity {
     private void startMyRentablesActivity() {
         startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
         finish(); 
+    }
+
+    private void startRentableFeedActivity() {
+        startActivity(new Intent(getApplicationContext(), RentableFeedActivity.class));
+        finish();
     }
 
     /* Starts the ViewRequestActivity */
