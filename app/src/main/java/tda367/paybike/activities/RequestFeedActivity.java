@@ -1,6 +1,6 @@
 package tda367.paybike.activities;
 
-import android.arch.lifecycle.ViewModel;
+
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,15 +13,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.GridView;
-
 import java.util.List;
-
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomRequestAdapter;
-import tda367.paybike.handlers.RequestHandler;
 import tda367.paybike.model.Request;
-import tda367.paybike.repository.Repository;
-import tda367.paybike.viewmodels.AddBikeViewModel;
 import tda367.paybike.viewmodels.RequestFeedViewModel;
 
 public class RequestFeedActivity extends AppCompatActivity {
