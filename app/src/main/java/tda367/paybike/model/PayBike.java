@@ -51,6 +51,8 @@ public class PayBike {
         return modelRentables;
     }
 
+
+
     public void setModelRentables(List<Rentable> modelRentables) {
         this.modelRentables = modelRentables;
     }
