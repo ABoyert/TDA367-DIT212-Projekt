@@ -3,6 +3,7 @@ package tda367.paybike.model;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -19,17 +20,6 @@ public class PositionTest {
 
         assertEquals("tda367.paybike", appContext.getPackageName());
 
-    }
-
-    @Test
-    public void createPositionTest(){
-        Position pos = new Position("Horsalevagen", "goteborg", "Swe", 42313);
-        pos.setCity("Varberg");
-        pos.setCountry("Norge");
-        pos.setStreet("hubben");
-        pos.setZipCode(12351);
-
-        assert pos.getCity() == "Varberg" && pos.getCountry() == "Norge" && pos.getStreet() == "hubben" && pos.getZipCode() == 12351;
     }
 
 }

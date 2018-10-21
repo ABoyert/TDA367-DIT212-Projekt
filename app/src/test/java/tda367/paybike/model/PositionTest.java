@@ -10,7 +10,6 @@ public class PositionTest {
         Position position = new Position("Testgatan 2", 534313, "Göteborg");
     }
 
-
     @Test(expected = IllegalArgumentException.class)
     public void checkStreet() {
         Position position = new Position("", 534313, "Göteborg");
@@ -46,6 +45,32 @@ public class PositionTest {
         String positionString = pos1.toString();
         Position pos2 = Position.parseString(positionString);
         assertEquals(pos1, pos2);
+    }
+
+
+    //Test for getters
+    @Test
+    public void testGetEmail() {
+        Position position = new Position("Testgatan 2", 53431, "Göteborg");
+        assertEquals(position.getStreet(), "Testgatan 2");
+    }
+
+    @Test
+    public void testGetZipCode() {
+        Position position = new Position("Testgatan 2", 53431, "Göteborg");
+        assert position.getZipCode() == 53431;
+    }
+
+    @Test
+    public void testGetCity() {
+        Position position = new Position("Testgatan 2", 53431, "Göteborg");
+        assertEquals(position.getCity(), "Göteborg");
+    }
+
+    @Test
+    public void testGetCountry() {
+        Position position = new Position("Testgatan 2", 53431, "Göteborg");
+        assertEquals(position.getCountry(), "Sweden");
     }
 
 }

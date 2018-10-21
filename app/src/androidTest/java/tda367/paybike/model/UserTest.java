@@ -47,28 +47,4 @@ public class UserTest {
         assertEquals("tda367.paybike", appContext.getPackageName());
     }
 
-    //Test for getters
-    @Test
-    public void testGetEmail() {
-        User user = new User("test@test.com", "password", "Anton", "123123123");
-        assertEquals(user.getEmail(), "test@test.com");
-    }
-
-    @Test
-    public void testGetPassword() {
-        User user = new User("test@test.com", "password", "Anton", "123123123");
-        assertEquals(user.getPassword(), "password");
-    }
-
-    @Test
-    public void testGetName() {
-        User user = new User("test@test.com", "password", "Anton", "123123123");
-        assertEquals(user.getName(), "Anton");
-    }
-
-    @Test
-    public void testGetUserID() {
-        User user = new User("test@test.com", "password", "Anton", "123123123");
-        assertEquals(user.getUserID(), "123123123");
-    }
 }

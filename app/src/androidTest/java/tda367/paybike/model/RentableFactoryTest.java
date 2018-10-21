@@ -18,7 +18,7 @@ public class RentableFactoryTest {
 
         assertEquals("tda367.paybike", appContext.getPackageName());
     }
-
+    /*
     public void createBikeWithFactoryTest() {
         RentableFactory rf = new RentableFactory();
         Position testPos = new Position("123","456","789",000);
@@ -28,7 +28,7 @@ public class RentableFactoryTest {
         rentables.add(testBike1);
         assert testBike1.getId() == "123" && testBike1.getPosition() == testPos
                 && testBike1.getPrice() == 100.0 && testBike1.isAvailable();
-    }
+    }*/
 
 
 }
