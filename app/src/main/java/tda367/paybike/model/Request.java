@@ -22,11 +22,7 @@ public class Request {
     private final LocalDateTime toDateTime;
     private double price;
     private String id;
-    /* The reason for having both answered and accepted, is to be able to
-     tell apart a request that has not yet been answered with one that has been answered.
-     A request which has accepted = false and answered = false has not been answered and therefore
-     accepted = false should not be interpreted as declined. Whereas accepted = false and answered = true
-     means the request has been declined by the owner.*/
+    /* All the states a request can have */
     public enum Answer {
         ACCEPTED,
         UNANSWERED,
