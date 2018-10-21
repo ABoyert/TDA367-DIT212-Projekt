@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class BikeTest {
@@ -23,7 +24,7 @@ public class BikeTest {
 
     @BeforeClass
     public static void setUp() {
-        testBike = new Bike (TEST_NAME, TEST_PRICE, TEST_POSITION, TEST_AVAILABLE, TEST_OWNER, TEST_URI, TEST_DESCRIPTION, TEST_ID);
+        testBike = new Bike(TEST_NAME, TEST_PRICE, TEST_POSITION, TEST_AVAILABLE, TEST_OWNER, TEST_URI, TEST_DESCRIPTION, TEST_ID);
     }
 
     /*@Test(expected = IllegalArgumentException.class)
@@ -33,7 +34,7 @@ public class BikeTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void checkName2() {
-        Bike bike = new Bike ("This is a very long name that should not be accepted by the constructor. " +
+        Bike bike = new Bike("This is a very long name that should not be accepted by the constructor. " +
                 "Hopefully this will return an exception to notify the user that something is wrong.",
                 TEST_PRICE, TEST_POSITION, TEST_AVAILABLE, TEST_OWNER, TEST_URI, TEST_DESCRIPTION);
     }
@@ -89,18 +90,18 @@ public class BikeTest {
     @Test
     public void setPrice() {
         testBike.setPrice(22.0);
-        assert(22.0 == testBike.getPrice());
+        assert (22.0 == testBike.getPrice());
         testBike.setPrice(TEST_PRICE);
     }
 
     @Test
     public void getPrice() {
-        assert(TEST_PRICE == testBike.getPrice());
+        assert (TEST_PRICE == testBike.getPrice());
     }
 
     @Test
     public void setPosition() {
-        Position newPos = new Position("Fiske", 86532,"Umeå");
+        Position newPos = new Position("Fiske", 86532, "Umeå");
 
         testBike.setPosition(newPos);
         assertEquals(newPos, testBike.getPosition());

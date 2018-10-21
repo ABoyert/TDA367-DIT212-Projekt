@@ -44,7 +44,8 @@ public class RentableDetailsFragment extends Fragment {
     private RentableViewModel viewModel;
 
     // Required empty public constructor
-    public RentableDetailsFragment() { }
+    public RentableDetailsFragment() {
+    }
 
     public static RentableDetailsFragment newInstance(Rentable r) {
         RentableDetailsFragment fragment = new RentableDetailsFragment();

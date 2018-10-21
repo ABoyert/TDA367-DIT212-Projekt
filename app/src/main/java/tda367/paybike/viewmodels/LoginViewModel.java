@@ -1,11 +1,12 @@
 package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
+
 import tda367.paybike.repository.Repository;
 
 /*
-* Created by Julia Gustafsson
-*
+ * Created by Julia Gustafsson
+ *
  * This ViewModel is responsible for handling the data which will be presented in the LoginActivity as well
  * as the RegisterUserFragment.
  *
@@ -80,7 +81,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public boolean inputIsValid() {
-        return emailIsValid() && passwordIsValid() && nameIsValid() &&passwordsMatch();
+        return emailIsValid() && passwordIsValid() && nameIsValid() && passwordsMatch();
     }
 
     public boolean passwordsMatch() {

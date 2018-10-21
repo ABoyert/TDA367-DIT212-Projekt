@@ -27,7 +27,7 @@ import tda367.paybike.model.Request;
 import tda367.paybike.model.User;
 import tda367.paybike.repository.Repository;
 
-public class CustomRequestAdapter extends ArrayAdapter<Request>{
+public class CustomRequestAdapter extends ArrayAdapter<Request> {
 
     /* Widgets */
     private List<Request> requests;
@@ -59,10 +59,12 @@ public class CustomRequestAdapter extends ArrayAdapter<Request>{
     }
 
     /* Formats the price with a dollar sign and two decimals */
-    private String formatPrice(double price) { return "$" + String.format("%.2f", price); }
+    private String formatPrice(double price) {
+        return "$" + String.format("%.2f", price);
+    }
 
     @Override
-    public Request getItem(int position){
+    public Request getItem(int position) {
         return requests.get(position);
     }
 

@@ -28,10 +28,10 @@ import static java.util.stream.Collectors.toCollection;
 public class Repository {
 
     /*
-    *
-    * Passes data
-    *
-    * */
+     *
+     * Passes data
+     *
+     * */
     private PayBike payBike = PayBike.getInstance();
     private RequestHandler requestHandler = RequestHandler.getInstance();
     private RentableHandler rentableHandler = RentableHandler.getInstance();
@@ -45,42 +45,48 @@ public class Repository {
     }
 
     //Retrieves rentables from database
-    public List<Rentable> getDatabaseRentables(){
+    public List<Rentable> getDatabaseRentables() {
         return rentableHandler.getAllRentables();
     }
 
-    public List<Request> getDatabaseRequests(){ return requestHandler.getCurrentRequests();}
+    public List<Request> getDatabaseRequests() {
+        return requestHandler.getCurrentRequests();
+    }
 
     /* Returns requests that are associated with the current user */
     public List<Request> getCurrentUserRequests() {
         updateModelRequests();
-       return getModelRequests().stream()
+        return getModelRequests().stream()
                 .filter(request -> getCurrentUser().getUserID().equals(request.getSendingUserId()) ||
-                getCurrentUser().getUserID().equals(payBike.getRentableFromId(request.getTargetRentableId()).getOwner()))
+                        getCurrentUser().getUserID().equals(payBike.getRentableFromId(request.getTargetRentableId()).getOwner()))
                 .collect(toCollection(ArrayList::new));
     }
 
-    public void updateModelRequests(){ payBike.setModelRequests(getDatabaseRequests()); }
+    public void updateModelRequests() {
+        payBike.setModelRequests(getDatabaseRequests());
+    }
 
-    public List<Request> updateAndGetRequests(){
+    public List<Request> updateAndGetRequests() {
         updateModelRequests();
         return getModelRequests();
     }
 
     //Puts rentables from database in payBike
-    public void updateModelRentables(){
+    public void updateModelRentables() {
         payBike.setModelRentables(getDatabaseRentables());
     }
 
     //Get list of rentables from payBike
-    public List<Rentable> getModelRentables(){
+    public List<Rentable> getModelRentables() {
         return payBike.getModelRentables();
     }
 
-    public List<Request> getModelRequests(){return payBike.getModelRequests();}
+    public List<Request> getModelRequests() {
+        return payBike.getModelRequests();
+    }
 
     //Updates the payBike with rentables from the database and returns the updated list
-    public List<Rentable>updateAndGetRentables(){
+    public List<Rentable> updateAndGetRentables() {
         updateModelRentables();
         return getModelRentables();
     }
@@ -107,13 +113,13 @@ public class Repository {
         requestHandler.updateRequest(request);
     }
 
-    public PayBike getPayBike(){
+    public PayBike getPayBike() {
         return payBike;
     }
 
     public void newRentableNoID(String type, String name, double price, Position position,
-                            boolean available,Uri imageLink,
-                            String description){
+                                boolean available, Uri imageLink,
+                                String description) {
         updateModelRentables();
         // TODO change owner argument to respons from userHandler.getCurrentUser().getId()
         Rentable newRentable = RentableFactory.createRentableNoID(type, name, price,
@@ -149,7 +155,7 @@ public class Repository {
         return true;
     }
 
-    public void updateCurrentUser(){
+    public void updateCurrentUser() {
         PayBike.setCurrentUser(userHandler.convertGetCurrentUser());
     }
 
@@ -158,7 +164,7 @@ public class Repository {
         updateCurrentUser();
     }
 
-    public void createNewRequest(Rentable requested, LocalDateTime fromDateTime, LocalDateTime toDateTime, double price){
+    public void createNewRequest(Rentable requested, LocalDateTime fromDateTime, LocalDateTime toDateTime, double price) {
         updateModelRequests();
         Request request = new Request(PayBike.getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime, price, Request.Answer.UNANSWERED);
         getModelRequests().add(request);

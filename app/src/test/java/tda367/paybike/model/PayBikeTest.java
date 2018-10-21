@@ -38,8 +38,8 @@ public class PayBikeTest {
     }
 
     @Test
-    public void addRequest(){
-        payBike.addRequest(currentUser, testRentable, LocalDateTime.of(2020, 12, 24, 11,0), LocalDateTime.of(2020, 12, 24, 12, 0), 10);
+    public void addRequest() {
+        payBike.addRequest(currentUser, testRentable, LocalDateTime.of(2020, 12, 24, 11, 0), LocalDateTime.of(2020, 12, 24, 12, 0), 10);
         assertFalse(payBike.getModelRequests().isEmpty());
     }
 

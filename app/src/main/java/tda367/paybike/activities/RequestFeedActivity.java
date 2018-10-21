@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
+
 import tda367.paybike.R;
 import tda367.paybike.adapters.CustomRequestAdapter;
 import tda367.paybike.viewmodels.RequestFeedViewModel;
@@ -106,7 +107,7 @@ public class RequestFeedActivity extends AppCompatActivity {
     }
 
     //Starts the RentableFeedActivity
-    private  void startBikeFeedActivity(){
+    private void startBikeFeedActivity() {
         startActivity(new Intent(getApplicationContext(), RentableFeedActivity.class));
     }
 

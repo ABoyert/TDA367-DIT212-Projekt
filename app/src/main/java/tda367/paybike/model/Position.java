@@ -16,7 +16,7 @@ public class Position {
 
     private final String street;
     private final Integer zipCode;
-    private final  String city;
+    private final String city;
 
     /* Verifies that the given zipcode has five digits */
     private void checkZipCode(Integer zipCode) throws IllegalArgumentException {
@@ -42,9 +42,9 @@ public class Position {
     /**
      * Models Swedish address, hence all positions will have country automatically set to Sweden
      *
-     * @param street Describes the street address, cannot be empty string
+     * @param street  Describes the street address, cannot be empty string
      * @param zipCode Valid Swedish zipcode with 5 digits
-     * @param city Cannot be empty string
+     * @param city    Cannot be empty string
      */
     public Position(String street, Integer zipCode, String city) {
         checkStreet(street);
@@ -98,10 +98,10 @@ public class Position {
     }
 
     /*
-    *  Takes a toString() representation of a Position and parses to a new Position object
-    *  Street, zipcode and city should be separated with a comma
-    *  Example: "Mainstreet 2,45643,Stockholm"
-    */
+     *  Takes a toString() representation of a Position and parses to a new Position object
+     *  Street, zipcode and city should be separated with a comma
+     *  Example: "Mainstreet 2,45643,Stockholm"
+     */
     public static Position parseString(String position) throws IllegalArgumentException {
         String street;
         Integer zipCode;

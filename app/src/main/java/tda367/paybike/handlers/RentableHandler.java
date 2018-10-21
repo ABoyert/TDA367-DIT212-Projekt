@@ -16,10 +16,11 @@ import tda367.paybike.model.Position;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;
 
-/**        -SINGLETON CLASS-
+/**
+ * -SINGLETON CLASS-
  * Use class by getting the class instance
  * through the function getInstance()
- *
+ * <p>
  * Everything regarding Rentables in
  * the database goes through this
  * class. Uses DatabaseController in
@@ -65,7 +66,7 @@ public class RentableHandler {
         ArrayList<Rentable> rentablesList = new ArrayList<>();
 
         // Might not be needed
-        while (db.getCollection(BIKESCOLLECTION) == null);
+        while (db.getCollection(BIKESCOLLECTION) == null) ;
 
         for (DocumentSnapshot doc : db.getCollection(BIKESCOLLECTION)) {
             rentablesList.add(RentableFactory.createRentable("Bike",

@@ -85,7 +85,7 @@ public class PayBike {
         PayBike.modelRequests = modelRequests;
     }
 
-    public void addRequest(User sendingUser, Rentable targetRentable, LocalDateTime fromDateTime, LocalDateTime toDateTime, double price){
+    public void addRequest(User sendingUser, Rentable targetRentable, LocalDateTime fromDateTime, LocalDateTime toDateTime, double price) {
         modelRequests.add(new Request(sendingUser.getUserID(), targetRentable.getId(), fromDateTime, toDateTime, price, Request.Answer.UNANSWERED));
     }
 

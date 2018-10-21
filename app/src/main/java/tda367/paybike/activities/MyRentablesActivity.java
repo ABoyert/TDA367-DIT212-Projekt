@@ -128,10 +128,10 @@ public class MyRentablesActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         // Fetch item and notify ViewModel that item is clicked
-        Rentable selected = rentablesAdapter.getItem(((AdapterView.AdapterContextMenuInfo)menuInfo).position);
+        Rentable selected = rentablesAdapter.getItem(((AdapterView.AdapterContextMenuInfo) menuInfo).position);
         viewModel.setSelected(selected);
 
-        if (v.getId()==R.id.myRentablesGrid) {
+        if (v.getId() == R.id.myRentablesGrid) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.rentable_settings_menu, menu);
         }
@@ -141,7 +141,7 @@ public class MyRentablesActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.change_availibility:
                 viewModel.toggleSelectedAvailability();
                 refreshRentables();
@@ -173,7 +173,7 @@ public class MyRentablesActivity extends AppCompatActivity {
     /* Starts the MyRentablesActivity */
     private void startMyRentablesActivity() {
         startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
-        finish(); 
+        finish();
     }
 
     private void startRentableFeedActivity() {

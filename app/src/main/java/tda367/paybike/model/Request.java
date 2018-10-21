@@ -5,12 +5,9 @@ import java.util.Objects;
 
 /**
  * Created by Oscar Orava Kilberg on 2018-09-19.
- *
+ * <p>
  * Requests contain the information required for someone to ask for permission to rent a bike (or rentable) from a owner.
  * Is then accepted/declined by owner.
- *
- *
- *
  */
 
 public class Request {
@@ -22,12 +19,14 @@ public class Request {
     private final LocalDateTime toDateTime;
     private double price;
     private String id;
+
     /* All the states a request can have */
     public enum Answer {
         ACCEPTED,
         UNANSWERED,
         DENIED
     }
+
     private Answer answer;
 
     public Request(String sendingUserID, String targetRentableID,
@@ -61,7 +60,7 @@ public class Request {
     }
 
     public void setAnswer(Answer answer) {
-            this.answer = answer;
+        this.answer = answer;
     }
 
     public String getTargetRentableId() {

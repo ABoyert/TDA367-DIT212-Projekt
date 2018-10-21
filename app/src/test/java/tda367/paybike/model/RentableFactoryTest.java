@@ -2,6 +2,7 @@ package tda367.paybike.model;
 
 
 import org.junit.Test;
+
 import static junit.framework.TestCase.assertNotNull;
 
 public class RentableFactoryTest {
@@ -9,7 +10,7 @@ public class RentableFactoryTest {
     RentableFactory rf = new RentableFactory();
 
     @Test
-    public void TestCreateRentable(){
+    public void TestCreateRentable() {
         RentableFactory rf = new RentableFactory();
         Rentable testBike1 = RentableFactory.createTestRentable("Bike");
         assertNotNull(testBike1);

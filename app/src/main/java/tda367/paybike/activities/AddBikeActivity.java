@@ -65,10 +65,12 @@ public class AddBikeActivity extends AppCompatActivity {
         bikeName = findViewById(R.id.nameText);
         bikeName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -78,14 +80,16 @@ public class AddBikeActivity extends AppCompatActivity {
                 boolean valid = viewModel.nameIsValid();
                 setBackgroundTintListColor(valid, bikeName);
                 /* Evaluate if button should be enabled or disabled */
-                updatePostBikeBtn();}
+                updatePostBikeBtn();
+            }
         });
 
         /* Configure bikeDescription */
         bikeDescription = findViewById(R.id.descriptionText);
         bikeDescription.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -99,14 +103,16 @@ public class AddBikeActivity extends AppCompatActivity {
                 boolean valid = viewModel.descriptionIsValid();
                 setBackgroundTintListColor(valid, bikeDescription);
                 // Evaluate if button should be enabled or disabled
-                updatePostBikeBtn();}
+                updatePostBikeBtn();
+            }
         });
 
 
         street = findViewById(R.id.street);
         street.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -127,7 +133,8 @@ public class AddBikeActivity extends AppCompatActivity {
         zipcode = findViewById(R.id.zipcode);
         zipcode.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -148,7 +155,8 @@ public class AddBikeActivity extends AppCompatActivity {
         city = findViewById(R.id.city);
         city.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -170,10 +178,12 @@ public class AddBikeActivity extends AppCompatActivity {
         bikePrice = findViewById(R.id.priceText);
         bikePrice.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -232,16 +242,14 @@ public class AddBikeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null )
-        {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 chooseImageBtn.setImageBitmap(bitmap);
                 viewModel.setBikeImagePath(filePath);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -268,6 +276,8 @@ public class AddBikeActivity extends AppCompatActivity {
     Decides if the button should be enabled or disabled depending on the validation of the input fields
     See ViewModel for constraints
     */
-    private void updatePostBikeBtn() { addBikeBtn.setEnabled(viewModel.inputIsValid()); }
+    private void updatePostBikeBtn() {
+        addBikeBtn.setEnabled(viewModel.inputIsValid());
+    }
 
 }

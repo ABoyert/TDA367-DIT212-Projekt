@@ -50,11 +50,11 @@ public class RequestTest {
     public void equals() {
         Request r1 = new Request("Julia", "Bike",
                 LocalDateTime.of(2020, 6, 5, 22, 30),
-                LocalDateTime.of(2020, 6,5,23,0),
+                LocalDateTime.of(2020, 6, 5, 23, 0),
                 10, Request.Answer.UNANSWERED);
         Request r2 = new Request("Julia", "Bike",
                 LocalDateTime.of(2020, 6, 5, 22, 30),
-                LocalDateTime.of(2020, 6,5,23,0),
+                LocalDateTime.of(2020, 6, 5, 23, 0),
                 10, Request.Answer.UNANSWERED);
         assertTrue(r1.equals(r2));
     }

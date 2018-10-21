@@ -12,10 +12,11 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 import tda367.paybike.model.User;
 
-/**        -SINGLETON CLASS-
+/**
+ * -SINGLETON CLASS-
  * Use class by getting the class instance
  * through the function getInstance()
- *
+ * <p>
  * Everything regarding users and user accounts in
  * Firebase Auth goes through this
  * class. Uses Firebase Auth in
@@ -89,9 +90,9 @@ public class UserHandler {
         fAuth.signOut();
     }
 
-    public User convertGetCurrentUser(){
+    public User convertGetCurrentUser() {
         FirebaseUser user = fAuth.getCurrentUser();
-        if(user == null)return null;
+        if (user == null) return null;
         return new User(user.getEmail(), user.getDisplayName(), user.getUid());
     }
 

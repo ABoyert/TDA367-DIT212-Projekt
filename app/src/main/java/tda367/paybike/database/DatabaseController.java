@@ -22,23 +22,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/**        -SINGLETON CLASS-
+/**
+ * -SINGLETON CLASS-
  * Use class by getting the class instance
  * through the function getInstance()
- *
+ * <p>
  * Class that is supposed to act as a
  * middleman between the application and
  * our Google Firestore database in order
  * to simplify use of the database and
  * reduce dependency on direct database
  * connections.
- *
- *   EXAMPLE DOCUMENT MAP:
+ * <p>
+ * EXAMPLE DOCUMENT MAP:
  * Map<String, Object> example = new HashMap<>();
  * example.put("text", "abc");
  * example.put("name", "erik");
  * example.put("price", 22);
- *
+ * <p>
  * EXAMPLE USING add:
  * add("bikes", "bike1234", example); (This will add the example document map created above to the document 'bike1234' in collection 'bikes')
  */
@@ -222,11 +223,11 @@ public class DatabaseController {
                         Log.d(TAG, "ID-" + documentID + " deleted!");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "ID-" + documentID + " could not be deleted!");
-                    }
-                });
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "ID-" + documentID + " could not be deleted!");
+            }
+        });
     }
 
     // Uploads given file to Firebase Storage and returns the Uri Task
@@ -252,8 +253,8 @@ public class DatabaseController {
         });
 
         // Let upload task finish
-        while (!uploadTask.isComplete());
-            //SystemClock.sleep(50);
+        while (!uploadTask.isComplete()) ;
+        //SystemClock.sleep(50);
 
         Task<Uri> getUriTask = fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

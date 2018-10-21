@@ -6,9 +6,8 @@ import java.util.Objects;
 
 /**
  * Created by Oscar Orava Kilberg on 2018-09-19.
- *
+ * <p>
  * App user variables and methods. Implemented as immutable object since user properties cannot be updated.
- *
  */
 
 final public class User {
@@ -38,7 +37,7 @@ final public class User {
         this.userID = userID;
     }
 
-    public User(String email, String name, String userID){
+    public User(String email, String name, String userID) {
         checkEmail(email);
         this.name = name;
         this.email = email;

@@ -124,8 +124,7 @@
             android:paddingRight="16dp"
             android:paddingTop="16dp"
             android:scrollbarStyle="outsideInset"
-            android:verticalSpacing="16dp" >
-        </GridView>
+            android:verticalSpacing="16dp"></GridView>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

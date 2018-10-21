@@ -107,7 +107,7 @@ public class Bike implements Rentable {
     }
 
     @Override
-    public String getId(){
+    public String getId() {
         return id;
     }
 

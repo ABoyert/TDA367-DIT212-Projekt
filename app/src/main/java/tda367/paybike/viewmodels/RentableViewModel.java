@@ -35,7 +35,7 @@ public class RentableViewModel extends ViewModel {
         r = new Repository();
         fromDateTime = LocalDateTime.now();
         System.out.println("From Date: " + fromDateTime);
-        toDateTime = LocalDateTime.now().plus(1,ChronoUnit.HOURS);
+        toDateTime = LocalDateTime.now().plus(1, ChronoUnit.HOURS);
         System.out.println("To Date: " + toDateTime);
     }
 
@@ -89,12 +89,12 @@ public class RentableViewModel extends ViewModel {
                 && getFromTime() != null
                 && getToDate() != null
                 && getToTime() != null) {
-            long minBetween = ChronoUnit.MINUTES.between(fromDateTime,toDateTime);
+            long minBetween = ChronoUnit.MINUTES.between(fromDateTime, toDateTime);
             int hours = (int) minBetween / 60;
             int minutes = (int) (minBetween % 60);
             double rate = selected.getPrice();
             // Lowest price is for one hour, if more than one hour, calculate exact price
-            price = hours < 1 ? selected.getPrice() : (hours * rate) + (minutes * rate/60);
+            price = hours < 1 ? selected.getPrice() : (hours * rate) + (minutes * rate / 60);
         }
         return price;
     }
@@ -109,7 +109,7 @@ public class RentableViewModel extends ViewModel {
 
     public boolean toDateIsOneHourAfterFromDate() {
         if (fromDateIsBeforeToDate()) {
-            long min = ChronoUnit.MINUTES.between(fromDateTime,toDateTime);
+            long min = ChronoUnit.MINUTES.between(fromDateTime, toDateTime);
             return min >= 60;
         } else {
             return false;
@@ -166,7 +166,7 @@ public class RentableViewModel extends ViewModel {
                 .collect(toCollection(ArrayList::new));
     }
 
-    public void updateViewModelRentables(){
+    public void updateViewModelRentables() {
         setAvailableRentables(getModelRentables());
     }
 

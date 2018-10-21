@@ -83,7 +83,7 @@ public class DatabaseControllerTest {
                     }
                 })*/;
 
-        while (!collectionSnapshot.isComplete()); // Nice code, need rework
+        while (!collectionSnapshot.isComplete()) ; // Nice code, need rework
 
         // Check if there is only the recently added document in collection tests
         assertEquals(expectedSize, collectionSnapshot.getResult().getDocuments().size());
@@ -108,7 +108,7 @@ public class DatabaseControllerTest {
 
         // Read collection tests2 into local collectionSnapshot
         Task<QuerySnapshot> collectionSnapshot = firestore.collection(collectionName).get();
-        while (!collectionSnapshot.isComplete()); // REWORK
+        while (!collectionSnapshot.isComplete()) ; // REWORK
 
         // Check if the document added in testAddtoDatabase now is gone
         assertEquals(expectedSize, collectionSnapshot.getResult().getDocuments().size());
@@ -172,7 +172,7 @@ public class DatabaseControllerTest {
 
         Task addTestDoc = firestore.collection("tests2").document(docID).set(test);
 
-        while (!addTestDoc.isSuccessful()); // !!!!!
+        while (!addTestDoc.isSuccessful()) ; // !!!!!
     }
 
     private static void deleteCollection(String collectionName) {
@@ -190,7 +190,7 @@ public class DatabaseControllerTest {
                     }
                 });
 
-        while (!testsCollection.isComplete()); // Nice nice, rework
+        while (!testsCollection.isComplete()) ; // Nice nice, rework
 
         for (DocumentSnapshot doc : testsCollection.getResult()) {
             Task docDel = firestore.collection(collectionName).document(doc.getId())
@@ -202,7 +202,7 @@ public class DatabaseControllerTest {
                         }
                     });
 
-            while (!docDel.isSuccessful()); // Nice code again
+            while (!docDel.isSuccessful()) ; // Nice code again
         }
     }
 

@@ -51,7 +51,7 @@ public class CustomRentableAdapter extends ArrayAdapter<Rentable> {
     }
 
     @Override
-    public Rentable getItem(int position){
+    public Rentable getItem(int position) {
         return rentables.get(position);
     }
 

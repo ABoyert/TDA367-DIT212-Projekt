@@ -10,7 +10,7 @@ import tda367.paybike.repository.Repository;
 
 import static java.util.stream.Collectors.toCollection;
 
-public class  MyRentablesViewModel extends ViewModel {
+public class MyRentablesViewModel extends ViewModel {
 
     private Repository r;
     private Rentable selected;
@@ -21,7 +21,7 @@ public class  MyRentablesViewModel extends ViewModel {
 
     public List<Rentable> getCurrentUserRentables() {
         return r.updateAndGetRentables().stream()
-                .filter(u->u.getOwner().equals(r.getCurrentUser().getUserID()))
+                .filter(u -> u.getOwner().equals(r.getCurrentUser().getUserID()))
                 .collect(toCollection(ArrayList::new));
     }
 

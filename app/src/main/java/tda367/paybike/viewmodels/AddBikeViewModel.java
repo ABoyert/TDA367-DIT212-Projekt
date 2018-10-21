@@ -94,6 +94,7 @@ public class AddBikeViewModel extends ViewModel {
     public boolean streetIsValid() {
         return street.length() > 0 && street.length() < MAX_STREET_LENGTH && street.indexOf(',') == -1;
     }
+
     public boolean zipcodeIsValid() {
         return zipcode.length() == ZIPCODE_LENGTH;
     }

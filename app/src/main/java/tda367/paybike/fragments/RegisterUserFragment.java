@@ -34,7 +34,8 @@ public class RegisterUserFragment extends Fragment {
     private LoginViewModel viewModel;
 
     // Required empty public constructor
-    public RegisterUserFragment() { }
+    public RegisterUserFragment() {
+    }
 
     public static RegisterUserFragment newInstance() {
         RegisterUserFragment fragment = new RegisterUserFragment();

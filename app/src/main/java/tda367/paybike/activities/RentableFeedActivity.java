@@ -215,8 +215,7 @@ public class RentableFeedActivity extends AppCompatActivity
             transaction.addToBackStack(null);
             /* Allow to fragment to cover the area below the toolbar */
             transaction.add(R.id.fragment_frame, fragment, fragmentString).commit();
-        }
-        else {
+        } else {
             Log.e(TAG, "Given fragment doesn't exist. No action taken.");
         }
     }

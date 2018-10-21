@@ -12,9 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
 import tda367.paybike.R;
 import tda367.paybike.database.DatabaseController;
 import tda367.paybike.fragments.RegisterUserFragment;
@@ -53,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
         /* If already logged in, skip login screen! */
         if (fAuth.getCurrentUser() != null) {
@@ -85,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements
             String userEmailValue = userEmail.getText().toString();
             String userPasswordValue = userPassword.getText().toString();
 
-            if (userEmailValue.length() != 0 && userPasswordValue.length() != 0){
+            if (userEmailValue.length() != 0 && userPasswordValue.length() != 0) {
                 signIn(userEmailValue, userPasswordValue);
             } else {
                 Toast.makeText(LoginActivity.this, viewModel.getWarning(userEmailValue, userPasswordValue),
@@ -103,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         /* If it is possible to create a user...*/
         if (viewModel.createUser()) {
-            /* Close fragment */ 
+            /* Close fragment */
             onBackPressed();
             /* When new user registers, show new account details on login screen */
             userEmail.setText(viewModel.getEmail());

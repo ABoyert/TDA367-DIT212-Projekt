@@ -143,7 +143,7 @@ public class SendRequestFragment extends Fragment {
         if (dialog instanceof DatePickerDialog) {
             DatePicker datePicker = ((DatePickerDialog) dialog).getDatePicker();
             datePicker.setMinDate(System.currentTimeMillis() + 1000);
-            datePicker.setMaxDate((long) (System.currentTimeMillis() + 3.1556926 * Math.pow(10,10)));
+            datePicker.setMaxDate((long) (System.currentTimeMillis() + 3.1556926 * Math.pow(10, 10)));
             dialog.show();
         } else if (dialog instanceof TimePickerDialog) {
             dialog.show();
@@ -181,10 +181,10 @@ public class SendRequestFragment extends Fragment {
                 public void onDateSet(DatePicker arg0,
                                       int year, int month, int day) {
                     if (openDialog == FROM_DATE) {
-                        updateFromDate(year, month+1, day);
+                        updateFromDate(year, month + 1, day);
                         updatePrice();
                     } else if (openDialog == TO_DATE) {
-                        updateToDate(year, month+1, day);
+                        updateToDate(year, month + 1, day);
                         updatePrice();
                     }
                     openDialog = 0;

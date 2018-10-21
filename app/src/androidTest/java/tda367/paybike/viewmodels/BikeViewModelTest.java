@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class BikeViewModelTest {
 
     @Test
-    public void testModel(){
+    public void testModel() {
         //BikeViewModel testView = new BikeViewModel();
         //assert testView.getAvailableRentables();
     }
