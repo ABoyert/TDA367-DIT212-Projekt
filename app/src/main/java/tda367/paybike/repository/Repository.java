@@ -114,17 +114,18 @@ public class Repository {
     public void newRentableNoID(String type, String name, double price, Position position,
                             boolean available,Uri imageLink,
                             String description){
-
+        updateModelRentables();
         // TODO change owner argument to respons from userHandler.getCurrentUser().getId()
         Rentable newRentable = RentableFactory.createRentableNoID(type, name, price,
                 position, available, PayBike.getCurrentUser().getUserID(),
                 imageLink, description);
-
+        payBike.getModelRentables().add(newRentable);
         rentableHandler.addRentable(newRentable);
-        updateModelRentables();
+
     }
 
     public boolean createUser(String email, String password, String name) {
+
         Task<AuthResult> signUp = userHandler.createUser(email, password, name);
 
         signUp.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -158,9 +159,11 @@ public class Repository {
     }
 
     public void createNewRequest(Rentable requested, LocalDateTime fromDateTime, LocalDateTime toDateTime, double price){
-        Request request = new Request(PayBike.getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime, price, Request.Answer.UNANSWERED);
-        requestHandler.add(request);
         updateModelRequests();
+        Request request = new Request(PayBike.getCurrentUser().getUserID(), requested.getId(), fromDateTime, toDateTime, price, Request.Answer.UNANSWERED);
+        getModelRequests().add(request);
+        requestHandler.add(request);
+
     }
 
     public User getCurrentUser() {
