@@ -4,9 +4,10 @@ AirBnB for bikes!
 
 #### Installing PayBike to Emulator/Phone:
 1. Clone this project to your computer.
-2. Start an Android emulator or connect an Android phone in [USB-debugging mode](https://developer.android.com/studio/run/device).
-3. Open Terminal/CMD in the root directory of the project and execute the command ```./gradlew installDebug``` on MacOS or ```.\gradlew installDebug``` on Windows. (might need to add ANDROID_HOME environment variable on Windows)
-4. You should now be able to find PayBike among your apps and launch it.
+2. Install Android SDK if not already installed.
+3. Start an Android emulator or connect an Android phone in [USB-debugging mode](https://developer.android.com/studio/run/device).
+4. Open Terminal/CMD in the root directory of the project and execute the command ```./gradlew installDebug``` on MacOS or ```.\gradlew installDebug``` on Windows. (might need to add ANDROID_HOME environment variable on Windows)
+5. You should now be able to find PayBike among your apps and launch it.
 
 #### Open project in Android Studio:
 1. Clone this project to your computer.
