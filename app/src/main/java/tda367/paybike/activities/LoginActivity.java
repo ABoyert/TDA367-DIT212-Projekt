@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements
         /* If already logged in, skip login screen! */
         if (fAuth.getCurrentUser() != null) {
             Log.d(TAG, "Current User: " + fAuth.getCurrentUser().getDisplayName());
-            viewModel.getC().updateCurrentUser();
+            viewModel.updateCurrentUser();
             showBikeFeed();
         }
 
@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements
         Task<AuthResult> login = fAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
                     Log.d(TAG, "Successfully logged in " + fAuth.getCurrentUser().getDisplayName() + "!");
-                    viewModel.getC().updateCurrentUser();
+                    viewModel.updateCurrentUser();
                     showBikeFeed();
                 }).addOnFailureListener(e -> {
                     Log.w(TAG, "LOGIN FAILED! Error: " + e.getMessage());

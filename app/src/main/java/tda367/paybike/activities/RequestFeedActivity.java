@@ -106,28 +106,30 @@ public class RequestFeedActivity extends AppCompatActivity {
         rAdapter.updateBikeView(viewModel.getRequests());
     }
 
-    //Starts the RentableFeedActivity
+    /* Starts the RentableFeedActivity */
     private void startBikeFeedActivity() {
         startActivity(new Intent(getApplicationContext(), RentableFeedActivity.class));
     }
 
-    //Starts the AddBikeActivity
+    /* Starts the AddBikeActivity */
     private void startAddBikeActivity() {
         startActivity(new Intent(getApplicationContext(), AddBikeActivity.class));
     }
 
-    //Starts the MyRentablesActivity
+    /* Starts the MyRentablesActivity */
     private void startMyRentablesActivity() {
         startActivity(new Intent(getApplicationContext(), MyRentablesActivity.class));
     }
 
-    //Starts the ViewRequestsActivity
+    /* Starts the ViewRequestActivity */
     private void startViewRequestActivity() {
         startActivity(new Intent(getApplicationContext(), RequestFeedActivity.class));
     }
 
-    //Method that Sign out out the user
+    /* Signs out the user and closes the RentableFeedActivity */
     private void signOut() {
-        //TODO Implement method
+        viewModel.signOut();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 }

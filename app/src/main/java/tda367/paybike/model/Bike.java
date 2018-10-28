@@ -10,7 +10,6 @@ Bike implements Rentable and is one type of rentable object.
 
  */
 
-
 public class Bike implements Rentable {
 
     /* Instance variables */

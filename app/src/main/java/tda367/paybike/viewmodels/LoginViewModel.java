@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModel;
 import tda367.paybike.repository.Repository;
 
 /*
- * Created by Julia Gustafsson
+ * Created by Julia Gustafsson and Anton Boyert
  *
  * This ViewModel is responsible for handling the data which will be presented in the LoginActivity as well
  * as the RegisterUserFragment.
@@ -24,18 +24,19 @@ public class LoginViewModel extends ViewModel {
     private static final String INVALID_PASSWORD = "Password might be incorrect ";
     private static final String NO_PASSWORD = "You have to enter your password. ";
 
+    /* Resources */
     private String name, email, password, repeatedPassword;
-
-    Repository c;
+    Repository r;
 
     public LoginViewModel() {
-        c = new Repository();
+        r = new Repository();
         name = "";
         email = "";
         password = "";
         repeatedPassword = "";
     }
 
+    /* Getters and setters */
     public String getName() {
         return name;
     }
@@ -68,39 +69,46 @@ public class LoginViewModel extends ViewModel {
         this.repeatedPassword = repeatedPassword;
     }
 
+    /* Checks if given name is valid */
     public boolean nameIsValid() {
         return getName().length() > MIN_NAME_LENGTH && getName().length() < MAX_NAME_LENGTH;
     }
 
+    /* Checks if given email is valid */
     public boolean emailIsValid() {
         return email.contains("@");
     }
 
+    /* Checks if password name is valid */
     public boolean passwordIsValid() {
         return getPassword().length() >= MIN_PASSWORD_LENGTH;
     }
 
+    /* Validates all conditions above */
     public boolean inputIsValid() {
         return emailIsValid() && passwordIsValid() && nameIsValid() && passwordsMatch();
     }
 
+    /* Checks if both password fields match */
     public boolean passwordsMatch() {
         return password.equals(repeatedPassword);
     }
 
+    /* Creates a new user */
     public boolean createUser() {
-        return c.createUser(getEmail(), getPassword(), getName());
+        return r.createUser(getEmail(), getPassword(), getName());
     }
 
-    public Repository getC() {
-        return c;
+    /* Updates the current user */
+    public void updateCurrentUser() {
+        r.updateCurrentUser();
     }
 
+    /* Generate a warning message to inform user about what is wrong with the provided input */
     public String getWarning(String userName, String userPassword) {
         String warningMessage = "";
         warningMessage += (userName.length() != 0) ? INVALID_USERNAME : NO_USERNAME;
         warningMessage += (userPassword.length() != 0) ? INVALID_PASSWORD : NO_PASSWORD;
-
         return warningMessage;
     }
 

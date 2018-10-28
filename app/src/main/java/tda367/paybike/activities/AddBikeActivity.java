@@ -32,7 +32,6 @@ import tda367.paybike.viewmodels.AddBikeViewModel;
 
 public class AddBikeActivity extends AppCompatActivity {
 
-
     /* Constants */
     private static final int PICK_IMAGE_REQUEST = 71; // Request id, used for fetching images from device
     private static final String TAG = AddBikeActivity.class.getSimpleName(); // Used for logging
@@ -107,7 +106,7 @@ public class AddBikeActivity extends AppCompatActivity {
             }
         });
 
-
+        /* Configure street */
         street = findViewById(R.id.street);
         street.addTextChangedListener(new TextWatcher() {
             @Override
@@ -130,6 +129,7 @@ public class AddBikeActivity extends AppCompatActivity {
             }
         });
 
+        /* Configure zipcode */
         zipcode = findViewById(R.id.zipcode);
         zipcode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -152,6 +152,7 @@ public class AddBikeActivity extends AppCompatActivity {
             }
         });
 
+        /* Configure city */
         city = findViewById(R.id.city);
         city.addTextChangedListener(new TextWatcher() {
             @Override
@@ -207,7 +208,7 @@ public class AddBikeActivity extends AppCompatActivity {
         /* If button is pressed, check if input is valid before posting bike and clear all fields. */
         addBikeBtn.setOnClickListener(v -> {
             if (viewModel.inputIsValid()) {
-                viewModel.postBike();
+                viewModel.postRentable();
                 viewModel.clearAll();
                 finish(); // End Activity when bike is added
             }
