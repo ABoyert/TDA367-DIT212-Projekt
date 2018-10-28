@@ -19,6 +19,15 @@ import tda367.paybike.R;
 import tda367.paybike.adapters.CustomRequestAdapter;
 import tda367.paybike.viewmodels.RequestFeedViewModel;
 
+/*
+ * Created by Anton Boyert
+ *
+ * This Activity gives the user the ability to view all requests.
+ *
+ * General note: All activities work in close relation with their respective ViewModel which
+ * holds the data to be shown, while the activity itself is responsible for displaying it in the correct fashion.
+ */
+
 public class RequestFeedActivity extends AppCompatActivity {
 
     /* Widgets */

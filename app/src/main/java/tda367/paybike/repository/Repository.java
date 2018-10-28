@@ -101,7 +101,7 @@ public class Repository {
         }
     }
 
-    public void deleteRequst(Request request) {
+    public void deleteRequest(Request request) {
         requestHandler.deleteRequest(request);
     }
 

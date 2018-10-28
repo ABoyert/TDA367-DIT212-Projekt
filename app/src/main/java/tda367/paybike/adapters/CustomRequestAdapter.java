@@ -174,7 +174,7 @@ public class CustomRequestAdapter extends ArrayAdapter<Request> {
 
     /* Used to delete the request */
     private void deleteRequest(Request request) {
-        r.deleteRequst(request);
+        r.deleteRequest(request);
     }
 
     /* Help method which can decide if the current user sent or received the request */
@@ -186,12 +186,14 @@ public class CustomRequestAdapter extends ArrayAdapter<Request> {
     private void acceptRequest(Request request) {
         request.setAnswer(Request.Answer.ACCEPTED);
         r.updateRequest(request);
+        viewAsAccepted();
     }
 
     /* Accepts the chosen request. Will only be called by a receiver. */
     private void declineRequest(Request request) {
         request.setAnswer(Request.Answer.DENIED);
         r.updateRequest(request);
+        viewAsDeclined();
     }
 
     /* The following methods are used to view different versions of the view
