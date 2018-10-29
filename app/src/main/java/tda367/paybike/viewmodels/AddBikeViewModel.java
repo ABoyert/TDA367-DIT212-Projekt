@@ -120,7 +120,10 @@ public class AddBikeViewModel extends ViewModel {
 
     /* Checks if provided price is valid */
     public boolean priceIsValid() {
-        return Double.parseDouble(bikePrice) >= MIN_BIKE_PRICE;
+        if (bikePrice.length() != 0)
+            return Double.parseDouble(bikePrice) >= MIN_BIKE_PRICE;
+
+        return false;
     }
 
     /* Checks if provided description is valid */

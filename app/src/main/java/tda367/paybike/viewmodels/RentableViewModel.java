@@ -181,7 +181,7 @@ public class RentableViewModel extends ViewModel {
 
     /* Returns a List of Rentables which matches the given String */
     public ArrayList<Rentable> getSearchResult(String searchText) {
-        return getAvailableRentables().stream()
+        return r.getModelRentables().stream()
                 .filter(bike -> bike.getName().toLowerCase().contains(searchText.toLowerCase())
                         || bike.getPosition().getCity().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(toCollection(ArrayList::new));
