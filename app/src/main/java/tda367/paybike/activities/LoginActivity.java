@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     /* Starts RegisterUserFragment to enable new account registration */
     private void registerNewUser(View view) {
-        findBikeBtn.setVisibility(View.INVISIBLE);
+        //findBikeBtn.setVisibility(View.INVISIBLE);
         RegisterUserFragment newUser = RegisterUserFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();

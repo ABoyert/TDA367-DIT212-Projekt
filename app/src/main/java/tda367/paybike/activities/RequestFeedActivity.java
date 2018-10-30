@@ -59,7 +59,8 @@ public class RequestFeedActivity extends AppCompatActivity {
         rAdapter = new CustomRequestAdapter(this,
                 R.layout.view_layout_my_request, viewModel.getRequests());
         myRequestsGrid.setAdapter(rAdapter);
-        myRequestsGrid.setOnItemClickListener((parent, view, position, id) -> updateAdapter());
+        myRequestsGrid.setOnItemClickListener((parent, view, position, id) -> {
+        });
 
         swipeRefresh = findViewById(R.id.swipeRefresh);
         swipeRefresh.setColorSchemeColors(Color.parseColor("#30d9af"));

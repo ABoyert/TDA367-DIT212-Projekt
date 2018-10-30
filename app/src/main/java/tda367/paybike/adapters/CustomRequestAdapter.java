@@ -24,8 +24,11 @@ import java.util.List;
 import tda367.paybike.R;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.Request;
+import tda367.paybike.model.Request.Answer;
 import tda367.paybike.model.User;
 import tda367.paybike.repository.Repository;
+
+import static tda367.paybike.model.Request.Answer.*;
 
 /*
  * Created by Anton Boyert on 2018-10-18.
@@ -138,12 +141,14 @@ public class CustomRequestAdapter extends ArrayAdapter<Request> {
         }
 
         /* Configure buttons in view */
-        acceptBtn.setOnClickListener(v -> acceptRequest(request));
+        acceptBtn.setOnClickListener(v -> {
+            acceptRequest(request, position);
+        });
         declineBtn.setOnClickListener(v -> {
             if (userIsSender(request, currentUser)) {
-                deleteRequest(request);
+                deleteRequest(request, position);
             } else {
-                declineRequest(request);
+                declineRequest(request, position);
             }
         });
 
@@ -172,9 +177,11 @@ public class CustomRequestAdapter extends ArrayAdapter<Request> {
         }
     }
 
-    /* Used to delete the request */
-    private void deleteRequest(Request request) {
+    /* Used to delete the request, also removes it from the list of items */
+    private void deleteRequest(Request request, int position) {
         r.deleteRequest(request);
+        requests.remove(position);
+        notifyDataSetChanged();
     }
 
     /* Help method which can decide if the current user sent or received the request */
@@ -183,17 +190,19 @@ public class CustomRequestAdapter extends ArrayAdapter<Request> {
     }
 
     /* Accepts the chosen request. Will only be called by a receiver. */
-    private void acceptRequest(Request request) {
-        request.setAnswer(Request.Answer.ACCEPTED);
+    private void acceptRequest(Request request, int position) {
+        request.setAnswer(ACCEPTED);
         r.updateRequest(request);
-        viewAsAccepted();
+        requests.get(position).setAnswer(ACCEPTED);
+        notifyDataSetChanged();
     }
 
     /* Accepts the chosen request. Will only be called by a receiver. */
-    private void declineRequest(Request request) {
-        request.setAnswer(Request.Answer.DENIED);
+    private void declineRequest(Request request, int position) {
+        request.setAnswer(DENIED);
         r.updateRequest(request);
-        viewAsDeclined();
+        requests.get(position).setAnswer(DENIED);
+        notifyDataSetChanged();
     }
 
     /* The following methods are used to view different versions of the view
