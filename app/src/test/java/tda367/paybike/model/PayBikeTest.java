@@ -56,6 +56,12 @@ public class PayBikeTest {
         /* Size should still be 2 */
         assertEquals(rentableList.size(), payBike.getModelRentables().size());
     }
+    @Test
+    public void checkCurrentUser(){
+        User shouldBeCurrent = new User("testCurrent@test.com", "password", "TestareCurrent", "1");
+        PayBike.setCurrentUser(shouldBeCurrent);
+        assertEquals(shouldBeCurrent, PayBike.getCurrentUser());
+    }
 
     @Test
     public void addModelUser() {
@@ -68,7 +74,10 @@ public class PayBikeTest {
 
         /* Should only be 2 users in model */
         assertEquals(2, payBike.getModelUsers().size());
+
     }
+
+
 
     //TODO kolla så inte flera av samma request kan göras, kolla så inte en bike med samma ID av redan existerande bike läggs till
 
