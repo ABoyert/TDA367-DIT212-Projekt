@@ -31,7 +31,7 @@ public class RentableFactoryTest {
         Uri imageLink;
         String description;
 
-        String userOwenr = "ÄgareTest";
+        String userOwenr = testUser.getName();
         position = new Position("Testgatan", 55555, "Teststaden");
         type = "Bike";
         name = "TestBike1";
@@ -49,10 +49,48 @@ public class RentableFactoryTest {
         assertEquals(testBike.getName(), name);
         assertEquals(testBike.getPosition(), position);
 
-
-
     }
 
+    @Test
+    public void addFactoryRentableTOModel(){
+        PayBike payBike = PayBike.getInstance();
+
+        User testUser = new User("t@t.com", "testpass", "Testare", "1");
+        String type;
+        String name;
+        double price;
+        Position position;
+        boolean available;
+        String owner;
+        Uri imageLink;
+        String description;
+
+        position = new Position("Modelgatan", 44444, "Teststaden");
+        type = "Bike";
+        name = "TestBike2";
+        price = 56.05;
+        available = true;
+        owner = testUser.getName();
+        imageLink = null;
+        description = "This is a testBike which is added to payBike";
+        //Creates bike with factory
+        Rentable testBike = RentableFactory.createRentableNoID(type, name, price, position, available, owner, imageLink, description);
+        //Adds to model
+        payBike.addModelRentable(testBike);
+        //Find testBike and check
+        assertEquals(findRentable(name).getName(), testBike.getName());
+    }
+
+    public Rentable findRentable(String name){
+        PayBike payBike = PayBike.getInstance();
+        for (Rentable rentable: payBike.getModelRentables()
+             ) {
+            if(rentable.getName().equals(name)){
+                return rentable;
+            }
+        }
+        return null;
+    }
 
 
 }
