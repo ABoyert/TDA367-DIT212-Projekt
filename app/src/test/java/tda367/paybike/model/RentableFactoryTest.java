@@ -22,22 +22,15 @@ public class RentableFactoryTest {
     @Test
     public void createRentableNoID(){
         User testUser = new User("t@t.com", "testpass", "Testare", "1");
-        String type;
-        String name;
-        double price;
+        String type = "Bike";
+        String name = "TestBike1";
+        double price= 55.05;
         Position position;
-        boolean available;
-        String owner;
+        boolean available = true;
+        String owner= testUser.getName();
         Uri imageLink;
         String description;
-
-        String userOwenr = testUser.getName();
         position = new Position("Testgatan", 55555, "Teststaden");
-        type = "Bike";
-        name = "TestBike1";
-        price = 55.05;
-        available = true;
-        owner = userOwenr;
         imageLink = null;
         description = "This is a testBike";
 
@@ -56,21 +49,14 @@ public class RentableFactoryTest {
         PayBike payBike = PayBike.getInstance();
 
         User testUser = new User("t@t.com", "testpass", "Testare", "1");
-        String type;
-        String name;
-        double price;
-        Position position;
-        boolean available;
-        String owner;
+        String type = "Bike";
+        String name= "TestBike2";
+        double price = 56.05;
+        Position position = new Position("Modelgatan", 44444, "Teststaden");
+        boolean available = true;
+        String owner= testUser.getName();
         Uri imageLink;
         String description;
-
-        position = new Position("Modelgatan", 44444, "Teststaden");
-        type = "Bike";
-        name = "TestBike2";
-        price = 56.05;
-        available = true;
-        owner = testUser.getName();
         imageLink = null;
         description = "This is a testBike which is added to payBike";
         //Creates bike with factory
