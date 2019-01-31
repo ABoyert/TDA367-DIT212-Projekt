@@ -19,7 +19,7 @@ import java.util.List;
 
 import tda367.paybike.R;
 import tda367.paybike.model.Rentable;
-import tda367.paybike.repository.Repository;
+import tda367.paybike.repositori.Repository;
 
 /*
  * Created by Julia Gustafsson on 2018-09-23.

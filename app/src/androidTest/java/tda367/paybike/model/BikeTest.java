@@ -23,6 +23,20 @@ public class BikeTest {
 
         assertEquals("tda367.paybike", appContext.getPackageName());
     }
+
+    @Test public void createTestBike(){
+
+        String bName = "Bike";
+        Double bPrice = 20.00;
+        Position bPos = new Position("TestStreet", 21111,"TestCity");
+        boolean bBool = true;
+        String bOwn = "TestOwner";
+        String bDesc = "A Test Bike";
+        String bID = "01";
+
+        Bike testBike = new Bike(bName, bPrice,bPos, bBool,bOwn, null,bDesc,bID);
+        assert testBike.getName() == bName && bPos == testBike.getPosition() && testBike.getId() == bID;
+    }
 /*
         @Test
         public void createTestBike(){
