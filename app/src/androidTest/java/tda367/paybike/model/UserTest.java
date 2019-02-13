@@ -27,17 +27,28 @@ public class UserTest {
         User user = new User("Julia Gustafsson", "julia@live.se", "passwrd", "12311");
     }
 
-    /*@Test
-    public void createUserTest(){
-        Position pos = new Position("Horsalevagen", "goteborg", "Swe", 42313);
-        User testUser = new User("boy", "123", "456", pos);
-        testUser.setId("999");
-        testUser.setPassWord("password");
-        testUser.setName("abc");
+    @Test
+    public void createUsersTest(){
+        User testUser = new User("tester@test", "tester", "01");
+        assert testUser.getName().equals("tester") && testUser.getEmail().equals("tester@test") && testUser.getUserID().equals("01");
 
-        assert testUser.getId() == "999" && testUser.getName() == "abc" && testUser.getPassWord() == "password";
-    }*/
+        User testUserPassword = new User("tester2@test", "pass123","tester2", "02");
+        assert testUserPassword.getName().equals("tester2") && testUser.getEmail().equals("tester2@test")
+                && testUser.getUserID().equals("02") &&
+                testUserPassword.getPassword().equals("pass123");
+    }
 
+@Test public void testEquals(){
+    User testUser = new User("tester@test", "tester", "01");
+    User testUser2 = new User("tester@test", "tester", "01");
+    assert  testUser.equals(testUser2);
+}
+
+@Test public void testToString(){
+    User testUser = new User("tester@test", "tester", "01");
+    String string = "User Id: " + testUser.getUserID() + "\nName: " + testUser.getName() + "\nEmail: " + testUser.getEmail() + "\nPassword: " + testUser.getPassword();
+    assert testUser.toString().equals(string);
+}
 
     @Test
     public void useAppContext() {

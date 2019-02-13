@@ -50,17 +50,5 @@ public class RentableFactoryTest {
 
         assert tBike.getName().equals("Test") && tBike.getPrice() == 25.00 && tBike.getPosition().equals(tPos) && tBike.getId().equals("123test");
     }
-    /*
-    public void createBikeWithFactoryTest() {
-        RentableFactory rf = new RentableFactory();
-        Position testPos = new Position("123","456","789",000);
-        Rentable testBike1 = rf.createRentable("Bike", "123", 100.0, testPos, true, "Per", "www.chalmers.se", "Bra cykel");
-
-        List<Rentable> rentables =  new ArrayList<Rentable>();
-        rentables.add(testBike1);
-        assert testBike1.getId() == "123" && testBike1.getPosition() == testPos
-                && testBike1.getPrice() == 100.0 && testBike1.isAvailable();
-    }*/
-
 
 }
