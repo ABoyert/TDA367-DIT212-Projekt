@@ -24,9 +24,8 @@ import java.util.List;
 import tda367.paybike.R;
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.Request;
-import tda367.paybike.model.Request.Answer;
 import tda367.paybike.model.User;
-import tda367.paybike.repository.Repository;
+import tda367.paybike.repositori.Repository;
 
 import static tda367.paybike.model.Request.Answer.*;
 

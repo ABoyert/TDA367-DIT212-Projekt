@@ -8,10 +8,10 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.List;
 
-import tda367.paybike.repository.Repository;
+
 import tda367.paybike.model.Rentable;
 import tda367.paybike.model.RentableFactory;
-
+import tda367.paybike.repositori.Repository;
 /**
  * Created by Oscar Orava Kilberg on 2018-10-04.
  */

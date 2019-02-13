@@ -2,7 +2,7 @@ package tda367.paybike.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
 
-import tda367.paybike.repository.Repository;
+import tda367.paybike.repositori.Repository;
 
 /*
  * Created by Julia Gustafsson and Anton Boyert

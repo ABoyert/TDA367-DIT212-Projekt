@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModel;
 import java.util.List;
 
 import tda367.paybike.model.Request;
-import tda367.paybike.repository.Repository;
+import tda367.paybike.repositori.Repository;
 
 /*
  * Created by Julia Gustafsson.

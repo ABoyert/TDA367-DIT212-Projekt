@@ -1,4 +1,4 @@
-package tda367.paybike.repository;
+package tda367.paybike.repositori;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;

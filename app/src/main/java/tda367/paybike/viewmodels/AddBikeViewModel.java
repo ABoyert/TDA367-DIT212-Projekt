@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.net.Uri;
 
 import tda367.paybike.model.Position;
-import tda367.paybike.repository.Repository;
+import tda367.paybike.repositori.Repository;
 
 /*
  * Created by Julia Gustafsson

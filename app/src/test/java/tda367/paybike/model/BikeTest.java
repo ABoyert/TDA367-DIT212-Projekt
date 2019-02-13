@@ -134,6 +134,7 @@ public class BikeTest {
 
     @Test
     public void setDescription() {
+
         testBike.setDescription("abcde");
         assertEquals("abcde", testBike.getDescription());
         testBike.setDescription(TEST_DESCRIPTION);

@@ -23,6 +23,72 @@ public class BikeTest {
 
         assertEquals("tda367.paybike", appContext.getPackageName());
     }
+
+    @Test public void createTestBike(){
+
+        //With ID
+        String bName = "Bike";
+        Double bPrice = 20.00;
+        Position bPos = new Position("TestStreet", 21111,"TestCity");
+        boolean bBool = true;
+        String bOwn = "TestOwner";
+        String bDesc = "A Test Bike";
+        String bID = "01";
+
+        Bike testBike = new Bike(bName, bPrice,bPos, bBool,bOwn, null,bDesc,bID);
+        assert testBike.getName() == bName && bPos == testBike.getPosition() && testBike.getId() == bID;
+
+        //Without ID
+        Bike testBike2 = new Bike(bName, bPrice, bPos, bBool, bOwn, null, bDesc);
+
+        assert testBike2.getName().equals(bName) && bPos == testBike2.getPosition() && bOwn.equals(testBike2.getOwner());
+    }
+
+    @Test public void testGetSetAvailable(){
+        Bike test = quickTestBike();
+
+        String testname = "Test1";
+        test.setName(testname);
+
+        assert test.getName().equals(testname);
+
+        boolean bTest = false;
+        test.setAvailable(bTest);
+
+        assert !test.isAvailable();
+    }
+
+    @Test public void testEquals(){
+        Bike test = quickTestBike();
+        Bike test2 = quickTestBike();
+
+        assert test.equals(test2);
+    }
+
+    @Test public void testToString(){
+
+        Bike test = quickTestBike();
+
+        String testString = "Bike Id: " + test.getId() + "\nName: " + test.getName() + "\nPosition: " + test.getPosition() +
+                "\nOwner Id: " + test.getOwner() + "\nDescription: " + test.getDescription();
+
+        assert test.toString().equals(testString);
+    }
+
+    public Bike quickTestBike(){
+
+        String bName = "Bike";
+        Double bPrice = 20.00;
+        Position bPos = new Position("TestStreet", 21111,"TestCity");
+        boolean bBool = true;
+        String bOwn = "TestOwner";
+        String bDesc = "A Test Bike";
+        String bID = "01";
+
+        Bike testBike = new Bike(bName, bPrice,bPos, bBool,bOwn, null,bDesc,bID);
+
+        return testBike;
+    }
 /*
         @Test
         public void createTestBike(){
